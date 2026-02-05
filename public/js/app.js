@@ -5539,6 +5539,129 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5658,7 +5781,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     },
     fetchRegions: function fetchRegions() {
       var _this3 = this;
-      axios.get('/bims/get-regions') // Make sure you create this route in Laravel
+      axios.get("/bims/get-regions") // Make sure you create this route in Laravel
       .then(function (res) {
         _this3.regions = res.data;
         if (_this3.regions.length > 0) {
@@ -5675,62 +5798,71 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       this.provinces = [];
       this.municipalities = [];
       this.barangays = [];
-      this.formData.province = '';
-      this.formData.municipality = '';
-      this.formData.barangay = '';
-      if (this.formData.region) {
-        axios.get("/bims/get-provinces/".concat(this.formData.region)).then(function (res) {
-          return _this4.provinces = res.data;
-        });
-      }
+      this.formData.province = "";
+      this.formData.municipality = "";
+      this.formData.barangay = "";
+      if (!this.formData.region) return Promise.resolve();
+      return axios.get("/bims/get-provinces/".concat(this.formData.region)).then(function (res) {
+        _this4.provinces = res.data;
+      });
     },
     fetchMunicipalities: function fetchMunicipalities() {
       var _this5 = this;
       this.municipalities = [];
       this.barangays = [];
-      this.formData.municipality = '';
-      this.formData.barangay = '';
-      if (this.formData.province) {
-        axios.get("/bims/get-municipalities/".concat(this.formData.province)).then(function (res) {
-          return _this5.municipalities = res.data;
-        });
-      }
+      this.formData.municipality = "";
+      this.formData.barangay = "";
+      if (!this.formData.province) return Promise.resolve();
+      return axios.get("/bims/get-municipalities/".concat(this.formData.province)).then(function (res) {
+        _this5.municipalities = res.data;
+      });
     },
     fetchBarangays: function fetchBarangays() {
       var _this6 = this;
       this.barangays = [];
-      this.formData.barangay = '';
-      if (this.formData.municipality) {
-        axios.get("/bims/get-barangays/".concat(this.formData.municipality)).then(function (res) {
-          return _this6.barangays = res.data;
-        });
-      }
+      this.formData.barangay = "";
+      if (!this.formData.municipality) return Promise.resolve();
+      return axios.get("/bims/get-barangays/".concat(this.formData.municipality)).then(function (res) {
+        _this6.barangays = res.data;
+      });
     },
     openModal: function openModal(mode) {
+      var _this7 = this;
       var barangayinfo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       this.modalMode = mode;
-      if (mode === "add") {
-        this.modalTitle = "Add Barangay Info";
-        this.formData = {
-          id: "",
-          barangay_name: "",
-          region: "",
-          province: "",
-          municipality: "",
-          barangay: "",
-          barangay_code: "",
-          zip_code: "",
-          contact_number: "",
-          email: "",
-          status: "active"
-        };
-      } else if (mode === "edit") {
-        this.modalTitle = "Edit Office";
-        this.formData = _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
-          id: barangay.id,
-          barangay_name: barangayinfo.barangay_name,
-          province: barangayinfo.province
-        }, "province", barangayinfo.region), "municipality", barangayinfo.municipality), "barangay", barangayinfo.barangay), "barangay_code", barangayinfo.barangay_code), "zip_code", barangayinfo.zip_code), "contact_number", barangayinfo.contact_number), "email", barangayinfo.email);
+      this.modalTitle = "Edit Barangay Information";
+      if (mode === "edit" && barangayinfo) {
+        // Reset first
+        this.provinces = [];
+        this.municipalities = [];
+        this.barangays = [];
+
+        // Basic fields
+        this.formData.id = barangayinfo.id;
+        this.formData.barangay_name = barangayinfo.barangay_name;
+        this.formData.barangay_code = barangayinfo.barangay_code;
+        this.formData.zip_code = barangayinfo.zip_code;
+        this.formData.contact_number = barangayinfo.contact_number;
+        this.formData.email = barangayinfo.email;
+        this.formData.status = barangayinfo.status;
+
+        // 1️⃣ Set Region
+        this.formData.region = barangayinfo.region.id;
+
+        // 2️⃣ Load Provinces → then set Province
+        this.fetchProvinces().then(function () {
+          _this7.formData.province = barangayinfo.province.id;
+
+          // 3️⃣ Load Municipalities → then set Municipality
+          _this7.fetchMunicipalities().then(function () {
+            _this7.formData.municipality = barangayinfo.municipality.id;
+
+            // 4️⃣ Load Barangays → then set Barangay
+            _this7.fetchBarangays().then(function () {
+              _this7.formData.barangay = barangayinfo.barangay.id;
+            });
+          });
+        });
       }
       $("#modalBrgyInfo").modal("show");
     },
@@ -5758,14 +5890,14 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       barangays: [],
       modalMode: "add",
       modalTitle: "Add Head of Office",
-      formData: _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
+      formData: _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
         id: "",
-        region: '',
-        province: '',
-        municipality: '',
-        barangay: '',
+        region: "",
+        province: "",
+        municipality: "",
+        barangay: "",
         barangay_name: ""
-      }, "province", ""), "barangay_code", ""), "zip_code", ""), "contact_number", ""), "email", ""), "photo", null)
+      }, "province", ""), "barangay_code", ""), "zip_code", ""), "contact_number", ""), "email", ""), "status", ""), "photo", null)
     };
   },
   computed: {
@@ -10492,7 +10624,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card[data-v-7d0d9ad0] {\r\n    border-radius: 10px;\n}\n.card-header[data-v-7d0d9ad0] {\r\n    border-radius: 10px 10px 0 0 !important;\r\n    padding: 1.2rem 1.5rem;\n}\n.table th[data-v-7d0d9ad0] {\r\n    background-color: #f8fafc;\r\n    font-weight: 600;\r\n    padding: 1rem;\r\n    border-bottom: 2px solid #e9ecef;\n}\n.table td[data-v-7d0d9ad0] {\r\n    padding: 1rem;\r\n    vertical-align: middle;\n}\n.badge[data-v-7d0d9ad0] {\r\n    padding: 0.35rem 0.7rem;\r\n    border-radius: 6px;\r\n    font-weight: 500;\n}\n.btn-group .btn[data-v-7d0d9ad0] {\r\n    border-radius: 6px;\r\n    margin: 0 2px;\n}\n.btn-outline-primary[data-v-7d0d9ad0] {\r\n    border-color: #198754;\r\n    color: #198754;\n}\n.btn-outline-primary[data-v-7d0d9ad0]:hover {\r\n    background-color: #198754;\r\n    color: white;\n}\n.page-link[data-v-7d0d9ad0] {\r\n    color: #198754;\r\n    border: 1px solid #dee2e6;\n}\n.page-item.active .page-link[data-v-7d0d9ad0] {\r\n    background-color: #198754;\r\n    border-color: #198754;\r\n    color: white;\n}\n.page-link[data-v-7d0d9ad0]:hover {\r\n    color: #146c43;\r\n    background-color: #e9ecef;\n}\n.modal-content[data-v-7d0d9ad0] {\r\n    border-radius: 10px;\n}\n.input-group-text[data-v-7d0d9ad0] {\r\n    background-color: #f8f9fa;\r\n    border-color: #dee2e6;\n}\n.form-check-input[data-v-7d0d9ad0]:checked {\r\n    background-color: #198754;\r\n    border-color: #198754;\n}\n.bg-primary[data-v-7d0d9ad0] {\r\n    background-color: #198754 !important;\n}\n.text-primary[data-v-7d0d9ad0] {\r\n    color: #198754 !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card[data-v-7d0d9ad0] {\r\n  border-radius: 10px;\n}\n.card-header[data-v-7d0d9ad0] {\r\n  border-radius: 10px 10px 0 0 !important;\r\n  padding: 1.2rem 1.5rem;\n}\n.table th[data-v-7d0d9ad0] {\r\n  background-color: #f8fafc;\r\n  font-weight: 600;\r\n  padding: 1rem;\r\n  border-bottom: 2px solid #e9ecef;\n}\n.table td[data-v-7d0d9ad0] {\r\n  padding: 1rem;\r\n  vertical-align: middle;\n}\n.badge[data-v-7d0d9ad0] {\r\n  padding: 0.35rem 0.7rem;\r\n  border-radius: 6px;\r\n  font-weight: 500;\n}\n.btn-group .btn[data-v-7d0d9ad0] {\r\n  border-radius: 6px;\r\n  margin: 0 2px;\n}\n.btn-outline-primary[data-v-7d0d9ad0] {\r\n  border-color: #198754;\r\n  color: #198754;\n}\n.btn-outline-primary[data-v-7d0d9ad0]:hover {\r\n  background-color: #198754;\r\n  color: white;\n}\n.page-link[data-v-7d0d9ad0] {\r\n  color: #198754;\r\n  border: 1px solid #dee2e6;\n}\n.page-item.active .page-link[data-v-7d0d9ad0] {\r\n  background-color: #198754;\r\n  border-color: #198754;\r\n  color: white;\n}\n.page-link[data-v-7d0d9ad0]:hover {\r\n  color: #146c43;\r\n  background-color: #e9ecef;\n}\n.modal-content[data-v-7d0d9ad0] {\r\n  border-radius: 10px;\n}\n.input-group-text[data-v-7d0d9ad0] {\r\n  background-color: #f8f9fa;\r\n  border-color: #dee2e6;\n}\n.form-check-input[data-v-7d0d9ad0]:checked {\r\n  background-color: #198754;\r\n  border-color: #198754;\n}\n.bg-primary[data-v-7d0d9ad0] {\r\n  background-color: #198754 !important;\n}\n.text-primary[data-v-7d0d9ad0] {\r\n  color: #198754 !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38096,7 +38228,7 @@ module.exports = function (list, options) {
 (module) {
 
 /*!
-* sweetalert2 v11.26.17
+* sweetalert2 v11.26.18
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -41731,23 +41863,23 @@ module.exports = function (list, options) {
   };
 
   /**
-   * @param {any} elem
+   * @param {unknown} elem
    * @returns {boolean}
    */
-  const isJqueryElement = elem => typeof elem === 'object' && elem.jquery;
+  const isJqueryElement = elem => typeof elem === 'object' && elem !== null && 'jquery' in elem;
 
   /**
-   * @param {any} elem
+   * @param {unknown} elem
    * @returns {boolean}
    */
   const isElement = elem => elem instanceof Element || isJqueryElement(elem);
 
   /**
-   * @param {any[]} args
+   * @param {ReadonlyArray<unknown>} args
    * @returns {SweetAlertOptions}
    */
   const argsToParams = args => {
-    /** @type {Record<string, any>} */
+    /** @type {Record<string, unknown>} */
     const params = {};
     if (typeof args[0] === 'object' && !isElement(args[0])) {
       Object.assign(params, args[0]);
@@ -41761,7 +41893,7 @@ module.exports = function (list, options) {
         }
       });
     }
-    return params;
+    return /** @type {SweetAlertOptions} */params;
   };
 
   /**
@@ -42908,7 +43040,7 @@ module.exports = function (list, options) {
     };
   });
   SweetAlert.DismissReason = DismissReason;
-  SweetAlert.version = '11.26.17';
+  SweetAlert.version = '11.26.18';
 
   const Swal = SweetAlert;
   // @ts-ignore
@@ -43470,9 +43602,7 @@ var render = function () {
                 },
                 [
                   _c("i", { staticClass: "ri-add-circle-line me-1" }),
-                  _vm._v(
-                    "\n                            Create Barangay Info\n                        "
-                  ),
+                  _vm._v("\n              Create Barangay Info\n            "),
                 ]
               ),
             ]),
@@ -43570,15 +43700,13 @@ var render = function () {
                 }),
               ]),
             ]),
-            _vm._v(" "),
-            _vm._m(3),
           ]),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body p-0" }, [
           _c("div", { staticClass: "table-responsive" }, [
             _c("table", { staticClass: "table table-hover mb-0" }, [
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -43586,14 +43714,14 @@ var render = function () {
                   return _c("tr", { key: barangayinfo.id }, [
                     _c("td", { staticClass: "ps-4" }, [
                       _vm._v(
-                        "\n                                    " +
+                        "\n                  " +
                           _vm._s(
                             (_vm.barangay_info.current_page - 1) *
                               _vm.barangay_info.per_page +
                               index +
                               1
                           ) +
-                          "\n                                "
+                          "\n                "
                       ),
                     ]),
                     _vm._v(" "),
@@ -43601,9 +43729,9 @@ var render = function () {
                       _c("div", { staticClass: "d-flex align-items-center" }, [
                         _c("div", [
                           _vm._v(
-                            "\n                                            " +
+                            "\n                      " +
                               _vm._s(barangayinfo.region.region_name) +
-                              "\n                                        "
+                              "\n                    "
                           ),
                         ]),
                       ]),
@@ -43613,9 +43741,9 @@ var render = function () {
                       _c("div", { staticClass: "d-flex align-items-center" }, [
                         _c("div", [
                           _vm._v(
-                            "\n                                            " +
+                            "\n                      " +
                               _vm._s(barangayinfo.province.province_name) +
-                              "\n                                        "
+                              "\n                    "
                           ),
                         ]),
                       ]),
@@ -43625,11 +43753,11 @@ var render = function () {
                       _c("div", { staticClass: "d-flex align-items-center" }, [
                         _c("div", [
                           _vm._v(
-                            "\n                                            " +
+                            "\n                      " +
                               _vm._s(
                                 barangayinfo.municipality.municipality_name
                               ) +
-                              "\n                                        "
+                              "\n                    "
                           ),
                         ]),
                       ]),
@@ -43639,9 +43767,9 @@ var render = function () {
                       _c("div", { staticClass: "d-flex align-items-center" }, [
                         _c("div", [
                           _vm._v(
-                            "\n                                            " +
+                            "\n                      " +
                               _vm._s(barangayinfo.barangay.barangay_name) +
-                              "\n                                        "
+                              "\n                    "
                           ),
                         ]),
                       ]),
@@ -43651,9 +43779,9 @@ var render = function () {
                       _c("div", { staticClass: "d-flex align-items-center" }, [
                         _c("div", [
                           _vm._v(
-                            "\n                                            " +
+                            "\n                      " +
                               _vm._s(barangayinfo.barangay_name) +
-                              "\n                                        "
+                              "\n                    "
                           ),
                         ]),
                       ]),
@@ -43663,9 +43791,9 @@ var render = function () {
                       _c("div", { staticClass: "d-flex align-items-center" }, [
                         _c("div", [
                           _vm._v(
-                            "\n                                            " +
+                            "\n                      " +
                               _vm._s(barangayinfo.email) +
-                              "\n                                        "
+                              "\n                    "
                           ),
                         ]),
                       ]),
@@ -43675,9 +43803,9 @@ var render = function () {
                       _c("div", { staticClass: "d-flex align-items-center" }, [
                         _c("div", [
                           _vm._v(
-                            "\n                                            " +
+                            "\n                      " +
                               _vm._s(barangayinfo.status) +
-                              "\n                                        "
+                              "\n                    "
                           ),
                         ]),
                       ]),
@@ -43702,9 +43830,9 @@ var render = function () {
                             [_c("i", { staticClass: "ri-edit-line" })]
                           ),
                           _vm._v(" "),
-                          _vm._m(5, true),
+                          _vm._m(4, true),
                           _vm._v(" "),
-                          _vm._m(6, true),
+                          _vm._m(5, true),
                         ]
                       ),
                     ]),
@@ -43721,13 +43849,13 @@ var render = function () {
                       _c("span", { staticClass: "text-muted small" }, [
                         _c("i", { staticClass: "ri-file-list-line me-1" }),
                         _vm._v(
-                          "\n                                    Showing " +
+                          "\n                  Showing " +
                             _vm._s(_vm.barangay_info.from) +
-                            " to " +
+                            " to\n                  " +
                             _vm._s(_vm.barangay_info.to) +
-                            " of\n                                    " +
+                            " of " +
                             _vm._s(_vm.barangay_info.total) +
-                            " entries\n                                "
+                            " entries\n                "
                         ),
                       ]),
                     ]),
@@ -43824,9 +43952,9 @@ var render = function () {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                                " +
+                                        "\n                        " +
                                           _vm._s(page) +
-                                          "\n                                            "
+                                          "\n                      "
                                       ),
                                     ]
                                   ),
@@ -43939,9 +44067,9 @@ var render = function () {
                             },
                             [
                               _vm._v(
-                                "\n                                        " +
+                                "\n                    " +
                                   _vm._s(_vm.modalTitle) +
-                                  "\n                                    "
+                                  "\n                  "
                               ),
                             ]
                           ),
@@ -43963,7 +44091,7 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(7),
+                                _vm._m(6),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -44000,11 +44128,11 @@ var render = function () {
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-12" }, [
                               _c("label", { staticClass: "form-label" }, [
-                                _vm._v("Regionss"),
+                                _vm._v("Regions"),
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(8),
+                                _vm._m(7),
                                 _vm._v(" "),
                                 _c(
                                   "select",
@@ -44062,9 +44190,9 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                                            " +
+                                            "\n                              " +
                                               _vm._s(region.region_name) +
-                                              "\n                                                        "
+                                              "\n                            "
                                           ),
                                         ]
                                       )
@@ -44081,7 +44209,7 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(9),
+                                _vm._m(8),
                                 _vm._v(" "),
                                 _c(
                                   "select",
@@ -44139,9 +44267,9 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                                            " +
+                                            "\n                              " +
                                               _vm._s(province.province_name) +
-                                              "\n                                                        "
+                                              "\n                            "
                                           ),
                                         ]
                                       )
@@ -44158,7 +44286,7 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(10),
+                                _vm._m(9),
                                 _vm._v(" "),
                                 _c(
                                   "select",
@@ -44204,7 +44332,9 @@ var render = function () {
                                   },
                                   [
                                     _c("option", { attrs: { value: "" } }, [
-                                      _vm._v("-- Select Municipality --"),
+                                      _vm._v(
+                                        "\n                              -- Select Municipality --\n                            "
+                                      ),
                                     ]),
                                     _vm._v(" "),
                                     _vm._l(
@@ -44220,11 +44350,11 @@ var render = function () {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                                            " +
+                                              "\n                              " +
                                                 _vm._s(
                                                   municipality.municipality_name
                                                 ) +
-                                                "\n                                                        "
+                                                "\n                            "
                                             ),
                                           ]
                                         )
@@ -44242,7 +44372,7 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(11),
+                                _vm._m(10),
                                 _vm._v(" "),
                                 _c(
                                   "select",
@@ -44297,9 +44427,9 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                                            " +
+                                            "\n                              " +
                                               _vm._s(barangay.barangay_name) +
-                                              "\n                                                        "
+                                              "\n                            "
                                           ),
                                         ]
                                       )
@@ -44316,7 +44446,7 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(12),
+                                _vm._m(11),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -44357,7 +44487,7 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(13),
+                                _vm._m(12),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -44396,7 +44526,7 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(14),
+                                _vm._m(13),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -44437,7 +44567,7 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(15),
+                                _vm._m(14),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -44476,7 +44606,7 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(16),
+                                _vm._m(15),
                                 _vm._v(" "),
                                 _c(
                                   "select",
@@ -44520,13 +44650,13 @@ var render = function () {
                                   [
                                     _c(
                                       "option",
-                                      { attrs: { value: "active" } },
+                                      { attrs: { value: "Active" } },
                                       [_vm._v("Active")]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "option",
-                                      { attrs: { value: "inactive" } },
+                                      { attrs: { value: "Inactive" } },
                                       [_vm._v("Inactive")]
                                     ),
                                   ]
@@ -44540,7 +44670,7 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(17),
+                                _vm._m(16),
                                 _vm._v(" "),
                                 _c("input", {
                                   staticClass: "form-control",
@@ -44564,7 +44694,7 @@ var render = function () {
                           [
                             _c("i", { staticClass: "ri-close-line me-1" }),
                             _vm._v(
-                              "\n                                        Cancel\n                                    "
+                              "\n                    Cancel\n                  "
                             ),
                           ]
                         ),
@@ -44590,13 +44720,13 @@ var render = function () {
                                     })
                                   : _vm._e(),
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                    " +
                                     _vm._s(
                                       _vm.modalMode === "add"
                                         ? "Save Record"
                                         : "Update Record"
                                     ) +
-                                    "\n                                    "
+                                    "\n                  "
                                 ),
                               ]
                             )
@@ -44627,15 +44757,13 @@ var staticRenderFns = [
         _c("div", [
           _c("h5", { staticClass: "card-title mb-0 text-white" }, [
             _c("i", { staticClass: "ri-building-3-line me-2" }),
-            _vm._v(
-              "\n                                    Barangay Info List\n                                "
-            ),
+            _vm._v("\n                  Barangay Info List\n                "),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "text-white-50 mb-0 small" }, [
             _c("i", { staticClass: "ri-list-check me-1" }),
             _vm._v(
-              "\n                                    Barangay Information Management System\n                                "
+              "\n                  Barangay Information Management System\n                "
             ),
           ]),
         ]),
@@ -44662,16 +44790,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 text-end" }, [
-      _c("button", { staticClass: "btn btn-outline-primary btn-lg me-1" }, [
-        _c("i", { staticClass: "ri-refresh-line" }),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "table-light" }, [
       _c("tr", [
         _c("th", { staticClass: "ps-4", attrs: { width: "50" } }, [
@@ -44681,65 +44799,49 @@ var staticRenderFns = [
         _c("th", [
           _c("i", { staticClass: "ri-map-pin-line me-1" }),
           _vm._v(" "),
-          _vm._v(
-            "\n                                    Region\n                                "
-          ),
+          _vm._v("\n                  Region\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
           _c("i", { staticClass: "ri-building-line me-1" }),
           _vm._v(" "),
-          _vm._v(
-            "\n                                    Province\n                                "
-          ),
+          _vm._v("\n                  Province\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
           _c("i", { staticClass: "ri-government-line me-1" }),
           _vm._v(" "),
-          _vm._v(
-            "\n                                    Municipality\n                                "
-          ),
+          _vm._v("\n                  Municipality\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
           _c("i", { staticClass: "ri-community-line me-1" }),
           _vm._v(" "),
-          _vm._v(
-            "\n                                    Barangay\n                                "
-          ),
+          _vm._v("\n                  Barangay\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
           _c("i", { staticClass: "ri-home-2-line me-1" }),
           _vm._v(" "),
-          _vm._v(
-            "\n                                    Barangay Name\n                                "
-          ),
+          _vm._v("\n                  Barangay Name\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
           _c("i", { staticClass: "ri-mail-line me-1" }),
           _vm._v(" "),
-          _vm._v(
-            "\n                                    Email\n                                "
-          ),
+          _vm._v("\n                  Email\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
           _c("i", { staticClass: "ri-checkbox-circle-line me-1" }),
           _vm._v(" "),
-          _vm._v(
-            "\n                                    Status\n                                "
-          ),
+          _vm._v("\n                  Status\n                "),
         ]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [
           _c("i", { staticClass: "ri-settings-3-line me-1" }),
           _vm._v(" "),
-          _vm._v(
-            "\n                                    Actions\n                                "
-          ),
+          _vm._v("\n                  Actions\n                "),
         ]),
       ]),
     ])

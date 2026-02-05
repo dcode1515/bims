@@ -131,6 +131,81 @@ class AdminController extends Controller
 
 
     }
+     public function update_barangay_info(Request $request,$id){
+         $validator = Validator::make($request->all(), [
+            'barangay_name' => 'required',
+            'region' => 'required',
+            'province' => 'required',
+            'municipality' => 'required',
+            'barangay' => 'required',
+            'barangay_code' => 'required',
+            'zip_code' => 'required',
+            'contact_number' => 'required',
+            'email' => 'required',
+           
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+        
+    
+        try {
+            $barangay =  BarangayInfo::find($id);
+            $barangay->barangay_name = $request->barangay_name;
+            $barangay->province = $request->province;
+            $barangay->municipality = $request->municipality;
+            $barangay->barangay = $request->barangay;
+            $barangay->region = $request->region;
+            $barangay->barangay_code = $request->barangay_code;
+            $barangay->zip_code = $request->zip_code;
+            $barangay->contact_number = $request->contact_number;
+            $barangay->email = $request->email;
+            $barangay->status = "Active";
+             if ($request->hasFile('photo')) {
+                            $file = $request->file('photo');
+                            $ext = $file->extension();
+                            $now = Carbon::now();
+                            $name = str_replace(' ', '_', strtoupper($barangay->barangay_name));
+                            $contact = $barangay->contact_number;
+                            $fileName = $now->year . '-' . $name . '-' . $contact . '.' . $ext;
+
+                            // Ensure the directory exists
+                            $directory = public_path('barangay/logo/' . $barangay->barangay_name);
+                            if (!file_exists($directory)) {
+                                mkdir($directory, 0777, true);
+                            }
+
+                            // Delete old photo if exists
+                            if ($barangay->photo && file_exists($directory . '/' . $barangay->photo)) {
+                                unlink($directory . '/' . $barangay->photo);
+                            }
+
+                            // Move the file to the desired location
+                            $file->move($directory, $fileName);
+                            $barangay->photo = $fileName;
+                        }
+                        
+                $barangay->save();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Barangay Info created successfully',
+                'data' => $barangay
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while creating the Office Head',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+
+
+    }
     public function getBarangayInfo(Request $request){
           $search = $request->query('search');
           $perPage = $request->query('per_page', 10); // Default to 10 if per_page is not provided

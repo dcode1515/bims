@@ -31,4 +31,4 @@ Route::get('/get-municipalities/{province_id}',  [App\Http\Controllers\Admin\Adm
 Route::get('/get-barangays/{municipality_id}', [App\Http\Controllers\Admin\AdminController::class, 'getBarangays']);
 Route::post('/api/store/barangay/info', [App\Http\Controllers\Admin\AdminController::class, 'store_barangay_info']);
 Route::get('/api/get/data/barangay/info', [App\Http\Controllers\Admin\AdminController::class, 'getBarangayInfo']);
-
+Route::post('/api/update/barangay/info/{id}', [App\Http\Controllers\Admin\AdminController::class, 'update_barangay_info']);

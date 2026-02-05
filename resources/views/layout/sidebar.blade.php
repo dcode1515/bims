@@ -59,7 +59,7 @@
                            
                         
 
-     <li class="nav-item">
+                      <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
                                 <i class="ri-settings-3-line"></i> <span data-key="t-apps">Settings</span>
                             </a>
@@ -70,14 +70,19 @@
                                         <a href="{{route('brgy.info')}}" class="nav-link" data-key="t-chat">Barangay Info</a>
                                     </li>
                                      <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-chat">Barangay Official</a>
+                                        <a href="" class="nav-link" data-key="t-chat">Barangay Positions</a>
                                     </li>
                                      <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-chat">Certification</a>
+                                        <a href="" class="nav-link" data-key="t-chat">Barangay Commitee</a>
                                     </li>
-                                  
                                 </ul>
                             </div>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link menu-link" href="widgets.html">
+                               <i class="ri-user-settings-line"></i>
+                            <span data-key="t-widgets">User Management</span>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="widgets.html">
