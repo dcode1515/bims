@@ -3,7 +3,7 @@
     <div class="col-lg-12">
       <div class="card border-0 shadow-sm">
         <!-- DENR Themed Header -->
-        <div class="card-header bg-primary border-0">
+        <div class="card-header bg-primary border-0  bg-gradient-primary">
           <div class="row align-items-center">
             <div class="col-md-8">
               <div class="d-flex align-items-center">
@@ -904,5 +904,8 @@ fetchBarangays() {
 
 .text-primary {
   color: #198754 !important;
+}
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
 }
 </style>

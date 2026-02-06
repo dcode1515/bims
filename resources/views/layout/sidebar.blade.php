@@ -70,16 +70,16 @@
                                         <a href="{{route('brgy.info')}}" class="nav-link" data-key="t-chat">Barangay Info</a>
                                     </li>
                                      <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-chat">Barangay Positions</a>
+                                        <a href="{{route('position')}}" class="nav-link" data-key="t-chat">Barangay Positions</a>
                                     </li>
                                      <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-chat">Barangay Commitee</a>
+                                        <a href="{{route('barangay.commitee')}}" class="nav-link" data-key="t-chat">Barangay Commitee</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link menu-link" href="widgets.html">
+                            <a class="nav-link menu-link" href="{{route('user.management')}}">
                                <i class="ri-user-settings-line"></i>
                             <span data-key="t-widgets">User Management</span>
                             </a>

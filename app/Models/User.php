@@ -41,4 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+         public function barangay()
+    {
+        return $this->belongsTo(BarangayInfo::class, 'barangay_info_id');
+    }
 }

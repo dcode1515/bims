@@ -32,3 +32,18 @@ Route::get('/get-barangays/{municipality_id}', [App\Http\Controllers\Admin\Admin
 Route::post('/api/store/barangay/info', [App\Http\Controllers\Admin\AdminController::class, 'store_barangay_info']);
 Route::get('/api/get/data/barangay/info', [App\Http\Controllers\Admin\AdminController::class, 'getBarangayInfo']);
 Route::post('/api/update/barangay/info/{id}', [App\Http\Controllers\Admin\AdminController::class, 'update_barangay_info']);
+Route::get('/barangay/commitee', [App\Http\Controllers\Admin\AdminController::class, 'barangay_commitee'])->name('barangay.commitee');
+Route::post('/api/store/commitee', [App\Http\Controllers\Admin\AdminController::class, 'store_commitee']);
+Route::get('/api/get/data/commitee', [App\Http\Controllers\Admin\AdminController::class, 'getDataCommitee']);
+Route::post('/api/update/commitee/{id}', [App\Http\Controllers\Admin\AdminController::class, 'update_commitee']);
+Route::delete('/api/delete/commitee/{id}', [App\Http\Controllers\Admin\AdminController::class, 'delete_commitee']);
+Route::get('/barangay/position', [App\Http\Controllers\Admin\AdminController::class, 'barangay_position'])->name('position');
+Route::post('/api/store/position', [App\Http\Controllers\Admin\AdminController::class, 'store_position']);
+Route::get('/api/get/data/position', [App\Http\Controllers\Admin\AdminController::class, 'getDataPosition']);
+Route::post('/api/update/position/{id}', [App\Http\Controllers\Admin\AdminController::class, 'update_position']);
+Route::delete('/api/delete/position/{id}', [App\Http\Controllers\Admin\AdminController::class, 'delete_position']);
+Route::get('/user/management', [App\Http\Controllers\Admin\AdminController::class, 'user_management'])->name('user.management');
+Route::get('/api/get/data/barangay/user', [App\Http\Controllers\Admin\AdminController::class, 'getDataBarangay']);
+Route::post('/api/store/barangay/user', [App\Http\Controllers\Admin\AdminController::class, 'store_barangay_user']);
+Route::get('/api/get/data/active/user', [App\Http\Controllers\Admin\AdminController::class, 'getDataUserActive']);
+

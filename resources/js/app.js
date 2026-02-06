@@ -20,8 +20,11 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('Login', require('./components/Auth/Login.vue').default);
 Vue.component('Barangayinfo', require('./components/Admin/Barangayinfo.vue').default);
+Vue.component('Login', require('./components/Auth/Login.vue').default);
+Vue.component('Comittee', require('./components/Admin/Comittee.vue').default);
+Vue.component('Position', require('./components/Admin/Position.vue').default);
+Vue.component('User', require('./components/Admin/User.vue').default);
 
 
 /**
