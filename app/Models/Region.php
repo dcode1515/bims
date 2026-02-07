@@ -24,4 +24,8 @@ class Region extends Model
     {
         return $this->hasMany(Province::class);
     }
+       public function barangayInfos()
+    {
+        return $this->hasMany(BarangayInfo::class, 'region_id');
+    }
 }

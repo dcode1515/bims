@@ -473,7 +473,7 @@
                                                             </div>
 
                                                             <!-- PASSWORD (Only show for add mode) -->
-                                                            <div v-if="modalMode === 'add'" class="col-md-4">
+                                                           <div v-if="modalMode === 'add' || modalMode === 'edit'" class="col-md-4">
                                                                 <div class="mb-3">
                                                                     <label class="form-label fw-medium">Password <span
                                                                             class="text-danger">*</span></label>
@@ -499,7 +499,8 @@
                                                             </div>
 
                                                             <!-- CONFIRM PASSWORD (Only show for add mode) -->
-                                                            <div v-if="modalMode === 'add'" class="col-md-4">
+                                                          <div v-if="modalMode === 'add' || modalMode === 'edit'" class="col-md-4">
+
                                                                 <div class="mb-3">
                                                                     <label class="form-label fw-medium">Confirm Password
                                                                         <span class="text-danger">*</span></label>
@@ -780,19 +781,21 @@ export default {
             }
         },
 
-        openModal(mode = 'add', data = null) {
+        openModal(mode = 'add', user = null) {
             this.modalMode = mode;
            
 
             if (mode === 'add') {
                 this.modalTitle = 'Add User Member';
                 this.resetForm();
-            } else if (mode === 'edit' && User) {
+            } else if (mode === 'edit' && user) {
                 this.modalTitle = 'Edit User Member';
-                this.formData = { ...data };
-            } else if (mode === 'view' && data) {
+                this.formData = { ...user,
+                     barangay: user.barangay ? user.barangay.id : ''
+                 };
+            } else if (mode === 'view' && user) {
                 this.modalTitle = 'View User User Details';
-                this.formData = { ...data };
+                this.formData = { ...user };
             }
 
             // Show modal
@@ -832,18 +835,13 @@ export default {
 
         
 
-      
-
 
         viewDetails(user) {
             this.modalMode = "view";
             this.modalTitle = "View Details";
-            this.formData = {
-                id: user.id,
-                firstname: user.firstname,
-
-                status: user.status || "Active",
-            };
+             this.formData = { ...user,
+                     barangay: user.barangay ? user.barangay.id : ''
+                 };
             $("#modalUser").modal("show");
         },
 
@@ -859,7 +857,7 @@ export default {
                     );
                 } else {
                     response = await axios.post(
-                        `/bims/api/update/office/${this.formData.id}`,
+                        `/bims/api/update/barangay/user/${this.formData.id}`,
                         this.formData
                     );
                 }
@@ -871,10 +869,18 @@ export default {
                     confirmButtonColor: "#198754",
                     confirmButtonText: "OK",
                 });
-
-                $("#modalUser").modal("show");
+                   if (this.modalMode === "add") {
+                  $("#modalUser").modal("show");
                   this.resetForm();
                     this.getDataUser();
+                   } 
+                     if (this.modalMode === "edit") {
+                  $("#modalUser").modal("hide");
+                  this.resetForm();
+                    this.getDataUser();
+                   } 
+                
+
             } catch (error) {
                 if (error.response?.status === 409) {
                     this.showError("This head of office already exists");

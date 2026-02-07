@@ -64,7 +64,7 @@
     <!-- Theme Settings -->
    
     <!-- JAVASCRIPT -->
-    <script src="{{ asset('public/js/app.js') }}?v={{ config('app.version') }}"></script>
+    <script src="{{ asset('public/js/app.js') }}"></script>
 
     <!-- jQuery & Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

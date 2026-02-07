@@ -22,7 +22,7 @@ Route::get('/', [App\Http\Controllers\Auth\AuthController::class, 'login'])->nam
 Route::post('/api/login', [App\Http\Controllers\Auth\AuthController::class, 'post_login']);
 /* End Login Routes */
 
-
+/* Super Admin Routes */
 Route::get('/admin/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'admin'])->name('admin.dashboard');
 Route::get('/barangay/info', [App\Http\Controllers\Admin\AdminController::class, 'barangay_info'])->name('brgy.info');
 Route::get('/get-regions', [App\Http\Controllers\Admin\AdminController::class, 'index']);
@@ -46,4 +46,18 @@ Route::get('/user/management', [App\Http\Controllers\Admin\AdminController::clas
 Route::get('/api/get/data/barangay/user', [App\Http\Controllers\Admin\AdminController::class, 'getDataBarangay']);
 Route::post('/api/store/barangay/user', [App\Http\Controllers\Admin\AdminController::class, 'store_barangay_user']);
 Route::get('/api/get/data/active/user', [App\Http\Controllers\Admin\AdminController::class, 'getDataUserActive']);
+Route::post('/api/update/barangay/user/{id}', [App\Http\Controllers\Admin\AdminController::class, 'update_barangay_user']);
+/* End Super Admin Routes */
 
+
+/*Admin Routes */
+Route::get('/barangay/dashboard', [App\Http\Controllers\Barangay\BarangayController::class, 'dashboard_barangay'])->name('dashboard.admin');
+Route::get('/purok', [App\Http\Controllers\Barangay\BarangayController::class, 'purok'])->name('purok');
+Route::post('/api/store/purok', [App\Http\Controllers\Barangay\BarangayController::class, 'store_purok']);
+Route::get('/api/get/data/purok', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataPurok']);
+Route::post('/api/update/purok/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_purok']);
+Route::delete('/api/delete/purok/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'delete_purok']);
+
+
+
+/*End Admin Routes */

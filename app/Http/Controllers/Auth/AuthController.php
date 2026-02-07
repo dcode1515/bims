@@ -31,7 +31,14 @@ class AuthController extends Controller
 
         if ($user->role === "Super Admin") {
             return redirect()->route('admin.dashboard');
-        } else {
+        }
+         else if ($user->role === "Admin") {
+            return redirect()->route('dashboard.admin');
+        }
+          else if ($user->role === "Secretary") {
+            return redirect()->route('barangay.dashboard.sec');
+        }
+         else {
             Auth::logout();
             return response()->json([
                 'error' => 'Your Email address or Password is incorrect. Please try again.'

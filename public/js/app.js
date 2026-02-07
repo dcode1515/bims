@@ -7797,6 +7797,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -7962,17 +7963,19 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     },
     openModal: function openModal() {
       var mode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'add';
-      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var user = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       this.modalMode = mode;
       if (mode === 'add') {
         this.modalTitle = 'Add User Member';
         this.resetForm();
-      } else if (mode === 'edit' && User) {
+      } else if (mode === 'edit' && user) {
         this.modalTitle = 'Edit User Member';
-        this.formData = _objectSpread({}, data);
-      } else if (mode === 'view' && data) {
+        this.formData = _objectSpread(_objectSpread({}, user), {}, {
+          barangay: user.barangay ? user.barangay.id : ''
+        });
+      } else if (mode === 'view' && user) {
         this.modalTitle = 'View User User Details';
-        this.formData = _objectSpread({}, data);
+        this.formData = _objectSpread({}, user);
       }
 
       // Show modal
@@ -8008,11 +8011,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     viewDetails: function viewDetails(user) {
       this.modalMode = "view";
       this.modalTitle = "View Details";
-      this.formData = {
-        id: user.id,
-        firstname: user.firstname,
-        status: user.status || "Active"
-      };
+      this.formData = _objectSpread(_objectSpread({}, user), {}, {
+        barangay: user.barangay ? user.barangay.id : ''
+      });
       $("#modalUser").modal("show");
     },
     submitForm: function submitForm() {
@@ -8036,7 +8037,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               break;
             case 3:
               _context3.n = 4;
-              return axios.post("/bims/api/update/office/".concat(_this3.formData.id), _this3.formData);
+              return axios.post("/bims/api/update/barangay/user/".concat(_this3.formData.id), _this3.formData);
             case 4:
               response = _context3.v;
             case 5:
@@ -8049,9 +8050,16 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 confirmButtonText: "OK"
               });
             case 6:
-              $("#modalUser").modal("show");
-              _this3.resetForm();
-              _this3.getDataUser();
+              if (_this3.modalMode === "add") {
+                $("#modalUser").modal("show");
+                _this3.resetForm();
+                _this3.getDataUser();
+              }
+              if (_this3.modalMode === "edit") {
+                $("#modalUser").modal("hide");
+                _this3.resetForm();
+                _this3.getDataUser();
+              }
               _context3.n = 8;
               break;
             case 7:
@@ -8305,6 +8313,766 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
   },
   mounted: function mounted() {
     console.log("Login component mounted.");
+  }
+});
+
+/***/ },
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=script&lang=js&"
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      puroks: {
+        data: [],
+        current_page: 1,
+        from: 1,
+        to: 1,
+        last_page: 1,
+        per_page: 10,
+        total: 0
+      },
+      formData: {
+        id: "",
+        purok_name: "",
+        purok_incharge: "",
+        contact_number: "",
+        term_start_date: "",
+        term_end_date: "",
+        status_term: "",
+        status: "Active"
+      },
+      modalMode: "add",
+      modalTitle: "Add Purok",
+      searchQuery: "",
+      perPage: 10,
+      loading: false
+    };
+  },
+  computed: {
+    pages: function pages() {
+      var pages = [];
+      var total = this.puroks.last_page;
+      var current = this.puroks.current_page;
+      var maxVisible = 5;
+      if (total <= maxVisible) {
+        for (var i = 1; i <= total; i++) pages.push(i);
+      } else {
+        var start = Math.max(1, current - 2);
+        var end = Math.min(total, start + maxVisible - 1);
+        if (end - start + 1 < maxVisible) {
+          start = Math.max(1, end - maxVisible + 1);
+        }
+        for (var _i = start; _i <= end; _i++) pages.push(_i);
+      }
+      return pages;
+    }
+  },
+  methods: {
+    getDataPurok: function getDataPurok() {
+      var _this = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+        var response, _t;
+        return _regenerator().w(function (_context) {
+          while (1) switch (_context.p = _context.n) {
+            case 0:
+              _context.p = 0;
+              _context.n = 1;
+              return axios.get("/bims/api/get/data/purok", {
+                params: {
+                  page: _this.puroks.current_page,
+                  per_page: _this.perPage,
+                  search: _this.searchQuery
+                }
+              });
+            case 1:
+              response = _context.v;
+              _this.puroks = response.data.data;
+              _context.n = 3;
+              break;
+            case 2:
+              _context.p = 2;
+              _t = _context.v;
+              _this.showError("Failed to load data. Please try again.");
+            case 3:
+              return _context.a(2);
+          }
+        }, _callee, null, [[0, 2]]);
+      }))();
+    },
+    changePage: function changePage(page) {
+      if (page >= 1 && page <= this.puroks.last_page) {
+        this.puroks.current_page = page;
+        this.getDataPurok();
+      }
+    },
+    formatDate: function formatDate(dateString) {
+      if (!dateString) return "";
+      var date = new Date(dateString);
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    },
+    getStatusClass: function getStatusClass(status) {
+      switch (status) {
+        case "active":
+          return "badge bg-success bg-opacity-10 text-success";
+        case "inactive":
+          return "badge bg-danger bg-opacity-10 text-danger";
+        case "pending":
+          return "badge bg-warning bg-opacity-10 text-warning";
+        default:
+          return "badge bg-secondary bg-opacity-10 text-secondary";
+      }
+    },
+    getStatusIcon: function getStatusIcon(status) {
+      switch (status) {
+        case "active":
+          return "ri-checkbox-circle-line";
+        case "inactive":
+          return "ri-close-circle-line";
+        case "pending":
+          return "ri-time-line";
+        default:
+          return "ri-question-line";
+      }
+    },
+    openModal: function openModal(mode) {
+      var purok = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      this.modalMode = mode;
+      if (mode === "add") {
+        this.modalTitle = "Add Purok";
+        this.formData = {
+          id: "",
+          purok: "",
+          status: "active"
+        };
+      } else if (mode === "edit") {
+        this.modalTitle = "Edit Purok";
+        this.formData = {
+          id: purok.id,
+          purok_name: purok.purok_name,
+          purok_incharge: purok.purok_incharge,
+          contact_number: purok.contact_number,
+          term_start_date: purok.term_start_date,
+          term_end_date: purok.term_end_date,
+          status_term: purok.status_term,
+          status: purok.status || "Active"
+        };
+      }
+      $("#modalPurok").modal("show");
+    },
+    closeModal: function closeModal() {
+      $("#modalPurok").modal("hide");
+    },
+    viewDetails: function viewDetails(purok) {
+      this.modalMode = "view";
+      this.modalTitle = "View Details";
+      this.formData = {
+        id: purok.id,
+        purok_name: purok.purok_name,
+        purok_incharge: purok.purok_incharge,
+        contact_number: purok.contact_number,
+        term_start_date: purok.term_start_date,
+        term_end_date: purok.term_end_date,
+        status_term: purok.status_term,
+        status: purok.status || "Active"
+      };
+      $("#modalPurok").modal("show");
+    },
+    submitForm: function submitForm() {
+      var _this2 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+        var response, _error$response, _error$response2, errors, errorMessage, _t2;
+        return _regenerator().w(function (_context2) {
+          while (1) switch (_context2.p = _context2.n) {
+            case 0:
+              _this2.loading = true;
+              _context2.p = 1;
+              if (!(_this2.modalMode === "add")) {
+                _context2.n = 3;
+                break;
+              }
+              _context2.n = 2;
+              return axios.post("/bims/api/store/purok", _this2.formData);
+            case 2:
+              response = _context2.v;
+              _context2.n = 5;
+              break;
+            case 3:
+              _context2.n = 4;
+              return axios.post("/bims/api/update/purok/".concat(_this2.formData.id), _this2.formData);
+            case 4:
+              response = _context2.v;
+            case 5:
+              _context2.n = 6;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                icon: "success",
+                title: "Success",
+                text: response.data.message || "Operation completed successfully",
+                confirmButtonColor: "#198754",
+                confirmButtonText: "OK"
+              });
+            case 6:
+              $("#modalPurok").modal("show");
+              if (_this2.modalMode === "add") {
+                _this2.formData = {
+                  id: "",
+                  purok_name: "",
+                  purok_incharge: "",
+                  contact_number: "",
+                  term_start_date: "",
+                  term_end_date: "",
+                  status_term: "",
+                  status: "Active"
+                };
+              }
+              if (_this2.modalMode === "edit") {
+                _this2.formData = {
+                  id: "",
+                  purok_name: "",
+                  purok_incharge: "",
+                  contact_number: "",
+                  term_start_date: "",
+                  term_end_date: "",
+                  status_term: "",
+                  status: "Active"
+                };
+                $("#modalPurok").modal("hide");
+              }
+              _this2.getDataPurok();
+              _context2.n = 8;
+              break;
+            case 7:
+              _context2.p = 7;
+              _t2 = _context2.v;
+              if (((_error$response = _t2.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 409) {
+                _this2.showError("This Purok  already exists");
+              } else if ((_error$response2 = _t2.response) !== null && _error$response2 !== void 0 && (_error$response2 = _error$response2.data) !== null && _error$response2 !== void 0 && _error$response2.errors) {
+                errors = _t2.response.data.errors;
+                errorMessage = Object.values(errors).flat().join(", ");
+                _this2.showError(errorMessage);
+              } else {
+                _this2.showError("Something went wrong. Please try again.");
+              }
+            case 8:
+              _context2.p = 8;
+              _this2.loading = false;
+              return _context2.f(8);
+            case 9:
+              return _context2.a(2);
+          }
+        }, _callee2, null, [[1, 7, 8, 9]]);
+      }))();
+    },
+    confirmDelete: function confirmDelete(commitee) {
+      var _this3 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+        var result, _t3;
+        return _regenerator().w(function (_context3) {
+          while (1) switch (_context3.p = _context3.n) {
+            case 0:
+              _context3.n = 1;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                title: "Delete Record",
+                text: "Are you sure you want to delete \"".concat(commitee.commitee, "\"?"),
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
+                reverseButtons: true
+              });
+            case 1:
+              result = _context3.v;
+              if (!result.isConfirmed) {
+                _context3.n = 6;
+                break;
+              }
+              _context3.p = 2;
+              _context3.n = 3;
+              return axios["delete"]("/bims/api/delete/commitee/".concat(commitee.id));
+            case 3:
+              _context3.n = 4;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                icon: "success",
+                title: "Deleted!",
+                text: "Record has been deleted successfully.",
+                confirmButtonColor: "#198754",
+                timer: 2000
+              });
+            case 4:
+              _this3.getDataCommitee();
+              _context3.n = 6;
+              break;
+            case 5:
+              _context3.p = 5;
+              _t3 = _context3.v;
+              _this3.showError("Failed to delete record");
+            case 6:
+              return _context3.a(2);
+          }
+        }, _callee3, null, [[2, 5]]);
+      }))();
+    },
+    refreshData: function refreshData() {
+      this.getDataPurok();
+      this.showSuccess("Data refreshed successfully!");
+    },
+    showError: function showError(message) {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+        icon: "error",
+        title: "Error",
+        text: message,
+        confirmButtonColor: "#dc3545"
+      });
+    },
+    showSuccess: function showSuccess(message) {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+        icon: "success",
+        title: "Success",
+        text: message,
+        confirmButtonColor: "#198754",
+        timer: 1500
+      });
+    },
+    showInfo: function showInfo(message) {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+        icon: "info",
+        title: "Information",
+        text: message,
+        confirmButtonColor: "#0dcaf0"
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getDataPurok();
   }
 });
 
@@ -12959,6 +13727,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Optional: add your custom styles here */\n.is-invalid[data-v-06688fcd] {\r\n    border-color: #dc3545;\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ },
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css&"
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card[data-v-81c2acf8] {\r\n    border-radius: 10px;\n}\n.card-header[data-v-81c2acf8] {\r\n    border-radius: 10px 10px 0 0 !important;\r\n    padding: 1.2rem 1.5rem;\n}\n.table th[data-v-81c2acf8] {\r\n    background-color: #f8fafc;\r\n    font-weight: 600;\r\n    padding: 1rem;\r\n    border-bottom: 2px solid #e9ecef;\n}\n.table td[data-v-81c2acf8] {\r\n    padding: 1rem;\r\n    vertical-align: middle;\n}\n.badge[data-v-81c2acf8] {\r\n    padding: 0.35rem 0.7rem;\r\n    border-radius: 6px;\r\n    font-weight: 500;\n}\n.btn-group .btn[data-v-81c2acf8] {\r\n    border-radius: 6px;\r\n    margin: 0 2px;\n}\n.btn-outline-primary[data-v-81c2acf8] {\r\n    border-color: #198754;\r\n    color: #198754;\n}\n.btn-outline-primary[data-v-81c2acf8]:hover {\r\n    background-color: #198754;\r\n    color: white;\n}\n.page-link[data-v-81c2acf8] {\r\n    color: #198754;\r\n    border: 1px solid #dee2e6;\n}\n.page-item.active .page-link[data-v-81c2acf8] {\r\n    background-color: #198754;\r\n    border-color: #198754;\r\n    color: white;\n}\n.page-link[data-v-81c2acf8]:hover {\r\n    color: #146c43;\r\n    background-color: #e9ecef;\n}\n.modal-content[data-v-81c2acf8] {\r\n    border-radius: 10px;\n}\n.input-group-text[data-v-81c2acf8] {\r\n    background-color: #f8f9fa;\r\n    border-color: #dee2e6;\n}\n.form-check-input[data-v-81c2acf8]:checked {\r\n    background-color: #198754;\r\n    border-color: #198754;\n}\n.bg-primary[data-v-81c2acf8] {\r\n    background-color: #198754 !important;\n}\n.text-primary[data-v-81c2acf8] {\r\n    color: #198754 !important;\n}\n.bg-gradient-primary[data-v-81c2acf8] {\r\n    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40342,6 +41134,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ },
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css&"
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Purok_vue_vue_type_style_index_0_id_81c2acf8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Purok_vue_vue_type_style_index_0_id_81c2acf8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Purok_vue_vue_type_style_index_0_id_81c2acf8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ },
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js"
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -50247,7 +51069,8 @@ var render = function () {
                                       ]),
                                     ]),
                                     _vm._v(" "),
-                                    _vm.modalMode === "add"
+                                    _vm.modalMode === "add" ||
+                                    _vm.modalMode === "edit"
                                       ? _c("div", { staticClass: "col-md-4" }, [
                                           _c("div", { staticClass: "mb-3" }, [
                                             _vm._m(25),
@@ -50335,7 +51158,8 @@ var render = function () {
                                         ])
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _vm.modalMode === "add"
+                                    _vm.modalMode === "add" ||
+                                    _vm.modalMode === "edit"
                                       ? _c("div", { staticClass: "col-md-4" }, [
                                           _c("div", { staticClass: "mb-3" }, [
                                             _vm._m(27),
@@ -51368,6 +52192,1271 @@ var staticRenderFns = [
             [_vm._v("\n                Remember me\n            ")]
           ),
         ]),
+      ]
+    )
+  },
+]
+render._withStripped = true
+
+
+
+/***/ },
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=template&id=81c2acf8&scoped=true&"
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=template&id=81c2acf8&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-lg-12" }, [
+      _c("div", { staticClass: "card border-0 shadow-sm" }, [
+        _c(
+          "div",
+          {
+            staticClass: "card-header bg-primary border-0 bg-gradient-primary",
+          },
+          [
+            _c("div", { staticClass: "row align-items-center" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4 text-end" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-light btn-sm",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.openModal("add")
+                      },
+                    },
+                  },
+                  [
+                    _c("i", { staticClass: "ri-add-circle-line me-1" }),
+                    _vm._v(
+                      "\n                            Create Purok\n                        "
+                    ),
+                  ]
+                ),
+              ]),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body border-bottom" }, [
+          _c("div", { staticClass: "row g-3 align-items-center" }, [
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "input-group input-group" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.perPage,
+                        expression: "perPage",
+                      },
+                    ],
+                    staticClass: "form-control form-control",
+                    on: {
+                      change: [
+                        function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.perPage = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        },
+                        _vm.getDataPurok,
+                      ],
+                    },
+                  },
+                  [
+                    _c("option", { attrs: { value: "5" } }, [
+                      _vm._v("5 per page"),
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "10" } }, [
+                      _vm._v("10 per page"),
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "20" } }, [
+                      _vm._v("20 per page"),
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "50" } }, [
+                      _vm._v("50 per page"),
+                    ]),
+                  ]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "input-group input-group" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.searchQuery,
+                      expression: "searchQuery",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Search  Purok..." },
+                  domProps: { value: _vm.searchQuery },
+                  on: {
+                    input: [
+                      function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.searchQuery = $event.target.value
+                      },
+                      _vm.getDataPurok,
+                    ],
+                  },
+                }),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3 text-end" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary btn-lg me-1",
+                  on: { click: _vm.refreshData },
+                },
+                [_c("i", { staticClass: "ri-refresh-line" })]
+              ),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body p-0" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("table", { staticClass: "table table-hover mb-0" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                [
+                  _vm._l(_vm.puroks.data, function (purok, index) {
+                    return _c("tr", { key: purok.id }, [
+                      _c("td", { staticClass: "ps-4" }, [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(
+                              (_vm.puroks.current_page - 1) *
+                                _vm.puroks.per_page +
+                                index +
+                                1
+                            ) +
+                            "\n                                "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "div",
+                          { staticClass: "d-flex align-items-center" },
+                          [
+                            _c("div", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(purok.purok_name) +
+                                  "\n                                        "
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "div",
+                          { staticClass: "d-flex align-items-center" },
+                          [
+                            _c("div", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(purok.purok_incharge) +
+                                  "\n                                        "
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "div",
+                          { staticClass: "d-flex align-items-center" },
+                          [
+                            _c("div", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(purok.contact_number) +
+                                  "\n                                        "
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "div",
+                          { staticClass: "d-flex align-items-center" },
+                          [
+                            _c("div", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(
+                                    _vm.formatDate(purok.term_start_date)
+                                  ) +
+                                  " - " +
+                                  _vm._s(_vm.formatDate(purok.term_end_date)) +
+                                  "\n                                        "
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "div",
+                          { staticClass: "d-flex align-items-center" },
+                          [
+                            _c("div", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(purok.status_term) +
+                                  "\n                                        "
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "div",
+                          { staticClass: "d-flex align-items-center" },
+                          [
+                            _c("div", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(purok.status) +
+                                  "\n                                        "
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(_vm.formatDate(purok.created_at)) +
+                              "\n                                    "
+                          ),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn-group",
+                            attrs: { role: "group" },
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-sm btn-outline-primary",
+                                attrs: { title: "Edit" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.openModal("edit", purok)
+                                  },
+                                },
+                              },
+                              [_c("i", { staticClass: "ri-edit-line" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-sm btn-outline-info",
+                                attrs: { title: "View" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.viewDetails(purok)
+                                  },
+                                },
+                              },
+                              [_c("i", { staticClass: "ri-eye-line" })]
+                            ),
+                          ]
+                        ),
+                      ]),
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _vm.puroks.data.length === 0
+                    ? _c("tr", [_vm._m(4)])
+                    : _vm._e(),
+                ],
+                2
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "modal fade zoomIn",
+                attrs: {
+                  id: "modalPurok",
+                  tabindex: "-1",
+                  "aria-labelledby": "exampleModalLabel",
+                  "aria-hidden": "true",
+                },
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "modal-dialog modal-dialog-centered modal" },
+                  [
+                    _c("div", { staticClass: "modal-content border-0" }, [
+                      _c(
+                        "div",
+                        { staticClass: "modal-header bg-light p-3 bg-primary" },
+                        [
+                          _c(
+                            "h5",
+                            {
+                              staticClass: "modal-title",
+                              staticStyle: { color: "white" },
+                              attrs: { id: "exampleModalLabel" },
+                            },
+                            [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(_vm.modalTitle) +
+                                  "\n                                    "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("button", {
+                            staticClass: "btn-close btn-close-white",
+                            attrs: { type: "button" },
+                            on: { click: _vm.closeModal },
+                          }),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body p-4" }, [
+                        _c("div", { staticClass: "mb-4" }, [
+                          _c("div", { staticClass: "mb-4" }, [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "input-group" }, [
+                              _vm._m(6),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.purok_name,
+                                    expression: "formData.purok_name",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Enter Purok Name",
+                                },
+                                domProps: { value: _vm.formData.purok_name },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.formData,
+                                      "purok_name",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mb-4" }, [
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "input-group" }, [
+                              _vm._m(8),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.purok_incharge,
+                                    expression: "formData.purok_incharge",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Enter Purok In Charge",
+                                },
+                                domProps: {
+                                  value: _vm.formData.purok_incharge,
+                                },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.formData,
+                                      "purok_incharge",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mb-4" }, [
+                            _vm._m(9),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "input-group" }, [
+                              _vm._m(10),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.contact_number,
+                                    expression: "formData.contact_number",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Enter Purok Contact Number",
+                                },
+                                domProps: {
+                                  value: _vm.formData.contact_number,
+                                },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.formData,
+                                      "contact_number",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mb-4" }, [
+                            _vm._m(11),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "input-group" }, [
+                              _vm._m(12),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.term_start_date,
+                                    expression: "formData.term_start_date",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "date",
+                                  placeholder: "Enter Purok Term Start Date",
+                                },
+                                domProps: {
+                                  value: _vm.formData.term_start_date,
+                                },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.formData,
+                                      "term_start_date",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mb-4" }, [
+                            _vm._m(13),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "input-group" }, [
+                              _vm._m(14),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.term_end_date,
+                                    expression: "formData.term_end_date",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "date",
+                                  placeholder: "Enter Purok Term End Date",
+                                },
+                                domProps: { value: _vm.formData.term_end_date },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.formData,
+                                      "term_end_date",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mb-4" }, [
+                            _vm._m(15),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "input-group" }, [
+                              _vm._m(16),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.formData.status_term,
+                                      expression: "formData.status_term",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.formData,
+                                        "status_term",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "", disabled: "" } },
+                                    [_vm._v("Select Purok Status Term")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Incumbent" } },
+                                    [_vm._v("Incumbent")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "Former" } }, [
+                                    _vm._v("Former"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "Vacant" } }, [
+                                    _vm._v("Vacant"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Suspended" } },
+                                    [_vm._v("Suspended")]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _vm.modalMode === "edit"
+                          ? _c("div", { staticClass: "mb-3" }, [
+                              _vm._m(17),
+                              _vm._v(" "),
+                              _c("div", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "form-check form-check-inline",
+                                  },
+                                  [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.formData.status,
+                                          expression: "formData.status",
+                                        },
+                                      ],
+                                      staticClass: "form-check-input",
+                                      attrs: {
+                                        type: "radio",
+                                        value: "Active",
+                                        id: "active",
+                                      },
+                                      domProps: {
+                                        checked: _vm._q(
+                                          _vm.formData.status,
+                                          "Active"
+                                        ),
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          return _vm.$set(
+                                            _vm.formData,
+                                            "status",
+                                            "Active"
+                                          )
+                                        },
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _vm._m(18),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "form-check form-check-inline",
+                                  },
+                                  [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.formData.status,
+                                          expression: "formData.status",
+                                        },
+                                      ],
+                                      staticClass: "form-check-input",
+                                      attrs: {
+                                        type: "radio",
+                                        value: "InActive",
+                                        id: "inactive",
+                                      },
+                                      domProps: {
+                                        checked: _vm._q(
+                                          _vm.formData.status,
+                                          "InActive"
+                                        ),
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          return _vm.$set(
+                                            _vm.formData,
+                                            "status",
+                                            "InActive"
+                                          )
+                                        },
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _vm._m(19),
+                                  ]
+                                ),
+                              ]),
+                            ])
+                          : _vm._e(),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-footer" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-light",
+                            attrs: { type: "button" },
+                            on: { click: _vm.closeModal },
+                          },
+                          [
+                            _c("i", { staticClass: "ri-close-line me-1" }),
+                            _vm._v(
+                              "\n                                        Cancel\n                                    "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.modalMode !== "view"
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: {
+                                  type: "button",
+                                  disabled: _vm.loading,
+                                },
+                                on: { click: _vm.submitForm },
+                              },
+                              [
+                                _c("i", { staticClass: "ri-save-line me-1" }),
+                                _vm._v(" "),
+                                _vm.loading
+                                  ? _c("span", {
+                                      staticClass:
+                                        "spinner-border spinner-border-sm me-1",
+                                    })
+                                  : _vm._e(),
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(
+                                      _vm.modalMode === "add"
+                                        ? "Save Record"
+                                        : "Update Record"
+                                    ) +
+                                    "\n                                    "
+                                ),
+                              ]
+                            )
+                          : _vm._e(),
+                      ]),
+                    ]),
+                  ]
+                ),
+              ]
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _vm.puroks.total > 0
+          ? _c("div", { staticClass: "card-footer bg-white" }, [
+              _c("div", { staticClass: "row align-items-center" }, [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("span", { staticClass: "text-muted small" }, [
+                    _c("i", { staticClass: "ri-file-list-line me-1" }),
+                    _vm._v(
+                      "\n                            Showing " +
+                        _vm._s(_vm.puroks.from) +
+                        " to " +
+                        _vm._s(_vm.puroks.to) +
+                        " of\n                            " +
+                        _vm._s(_vm.puroks.total) +
+                        " entries\n                        "
+                    ),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("nav", { staticClass: "float-end" }, [
+                    _c(
+                      "ul",
+                      { staticClass: "pagination pagination-sm mb-0" },
+                      [
+                        _c(
+                          "li",
+                          {
+                            staticClass: "page-item",
+                            class: { disabled: _vm.puroks.current_page === 1 },
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "page-link",
+                                attrs: { title: "First" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.changePage(1)
+                                  },
+                                },
+                              },
+                              [_c("i", { staticClass: "ri-skip-back-line" })]
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          {
+                            staticClass: "page-item",
+                            class: { disabled: _vm.puroks.current_page === 1 },
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "page-link",
+                                attrs: { title: "Previous" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.changePage(
+                                      _vm.puroks.current_page - 1
+                                    )
+                                  },
+                                },
+                              },
+                              [_c("i", { staticClass: "ri-arrow-left-s-line" })]
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.pages, function (page) {
+                          return _c(
+                            "li",
+                            {
+                              key: page,
+                              staticClass: "page-item",
+                              class: {
+                                active: page === _vm.puroks.current_page,
+                              },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "page-link",
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.changePage(page)
+                                    },
+                                  },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(page) +
+                                      "\n                                    "
+                                  ),
+                                ]
+                              ),
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          {
+                            staticClass: "page-item",
+                            class: {
+                              disabled:
+                                _vm.puroks.current_page ===
+                                _vm.puroks.last_page,
+                            },
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "page-link",
+                                attrs: { title: "Next" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.changePage(
+                                      _vm.puroks.current_page + 1
+                                    )
+                                  },
+                                },
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "ri-arrow-right-s-line",
+                                }),
+                              ]
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          {
+                            staticClass: "page-item",
+                            class: {
+                              disabled:
+                                _vm.puroks.current_page ===
+                                _vm.puroks.last_page,
+                            },
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "page-link",
+                                attrs: { title: "Last" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.changePage(_vm.puroks.last_page)
+                                  },
+                                },
+                              },
+                              [_c("i", { staticClass: "ri-skip-forward-line" })]
+                            ),
+                          ]
+                        ),
+                      ],
+                      2
+                    ),
+                  ]),
+                ]),
+              ]),
+            ])
+          : _vm._e(),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "d-flex align-items-center" }, [
+        _c("div", { staticClass: "bg-white rounded-circle p-2 me-3" }, [
+          _c("i", { staticClass: "ri-government-line text-primary fs-4" }),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("h5", { staticClass: "card-title mb-0 text-white" }, [
+            _c("i", { staticClass: "ri-building-3-line me-2" }),
+            _vm._v(
+              "\n                                    Purok List\n                                "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-white-50 mb-0 small" }, [
+            _c("i", { staticClass: "ri-list-check me-1" }),
+            _vm._v(
+              "\n                                    Barangay Information Management System\n                                "
+            ),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light" }, [
+      _c("i", { staticClass: "ri-list-settings-line" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light" }, [
+      _c("i", { staticClass: "ri-search-line" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "table-light" }, [
+      _c("tr", [
+        _c("th", { staticClass: "ps-4", attrs: { width: "50" } }, [
+          _c("i", { staticClass: "ri-list-check" }),
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _c("i", { staticClass: "ri-user-line me-1" }),
+          _vm._v(
+            "\n                                    Purok\n                                "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _c("i", { staticClass: "ri-user-line me-1" }),
+          _vm._v(
+            "\n                                    Purok Incharge\n                                "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _c("i", { staticClass: "ri-user-line me-1" }),
+          _vm._v(
+            "\n                                    Contact Number\n                                "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _c("i", { staticClass: "ri-user-line me-1" }),
+          _vm._v(
+            "\n                                    Date Term\n                                "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _c("i", { staticClass: "ri-user-line me-1" }),
+          _vm._v(
+            "\n                                    Status Term\n                                "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _c("i", { staticClass: "ri-leaf-line me-1" }),
+          _vm._v(
+            "\n                                    Status\n                                "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _c("i", { staticClass: "ri-calendar-line me-1" }),
+          _vm._v(
+            "\n                                    Date Created\n                                "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [
+          _c("i", { staticClass: "ri-settings-3-line me-1" }),
+          _vm._v(
+            "\n                                    Actions\n                                "
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "td",
+      { staticClass: "text-center py-5", attrs: { colspan: "6" } },
+      [
+        _c("div", { staticClass: "text-muted" }, [
+          _c("i", { staticClass: "ri-search-line display-5" }),
+          _vm._v(" "),
+          _c("p", { staticClass: "mt-3 mb-0" }, [_vm._v("No records found")]),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium mb-2" }, [
+      _vm._v(
+        "\n                                                Purok Name\n                                                "
+      ),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light" }, [
+      _c("i", { staticClass: "ri-building-line" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium mb-2" }, [
+      _vm._v(
+        "\n                                                Purok In Charge\n                                                "
+      ),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light" }, [
+      _c("i", { staticClass: "ri-building-line" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium mb-2" }, [
+      _vm._v(
+        "\n                                                Purok Contact Number\n                                                "
+      ),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light" }, [
+      _c("i", { staticClass: "ri-building-line" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium mb-2" }, [
+      _vm._v(
+        "\n                                                Purok Term Start Date\n                                                "
+      ),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light" }, [
+      _c("i", { staticClass: "ri-building-line" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium mb-2" }, [
+      _vm._v(
+        "\n                                                Purok Term End Date\n                                                "
+      ),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light" }, [
+      _c("i", { staticClass: "ri-building-line" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium mb-2" }, [
+      _vm._v(
+        "\n                                                Status Term\n                                                "
+      ),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light" }, [
+      _c("i", { staticClass: "ri-building-line" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium mb-2" }, [
+      _c("i", { staticClass: "ri-leaf-line me-1" }),
+      _vm._v(
+        "\n                                            Status\n                                        "
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-check-label", attrs: { for: "active" } },
+      [
+        _c("i", { staticClass: "ri-checkbox-circle-line me-1 text-success" }),
+        _vm._v(
+          "\n                                                    Active\n                                                "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-check-label", attrs: { for: "inactive" } },
+      [
+        _c("i", { staticClass: "ri-close-circle-line me-1 text-danger" }),
+        _vm._v(
+          "\n                                                    Inactive\n                                                "
+        ),
       ]
     )
   },
@@ -63546,6 +65635,7 @@ Vue.component('Login', (__webpack_require__(/*! ./components/Auth/Login.vue */ "
 Vue.component('Comittee', (__webpack_require__(/*! ./components/Admin/Comittee.vue */ "./resources/js/components/Admin/Comittee.vue")["default"]));
 Vue.component('Position', (__webpack_require__(/*! ./components/Admin/Position.vue */ "./resources/js/components/Admin/Position.vue")["default"]));
 Vue.component('User', (__webpack_require__(/*! ./components/Admin/User.vue */ "./resources/js/components/Admin/User.vue")["default"]));
+Vue.component('Purok', (__webpack_require__(/*! ./components/Barangay/Purok.vue */ "./resources/js/components/Barangay/Purok.vue")["default"]));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -64034,6 +66124,94 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_06688fcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_06688fcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Login.vue?vue&type=template&id=06688fcd&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Auth/Login.vue?vue&type=template&id=06688fcd&scoped=true&");
+
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Purok.vue"
+/*!****************************************************!*\
+  !*** ./resources/js/components/Barangay/Purok.vue ***!
+  \****************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Purok_vue_vue_type_template_id_81c2acf8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Purok.vue?vue&type=template&id=81c2acf8&scoped=true& */ "./resources/js/components/Barangay/Purok.vue?vue&type=template&id=81c2acf8&scoped=true&");
+/* harmony import */ var _Purok_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Purok.vue?vue&type=script&lang=js& */ "./resources/js/components/Barangay/Purok.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Purok_vue_vue_type_style_index_0_id_81c2acf8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css& */ "./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Purok_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Purok_vue_vue_type_template_id_81c2acf8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Purok_vue_vue_type_template_id_81c2acf8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "81c2acf8",
+  null
+  
+)
+
+/* hot reload */
+if (false) // removed by dead control flow
+{ var api; }
+component.options.__file = "resources/js/components/Barangay/Purok.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Purok.vue?vue&type=script&lang=js&"
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/Barangay/Purok.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Purok_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Purok.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Purok_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css&"
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css& ***!
+  \*************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Purok_vue_vue_type_style_index_0_id_81c2acf8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css&");
+
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Purok.vue?vue&type=template&id=81c2acf8&scoped=true&"
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Barangay/Purok.vue?vue&type=template&id=81c2acf8&scoped=true& ***!
+  \***********************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Purok_vue_vue_type_template_id_81c2acf8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Purok_vue_vue_type_template_id_81c2acf8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Purok_vue_vue_type_template_id_81c2acf8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Purok.vue?vue&type=template&id=81c2acf8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=template&id=81c2acf8&scoped=true&");
 
 
 /***/ },

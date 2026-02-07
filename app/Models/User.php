@@ -45,4 +45,5 @@ class User extends Authenticatable
     {
         return $this->belongsTo(BarangayInfo::class, 'barangay_info_id');
     }
+    
 }

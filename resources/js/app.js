@@ -25,6 +25,7 @@ Vue.component('Login', require('./components/Auth/Login.vue').default);
 Vue.component('Comittee', require('./components/Admin/Comittee.vue').default);
 Vue.component('Position', require('./components/Admin/Position.vue').default);
 Vue.component('User', require('./components/Admin/User.vue').default);
+Vue.component('Purok', require('./components/Barangay/Purok.vue').default);
 
 
 /**

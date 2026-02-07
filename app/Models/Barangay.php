@@ -22,4 +22,9 @@ class Barangay extends Model
     {
         return $this->belongsTo(Municipality::class);
     }
+    
+      public function barangayInfos()
+      {
+          return $this->hasMany(BarangayInfo::class, 'barangay_id');
+      }
 }

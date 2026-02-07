@@ -29,4 +29,8 @@ class Municipality extends Model
     {
         return $this->hasMany(Barangay::class);
     }
+      public function barangayInfos()
+    {
+        return $this->hasMany(BarangayInfo::class, 'municipality_id');
+    }
 }
