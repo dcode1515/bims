@@ -211,7 +211,7 @@
                     <div class="collapse menu-dropdown" id="settings">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('brgy.info') }}" class="nav-link">Barangay Officials</a>
+                                <a href="{{ route('barangay.official') }}" class="nav-link">Barangay Officials</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('purok') }}" class="nav-link">Purok</a>

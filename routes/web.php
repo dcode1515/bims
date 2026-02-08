@@ -57,6 +57,7 @@ Route::post('/api/store/purok', [App\Http\Controllers\Barangay\BarangayControlle
 Route::get('/api/get/data/purok', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataPurok']);
 Route::post('/api/update/purok/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_purok']);
 Route::delete('/api/delete/purok/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'delete_purok']);
+Route::get('/barangay/official', [App\Http\Controllers\Barangay\BarangayController::class, 'barangay_official'])->name('barangay.official');
 
 
 

@@ -13,7 +13,7 @@
                                 <div>
                                     <h5 class="card-title mb-0 text-white">
                                         <i class="ri-building-3-line me-2"></i>
-                                        Purok Lists
+                                        Barangay Official Lists
                                     </h5>
                                     <p class="text-white-50 mb-0 small">
                                         <i class="ri-list-check me-1"></i>
@@ -25,7 +25,7 @@
                         <div class="col-md-4 text-end">
                             <button type="button" class="btn btn-light btn-sm" @click="openModal('add')">
                                 <i class="ri-add-circle-line me-1"></i>
-                                Create Purok
+                                Create Barangay Official
                             </button>
                         </div>
                     </div>
@@ -82,16 +82,16 @@
                                         <i class="ri-user-line me-1"></i>
                                         Purok Incharge
                                     </th>
-                                   
+
                                     <th>
                                         <i class="ri-user-line me-1"></i>
                                         Contact Number
                                     </th>
-                                     <th>
+                                    <th>
                                         <i class="ri-user-line me-1"></i>
                                         Date Term
                                     </th>
-                                     <th>
+                                    <th>
                                         <i class="ri-user-line me-1"></i>
                                         Status Term
                                     </th>
@@ -132,8 +132,8 @@
                                             </div>
                                         </div>
                                     </td>
-                                  
-                                      <td>
+
+                                    <td>
                                         <div class="d-flex align-items-center">
                                             <div>
                                                 {{ purok.contact_number }}
@@ -141,15 +141,16 @@
                                         </div>
                                     </td>
 
-                                      <td>
+                                    <td>
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                {{ formatDate(purok.term_start_date )}} - {{ formatDate(purok.term_end_date) }}
+                                                {{ formatDate(purok.term_start_date) }} - {{
+                                                    formatDate(purok.term_end_date) }}
                                             </div>
                                         </div>
                                     </td>
 
-                                      <td>
+                                    <td>
                                         <div class="d-flex align-items-center">
                                             <div>
                                                 {{ purok.status_term }}
@@ -198,9 +199,9 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="modal fade zoomIn" id="modalPurok" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal">
+                        <div class="modal fade zoomIn" id="modalBarangayOfficial" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content border-0">
                                     <div class="modal-header bg-light p-3 bg-primary">
                                         <h5 class="modal-title" id="exampleModalLabel" style="color: white">
@@ -210,123 +211,134 @@
                                             @click="closeModal"></button>
                                     </div>
                                     <div class="modal-body p-4">
-                                        <div class="mb-4">
+                                        <div class="row">
 
-                                            <div class="mb-4">
-                                                <label class="form-label fw-medium mb-2">
-                                                    Purok Name
-                                                    <span class="text-danger">*</span>
+                                            <!-- Firstname -->
+                                            <div class="col-md-4 mb-3">
+                                                <label class="form-label fw-medium">
+                                                    Firstname <span class="text-danger">*</span>
                                                 </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text bg-light">
-                                                        <i class="ri-building-line"></i>
-                                                    </span>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Enter Purok Name" v-model="formData.purok_name" />
-                                                </div>
+                                                <input type="text" class="form-control" placeholder="Enter Firstname"
+                                                    v-model="formData.first_name">
                                             </div>
-                                            <div class="mb-4">
-                                                <label class="form-label fw-medium mb-2">
-                                                    Purok In Charge
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text bg-light">
-                                                        <i class="ri-building-line"></i>
-                                                    </span>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Enter Purok In Charge"
-                                                        v-model="formData.purok_incharge" />
-                                                </div>
+
+                                            <!-- Middle Initial -->
+                                            <div class="col-md-2 mb-3">
+                                                <label class="form-label fw-medium">M.I.</label>
+                                                <input type="text" class="form-control" placeholder="M.I."
+                                                    v-model="formData.middle_initial">
                                             </div>
-                                            <div class="mb-4">
-                                                <label class="form-label fw-medium mb-2">
-                                                    Purok Contact Number
-                                                    <span class="text-danger">*</span>
+
+                                            <!-- Lastname -->
+                                            <div class="col-md-4 mb-3">
+                                                <label class="form-label fw-medium">
+                                                    Lastname <span class="text-danger">*</span>
                                                 </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text bg-light">
-                                                        <i class="ri-building-line"></i>
-                                                    </span>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Enter Purok Contact Number"
-                                                        v-model="formData.contact_number" />
-                                                </div>
+                                                <input type="text" class="form-control" placeholder="Enter Lastname"
+                                                    v-model="formData.last_name">
                                             </div>
-                                            <div class="mb-4">
-                                                <label class="form-label fw-medium mb-2">
-                                                    Purok Term Start Date
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text bg-light">
-                                                        <i class="ri-building-line"></i>
-                                                    </span>
-                                                    <input type="date" class="form-control"
-                                                        placeholder="Enter Purok Term Start Date"
-                                                        v-model="formData.term_start_date" />
-                                                </div>
+
+                                            <!-- Extension -->
+                                            <div class="col-md-2 mb-3">
+                                                <label class="form-label fw-medium">Extension</label>
+                                                <input type="text" class="form-control" placeholder="Jr., Sr."
+                                                    v-model="formData.extension">
                                             </div>
-                                            <div class="mb-4">
-                                                <label class="form-label fw-medium mb-2">
-                                                    Purok Term End Date
-                                                    <span class="text-danger">*</span>
+
+                                            <!-- Position -->
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label fw-medium">
+                                                    Position <span class="text-danger">*</span>
                                                 </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text bg-light">
-                                                        <i class="ri-building-line"></i>
-                                                    </span>
-                                                    <input type="date" class="form-control"
-                                                        placeholder="Enter Purok Term End Date"
-                                                        v-model="formData.term_end_date" />
-                                                </div>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Barangay Captain, Kagawad, etc."
+                                                    v-model="formData.position">
                                             </div>
-                                            <div class="mb-4">
-                                                <label class="form-label fw-medium mb-2">
-                                                    Status Term
-                                                    <span class="text-danger">*</span>
+
+                                            <!-- Contact Number -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-medium">
+                                                    Contact Number
                                                 </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text bg-light">
-                                                        <i class="ri-building-line"></i>
-                                                    </span>
-                                                    <select class="form-select" v-model="formData.status_term">
-                                                        <option value="" disabled>Select Purok Status Term</option>
-                                                        <option value="Incumbent">Incumbent</option>
-                                                        <option value="Former">Former</option>
-                                                        <option value="Vacant">Vacant</option>
-                                                        <option value="Suspended">Suspended</option>
-                                                    </select>
-                                                </div>
+                                                <input type="text" class="form-control" placeholder="09XXXXXXXXX"
+                                                    v-model="formData.contact_number">
+                                            </div>
+
+                                            <!-- Email -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-medium">
+                                                    Email
+                                                </label>
+                                                <input type="email" class="form-control" placeholder="example@email.com"
+                                                    v-model="formData.email">
+                                            </div>
+
+                                            <!-- Term Start -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-medium">
+                                                    Term Start <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="date" class="form-control" v-model="formData.term_start">
+                                            </div>
+
+                                            <!-- Term End -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-medium">
+                                                    Term End <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="date" class="form-control" v-model="formData.term_end">
+                                            </div>
+
+                                            <!-- Term Status -->
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label fw-medium">
+                                                    Term Status <span class="text-danger">*</span>
+                                                </label>
+                                                <select class="form-select" v-model="formData.term_status">
+                                                    <option value="" disabled>Select Term Status</option>
+                                                    <option value="Ongoing">Ongoing</option>
+                                                    <option value="Ended">Ended</option>
+                                                    <option value="Resigned">Resigned</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Full Address -->
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label fw-medium">
+                                                    Full Address
+                                                </label>
+                                                <textarea class="form-control" rows="3"
+                                                    placeholder="Enter complete address"
+                                                    v-model="formData.address"></textarea>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label fw-medium">
+                                                    Photo of Official <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="file" class="form-control" @change="handlePhotoUpload">
                                             </div>
 
                                         </div>
 
-                                        <div v-if="modalMode === 'edit'" class="mb-3">
-                                            <label class="form-label fw-medium mb-2">
-                                                <i class="ri-leaf-line me-1"></i>
-                                                Status
-                                            </label>
+                                        <!-- Active / Inactive (Edit mode only) -->
+                                        <div v-if="modalMode === 'edit'" class="mt-3">
+                                            <label class="form-label fw-medium">Status</label>
                                             <div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio"
-                                                        v-model="formData.status" value="Active" id="active" />
-                                                    <label class="form-check-label" for="active">
-                                                        <i class="ri-checkbox-circle-line me-1 text-success"></i>
-                                                        Active
-                                                    </label>
+                                                        v-model="formData.active" value="Active" id="active">
+                                                    <label class="form-check-label" for="active">Active</label>
                                                 </div>
+
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio"
-                                                        v-model="formData.status" value="InActive" id="inactive" />
-                                                    <label class="form-check-label" for="inactive">
-                                                        <i class="ri-close-circle-line me-1 text-danger"></i>
-                                                        Inactive
-                                                    </label>
+                                                        v-model="formData.active" value="Inactive" id="inactive">
+                                                    <label class="form-check-label" for="inactive">Inactive</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-light" @click="closeModal">
                                             <i class="ri-close-line me-1"></i>
@@ -431,7 +443,7 @@ export default {
                 status: "Active",
             },
             modalMode: "add",
-            modalTitle: "Add Purok",
+            modalTitle: "Add Barangay Official",
             searchQuery: "",
             perPage: 10,
             loading: false,
@@ -527,10 +539,10 @@ export default {
             this.modalMode = mode;
 
             if (mode === "add") {
-                this.modalTitle = "Add Purok";
+                this.modalTitle = "Add Barangay Official";
                 this.formData = { id: "", purok: "", status: "active" };
             } else if (mode === "edit") {
-                this.modalTitle = "Edit Purok";
+                this.modalTitle = "Edit Barangay Official";
                 this.formData = {
                     id: purok.id,
                     purok_name: purok.purok_name,
@@ -543,10 +555,10 @@ export default {
                 };
             }
 
-            $("#modalPurok").modal("show");
+            $("#modalBarangayOfficial").modal("show");
         },
         closeModal() {
-            $("#modalPurok").modal("hide");
+            $("#modalBarangayOfficial").modal("hide");
         },
 
         viewDetails(purok) {
@@ -562,7 +574,7 @@ export default {
                 status_term: purok.status_term,
                 status: purok.status || "Active",
             };
-            $("#modalPurok").modal("show");
+            $("#modalBarangayOfficial").modal("show");
         },
 
         async submitForm() {
@@ -590,20 +602,8 @@ export default {
                     confirmButtonText: "OK",
                 });
 
-                $("#modalPurok").modal("show");
+                $("#modalBarangayOfficial").modal("show");
                 if (this.modalMode === "add") {
-                   this.formData = {
-                        id: "",
-                        purok_name: "",
-                        purok_incharge: "",
-                        contact_number: "",
-                        term_start_date: "",
-                        term_end_date: "",
-                        status_term: "",
-                        status: "Active",
-                    };
-                }
-                 if (this.modalMode === "edit") {
                     this.formData = {
                         id: "",
                         purok_name: "",
@@ -614,9 +614,21 @@ export default {
                         status_term: "",
                         status: "Active",
                     };
-                     $("#modalPurok").modal("hide");
+                }
+                if (this.modalMode === "edit") {
+                    this.formData = {
+                        id: "",
+                        purok_name: "",
+                        purok_incharge: "",
+                        contact_number: "",
+                        term_start_date: "",
+                        term_end_date: "",
+                        status_term: "",
+                        status: "Active",
+                    };
+                    $("#modalBarangayOfficial").modal("hide");
 
-                 }
+                }
 
                 this.getDataPurok();
             } catch (error) {
@@ -791,4 +803,5 @@ export default {
 .bg-gradient-primary {
     background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
 }
+
 </style>

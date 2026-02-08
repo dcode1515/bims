@@ -143,6 +143,10 @@ class BarangayController extends Controller
                   ->where('purok_name', 'like', '%' . $search . '%')
                    ->OrWhere('purok_incharge', 'like', '%' . $search . '%')
                     ->OrWhere('contact_number', 'like', '%' . $search . '%')
+                      ->OrWhere('term_start_date', 'like', '%' . $search . '%')
+                      ->OrWhere('term_end_date', 'like', '%' . $search . '%')
+                      ->OrWhere('status_term', 'like', '%' . $search . '%')
+
                      ->OrWhere('status', 'like', '%' . $search . '%');
                 
           })
@@ -152,5 +156,9 @@ class BarangayController extends Controller
               'success' => true,
               'data' => $puroks
           ]);
+    }
+
+    public function barangay_official(){
+        return view('barangay.official');
     }
 }
