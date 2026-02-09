@@ -8753,12 +8753,206 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      puroks: {
+      positions: [],
+      commitees: [],
+      officials: {
         data: [],
         current_page: 1,
         from: 1,
@@ -8769,13 +8963,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       },
       formData: {
         id: "",
-        purok_name: "",
-        purok_incharge: "",
+        first_name: "",
+        middle_initial: "",
+        last_name: "",
+        extension: "",
+        position: "",
         contact_number: "",
-        term_start_date: "",
-        term_end_date: "",
-        status_term: "",
-        status: "Active"
+        email: "",
+        term_start: "",
+        term_end: "",
+        term_status: "",
+        address: "",
+        commitee: "",
+        status: "",
+        photo: null
       },
       modalMode: "add",
       modalTitle: "Add Barangay Official",
@@ -8787,8 +8988,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
   computed: {
     pages: function pages() {
       var pages = [];
-      var total = this.puroks.last_page;
-      var current = this.puroks.current_page;
+      var total = this.officials.last_page;
+      var current = this.officials.current_page;
       var maxVisible = 5;
       if (total <= maxVisible) {
         for (var i = 1; i <= total; i++) pages.push(i);
@@ -8804,41 +9005,251 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     }
   },
   methods: {
-    getDataPurok: function getDataPurok() {
+    submitForm: function submitForm() {
       var _this = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var response, _t;
+        var formData, response, _error$response, _error$response2, errors, errorMessage, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
-              _context.p = 0;
-              _context.n = 1;
-              return axios.get("/bims/api/get/data/purok", {
+              _this.loading = true;
+              _context.p = 1;
+              formData = new FormData(); // Append all form fields
+              Object.keys(_this.formData).forEach(function (key) {
+                if (_this.formData[key] !== null && _this.formData[key] !== undefined) {
+                  formData.append(key, _this.formData[key]);
+                }
+              });
+              if (!(_this.modalMode === "add")) {
+                _context.n = 3;
+                break;
+              }
+              _context.n = 2;
+              return axios.post("/bims/api/store/official", formData, {
+                headers: {
+                  "Content-Type": "multipart/form-data"
+                }
+              });
+            case 2:
+              response = _context.v;
+              _context.n = 5;
+              break;
+            case 3:
+              _context.n = 4;
+              return axios.post("/bims/api/update/official/".concat(_this.formData.id), formData, {
+                headers: {
+                  "Content-Type": "multipart/form-data"
+                }
+              });
+            case 4:
+              response = _context.v;
+            case 5:
+              _context.n = 6;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                icon: "success",
+                title: "Success",
+                text: response.data.message || "Operation completed successfully",
+                confirmButtonColor: "#198754",
+                confirmButtonText: "OK"
+              });
+            case 6:
+              if (_this.modalMode === "add") {
+                $("#modalBarangayOfficial").modal("show");
+                _this.getDataBarangayOfficials();
+                _this.resetForm();
+                _this.removePhoto();
+              }
+              if (_this.modalMode === "edit") {
+                window.location.href = "/bims/barangay/official";
+              }
+              _context.n = 8;
+              break;
+            case 7:
+              _context.p = 7;
+              _t = _context.v;
+              if (((_error$response = _t.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 409) {
+                _this.showError("Only one Incumbent Barangay Chairman is allowed.");
+              } else if ((_error$response2 = _t.response) !== null && _error$response2 !== void 0 && (_error$response2 = _error$response2.data) !== null && _error$response2 !== void 0 && _error$response2.errors) {
+                errors = _t.response.data.errors;
+                errorMessage = Object.values(errors).flat().join(", ");
+                _this.showError(errorMessage);
+              } else {
+                _this.showError("Something went wrong. Please try again.");
+              }
+            case 8:
+              _context.p = 8;
+              _this.loading = false;
+              return _context.f(8);
+            case 9:
+              return _context.a(2);
+          }
+        }, _callee, null, [[1, 7, 8, 9]]);
+      }))();
+    },
+    displayImageOfficial: function displayImageOfficial(official) {
+      // 1️⃣ If official object or photo is missing, return default image
+      if (!official || !official.photo) {
+        return "/bims/public/images/default-avatar.png";
+      }
+
+      // 2️⃣ If backend already provides full relative path, just use it
+      if (official.photo.includes("barangay/official/photo")) {
+        return "/bims/public/".concat(official.photo);
+      }
+
+      // 3️⃣ Fallback: build path safely (if needed)
+      var region = official.barangay && official.barangay.region ? official.barangay.region.region_name.trim() : "Unknown Region";
+      var province = official.barangay && official.barangay.province ? official.barangay.province.province_name.trim() : "Unknown Province";
+      var municipality = official.barangay && official.barangay.municipality ? official.barangay.municipality.municipality_name.trim() : "Unknown Municipality";
+      var barangayName = official.barangay && official.barangay.barangay ? official.barangay.barangay.barangay_name.trim() : "Unknown Barangay";
+      var position = official.position && official.position.position ? official.position.position.trim() : "Unknown Position";
+      var photoName = official.photo.trim();
+
+      // Construct safe path
+      var photoUrl = "/bims/public/barangay/official/photo/".concat(region, "/").concat(province, "/").concat(municipality, "/").concat(barangayName, "/").concat(position, "/").concat(photoName);
+      return photoUrl;
+    },
+    resetForm: function resetForm() {
+      this.formData = {
+        id: "",
+        first_name: "",
+        middle_initial: "",
+        last_name: "",
+        extension: "",
+        position: "",
+        contact_number: "",
+        email: "",
+        term_start: "",
+        term_end: "",
+        term_status: "",
+        address: "",
+        commitee: "",
+        photo: null
+      };
+    },
+    removePhoto: function removePhoto() {
+      this.formData.photo = null;
+      if (this.$refs.photoInput) {
+        this.$refs.photoInput.value = "";
+      }
+    },
+    handlePhotoUpload: function handlePhotoUpload(event) {
+      if (event.target.files.length > 0) {
+        this.formData.photo = event.target.files[0];
+      } else {
+        this.formData.photo = null; // Clear if no file selected
+      }
+    },
+    getDataPositionDropdown: function getDataPositionDropdown() {
+      var _this2 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+        var response, _t2;
+        return _regenerator().w(function (_context2) {
+          while (1) switch (_context2.p = _context2.n) {
+            case 0:
+              _context2.p = 0;
+              _context2.n = 1;
+              return fetch("/bims/api/get/data/barangay/official");
+            case 1:
+              response = _context2.v;
+              if (response.ok) {
+                _context2.n = 2;
+                break;
+              }
+              throw new Error("Network response was not ok");
+            case 2:
+              _context2.n = 3;
+              return response.json();
+            case 3:
+              _this2.positions = _context2.v;
+              _context2.n = 5;
+              break;
+            case 4:
+              _context2.p = 4;
+              _t2 = _context2.v;
+              console.error("There was a problem fetching the officeheads:", _t2);
+            case 5:
+              return _context2.a(2);
+          }
+        }, _callee2, null, [[0, 4]]);
+      }))();
+    },
+    getDataCommiteesDropdown: function getDataCommiteesDropdown() {
+      var _this3 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+        var response, _t3;
+        return _regenerator().w(function (_context3) {
+          while (1) switch (_context3.p = _context3.n) {
+            case 0:
+              _context3.p = 0;
+              _context3.n = 1;
+              return fetch("/bims/api/get/data/commitees");
+            case 1:
+              response = _context3.v;
+              if (response.ok) {
+                _context3.n = 2;
+                break;
+              }
+              throw new Error("Network response was not ok");
+            case 2:
+              _context3.n = 3;
+              return response.json();
+            case 3:
+              _this3.commitees = _context3.v;
+              _context3.n = 5;
+              break;
+            case 4:
+              _context3.p = 4;
+              _t3 = _context3.v;
+              console.error("There was a problem fetching the officeheads:", _t3);
+            case 5:
+              return _context3.a(2);
+          }
+        }, _callee3, null, [[0, 4]]);
+      }))();
+    },
+    getDataBarangayOfficials: function getDataBarangayOfficials() {
+      var _this4 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+        var response, _t4;
+        return _regenerator().w(function (_context4) {
+          while (1) switch (_context4.p = _context4.n) {
+            case 0:
+              _context4.p = 0;
+              _context4.n = 1;
+              return axios.get("/bims/api/get/data/all/barangay/official", {
                 params: {
-                  page: _this.puroks.current_page,
-                  per_page: _this.perPage,
-                  search: _this.searchQuery
+                  page: _this4.officials.current_page,
+                  per_page: _this4.perPage,
+                  search: _this4.searchQuery
                 }
               });
             case 1:
-              response = _context.v;
-              _this.puroks = response.data.data;
-              _context.n = 3;
+              response = _context4.v;
+              _this4.officials = response.data.data;
+              _context4.n = 3;
               break;
             case 2:
-              _context.p = 2;
-              _t = _context.v;
-              _this.showError("Failed to load data. Please try again.");
+              _context4.p = 2;
+              _t4 = _context4.v;
+              _this4.showError("Failed to load data. Please try again.");
             case 3:
-              return _context.a(2);
+              return _context4.a(2);
           }
-        }, _callee, null, [[0, 2]]);
+        }, _callee4, null, [[0, 2]]);
       }))();
     },
     changePage: function changePage(page) {
-      if (page >= 1 && page <= this.puroks.last_page) {
-        this.puroks.current_page = page;
-        this.getDataPurok();
+      if (page >= 1 && page <= this.officials.last_page) {
+        this.officials.current_page = page;
+        this.getDataBarangayOfficials();
+      }
+    },
+    handleFileUpload: function handleFileUpload(event) {
+      if (event.target.files.length > 0) {
+        this.formData.photo = event.target.files[0];
+      } else {
+        this.formData.photo = null; // Clear if no file selected
       }
     },
     formatDate: function formatDate(dateString) {
@@ -8875,7 +9286,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }
     },
     openModal: function openModal(mode) {
-      var purok = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var official = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       this.modalMode = mode;
       if (mode === "add") {
         this.modalTitle = "Add Barangay Official";
@@ -8887,14 +9298,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       } else if (mode === "edit") {
         this.modalTitle = "Edit Barangay Official";
         this.formData = {
-          id: purok.id,
-          purok_name: purok.purok_name,
-          purok_incharge: purok.purok_incharge,
-          contact_number: purok.contact_number,
-          term_start_date: purok.term_start_date,
-          term_end_date: purok.term_end_date,
-          status_term: purok.status_term,
-          status: purok.status || "Active"
+          id: official.id,
+          first_name: official.first_name,
+          middle_initial: official.middle_initial,
+          last_name: official.last_name,
+          extension: official.extension,
+          position: official.position.id,
+          commitee: official.commitee.id,
+          contact_number: official.contact_number,
+          term_status: official.term_status,
+          term_start: official.term_start,
+          term_end: official.term_end,
+          address: official.address,
+          email: official.email,
+          status: official.status || "Active"
         };
       }
       $("#modalBarangayOfficial").modal("show");
@@ -8902,114 +9319,34 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     closeModal: function closeModal() {
       $("#modalBarangayOfficial").modal("hide");
     },
-    viewDetails: function viewDetails(purok) {
+    viewDetails: function viewDetails(official) {
       this.modalMode = "view";
       this.modalTitle = "View Details";
       this.formData = {
-        id: purok.id,
-        purok_name: purok.purok_name,
-        purok_incharge: purok.purok_incharge,
-        contact_number: purok.contact_number,
-        term_start_date: purok.term_start_date,
-        term_end_date: purok.term_end_date,
-        status_term: purok.status_term,
-        status: purok.status || "Active"
+        id: official.id,
+        first_name: official.first_name,
+        middle_initial: official.middle_initial,
+        last_name: official.last_name,
+        extension: official.extension,
+        position: official.position.id,
+        commitee: official.commitee.id,
+        contact_number: official.contact_number,
+        term_status: official.term_status,
+        address: official.address,
+        term_start: official.term_start,
+        term_end: official.term_end,
+        status: official.status || "Active"
       };
       $("#modalBarangayOfficial").modal("show");
     },
-    submitForm: function submitForm() {
-      var _this2 = this;
-      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-        var response, _error$response, _error$response2, errors, errorMessage, _t2;
-        return _regenerator().w(function (_context2) {
-          while (1) switch (_context2.p = _context2.n) {
-            case 0:
-              _this2.loading = true;
-              _context2.p = 1;
-              if (!(_this2.modalMode === "add")) {
-                _context2.n = 3;
-                break;
-              }
-              _context2.n = 2;
-              return axios.post("/bims/api/store/purok", _this2.formData);
-            case 2:
-              response = _context2.v;
-              _context2.n = 5;
-              break;
-            case 3:
-              _context2.n = 4;
-              return axios.post("/bims/api/update/purok/".concat(_this2.formData.id), _this2.formData);
-            case 4:
-              response = _context2.v;
-            case 5:
-              _context2.n = 6;
-              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-                icon: "success",
-                title: "Success",
-                text: response.data.message || "Operation completed successfully",
-                confirmButtonColor: "#198754",
-                confirmButtonText: "OK"
-              });
-            case 6:
-              $("#modalBarangayOfficial").modal("show");
-              if (_this2.modalMode === "add") {
-                _this2.formData = {
-                  id: "",
-                  purok_name: "",
-                  purok_incharge: "",
-                  contact_number: "",
-                  term_start_date: "",
-                  term_end_date: "",
-                  status_term: "",
-                  status: "Active"
-                };
-              }
-              if (_this2.modalMode === "edit") {
-                _this2.formData = {
-                  id: "",
-                  purok_name: "",
-                  purok_incharge: "",
-                  contact_number: "",
-                  term_start_date: "",
-                  term_end_date: "",
-                  status_term: "",
-                  status: "Active"
-                };
-                $("#modalBarangayOfficial").modal("hide");
-              }
-              _this2.getDataPurok();
-              _context2.n = 8;
-              break;
-            case 7:
-              _context2.p = 7;
-              _t2 = _context2.v;
-              if (((_error$response = _t2.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 409) {
-                _this2.showError("This Purok  already exists");
-              } else if ((_error$response2 = _t2.response) !== null && _error$response2 !== void 0 && (_error$response2 = _error$response2.data) !== null && _error$response2 !== void 0 && _error$response2.errors) {
-                errors = _t2.response.data.errors;
-                errorMessage = Object.values(errors).flat().join(", ");
-                _this2.showError(errorMessage);
-              } else {
-                _this2.showError("Something went wrong. Please try again.");
-              }
-            case 8:
-              _context2.p = 8;
-              _this2.loading = false;
-              return _context2.f(8);
-            case 9:
-              return _context2.a(2);
-          }
-        }, _callee2, null, [[1, 7, 8, 9]]);
-      }))();
-    },
     confirmDelete: function confirmDelete(commitee) {
-      var _this3 = this;
-      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-        var result, _t3;
-        return _regenerator().w(function (_context3) {
-          while (1) switch (_context3.p = _context3.n) {
+      var _this5 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+        var result, _t5;
+        return _regenerator().w(function (_context5) {
+          while (1) switch (_context5.p = _context5.n) {
             case 0:
-              _context3.n = 1;
+              _context5.n = 1;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
                 title: "Delete Record",
                 text: "Are you sure you want to delete \"".concat(commitee.commitee, "\"?"),
@@ -9022,16 +9359,16 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 reverseButtons: true
               });
             case 1:
-              result = _context3.v;
+              result = _context5.v;
               if (!result.isConfirmed) {
-                _context3.n = 6;
+                _context5.n = 6;
                 break;
               }
-              _context3.p = 2;
-              _context3.n = 3;
+              _context5.p = 2;
+              _context5.n = 3;
               return axios["delete"]("/bims/api/delete/commitee/".concat(commitee.id));
             case 3:
-              _context3.n = 4;
+              _context5.n = 4;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
                 icon: "success",
                 title: "Deleted!",
@@ -9040,21 +9377,21 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 timer: 2000
               });
             case 4:
-              _this3.getDataCommitee();
-              _context3.n = 6;
+              _this5.getDataCommitee();
+              _context5.n = 6;
               break;
             case 5:
-              _context3.p = 5;
-              _t3 = _context3.v;
-              _this3.showError("Failed to delete record");
+              _context5.p = 5;
+              _t5 = _context5.v;
+              _this5.showError("Failed to delete record");
             case 6:
-              return _context3.a(2);
+              return _context5.a(2);
           }
-        }, _callee3, null, [[2, 5]]);
+        }, _callee5, null, [[2, 5]]);
       }))();
     },
     refreshData: function refreshData() {
-      this.getDataPurok();
+      this.getDataBarangayOfficials();
       this.showSuccess("Data refreshed successfully!");
     },
     showError: function showError(message) {
@@ -9084,7 +9421,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     }
   },
   mounted: function mounted() {
-    this.getDataPurok();
+    this.getDataCommiteesDropdown();
+    this.getDataPositionDropdown();
+    this.getDataBarangayOfficials();
   }
 });
 
@@ -14522,7 +14861,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card[data-v-f9582182] {\r\n    border-radius: 10px;\n}\n.card-header[data-v-f9582182] {\r\n    border-radius: 10px 10px 0 0 !important;\r\n    padding: 1.2rem 1.5rem;\n}\n.table th[data-v-f9582182] {\r\n    background-color: #f8fafc;\r\n    font-weight: 600;\r\n    padding: 1rem;\r\n    border-bottom: 2px solid #e9ecef;\n}\n.table td[data-v-f9582182] {\r\n    padding: 1rem;\r\n    vertical-align: middle;\n}\n.badge[data-v-f9582182] {\r\n    padding: 0.35rem 0.7rem;\r\n    border-radius: 6px;\r\n    font-weight: 500;\n}\n.btn-group .btn[data-v-f9582182] {\r\n    border-radius: 6px;\r\n    margin: 0 2px;\n}\n.btn-outline-primary[data-v-f9582182] {\r\n    border-color: #198754;\r\n    color: #198754;\n}\n.btn-outline-primary[data-v-f9582182]:hover {\r\n    background-color: #198754;\r\n    color: white;\n}\n.page-link[data-v-f9582182] {\r\n    color: #198754;\r\n    border: 1px solid #dee2e6;\n}\n.page-item.active .page-link[data-v-f9582182] {\r\n    background-color: #198754;\r\n    border-color: #198754;\r\n    color: white;\n}\n.page-link[data-v-f9582182]:hover {\r\n    color: #146c43;\r\n    background-color: #e9ecef;\n}\n.modal-content[data-v-f9582182] {\r\n    border-radius: 10px;\n}\n.input-group-text[data-v-f9582182] {\r\n    background-color: #f8f9fa;\r\n    border-color: #dee2e6;\n}\n.form-check-input[data-v-f9582182]:checked {\r\n    background-color: #198754;\r\n    border-color: #198754;\n}\n.bg-primary[data-v-f9582182] {\r\n    background-color: #224abe !important;\n}\n.text-primary[data-v-f9582182] {\r\n    color: #198754 !important;\n}\n.bg-gradient-primary[data-v-f9582182] {\r\n    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card[data-v-f9582182] {\r\n  border-radius: 10px;\n}\n.card-header[data-v-f9582182] {\r\n  border-radius: 10px 10px 0 0 !important;\r\n  padding: 1.2rem 1.5rem;\n}\n.table th[data-v-f9582182] {\r\n  background-color: #f8fafc;\r\n  font-weight: 600;\r\n  padding: 1rem;\r\n  border-bottom: 2px solid #e9ecef;\n}\n.table td[data-v-f9582182] {\r\n  padding: 1rem;\r\n  vertical-align: middle;\n}\n.badge[data-v-f9582182] {\r\n  padding: 0.35rem 0.7rem;\r\n  border-radius: 6px;\r\n  font-weight: 500;\n}\n.btn-group .btn[data-v-f9582182] {\r\n  border-radius: 6px;\r\n  margin: 0 2px;\n}\n.btn-outline-primary[data-v-f9582182] {\r\n  border-color: #198754;\r\n  color: #198754;\n}\n.btn-outline-primary[data-v-f9582182]:hover {\r\n  background-color: #198754;\r\n  color: white;\n}\n.page-link[data-v-f9582182] {\r\n  color: #198754;\r\n  border: 1px solid #dee2e6;\n}\n.page-item.active .page-link[data-v-f9582182] {\r\n  background-color: #198754;\r\n  border-color: #198754;\r\n  color: white;\n}\n.page-link[data-v-f9582182]:hover {\r\n  color: #146c43;\r\n  background-color: #e9ecef;\n}\n.modal-content[data-v-f9582182] {\r\n  border-radius: 10px;\n}\n.input-group-text[data-v-f9582182] {\r\n  background-color: #f8f9fa;\r\n  border-color: #dee2e6;\n}\n.form-check-input[data-v-f9582182]:checked {\r\n  background-color: #198754;\r\n  border-color: #198754;\n}\n.bg-primary[data-v-f9582182] {\r\n  background-color: #224abe !important;\n}\n.text-primary[data-v-f9582182] {\r\n  color: #198754 !important;\n}\n.bg-gradient-primary[data-v-f9582182] {\r\n  background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);\n}\n.chairman-row[data-v-f9582182] {\r\n  background-color: #bae0c7;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42276,7 +42615,7 @@ module.exports = function (list, options) {
 (module) {
 
 /*!
-* sweetalert2 v11.26.17
+* sweetalert2 v11.26.18
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -45911,23 +46250,23 @@ module.exports = function (list, options) {
   };
 
   /**
-   * @param {any} elem
+   * @param {unknown} elem
    * @returns {boolean}
    */
-  const isJqueryElement = elem => typeof elem === 'object' && elem.jquery;
+  const isJqueryElement = elem => typeof elem === 'object' && elem !== null && 'jquery' in elem;
 
   /**
-   * @param {any} elem
+   * @param {unknown} elem
    * @returns {boolean}
    */
   const isElement = elem => elem instanceof Element || isJqueryElement(elem);
 
   /**
-   * @param {any[]} args
+   * @param {ReadonlyArray<unknown>} args
    * @returns {SweetAlertOptions}
    */
   const argsToParams = args => {
-    /** @type {Record<string, any>} */
+    /** @type {Record<string, unknown>} */
     const params = {};
     if (typeof args[0] === 'object' && !isElement(args[0])) {
       Object.assign(params, args[0]);
@@ -45941,7 +46280,7 @@ module.exports = function (list, options) {
         }
       });
     }
-    return params;
+    return /** @type {SweetAlertOptions} */params;
   };
 
   /**
@@ -47088,7 +47427,7 @@ module.exports = function (list, options) {
     };
   });
   SweetAlert.DismissReason = DismissReason;
-  SweetAlert.version = '11.26.17';
+  SweetAlert.version = '11.26.18';
 
   const Swal = SweetAlert;
   // @ts-ignore
@@ -52559,7 +52898,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "td",
-      { staticClass: "text-center py-5", attrs: { colspan: "6" } },
+      { staticClass: "text-center py-5", attrs: { colspan: "10" } },
       [
         _c("div", { staticClass: "text-muted" }, [
           _c("i", { staticClass: "ri-search-line display-5" }),
@@ -53071,7 +53410,7 @@ var render = function () {
                   [
                     _c("i", { staticClass: "ri-add-circle-line me-1" }),
                     _vm._v(
-                      "\n                            Create Barangay Official\n                        "
+                      "\n              Create Barangay Official\n            "
                     ),
                   ]
                 ),
@@ -53113,7 +53452,7 @@ var render = function () {
                             ? $$selectedVal
                             : $$selectedVal[0]
                         },
-                        _vm.getDataPurok,
+                        _vm.getDataBarangayOfficials,
                       ],
                     },
                   },
@@ -53162,7 +53501,7 @@ var render = function () {
                         }
                         _vm.searchQuery = $event.target.value
                       },
-                      _vm.getDataPurok,
+                      _vm.getDataBarangayOfficials,
                     ],
                   },
                 }),
@@ -53190,173 +53529,186 @@ var render = function () {
               _c(
                 "tbody",
                 [
-                  _vm._l(_vm.puroks.data, function (purok, index) {
-                    return _c("tr", { key: purok.id }, [
-                      _c("td", { staticClass: "ps-4" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(
-                              (_vm.puroks.current_page - 1) *
-                                _vm.puroks.per_page +
-                                index +
-                                1
-                            ) +
-                            "\n                                "
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "div",
-                          { staticClass: "d-flex align-items-center" },
-                          [
-                            _c("div", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(purok.purok_name) +
-                                  "\n                                        "
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "div",
-                          { staticClass: "d-flex align-items-center" },
-                          [
-                            _c("div", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(purok.purok_incharge) +
-                                  "\n                                        "
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "div",
-                          { staticClass: "d-flex align-items-center" },
-                          [
-                            _c("div", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(purok.contact_number) +
-                                  "\n                                        "
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "div",
-                          { staticClass: "d-flex align-items-center" },
-                          [
-                            _c("div", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(
-                                    _vm.formatDate(purok.term_start_date)
-                                  ) +
-                                  " - " +
-                                  _vm._s(_vm.formatDate(purok.term_end_date)) +
-                                  "\n                                        "
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "div",
-                          { staticClass: "d-flex align-items-center" },
-                          [
-                            _c("div", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(purok.status_term) +
-                                  "\n                                        "
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "div",
-                          { staticClass: "d-flex align-items-center" },
-                          [
-                            _c("div", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(purok.status) +
-                                  "\n                                        "
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", [
+                  _vm._l(_vm.officials.data, function (official, index) {
+                    return _c(
+                      "tr",
+                      {
+                        key: official.id,
+                        class:
+                          official.position &&
+                          official.position.position === "Barangay Chairman"
+                            ? "chairman-row"
+                            : "",
+                      },
+                      [
+                        _c("td", { staticClass: "ps-4" }, [
                           _vm._v(
-                            "\n                                        " +
-                              _vm._s(_vm.formatDate(purok.created_at)) +
-                              "\n                                    "
+                            "\n                  " +
+                              _vm._s(
+                                (_vm.officials.current_page - 1) *
+                                  _vm.officials.per_page +
+                                  index +
+                                  1
+                              ) +
+                              "\n                "
                           ),
                         ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "btn-group",
-                            attrs: { role: "group" },
-                          },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-sm btn-outline-primary",
-                                attrs: { title: "Edit" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.openModal("edit", purok)
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "div",
+                            { staticClass: "d-flex align-items-center" },
+                            [
+                              _c("div", [
+                                _c("img", {
+                                  staticClass: "rounded-circle",
+                                  attrs: {
+                                    src: _vm.displayImageOfficial(official),
+                                    alt: "Photo",
+                                    width: "50",
+                                    height: "50",
+                                  },
+                                }),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "div",
+                            { staticClass: "d-flex align-items-center" },
+                            [
+                              _c("div", [
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(official.first_name) +
+                                    " " +
+                                    _vm._s(official.middle_initial) +
+                                    "\n                      " +
+                                    _vm._s(official.last_name) +
+                                    " " +
+                                    _vm._s(official.extension) +
+                                    "\n                    "
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("div", [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.formatDate(official.term_start)) +
+                                " -\n                    " +
+                                _vm._s(_vm.formatDate(official.term_end)) +
+                                "\n                  "
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "div",
+                            { staticClass: "d-flex align-items-center" },
+                            [
+                              _c("div", [
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(official.position.position) +
+                                    "\n                    "
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "div",
+                            { staticClass: "d-flex align-items-center" },
+                            [
+                              _c("div", [
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(official.commitee.commitee) +
+                                    "\n                    "
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "div",
+                            { staticClass: "d-flex align-items-center" },
+                            [
+                              _c("div", [
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(official.term_status) +
+                                    "\n                    "
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("div", [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.formatDate(official.created_at)) +
+                                "\n                  "
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-center" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "btn-group",
+                              attrs: { role: "group" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-sm btn-outline-primary",
+                                  attrs: { title: "Edit" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.openModal("edit", official)
+                                    },
                                   },
                                 },
-                              },
-                              [_c("i", { staticClass: "ri-edit-line" })]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-sm btn-outline-info",
-                                attrs: { title: "View" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.viewDetails(purok)
+                                [_c("i", { staticClass: "ri-edit-line" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-sm btn-outline-info",
+                                  attrs: { title: "View" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.viewDetails(official)
+                                    },
                                   },
                                 },
-                              },
-                              [_c("i", { staticClass: "ri-eye-line" })]
-                            ),
-                          ]
-                        ),
-                      ]),
-                    ])
+                                [_c("i", { staticClass: "ri-eye-line" })]
+                              ),
+                            ]
+                          ),
+                        ]),
+                      ]
+                    )
                   }),
                   _vm._v(" "),
-                  _vm.puroks.data.length === 0
+                  _vm.officials.data.length === 0
                     ? _c("tr", [_vm._m(4)])
                     : _vm._e(),
                 ],
@@ -53396,9 +53748,9 @@ var render = function () {
                             },
                             [
                               _vm._v(
-                                "\n                                        " +
+                                "\n                    " +
                                   _vm._s(_vm.modalTitle) +
-                                  "\n                                    "
+                                  "\n                  "
                               ),
                             ]
                           ),
@@ -53550,34 +53902,157 @@ var render = function () {
                           _c("div", { staticClass: "col-md-12 mb-3" }, [
                             _vm._m(7),
                             _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.formData.position,
-                                  expression: "formData.position",
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.position,
+                                    expression: "formData.position",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                attrs: { disabled: _vm.modalMode === "view" },
+                                on: {
+                                  change: function ($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call(
+                                        $event.target.options,
+                                        function (o) {
+                                          return o.selected
+                                        }
+                                      )
+                                      .map(function (o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.formData,
+                                      "position",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  },
                                 },
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                placeholder: "Barangay Captain, Kagawad, etc.",
                               },
-                              domProps: { value: _vm.formData.position },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.formData,
-                                    "position",
-                                    $event.target.value
+                              [
+                                _c(
+                                  "option",
+                                  {
+                                    attrs: {
+                                      value: "",
+                                      disabled: "",
+                                      selected: "",
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                          Select an Barangay Position\n                        "
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(_vm.positions, function (position) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: position.id,
+                                      domProps: { value: position.id },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                          " +
+                                          _vm._s(position.position) +
+                                          "\n                        "
+                                      ),
+                                    ]
                                   )
+                                }),
+                              ],
+                              2
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-12 mb-3" }, [
+                            _vm._m(8),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.commitee,
+                                    expression: "formData.commitee",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                attrs: { disabled: _vm.modalMode === "view" },
+                                on: {
+                                  change: function ($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call(
+                                        $event.target.options,
+                                        function (o) {
+                                          return o.selected
+                                        }
+                                      )
+                                      .map(function (o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.formData,
+                                      "commitee",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  },
                                 },
                               },
-                            }),
+                              [
+                                _c(
+                                  "option",
+                                  {
+                                    attrs: {
+                                      value: "",
+                                      disabled: "",
+                                      selected: "",
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                          Select an Barangay Position\n                        "
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(_vm.commitees, function (commitee) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: commitee.id,
+                                      domProps: { value: commitee.id },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                          " +
+                                          _vm._s(commitee.commitee) +
+                                          "\n                        "
+                                      ),
+                                    ]
+                                  )
+                                }),
+                              ],
+                              2
+                            ),
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-6 mb-3" }, [
@@ -53586,7 +54061,7 @@ var render = function () {
                               { staticClass: "form-label fw-medium" },
                               [
                                 _vm._v(
-                                  "\n                                                Contact Number\n                                            "
+                                  "\n                        Contact Number\n                      "
                                 ),
                               ]
                             ),
@@ -53625,11 +54100,7 @@ var render = function () {
                             _c(
                               "label",
                               { staticClass: "form-label fw-medium" },
-                              [
-                                _vm._v(
-                                  "\n                                                Email\n                                            "
-                                ),
-                              ]
+                              [_vm._v(" Email ")]
                             ),
                             _vm._v(" "),
                             _c("input", {
@@ -53663,7 +54134,7 @@ var render = function () {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-6 mb-3" }, [
-                            _vm._m(8),
+                            _vm._m(9),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -53693,7 +54164,7 @@ var render = function () {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-6 mb-3" }, [
-                            _vm._m(9),
+                            _vm._m(10),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -53723,7 +54194,7 @@ var render = function () {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-12 mb-3" }, [
-                            _vm._m(10),
+                            _vm._m(11),
                             _vm._v(" "),
                             _c(
                               "select",
@@ -53768,17 +54239,25 @@ var render = function () {
                                   [_vm._v("Select Term Status")]
                                 ),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "Ongoing" } }, [
-                                  _vm._v("Ongoing"),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "Incumbent" } },
+                                  [_vm._v("Incumbent")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "Former" } }, [
+                                  _vm._v("Former"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "Ended" } }, [
-                                  _vm._v("Ended"),
+                                _c("option", { attrs: { value: "Vacant" } }, [
+                                  _vm._v("Vacant"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "Resigned" } }, [
-                                  _vm._v("Resigned"),
-                                ]),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "Suspended" } },
+                                  [_vm._v("Suspended")]
+                                ),
                               ]
                             ),
                           ]),
@@ -53789,7 +54268,7 @@ var render = function () {
                               { staticClass: "form-label fw-medium" },
                               [
                                 _vm._v(
-                                  "\n                                                Full Address\n                                            "
+                                  "\n                        Full Address\n                      "
                                 ),
                               ]
                             ),
@@ -53825,125 +54304,16 @@ var render = function () {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-12 mb-3" }, [
-                            _vm._m(11),
+                            _vm._m(12),
                             _vm._v(" "),
                             _c("input", {
+                              ref: "photoInput",
                               staticClass: "form-control",
                               attrs: { type: "file" },
                               on: { change: _vm.handlePhotoUpload },
                             }),
                           ]),
                         ]),
-                        _vm._v(" "),
-                        _vm.modalMode === "edit"
-                          ? _c("div", { staticClass: "mt-3" }, [
-                              _c(
-                                "label",
-                                { staticClass: "form-label fw-medium" },
-                                [_vm._v("Status")]
-                              ),
-                              _vm._v(" "),
-                              _c("div", [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "form-check form-check-inline",
-                                  },
-                                  [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.formData.active,
-                                          expression: "formData.active",
-                                        },
-                                      ],
-                                      staticClass: "form-check-input",
-                                      attrs: {
-                                        type: "radio",
-                                        value: "Active",
-                                        id: "active",
-                                      },
-                                      domProps: {
-                                        checked: _vm._q(
-                                          _vm.formData.active,
-                                          "Active"
-                                        ),
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          return _vm.$set(
-                                            _vm.formData,
-                                            "active",
-                                            "Active"
-                                          )
-                                        },
-                                      },
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "form-check-label",
-                                        attrs: { for: "active" },
-                                      },
-                                      [_vm._v("Active")]
-                                    ),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "form-check form-check-inline",
-                                  },
-                                  [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.formData.active,
-                                          expression: "formData.active",
-                                        },
-                                      ],
-                                      staticClass: "form-check-input",
-                                      attrs: {
-                                        type: "radio",
-                                        value: "Inactive",
-                                        id: "inactive",
-                                      },
-                                      domProps: {
-                                        checked: _vm._q(
-                                          _vm.formData.active,
-                                          "Inactive"
-                                        ),
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          return _vm.$set(
-                                            _vm.formData,
-                                            "active",
-                                            "Inactive"
-                                          )
-                                        },
-                                      },
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "form-check-label",
-                                        attrs: { for: "inactive" },
-                                      },
-                                      [_vm._v("Inactive")]
-                                    ),
-                                  ]
-                                ),
-                              ]),
-                            ])
-                          : _vm._e(),
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "modal-footer" }, [
@@ -53957,7 +54327,7 @@ var render = function () {
                           [
                             _c("i", { staticClass: "ri-close-line me-1" }),
                             _vm._v(
-                              "\n                                        Cancel\n                                    "
+                              "\n                    Cancel\n                  "
                             ),
                           ]
                         ),
@@ -53983,13 +54353,13 @@ var render = function () {
                                     })
                                   : _vm._e(),
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                    " +
                                     _vm._s(
                                       _vm.modalMode === "add"
                                         ? "Save Record"
                                         : "Update Record"
                                     ) +
-                                    "\n                                    "
+                                    "\n                  "
                                 ),
                               ]
                             )
@@ -54003,20 +54373,20 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _vm.puroks.total > 0
+        _vm.officials.total > 0
           ? _c("div", { staticClass: "card-footer bg-white" }, [
               _c("div", { staticClass: "row align-items-center" }, [
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("span", { staticClass: "text-muted small" }, [
                     _c("i", { staticClass: "ri-file-list-line me-1" }),
                     _vm._v(
-                      "\n                            Showing " +
-                        _vm._s(_vm.puroks.from) +
+                      "\n              Showing " +
+                        _vm._s(_vm.officials.from) +
                         " to " +
-                        _vm._s(_vm.puroks.to) +
-                        " of\n                            " +
-                        _vm._s(_vm.puroks.total) +
-                        " entries\n                        "
+                        _vm._s(_vm.officials.to) +
+                        " of\n              " +
+                        _vm._s(_vm.officials.total) +
+                        " entries\n            "
                     ),
                   ]),
                 ]),
@@ -54031,7 +54401,9 @@ var render = function () {
                           "li",
                           {
                             staticClass: "page-item",
-                            class: { disabled: _vm.puroks.current_page === 1 },
+                            class: {
+                              disabled: _vm.officials.current_page === 1,
+                            },
                           },
                           [
                             _c(
@@ -54054,7 +54426,9 @@ var render = function () {
                           "li",
                           {
                             staticClass: "page-item",
-                            class: { disabled: _vm.puroks.current_page === 1 },
+                            class: {
+                              disabled: _vm.officials.current_page === 1,
+                            },
                           },
                           [
                             _c(
@@ -54065,7 +54439,7 @@ var render = function () {
                                 on: {
                                   click: function ($event) {
                                     return _vm.changePage(
-                                      _vm.puroks.current_page - 1
+                                      _vm.officials.current_page - 1
                                     )
                                   },
                                 },
@@ -54082,7 +54456,7 @@ var render = function () {
                               key: page,
                               staticClass: "page-item",
                               class: {
-                                active: page === _vm.puroks.current_page,
+                                active: page === _vm.officials.current_page,
                               },
                             },
                             [
@@ -54098,9 +54472,9 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                        " +
+                                    "\n                    " +
                                       _vm._s(page) +
-                                      "\n                                    "
+                                      "\n                  "
                                   ),
                                 ]
                               ),
@@ -54114,8 +54488,8 @@ var render = function () {
                             staticClass: "page-item",
                             class: {
                               disabled:
-                                _vm.puroks.current_page ===
-                                _vm.puroks.last_page,
+                                _vm.officials.current_page ===
+                                _vm.officials.last_page,
                             },
                           },
                           [
@@ -54127,7 +54501,7 @@ var render = function () {
                                 on: {
                                   click: function ($event) {
                                     return _vm.changePage(
-                                      _vm.puroks.current_page + 1
+                                      _vm.officials.current_page + 1
                                     )
                                   },
                                 },
@@ -54147,8 +54521,8 @@ var render = function () {
                             staticClass: "page-item",
                             class: {
                               disabled:
-                                _vm.puroks.current_page ===
-                                _vm.puroks.last_page,
+                                _vm.officials.current_page ===
+                                _vm.officials.last_page,
                             },
                           },
                           [
@@ -54159,7 +54533,9 @@ var render = function () {
                                 attrs: { title: "Last" },
                                 on: {
                                   click: function ($event) {
-                                    return _vm.changePage(_vm.puroks.last_page)
+                                    return _vm.changePage(
+                                      _vm.officials.last_page
+                                    )
                                   },
                                 },
                               },
@@ -54194,14 +54570,14 @@ var staticRenderFns = [
           _c("h5", { staticClass: "card-title mb-0 text-white" }, [
             _c("i", { staticClass: "ri-building-3-line me-2" }),
             _vm._v(
-              "\n                                    Barangay Official Lists\n                                "
+              "\n                  Barangay Official Lists\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "text-white-50 mb-0 small" }, [
             _c("i", { staticClass: "ri-list-check me-1" }),
             _vm._v(
-              "\n                                    Barangay Information Management System\n                                "
+              "\n                  Barangay Information Management System\n                "
             ),
           ]),
         ]),
@@ -54231,63 +54607,55 @@ var staticRenderFns = [
     return _c("thead", { staticClass: "table-light" }, [
       _c("tr", [
         _c("th", { staticClass: "ps-4", attrs: { width: "50" } }, [
-          _c("i", { staticClass: "ri-list-check" }),
+          _c("i", { staticClass: "ri-number-1-line" }),
         ]),
         _vm._v(" "),
         _c("th", [
-          _c("i", { staticClass: "ri-user-line me-1" }),
-          _vm._v(
-            "\n                                    Purok\n                                "
-          ),
+          _c("i", { staticClass: "ri-image-line me-1" }),
+          _vm._v(" "),
+          _vm._v("\n                  Photo\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
-          _c("i", { staticClass: "ri-user-line me-1" }),
-          _vm._v(
-            "\n                                    Purok Incharge\n                                "
-          ),
+          _c("i", { staticClass: "ri-user-2-line me-1" }),
+          _vm._v(" "),
+          _vm._v("\n                  Name\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
-          _c("i", { staticClass: "ri-user-line me-1" }),
-          _vm._v(
-            "\n                                    Contact Number\n                                "
-          ),
+          _c("i", { staticClass: "ri-time-line me-1" }),
+          _vm._v(" "),
+          _vm._v("\n                  Date Term\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
-          _c("i", { staticClass: "ri-user-line me-1" }),
-          _vm._v(
-            "\n                                    Date Term\n                                "
-          ),
+          _c("i", { staticClass: "ri-briefcase-4-line me-1" }),
+          _vm._v(" "),
+          _vm._v("\n                  Position\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
-          _c("i", { staticClass: "ri-user-line me-1" }),
-          _vm._v(
-            "\n                                    Status Term\n                                "
-          ),
+          _c("i", { staticClass: "ri-team-line me-1" }),
+          _vm._v(" "),
+          _vm._v("\n                  Commitee\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
-          _c("i", { staticClass: "ri-leaf-line me-1" }),
-          _vm._v(
-            "\n                                    Status\n                                "
-          ),
+          _c("i", { staticClass: "ri-checkbox-circle-line me-1" }),
+          _vm._v(" "),
+          _vm._v("\n                  Status\n                "),
         ]),
         _vm._v(" "),
         _c("th", [
-          _c("i", { staticClass: "ri-calendar-line me-1" }),
-          _vm._v(
-            "\n                                    Date Created\n                                "
-          ),
+          _c("i", { staticClass: "ri-calendar-event-line me-1" }),
+          _vm._v(" "),
+          _vm._v("\n                  Date Created\n                "),
         ]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [
-          _c("i", { staticClass: "ri-settings-3-line me-1" }),
-          _vm._v(
-            "\n                                    Actions\n                                "
-          ),
+          _c("i", { staticClass: "ri-settings-2-line me-1" }),
+          _vm._v(" "),
+          _vm._v("\n                  Actions\n                "),
         ]),
       ]),
     ])
@@ -54313,7 +54681,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "form-label fw-medium" }, [
-      _vm._v("\n                                                Firstname "),
+      _vm._v("\n                        Firstname "),
       _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
     ])
   },
@@ -54322,7 +54690,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "form-label fw-medium" }, [
-      _vm._v("\n                                                Lastname "),
+      _vm._v("\n                        Lastname "),
       _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
     ])
   },
@@ -54331,7 +54699,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "form-label fw-medium" }, [
-      _vm._v("\n                                                Position "),
+      _vm._v("\n                        Position "),
       _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
     ])
   },
@@ -54340,7 +54708,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "form-label fw-medium" }, [
-      _vm._v("\n                                                Term Start "),
+      _vm._v("\n                        Commitee "),
       _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
     ])
   },
@@ -54349,7 +54717,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "form-label fw-medium" }, [
-      _vm._v("\n                                                Term End "),
+      _vm._v("\n                        Term Start "),
       _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
     ])
   },
@@ -54358,7 +54726,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "form-label fw-medium" }, [
-      _vm._v("\n                                                Term Status "),
+      _vm._v("\n                        Term End "),
       _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
     ])
   },
@@ -54367,9 +54735,16 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "form-label fw-medium" }, [
-      _vm._v(
-        "\n                                                Photo of Official "
-      ),
+      _vm._v("\n                        Term Status "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                        Photo of Official "),
       _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
     ])
   },

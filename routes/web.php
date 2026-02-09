@@ -32,16 +32,6 @@ Route::get('/get-barangays/{municipality_id}', [App\Http\Controllers\Admin\Admin
 Route::post('/api/store/barangay/info', [App\Http\Controllers\Admin\AdminController::class, 'store_barangay_info']);
 Route::get('/api/get/data/barangay/info', [App\Http\Controllers\Admin\AdminController::class, 'getBarangayInfo']);
 Route::post('/api/update/barangay/info/{id}', [App\Http\Controllers\Admin\AdminController::class, 'update_barangay_info']);
-Route::get('/barangay/commitee', [App\Http\Controllers\Admin\AdminController::class, 'barangay_commitee'])->name('barangay.commitee');
-Route::post('/api/store/commitee', [App\Http\Controllers\Admin\AdminController::class, 'store_commitee']);
-Route::get('/api/get/data/commitee', [App\Http\Controllers\Admin\AdminController::class, 'getDataCommitee']);
-Route::post('/api/update/commitee/{id}', [App\Http\Controllers\Admin\AdminController::class, 'update_commitee']);
-Route::delete('/api/delete/commitee/{id}', [App\Http\Controllers\Admin\AdminController::class, 'delete_commitee']);
-Route::get('/barangay/position', [App\Http\Controllers\Admin\AdminController::class, 'barangay_position'])->name('position');
-Route::post('/api/store/position', [App\Http\Controllers\Admin\AdminController::class, 'store_position']);
-Route::get('/api/get/data/position', [App\Http\Controllers\Admin\AdminController::class, 'getDataPosition']);
-Route::post('/api/update/position/{id}', [App\Http\Controllers\Admin\AdminController::class, 'update_position']);
-Route::delete('/api/delete/position/{id}', [App\Http\Controllers\Admin\AdminController::class, 'delete_position']);
 Route::get('/user/management', [App\Http\Controllers\Admin\AdminController::class, 'user_management'])->name('user.management');
 Route::get('/api/get/data/barangay/user', [App\Http\Controllers\Admin\AdminController::class, 'getDataBarangay']);
 Route::post('/api/store/barangay/user', [App\Http\Controllers\Admin\AdminController::class, 'store_barangay_user']);
@@ -58,6 +48,22 @@ Route::get('/api/get/data/purok', [App\Http\Controllers\Barangay\BarangayControl
 Route::post('/api/update/purok/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_purok']);
 Route::delete('/api/delete/purok/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'delete_purok']);
 Route::get('/barangay/official', [App\Http\Controllers\Barangay\BarangayController::class, 'barangay_official'])->name('barangay.official');
+
+Route::get('/barangay/position', [App\Http\Controllers\Barangay\BarangayController::class, 'barangay_position'])->name('position');
+Route::post('/api/store/position', [App\Http\Controllers\Barangay\BarangayController::class, 'store_position']);
+Route::get('/api/get/data/position', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataPosition']);
+Route::post('/api/update/position/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_position']);
+Route::delete('/api/delete/position/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'delete_position']);
+Route::get('/barangay/commitee', [App\Http\Controllers\Barangay\BarangayController::class, 'barangay_commitee'])->name('barangay.commitee');
+Route::post('/api/store/commitee', [App\Http\Controllers\Barangay\BarangayController::class, 'store_commitee']);
+Route::get('/api/get/data/commitee', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataCommitee']);
+Route::post('/api/update/commitee/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_commitee']);
+Route::delete('/api/delete/commitee/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'delete_commitee']);
+Route::get('/api/get/data/barangay/official', [App\Http\Controllers\Barangay\BarangayController::class, 'getDatabrangayOfficial']);
+Route::get('/api/get/data/commitees', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataCommiteesDropdown']);
+Route::post('/api/store/official', [App\Http\Controllers\Barangay\BarangayController::class, 'store_barangay_official']);
+Route::get('/api/get/data/all/barangay/official', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataBarangayOfficial']);
+Route::post('/api/update/official/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_barangay_official']);
 
 
 

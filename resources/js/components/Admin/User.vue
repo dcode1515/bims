@@ -214,7 +214,7 @@
                                     </td>
                                 </tr>
                                 <tr v-if="users.data.length === 0">
-                                    <td colspan="6" class="text-center py-5">
+                                    <td colspan="10" class="text-center py-5">
                                         <div class="text-muted">
                                             <i class="ri-search-line display-5"></i>
                                             <p class="mt-3 mb-0">No records found</p>

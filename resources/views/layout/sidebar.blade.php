@@ -90,12 +90,7 @@
                                     <li class="nav-item">
                                         <a href="{{route('brgy.info')}}" class="nav-link" data-key="t-chat">Barangay Info</a>
                                     </li>
-                                     <li class="nav-item">
-                                        <a href="{{route('position')}}" class="nav-link" data-key="t-chat">Barangay Positions</a>
-                                    </li>
-                                     <li class="nav-item">
-                                        <a href="{{route('barangay.commitee')}}" class="nav-link" data-key="t-chat">Barangay Commitee</a>
-                                    </li>
+                                   
                                 </ul>
                             </div>
                         </li>
@@ -213,6 +208,12 @@
                             <li class="nav-item">
                                 <a href="{{ route('barangay.official') }}" class="nav-link">Barangay Officials</a>
                             </li>
+                              <li class="nav-item">
+                                        <a href="{{route('position')}}" class="nav-link" data-key="t-chat">Barangay Positions</a>
+                                    </li>
+                                     <li class="nav-item">
+                                        <a href="{{route('barangay.commitee')}}" class="nav-link" data-key="t-chat">Barangay Commitee</a>
+                                    </li>
                             <li class="nav-item">
                                 <a href="{{ route('purok') }}" class="nav-link">Purok</a>
                             </li>
