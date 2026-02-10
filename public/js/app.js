@@ -9429,6 +9429,3480 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 /***/ },
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=script&lang=js&"
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "EnhancedHouseholdForm",
+  data: function data() {
+    return {
+      currentStep: 1,
+      acceptTerms: false,
+      showSuccessModal: false,
+      referenceId: "",
+      fieldErrors: {},
+      validationErrors: [],
+      steps: [{
+        id: 1,
+        label: "Address",
+        icon: "ri-map-pin-line"
+      }, {
+        id: 2,
+        label: "Head",
+        icon: "ri-user-line"
+      }, {
+        id: 3,
+        label: "Members",
+        icon: "ri-group-line"
+      }, {
+        id: 4,
+        label: "Household",
+        icon: "ri-home-line"
+      }, {
+        id: 5,
+        label: "Review",
+        icon: "ri-eye-line"
+      }],
+      purokOptions: ["Purok 1", "Purok 2", "Purok 3", "Purok 4", "Purok 5", "Purok 6"],
+      housingStatuses: [{
+        value: "Owned",
+        label: "Owned",
+        icon: "ri-home-3-line"
+      }, {
+        value: "Rented",
+        label: "Rented",
+        icon: "ri-contract-line"
+      }, {
+        value: "Family-owned",
+        label: "Family",
+        icon: "ri-group-line"
+      }, {
+        value: "Mortgaged",
+        label: "Mortgaged",
+        icon: "ri-bank-line"
+      }],
+      formData: {
+        address: {
+          purok: "",
+          street: "",
+          gpsCoordinates: ""
+        },
+        headOfFamily: {
+          firstName: "",
+          middleInitial: "",
+          lastName: "",
+          extension: "",
+          sex: "",
+          birthdate: "",
+          civilStatus: "",
+          contactNumber: "",
+          email: "",
+          occupation: "",
+          // New fields
+          nationalId: "",
+          highestEducation: "",
+          educationalStatus: "",
+          employmentStatus: "",
+          is4psMember: "",
+          voterStatus: "",
+          isDeceased: "No",
+          natureOfEmployment: "",
+          monthlyIncome: ""
+        },
+        members: [],
+        householdInfo: {
+          type: "",
+          numberOfRooms: "",
+          housingStatus: "",
+          waterSource: "",
+          toiletFacility: "",
+          hasElectricity: "",
+          hasInternet: "",
+          cookingFuel: "",
+          notes: ""
+        }
+      }
+    };
+  },
+  computed: {
+    progressWidth: function progressWidth() {
+      return "".concat((this.currentStep - 1) / (this.steps.length - 1) * 100, "%");
+    },
+    totalMembers: function totalMembers() {
+      return this.formData.members.length + 1; // +1 for head of family
+    }
+  },
+  methods: {
+    nextStep: function nextStep() {
+      if (this.validateCurrentStep()) {
+        if (this.currentStep < this.steps.length) {
+          this.currentStep++;
+          this.validationErrors = [];
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        }
+      }
+    },
+    prevStep: function prevStep() {
+      if (this.currentStep > 1) {
+        this.currentStep--;
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    },
+    goToStep: function goToStep(step) {
+      if (step < this.currentStep) {
+        this.currentStep = step;
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    },
+    hasStepError: function hasStepError(stepId) {
+      var _this = this;
+      switch (stepId) {
+        case 1:
+          return !this.formData.address.purok || !this.formData.address.street;
+        case 2:
+          return !this.formData.headOfFamily.firstName || !this.formData.headOfFamily.lastName || !this.formData.headOfFamily.sex || !this.formData.headOfFamily.birthdate || !this.formData.headOfFamily.contactNumber || !this.formData.headOfFamily.employmentStatus;
+        case 3:
+          if (this.formData.members.length === 0) return false;
+          return this.formData.members.some(function (member, index) {
+            var hasErrors = !member.firstName || !member.lastName || !member.sex || !member.birthdate || !member.relationship || _this.fieldErrors["members.".concat(index, ".firstName")] || _this.fieldErrors["members.".concat(index, ".lastName")] || _this.fieldErrors["members.".concat(index, ".sex")] || _this.fieldErrors["members.".concat(index, ".birthdate")] || _this.fieldErrors["members.".concat(index, ".relationship")];
+            return hasErrors;
+          });
+        case 4:
+          return !this.formData.householdInfo.type || !this.formData.householdInfo.housingStatus || !this.formData.householdInfo.numberOfRooms || !this.formData.householdInfo.waterSource || !this.formData.householdInfo.toiletFacility;
+        default:
+          return false;
+      }
+    },
+    validateCurrentStep: function validateCurrentStep() {
+      this.validationErrors = [];
+      this.fieldErrors = {};
+      switch (this.currentStep) {
+        case 1:
+          this.validateStep1();
+          break;
+        case 2:
+          this.validateStep2();
+          break;
+        case 3:
+          this.validateStep3();
+          break;
+        case 4:
+          this.validateStep4();
+          break;
+      }
+      return this.validationErrors.length === 0;
+    },
+    validateStep1: function validateStep1() {
+      if (!this.formData.address.purok) {
+        this.fieldErrors["address.purok"] = "Please select a purok";
+        this.validationErrors.push("Please select a purok");
+      }
+      if (!this.formData.address.street) {
+        this.fieldErrors["address.street"] = "Street name is required";
+        this.validationErrors.push("Please enter street name");
+      } else if (this.formData.address.street.length < 5) {
+        this.fieldErrors["address.street"] = "Street name is too short";
+        this.validationErrors.push("Please enter a valid street name");
+      }
+    },
+    validateStep2: function validateStep2() {
+      // Validate first name
+      if (!this.formData.headOfFamily.firstName) {
+        this.fieldErrors["headOfFamily.firstName"] = "First name is required";
+        this.validationErrors.push("First name is required");
+      } else if (!/^[A-Za-z\s]+$/.test(this.formData.headOfFamily.firstName)) {
+        this.fieldErrors["headOfFamily.firstName"] = "First name can only contain letters";
+        this.validationErrors.push("First name contains invalid characters");
+      }
+
+      // Validate last name
+      if (!this.formData.headOfFamily.lastName) {
+        this.fieldErrors["headOfFamily.lastName"] = "Last name is required";
+        this.validationErrors.push("Last name is required");
+      } else if (!/^[A-Za-z\s]+$/.test(this.formData.headOfFamily.lastName)) {
+        this.fieldErrors["headOfFamily.lastName"] = "Last name can only contain letters";
+        this.validationErrors.push("Last name contains invalid characters");
+      }
+
+      // Validate sex
+      if (!this.formData.headOfFamily.sex) {
+        this.fieldErrors["headOfFamily.sex"] = "Please select gender";
+        this.validationErrors.push("Gender selection is required");
+      }
+
+      // Validate birthdate
+      if (!this.formData.headOfFamily.birthdate) {
+        this.fieldErrors["headOfFamily.birthdate"] = "Birthdate is required";
+        this.validationErrors.push("Birthdate is required");
+      } else {
+        var birthdate = new Date(this.formData.headOfFamily.birthdate);
+        var today = new Date();
+        var age = today.getFullYear() - birthdate.getFullYear();
+        if (age < 18) {
+          this.fieldErrors["headOfFamily.birthdate"] = "Head of family must be at least 18 years old";
+          this.validationErrors.push("Head of family must be at least 18 years old");
+        }
+        if (age > 120) {
+          this.fieldErrors["headOfFamily.birthdate"] = "Please enter a valid birthdate";
+          this.validationErrors.push("Please enter a valid birthdate");
+        }
+      }
+
+      // Validate contact number
+      if (!this.formData.headOfFamily.contactNumber) {
+        this.fieldErrors["headOfFamily.contactNumber"] = "Contact number is required";
+        this.validationErrors.push("Contact number is required");
+      } else {
+        var phoneRegex = /^09\d{9}$/;
+        var cleanNumber = this.formData.headOfFamily.contactNumber.replace(/\D/g, "");
+        if (!phoneRegex.test(cleanNumber)) {
+          this.fieldErrors["headOfFamily.contactNumber"] = "Please enter a valid Philippine mobile number (09XXXXXXXXX)";
+          this.validationErrors.push("Invalid contact number format");
+        }
+      }
+
+      // Validate employment status
+      if (!this.formData.headOfFamily.employmentStatus) {
+        this.fieldErrors["headOfFamily.employmentStatus"] = "Employment status is required";
+        this.validationErrors.push("Employment status is required");
+      }
+    },
+    validateStep3: function validateStep3() {
+      var _this2 = this;
+      this.validationErrors = [];
+      this.fieldErrors = {};
+      this.formData.members.forEach(function (member, index) {
+        var memberNum = index + 1;
+
+        // Validate first name
+        if (!member.firstName) {
+          _this2.fieldErrors["members.".concat(index, ".firstName")] = "First name is required";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": First name is required"));
+        } else if (!/^[A-Za-z\sñÑ]+$/.test(member.firstName)) {
+          _this2.fieldErrors["members.".concat(index, ".firstName")] = "First name can only contain letters";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": First name contains invalid characters"));
+        } else if (member.firstName.length < 2) {
+          _this2.fieldErrors["members.".concat(index, ".firstName")] = "First name must be at least 2 characters";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": First name is too short"));
+        }
+
+        // Validate last name
+        if (!member.lastName) {
+          _this2.fieldErrors["members.".concat(index, ".lastName")] = "Last name is required";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": Last name is required"));
+        } else if (!/^[A-Za-z\sñÑ]+$/.test(member.lastName)) {
+          _this2.fieldErrors["members.".concat(index, ".lastName")] = "Last name can only contain letters";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": Last name contains invalid characters"));
+        } else if (member.lastName.length < 2) {
+          _this2.fieldErrors["members.".concat(index, ".lastName")] = "Last name must be at least 2 characters";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": Last name is too short"));
+        }
+
+        // Validate middle initial
+        if (member.middleInitial && !/^[A-Z]$/.test(member.middleInitial)) {
+          _this2.fieldErrors["members.".concat(index, ".middleInitial")] = "Must be a single capital letter";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": Middle initial must be a single capital letter"));
+        }
+
+        // Validate sex
+        if (!member.sex) {
+          _this2.fieldErrors["members.".concat(index, ".sex")] = "Gender is required";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": Gender is required"));
+        } else if (!["Male", "Female"].includes(member.sex)) {
+          _this2.fieldErrors["members.".concat(index, ".sex")] = "Invalid gender selection";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid gender selection"));
+        }
+
+        // Validate birthdate
+        if (!member.birthdate) {
+          _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Birthdate is required";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": Birthdate is required"));
+        } else {
+          var birthdate = new Date(member.birthdate);
+          var today = new Date();
+
+          // Check if date is valid
+          if (isNaN(birthdate.getTime())) {
+            _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Invalid date format";
+            _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid date format"));
+          } else {
+            var age = today.getFullYear() - birthdate.getFullYear();
+            var monthDiff = today.getMonth() - birthdate.getMonth();
+            var dayDiff = today.getDate() - birthdate.getDate();
+            var adjustedAge = monthDiff < 0 || monthDiff === 0 && dayDiff < 0 ? age - 1 : age;
+
+            // Validate age range
+            if (adjustedAge > 120) {
+              _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Age cannot exceed 120 years";
+              _this2.validationErrors.push("Member ".concat(memberNum, ": Age cannot exceed 120 years"));
+            } else if (adjustedAge < 0) {
+              _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Birthdate cannot be in the future";
+              _this2.validationErrors.push("Member ".concat(memberNum, ": Birthdate cannot be in the future"));
+            }
+
+            // Additional validations based on relationship
+            if (member.relationship === "Child") {
+              if (adjustedAge > 18) {
+                _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Child must be under 18 years old";
+                _this2.validationErrors.push("Member ".concat(memberNum, ": Child must be under 18 years old"));
+              }
+            }
+            if (member.relationship === "Spouse") {
+              if (adjustedAge < 18) {
+                _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Spouse must be at least 18 years old";
+                _this2.validationErrors.push("Member ".concat(memberNum, ": Spouse must be at least 18 years old"));
+              }
+            }
+          }
+        }
+
+        // Validate relationship
+        if (!member.relationship) {
+          _this2.fieldErrors["members.".concat(index, ".relationship")] = "Relationship is required";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": Relationship is required"));
+        } else if (!["Spouse", "Child", "Parent", "Sibling", "Grandchild", "Relative", "Non-relative"].includes(member.relationship)) {
+          _this2.fieldErrors["members.".concat(index, ".relationship")] = "Invalid relationship";
+          _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid relationship selection"));
+        }
+
+        // Validate contact number
+        if (member.contactNumber) {
+          var cleanNumber = member.contactNumber.replace(/\D/g, "");
+          if (!/^09\d{9}$/.test(cleanNumber)) {
+            _this2.fieldErrors["members.".concat(index, ".contactNumber")] = "Invalid Philippine mobile number format (09XXXXXXXXX)";
+            _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid contact number format"));
+          }
+        }
+
+        // Validate email
+        if (member.email) {
+          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(member.email)) {
+            _this2.fieldErrors["members.".concat(index, ".email")] = "Invalid email format";
+            _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid email format"));
+          }
+        }
+
+        // Validate National ID if provided
+        if (member.nationalId) {
+          var cleanedId = member.nationalId.replace(/\s|-/g, "");
+          if (!/^\d{12,19}$/.test(cleanedId)) {
+            _this2.fieldErrors["members.".concat(index, ".nationalId")] = "National ID must be 12-19 digits";
+            _this2.validationErrors.push("Member ".concat(memberNum, ": National ID must be 12-19 digits"));
+          }
+        }
+
+        // Validate monthly income if provided
+        if (member.monthlyIncome) {
+          var income = parseFloat(member.monthlyIncome);
+          if (isNaN(income) || income < 0) {
+            _this2.fieldErrors["members.".concat(index, ".monthlyIncome")] = "Monthly income must be a positive number";
+            _this2.validationErrors.push("Member ".concat(memberNum, ": Monthly income must be a positive number"));
+          } else if (income > 1000000) {
+            _this2.fieldErrors["members.".concat(index, ".monthlyIncome")] = "Monthly income cannot exceed ₱1,000,000";
+            _this2.validationErrors.push("Member ".concat(memberNum, ": Monthly income cannot exceed \u20B11,000,000"));
+          }
+        }
+
+        // Validate birthdate format on blur
+        if (member.birthdate) {
+          var dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+          if (!dateRegex.test(member.birthdate)) {
+            _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Invalid date format (YYYY-MM-DD)";
+            _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid date format"));
+          }
+        }
+      });
+
+      // Check for duplicate members
+      this.checkForDuplicateMembers();
+    },
+    checkForDuplicateMembers: function checkForDuplicateMembers() {
+      var members = this.formData.members;
+      for (var i = 0; i < members.length; i++) {
+        for (var j = i + 1; j < members.length; j++) {
+          var member1 = members[i];
+          var member2 = members[j];
+
+          // Compare key fields
+          if (member1.firstName.toLowerCase() === member2.firstName.toLowerCase() && member1.lastName.toLowerCase() === member2.lastName.toLowerCase() && member1.birthdate === member2.birthdate) {
+            this.validationErrors.push("Members ".concat(i + 1, " and ").concat(j + 1, " appear to be duplicates"));
+            break;
+          }
+        }
+      }
+    },
+    validateStep4: function validateStep4() {
+      if (!this.formData.householdInfo.type) {
+        this.fieldErrors["householdInfo.type"] = "Household type is required";
+        this.validationErrors.push("Household type is required");
+      }
+      if (!this.formData.householdInfo.housingStatus) {
+        this.fieldErrors["householdInfo.housingStatus"] = "Housing status is required";
+        this.validationErrors.push("Housing status is required");
+      }
+      if (!this.formData.householdInfo.numberOfRooms) {
+        this.fieldErrors["householdInfo.numberOfRooms"] = "Number of rooms is required";
+        this.validationErrors.push("Number of rooms is required");
+      } else if (this.formData.householdInfo.numberOfRooms < 1 || this.formData.householdInfo.numberOfRooms > 20) {
+        this.fieldErrors["householdInfo.numberOfRooms"] = "Please enter a valid number (1-20)";
+        this.validationErrors.push("Number of rooms must be between 1 and 20");
+      }
+      if (!this.formData.householdInfo.waterSource) {
+        this.fieldErrors["householdInfo.waterSource"] = "Water source is required";
+        this.validationErrors.push("Water source is required");
+      }
+      if (!this.formData.householdInfo.toiletFacility) {
+        this.fieldErrors["householdInfo.toiletFacility"] = "Toilet facility is required";
+        this.validationErrors.push("Toilet facility is required");
+      }
+    },
+    validateField: function validateField(fieldPath) {
+      var _fieldPath$split = fieldPath.split("."),
+        _fieldPath$split2 = _slicedToArray(_fieldPath$split, 2),
+        category = _fieldPath$split2[0],
+        field = _fieldPath$split2[1];
+
+      // Clear previous error
+      delete this.fieldErrors[fieldPath];
+
+      // Validate based on field
+      var value;
+      if (category === "headOfFamily") {
+        value = this.formData.headOfFamily[field];
+        switch (field) {
+          case "firstName":
+          case "lastName":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "This field is required";
+            } else if (!/^[A-Za-z\s]+$/.test(value)) {
+              this.fieldErrors[fieldPath] = "Can only contain letters";
+            }
+            break;
+          case "contactNumber":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Contact number is required";
+            } else {
+              var cleanNumber = value.replace(/\D/g, "");
+              if (!/^09\d{9}$/.test(cleanNumber)) {
+                this.fieldErrors[fieldPath] = "Invalid format (09XXXXXXXXX)";
+              }
+            }
+            break;
+          case "birthdate":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Birthdate is required";
+            } else {
+              var birthdate = new Date(value);
+              var today = new Date();
+              var age = today.getFullYear() - birthdate.getFullYear();
+              if (age < 18) {
+                this.fieldErrors[fieldPath] = "Must be at least 18 years old";
+              }
+            }
+            break;
+          case "sex":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Please select gender";
+            }
+            break;
+          case "employmentStatus":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Employment status is required";
+            }
+            break;
+        }
+      } else if (category === "address") {
+        value = this.formData.address[field];
+        switch (field) {
+          case "purok":
+            if (!value) this.fieldErrors[fieldPath] = "Please select a purok";
+            break;
+          case "street":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Street name is required";
+            } else if (value.length < 5) {
+              this.fieldErrors[fieldPath] = "Street name is too short";
+            }
+            break;
+        }
+      } else if (category === "householdInfo") {
+        value = this.formData.householdInfo[field];
+        switch (field) {
+          case "type":
+            if (!value) this.fieldErrors[fieldPath] = "Household type is required";
+            break;
+          case "housingStatus":
+            if (!value) this.fieldErrors[fieldPath] = "Housing status is required";
+            break;
+          case "numberOfRooms":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Number of rooms is required";
+            } else if (value < 1 || value > 20) {
+              this.fieldErrors[fieldPath] = "Must be between 1 and 20";
+            }
+            break;
+          case "waterSource":
+          case "toiletFacility":
+            if (!value) this.fieldErrors[fieldPath] = "This field is required";
+            break;
+        }
+      }
+    },
+    validateMemberField: function validateMemberField(index, field) {
+      var member = this.formData.members[index];
+      var fieldPath = "members.".concat(index, ".").concat(field);
+
+      // Clear previous error
+      delete this.fieldErrors[fieldPath];
+      if (!member[field] && field !== "middleInitial" && field !== "extension" && field !== "contactNumber" && field !== "email" && field !== "nationalId" && field !== "occupation" && field !== "monthlyIncome") {
+        this.fieldErrors[fieldPath] = "This field is required";
+        return;
+      }
+
+      // Additional validations
+      switch (field) {
+        case "firstName":
+        case "lastName":
+          if (!member[field]) return;
+          if (!/^[A-Za-z\sñÑ]+$/.test(member[field])) {
+            this.fieldErrors[fieldPath] = "Can only contain letters";
+          } else if (member[field].length < 2) {
+            this.fieldErrors[fieldPath] = "Must be at least 2 characters";
+          }
+          break;
+        case "middleInitial":
+          if (member[field] && !/^[A-Z]$/.test(member[field])) {
+            this.fieldErrors[fieldPath] = "Must be a single capital letter";
+          }
+          break;
+        case "sex":
+          if (member[field] && !["Male", "Female"].includes(member[field])) {
+            this.fieldErrors[fieldPath] = "Please select a valid gender";
+          }
+          break;
+        case "birthdate":
+          if (!member[field]) return;
+          var birthdate = new Date(member[field]);
+          var today = new Date();
+          if (isNaN(birthdate.getTime())) {
+            this.fieldErrors[fieldPath] = "Invalid date format";
+          } else {
+            var age = today.getFullYear() - birthdate.getFullYear();
+            var monthDiff = today.getMonth() - birthdate.getMonth();
+            var dayDiff = today.getDate() - birthdate.getDate();
+            var adjustedAge = monthDiff < 0 || monthDiff === 0 && dayDiff < 0 ? age - 1 : age;
+            if (adjustedAge > 120) {
+              this.fieldErrors[fieldPath] = "Age cannot exceed 120 years";
+            } else if (adjustedAge < 0) {
+              this.fieldErrors[fieldPath] = "Birthdate cannot be in the future";
+            }
+
+            // Relationship-specific validations
+            if (member.relationship === "Child" && adjustedAge > 18) {
+              this.fieldErrors[fieldPath] = "Child must be under 18 years old";
+            }
+            if (member.relationship === "Spouse" && adjustedAge < 18) {
+              this.fieldErrors[fieldPath] = "Spouse must be at least 18 years old";
+            }
+          }
+          break;
+        case "relationship":
+          if (!member[field]) return;
+          var validRelationships = ["Spouse", "Child", "Parent", "Sibling", "Grandchild", "Relative", "Non-relative"];
+          if (!validRelationships.includes(member[field])) {
+            this.fieldErrors[fieldPath] = "Please select a valid relationship";
+          }
+          break;
+        case "contactNumber":
+          if (!member[field]) return;
+          var cleanNumber = member[field].replace(/\D/g, "");
+          if (!/^09\d{9}$/.test(cleanNumber)) {
+            this.fieldErrors[fieldPath] = "Invalid format (09XXXXXXXXX)";
+          }
+          break;
+        case "email":
+          if (!member[field]) return;
+          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(member[field])) {
+            this.fieldErrors[fieldPath] = "Invalid email format";
+          }
+          break;
+        case "nationalId":
+          if (!member[field]) return;
+          var cleanedId = member[field].replace(/\s|-/g, "");
+          if (!/^\d{12,19}$/.test(cleanedId)) {
+            this.fieldErrors[fieldPath] = "Must be 12-19 digits";
+          }
+          break;
+        case "monthlyIncome":
+          if (!member[field]) return;
+          var income = parseFloat(member[field]);
+          if (isNaN(income) || income < 0) {
+            this.fieldErrors[fieldPath] = "Must be a positive number";
+          } else if (income > 1000000) {
+            this.fieldErrors[fieldPath] = "Cannot exceed ₱1,000,000";
+          }
+          break;
+      }
+    },
+    addMember: function addMember() {
+      this.formData.members.push({
+        firstName: "",
+        middleInitial: "",
+        lastName: "",
+        extension: "",
+        sex: "",
+        birthdate: "",
+        civilStatus: "",
+        relationship: "",
+        contactNumber: "",
+        email: "",
+        occupation: "",
+        // New fields matching head of family
+        nationalId: "",
+        highestEducation: "",
+        educationalStatus: "",
+        employmentStatus: "",
+        is4psMember: "",
+        voterStatus: "",
+        isDeceased: "No",
+        natureOfEmployment: "",
+        monthlyIncome: "",
+        education: "" // Keep this for backward compatibility if needed
+      });
+    },
+    formatMemberPhoneNumber: function formatMemberPhoneNumber(event, index) {
+      var value = event.target.value.replace(/\D/g, "");
+
+      // Limit to 11 digits
+      if (value.length > 11) value = value.slice(0, 11);
+
+      // Format: 09XX-XXX-XXXX
+      if (value.length > 4) {
+        value = value.slice(0, 4) + "-" + value.slice(4);
+      }
+      if (value.length > 8) {
+        value = value.slice(0, 9) + "-" + value.slice(9);
+      }
+      event.target.value = value;
+      this.formData.members[index].contactNumber = value;
+    },
+    removeMember: function removeMember(index) {
+      var _this3 = this;
+      if (confirm("Are you sure you want to remove this member?")) {
+        this.formData.members.splice(index, 1);
+        // Clear errors for removed member
+        Object.keys(this.fieldErrors).forEach(function (key) {
+          if (key.startsWith("members.".concat(index))) {
+            delete _this3.fieldErrors[key];
+          }
+        });
+      }
+    },
+    duplicateMember: function duplicateMember(index) {
+      var member = JSON.parse(JSON.stringify(this.formData.members[index]));
+      member.firstName = member.firstName + " (Copy)";
+      this.formData.members.splice(index + 1, 0, member);
+    },
+    formatPhoneNumber: function formatPhoneNumber(event) {
+      var value = event.target.value.replace(/\D/g, "");
+
+      // Limit to 11 digits
+      if (value.length > 11) value = value.slice(0, 11);
+
+      // Format: 09XX-XXX-XXXX
+      if (value.length > 4) {
+        value = value.slice(0, 4) + "-" + value.slice(4);
+      }
+      if (value.length > 8) {
+        value = value.slice(0, 9) + "-" + value.slice(9);
+      }
+      event.target.value = value;
+      this.formData.headOfFamily.contactNumber = value;
+    },
+    calculateAge: function calculateAge(birthdate) {
+      if (!birthdate) return "N/A";
+      var birth = new Date(birthdate);
+      var today = new Date();
+      var age = today.getFullYear() - birth.getFullYear();
+      var monthDiff = today.getMonth() - birth.getMonth();
+      if (monthDiff < 0 || monthDiff === 0 && today.getDate() < birth.getDate()) {
+        age--;
+      }
+      return age;
+    },
+    formatName: function formatName(person) {
+      if (!person.firstName && !person.lastName) return "Not specified";
+      var name = "".concat(person.firstName || "");
+      if (person.middleInitial) name += " ".concat(person.middleInitial, ".");
+      name += " ".concat(person.lastName || "");
+      if (person.extension) name += " ".concat(person.extension);
+      return name.trim();
+    },
+    formatDate: function formatDate(dateString) {
+      if (!dateString) return "Not specified";
+      var date = new Date(dateString);
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+    },
+    saveAsDraft: function saveAsDraft() {
+      localStorage.setItem("householdDraft", JSON.stringify(this.formData));
+      alert("Draft saved successfully!");
+    },
+    loadDraft: function loadDraft() {
+      var draft = localStorage.getItem("householdDraft");
+      if (draft) {
+        if (confirm("Load saved draft?")) {
+          this.formData = JSON.parse(draft);
+        }
+      }
+    },
+    generateReferenceId: function generateReferenceId() {
+      var timestamp = Date.now().toString().slice(-6);
+      var random = Math.floor(Math.random() * 1000).toString().padStart(3, "0");
+      return "HH-".concat(timestamp).concat(random);
+    },
+    submitForm: function submitForm() {
+      if (!this.acceptTerms) {
+        alert("Please accept the terms and conditions before submitting.");
+        return;
+      }
+      if (this.validateCurrentStep()) {
+        // Generate reference ID
+        this.referenceId = this.generateReferenceId();
+
+        // Show success modal
+        this.showSuccessModal = true;
+
+        // In real application, send to backend
+        console.log("Form submitted:", _objectSpread({
+          referenceId: this.referenceId
+        }, this.formData));
+
+        // Clear draft
+        localStorage.removeItem("householdDraft");
+      }
+    },
+    resetForm: function resetForm() {
+      this.showSuccessModal = false;
+      this.currentStep = 1;
+      this.acceptTerms = false;
+      this.fieldErrors = {};
+      this.validationErrors = [];
+      this.formData = {
+        address: {
+          purok: "",
+          street: "",
+          gpsCoordinates: ""
+        },
+        headOfFamily: {
+          firstName: "",
+          middleInitial: "",
+          lastName: "",
+          extension: "",
+          sex: "",
+          birthdate: "",
+          civilStatus: "",
+          contactNumber: "",
+          email: "",
+          occupation: "",
+          // New fields
+          nationalId: "",
+          highestEducation: "",
+          educationalStatus: "",
+          employmentStatus: "",
+          is4psMember: "",
+          voterStatus: "",
+          isDeceased: "No",
+          natureOfEmployment: "",
+          monthlyIncome: ""
+        },
+        members: [],
+        householdInfo: {
+          type: "",
+          numberOfRooms: "",
+          housingStatus: "",
+          waterSource: "",
+          toiletFacility: "",
+          hasElectricity: "",
+          hasInternet: "",
+          cookingFuel: "",
+          notes: ""
+        }
+      };
+    },
+    printConfirmation: function printConfirmation() {
+      window.print();
+    }
+  },
+  mounted: function mounted() {
+    this.loadDraft();
+  }
+});
+
+/***/ },
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=script&lang=js&"
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {};
+  },
+  computed: {},
+  methods: {},
+  mounted: function mounted() {}
+});
+
+/***/ },
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=script&lang=js&"
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=script&lang=js& ***!
@@ -14862,6 +18336,54 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.card[data-v-f9582182] {\r\n  border-radius: 10px;\n}\n.card-header[data-v-f9582182] {\r\n  border-radius: 10px 10px 0 0 !important;\r\n  padding: 1.2rem 1.5rem;\n}\n.table th[data-v-f9582182] {\r\n  background-color: #f8fafc;\r\n  font-weight: 600;\r\n  padding: 1rem;\r\n  border-bottom: 2px solid #e9ecef;\n}\n.table td[data-v-f9582182] {\r\n  padding: 1rem;\r\n  vertical-align: middle;\n}\n.badge[data-v-f9582182] {\r\n  padding: 0.35rem 0.7rem;\r\n  border-radius: 6px;\r\n  font-weight: 500;\n}\n.btn-group .btn[data-v-f9582182] {\r\n  border-radius: 6px;\r\n  margin: 0 2px;\n}\n.btn-outline-primary[data-v-f9582182] {\r\n  border-color: #198754;\r\n  color: #198754;\n}\n.btn-outline-primary[data-v-f9582182]:hover {\r\n  background-color: #198754;\r\n  color: white;\n}\n.page-link[data-v-f9582182] {\r\n  color: #198754;\r\n  border: 1px solid #dee2e6;\n}\n.page-item.active .page-link[data-v-f9582182] {\r\n  background-color: #198754;\r\n  border-color: #198754;\r\n  color: white;\n}\n.page-link[data-v-f9582182]:hover {\r\n  color: #146c43;\r\n  background-color: #e9ecef;\n}\n.modal-content[data-v-f9582182] {\r\n  border-radius: 10px;\n}\n.input-group-text[data-v-f9582182] {\r\n  background-color: #f8f9fa;\r\n  border-color: #dee2e6;\n}\n.form-check-input[data-v-f9582182]:checked {\r\n  background-color: #198754;\r\n  border-color: #198754;\n}\n.bg-primary[data-v-f9582182] {\r\n  background-color: #224abe !important;\n}\n.text-primary[data-v-f9582182] {\r\n  color: #198754 !important;\n}\n.bg-gradient-primary[data-v-f9582182] {\r\n  background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);\n}\n.chairman-row[data-v-f9582182] {\r\n  background-color: #bae0c7;\n}\r\n\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ },
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css&"
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Progress Steps */\n.step-container[data-v-6ddc430b] {\r\n  position: relative;\r\n  z-index: 2;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.step-line[data-v-6ddc430b] {\r\n  height: 3px;\r\n  background-color: #e9ecef;\r\n  z-index: 1;\n}\n.step-line-progress[data-v-6ddc430b] {\r\n  height: 3px;\r\n  background-color: #0d6efd;\r\n  z-index: 1;\r\n  transition: width 0.3s ease;\n}\n.step-circle[data-v-6ddc430b] {\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\r\n  background-color: #e9ecef;\r\n  color: #6c757d;\r\n  font-weight: 600;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  border: 3px solid #e9ecef;\n}\n.step-circle.step-active[data-v-6ddc430b] {\r\n  background-color: #0d6efd;\r\n  color: white;\r\n  border-color: #0d6efd;\r\n  transform: scale(1.1);\r\n  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2);\n}\n.step-circle.step-completed[data-v-6ddc430b] {\r\n  background-color: #198754;\r\n  color: white;\r\n  border-color: #198754;\n}\n.step-circle.step-error[data-v-6ddc430b] {\r\n  border-color: #dc3545;\r\n  background-color: #dc3545;\r\n  color: white;\n}\n.step-icon[data-v-6ddc430b] {\r\n  font-size: 1.25rem;\n}\n.step-number[data-v-6ddc430b] {\r\n  font-size: 1.1rem;\n}\n.step-label[data-v-6ddc430b] {\r\n  font-size: 0.875rem;\r\n  text-align: center;\r\n  min-width: 80px;\n}\r\n\r\n/* Card Header Icons */\n.step-header-icon[data-v-6ddc430b] {\r\n  width: 40px;\r\n  height: 40px;\r\n  background-color: rgba(13, 110, 253, 0.1);\r\n  border-radius: 10px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\r\n\r\n/* Member Cards */\n.member-card[data-v-6ddc430b] {\r\n  position: relative;\n}\n.member-card[data-v-6ddc430b]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  left: -15px;\r\n  top: 50%;\r\n  transform: translateY(-50%);\r\n  width: 10px;\r\n  height: 10px;\r\n  border-radius: 50%;\r\n  background-color: #0d6efd;\r\n  opacity: 0.5;\n}\n.member-avatar[data-v-6ddc430b] {\r\n  width: 40px;\r\n  height: 40px;\r\n  background-color: #e9ecef;\r\n  border-radius: 50%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  color: #6c757d;\n}\r\n\r\n/* Avatar Circle */\n.avatar-circle[data-v-6ddc430b] {\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  font-size: 1.5rem;\n}\r\n\r\n/* Form Validation Styles */\n.is-invalid[data-v-6ddc430b] {\r\n  border-color: #dc3545 !important;\r\n  background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e\") !important;\r\n  background-repeat: no-repeat;\r\n  background-position: right calc(0.375em + 0.1875rem) center;\r\n  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);\n}\n.invalid-feedback[data-v-6ddc430b] {\r\n  display: block;\r\n  font-size: 0.875rem;\n}\r\n\r\n/* Button Group Styles */\n.btn-group .btn-check:checked + .btn[data-v-6ddc430b] {\r\n  background-color: #0d6efd;\r\n  border-color: #0d6efd;\r\n  color: white;\n}\r\n\r\n/* Success Animation */\n.success-animation[data-v-6ddc430b] {\r\n  width: 80px;\r\n  height: 80px;\r\n  margin: 0 auto;\n}\n.checkmark-circle[data-v-6ddc430b] {\r\n  width: 80px;\r\n  height: 80px;\r\n  position: relative;\r\n  display: inline-block;\r\n  vertical-align: top;\n}\n.checkmark-circle .background[data-v-6ddc430b] {\r\n  width: 80px;\r\n  height: 80px;\r\n  border-radius: 50%;\r\n  background: #198754;\r\n  position: absolute;\n}\n.checkmark-circle .checkmark[data-v-6ddc430b] {\r\n  border-radius: 5px;\n}\n.checkmark-circle .checkmark.draw[data-v-6ddc430b]:after {\r\n  animation-delay: 100ms;\r\n  animation-duration: 1s;\r\n  animation-timing-function: ease;\r\n  animation-name: checkmark-data-v-6ddc430b;\r\n  transform: scaleX(-1) rotate(135deg);\r\n  animation-fill-mode: forwards;\n}\n.checkmark-circle .checkmark[data-v-6ddc430b]:after {\r\n  opacity: 1;\r\n  height: 40px;\r\n  width: 20px;\r\n  transform-origin: left top;\r\n  border-right: 6px solid white;\r\n  border-top: 6px solid white;\r\n  content: \"\";\r\n  left: 20px;\r\n  top: 40px;\r\n  position: absolute;\n}\n@keyframes checkmark-data-v-6ddc430b {\n0% {\r\n    height: 0;\r\n    width: 0;\r\n    opacity: 1;\n}\n20% {\r\n    height: 0;\r\n    width: 20px;\r\n    opacity: 1;\n}\n40% {\r\n    height: 40px;\r\n    width: 20px;\r\n    opacity: 1;\n}\n100% {\r\n    height: 40px;\r\n    width: 20px;\r\n    opacity: 1;\n}\n}\r\n\r\n/* Print Styles */\n@media print {\n.modal[data-v-6ddc430b] {\r\n    position: static !important;\r\n    display: block !important;\r\n    background: none !important;\n}\n.modal-dialog[data-v-6ddc430b] {\r\n    max-width: 100% !important;\r\n    margin: 0 !important;\n}\n.btn[data-v-6ddc430b] {\r\n    display: none !important;\n}\n}\r\n\r\n/* Responsive Adjustments */\n@media (max-width: 768px) {\n.step-circle[data-v-6ddc430b] {\r\n    width: 40px;\r\n    height: 40px;\n}\n.step-label[data-v-6ddc430b] {\r\n    font-size: 0.75rem;\r\n    min-width: 60px;\n}\n.btn[data-v-6ddc430b] {\r\n    padding: 0.375rem 0.75rem;\r\n    font-size: 0.875rem;\n}\n}\r\n\r\n/* Custom Scrollbar */\n[data-v-6ddc430b]::-webkit-scrollbar {\r\n  width: 8px;\r\n  height: 8px;\n}\n[data-v-6ddc430b]::-webkit-scrollbar-track {\r\n  background: #f1f1f1;\r\n  border-radius: 4px;\n}\n[data-v-6ddc430b]::-webkit-scrollbar-thumb {\r\n  background: #c1c1c1;\r\n  border-radius: 4px;\n}\n[data-v-6ddc430b]::-webkit-scrollbar-thumb:hover {\r\n  background: #a8a8a8;\n}\r\n\r\n/* Card Footer Styling */\n.card-footer[data-v-6ddc430b] {\r\n  border-top: 1px solid rgba(0, 0, 0, 0.125);\r\n  padding-top: 1.5rem;\r\n  margin-top: 1rem;\n}\n@media (max-width: 576px) {\n.card-footer .d-flex[data-v-6ddc430b] {\r\n    flex-direction: column;\r\n    gap: 1rem;\n}\n.card-footer .d-flex > *[data-v-6ddc430b] {\r\n    width: 100%;\n}\n.card-footer .btn[data-v-6ddc430b] {\r\n    width: 100%;\r\n    justify-content: center;\n}\n}\r\n\r\n/* Additional styling for new sections */\n.conditional-field[data-v-6ddc430b] {\r\n  animation: fadeIn-data-v-6ddc430b 0.3s ease-in;\n}\n@keyframes fadeIn-data-v-6ddc430b {\nfrom {\r\n    opacity: 0;\r\n    transform: translateY(-10px);\n}\nto {\r\n    opacity: 1;\r\n    transform: translateY(0);\n}\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ },
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css&"
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card[data-v-5f7a018c] {\r\n  border-radius: 10px;\n}\n.card-header[data-v-5f7a018c] {\r\n  border-radius: 10px 10px 0 0 !important;\r\n  padding: 1.2rem 1.5rem;\n}\n.table th[data-v-5f7a018c] {\r\n  background-color: #f8fafc;\r\n  font-weight: 600;\r\n  padding: 1rem;\r\n  border-bottom: 2px solid #e9ecef;\n}\n.table td[data-v-5f7a018c] {\r\n  padding: 1rem;\r\n  vertical-align: middle;\n}\n.badge[data-v-5f7a018c] {\r\n  padding: 0.35rem 0.7rem;\r\n  border-radius: 6px;\r\n  font-weight: 500;\n}\n.btn-group .btn[data-v-5f7a018c] {\r\n  border-radius: 6px;\r\n  margin: 0 2px;\n}\n.btn-outline-primary[data-v-5f7a018c] {\r\n  border-color: #198754;\r\n  color: #198754;\n}\n.btn-outline-primary[data-v-5f7a018c]:hover {\r\n  background-color: #198754;\r\n  color: white;\n}\n.page-link[data-v-5f7a018c] {\r\n  color: #198754;\r\n  border: 1px solid #dee2e6;\n}\n.page-item.active .page-link[data-v-5f7a018c] {\r\n  background-color: #198754;\r\n  border-color: #198754;\r\n  color: white;\n}\n.page-link[data-v-5f7a018c]:hover {\r\n  color: #146c43;\r\n  background-color: #e9ecef;\n}\n.modal-content[data-v-5f7a018c] {\r\n  border-radius: 10px;\n}\n.input-group-text[data-v-5f7a018c] {\r\n  background-color: #f8f9fa;\r\n  border-color: #dee2e6;\n}\n.form-check-input[data-v-5f7a018c]:checked {\r\n  background-color: #198754;\r\n  border-color: #198754;\n}\n.bg-primary[data-v-5f7a018c] {\r\n  background-color: #224abe !important;\n}\n.text-primary[data-v-5f7a018c] {\r\n  color: #198754 !important;\n}\n.bg-gradient-primary[data-v-5f7a018c] {\r\n  background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);\n}\n.stat-card[data-v-5f7a018c] {\r\n  border-radius: 12px;\r\n  border: none;\r\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);\r\n  transition: all 0.3s ease;\r\n  overflow: hidden;\r\n  position: relative;\n}\n.stat-card[data-v-5f7a018c]:hover {\r\n  transform: translateY(-5px);\r\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);\n}\n.stat-card[data-v-5f7a018c]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  height: 4px;\r\n  background: linear-gradient(\r\n    90deg,\r\n    var(--gradient-start),\r\n    var(--gradient-end)\r\n  );\n}\n.stat-card-1[data-v-5f7a018c] {\r\n  --gradient-start: #4e73df;\r\n  --gradient-end: #224abe;\n}\n.stat-card-2[data-v-5f7a018c] {\r\n  --gradient-start: #1cc88a;\r\n  --gradient-end: #13855c;\n}\n.stat-card-3[data-v-5f7a018c] {\r\n  --gradient-start: #36b9cc;\r\n  --gradient-end: #258391;\n}\n.stat-card-4[data-v-5f7a018c] {\r\n  --gradient-start: #f6c23e;\r\n  --gradient-end: #dda20a;\n}\n.stat-card .card-title[data-v-5f7a018c] {\r\n  font-size: 2rem;\r\n  font-weight: 700;\n}\n.stat-icon[data-v-5f7a018c] {\r\n  font-size: 2.5rem;\r\n  opacity: 0.8;\n}\n.main-content-card[data-v-5f7a018c] {\r\n    border-radius: 12px;\r\n    overflow: hidden;\r\n    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);\n}\n.card-header[data-v-5f7a018c] {\r\n    border-radius: 12px 12px 0 0 !important;\r\n    padding: 1.5rem !important;\r\n    position: relative;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42299,6 +45821,66 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ },
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css&"
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Createmember_vue_vue_type_style_index_0_id_6ddc430b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Createmember_vue_vue_type_style_index_0_id_6ddc430b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Createmember_vue_vue_type_style_index_0_id_6ddc430b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ },
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css&"
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Household_vue_vue_type_style_index_0_id_5f7a018c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Household_vue_vue_type_style_index_0_id_5f7a018c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Household_vue_vue_type_style_index_0_id_5f7a018c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ },
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css&"
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Purok.vue?vue&type=style&index=0&id=81c2acf8&scoped=true&lang=css& ***!
@@ -54746,6 +58328,7481 @@ var staticRenderFns = [
     return _c("label", { staticClass: "form-label fw-medium" }, [
       _vm._v("\n                        Photo of Official "),
       _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ },
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=template&id=6ddc430b&scoped=true&"
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=template&id=6ddc430b&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row mb-5" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c(
+          "div",
+          { staticClass: "d-flex justify-content-between position-relative" },
+          [
+            _c("div", {
+              staticClass: "step-line position-absolute top-50 start-0 end-0",
+            }),
+            _vm._v(" "),
+            _c("div", {
+              staticClass:
+                "step-line-progress position-absolute top-50 start-0",
+              style: { width: _vm.progressWidth },
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.steps, function (step) {
+              return _c(
+                "div",
+                { key: step.id, staticClass: "step-container" },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "step-circle d-flex align-items-center justify-content-center",
+                      class: {
+                        "step-active": _vm.currentStep === step.id,
+                        "step-completed": _vm.currentStep > step.id,
+                        "step-error": _vm.hasStepError(step.id),
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.goToStep(step.id)
+                        },
+                      },
+                    },
+                    [
+                      _vm.currentStep > step.id
+                        ? _c("i", { staticClass: "ri-check-line step-icon" })
+                        : _c("i", {
+                            staticClass: "ri-check-line step-icon",
+                            class: step.icon,
+                          }),
+                      _vm._v(" "),
+                      _vm.currentStep <= step.id
+                        ? _c("span", { staticClass: "step-number" }, [
+                            _vm._v(_vm._s(step.id)),
+                          ])
+                        : _vm._e(),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "step-label mt-2" }, [
+                    _c("small", { staticClass: "d-block fw-medium" }, [
+                      _vm._v(_vm._s(step.label)),
+                    ]),
+                  ]),
+                ]
+              )
+            }),
+          ],
+          2
+        ),
+      ]),
+    ]),
+    _vm._v(" "),
+    _vm.validationErrors.length > 0
+      ? _c("div", { staticClass: "row mb-4" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c(
+              "div",
+              { staticClass: "alert alert-danger border-0 shadow-sm" },
+              [
+                _c("div", { staticClass: "d-flex align-items-center" }, [
+                  _c("i", { staticClass: "ri-error-warning-line fs-5 me-2" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex-grow-1" }, [
+                    _c("h6", { staticClass: "mb-1 fw-semibold" }, [
+                      _vm._v("Please fix the following errors:"),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      { staticClass: "mb-0 ps-3" },
+                      _vm._l(_vm.validationErrors, function (error, index) {
+                        return _c("li", { key: index }, [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(error) +
+                              "\n              "
+                          ),
+                        ])
+                      }),
+                      0
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.currentStep === 1
+      ? _c("div", [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card border-0 shadow-sm" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-6 mb-4" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group has-validation" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.formData.address.purok,
+                                expression: "formData.address.purok",
+                              },
+                            ],
+                            staticClass: "form-select",
+                            class: {
+                              "is-invalid": _vm.fieldErrors["address.purok"],
+                            },
+                            on: {
+                              blur: function ($event) {
+                                return _vm.validateField("address.purok")
+                              },
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.formData.address,
+                                  "purok",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                            },
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: {
+                                  value: "",
+                                  disabled: "",
+                                  selected: "",
+                                },
+                              },
+                              [_vm._v("Select Purok")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("1"),
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("2"),
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "3" } }, [
+                              _vm._v("3"),
+                            ]),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "invalid-feedback d-flex align-items-center",
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "ri-error-warning-line me-1",
+                            }),
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.fieldErrors["address.purok"]) +
+                                "\n                  "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-text" }, [
+                        _vm._v(
+                          "\n                  Select the purok where your household is located\n                "
+                        ),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6 mb-4" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group has-validation" }, [
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.address.street,
+                              expression: "formData.address.street",
+                            },
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.fieldErrors["address.street"],
+                          },
+                          attrs: {
+                            rows: "2",
+                            placeholder: "Enter street name",
+                          },
+                          domProps: { value: _vm.formData.address.street },
+                          on: {
+                            blur: function ($event) {
+                              return _vm.validateField("address.street")
+                            },
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData.address,
+                                "street",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "invalid-feedback d-flex align-items-center",
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "ri-error-warning-line me-1",
+                            }),
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.fieldErrors["address.street"]) +
+                                "\n                  "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-text" }, [
+                        _vm._v(
+                          "\n                  Complete street name including landmarks if any\n                "
+                        ),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "mb-3" }, [
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _vm._m(7),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.formData.address.gpsCoordinates,
+                                expression: "formData.address.gpsCoordinates",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              placeholder: "e.g., 14.5645, 121.0322",
+                            },
+                            domProps: {
+                              value: _vm.formData.address.gpsCoordinates,
+                            },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.formData.address,
+                                  "gpsCoordinates",
+                                  $event.target.value
+                                )
+                              },
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-text" }, [
+                          _vm._v(
+                            "\n                    Latitude and Longitude coordinates\n                  "
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "card-footer bg-transparent border-0 pt-4 pb-0",
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex justify-content-between align-items-center",
+                        },
+                        [
+                          _c("div"),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "d-flex gap-2" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-primary px-4",
+                                attrs: { type: "button" },
+                                on: { click: _vm.saveAsDraft },
+                              },
+                              [
+                                _c("i", { staticClass: "ri-save-line me-2" }),
+                                _vm._v(" Save Draft\n                  "),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary px-4",
+                                attrs: { type: "button" },
+                                on: { click: _vm.nextStep },
+                              },
+                              [
+                                _vm._v("\n                    Next "),
+                                _c("i", {
+                                  staticClass: "ri-arrow-right-line ms-2",
+                                }),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ])
+      : _vm.currentStep === 2
+      ? _c("div", [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card border-0 shadow-sm" }, [
+                _vm._m(8),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-12 mb-4" }, [
+                      _vm._m(9),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row g-3" }, [
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _vm._m(10),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.formData.headOfFamily.firstName,
+                                expression: "formData.headOfFamily.firstName",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid":
+                                _vm.fieldErrors["headOfFamily.firstName"],
+                            },
+                            attrs: {
+                              type: "text",
+                              placeholder: "Enter first name",
+                            },
+                            domProps: {
+                              value: _vm.formData.headOfFamily.firstName,
+                            },
+                            on: {
+                              blur: function ($event) {
+                                return _vm.validateField(
+                                  "headOfFamily.firstName"
+                                )
+                              },
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.formData.headOfFamily,
+                                  "firstName",
+                                  $event.target.value
+                                )
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "invalid-feedback d-flex align-items-center",
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-error-warning-line me-1",
+                              }),
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(
+                                    _vm.fieldErrors["headOfFamily.firstName"]
+                                  ) +
+                                  "\n                    "
+                              ),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-2" }, [
+                          _c("label", { staticClass: "form-label fw-medium" }, [
+                            _vm._v("M.I."),
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.formData.headOfFamily.middleInitial,
+                                expression:
+                                  "formData.headOfFamily.middleInitial",
+                              },
+                            ],
+                            staticClass: "form-control text-uppercase",
+                            attrs: {
+                              type: "text",
+                              maxlength: "1",
+                              placeholder: "M",
+                            },
+                            domProps: {
+                              value: _vm.formData.headOfFamily.middleInitial,
+                            },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.formData.headOfFamily,
+                                  "middleInitial",
+                                  $event.target.value
+                                )
+                              },
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _vm._m(11),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.formData.headOfFamily.lastName,
+                                expression: "formData.headOfFamily.lastName",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid":
+                                _vm.fieldErrors["headOfFamily.lastName"],
+                            },
+                            attrs: {
+                              type: "text",
+                              placeholder: "Enter last name",
+                            },
+                            domProps: {
+                              value: _vm.formData.headOfFamily.lastName,
+                            },
+                            on: {
+                              blur: function ($event) {
+                                return _vm.validateField(
+                                  "headOfFamily.lastName"
+                                )
+                              },
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.formData.headOfFamily,
+                                  "lastName",
+                                  $event.target.value
+                                )
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "invalid-feedback d-flex align-items-center",
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-error-warning-line me-1",
+                              }),
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(
+                                    _vm.fieldErrors["headOfFamily.lastName"]
+                                  ) +
+                                  "\n                    "
+                              ),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-2" }, [
+                          _c("label", { staticClass: "form-label fw-medium" }, [
+                            _vm._v("Extension"),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formData.headOfFamily.extension,
+                                  expression: "formData.headOfFamily.extension",
+                                },
+                              ],
+                              staticClass: "form-select",
+                              on: {
+                                change: function ($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function (o) {
+                                      return o.selected
+                                    })
+                                    .map(function (o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formData.headOfFamily,
+                                    "extension",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("None"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Jr" } }, [
+                                _vm._v("Jr"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Sr" } }, [
+                                _vm._v("Sr"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "II" } }, [
+                                _vm._v("II"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "III" } }, [
+                                _vm._v("III"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "IV" } }, [
+                                _vm._v("IV"),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 mb-4" }, [
+                      _vm._m(12),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row g-3" }, [
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _vm._m(13),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "btn-group w-100",
+                              attrs: { role: "group" },
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.headOfFamily.sex,
+                                    expression: "formData.headOfFamily.sex",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  value: "Male",
+                                  id: "genderMale",
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.formData.headOfFamily.sex,
+                                    "Male"
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "sex",
+                                      "Male"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._m(14),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.headOfFamily.sex,
+                                    expression: "formData.headOfFamily.sex",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  value: "Female",
+                                  id: "genderFemale",
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.formData.headOfFamily.sex,
+                                    "Female"
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "sex",
+                                      "Female"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._m(15),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.fieldErrors["headOfFamily.sex"]
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "text-danger small d-flex align-items-center mt-1",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "ri-error-warning-line me-1",
+                                  }),
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(
+                                        _vm.fieldErrors["headOfFamily.sex"]
+                                      ) +
+                                      "\n                    "
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _vm._m(16),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "input-group has-validation" },
+                            [
+                              _vm._m(17),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.headOfFamily.birthdate,
+                                    expression:
+                                      "formData.headOfFamily.birthdate",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid":
+                                    _vm.fieldErrors["headOfFamily.birthdate"],
+                                },
+                                attrs: { type: "date" },
+                                domProps: {
+                                  value: _vm.formData.headOfFamily.birthdate,
+                                },
+                                on: {
+                                  blur: function ($event) {
+                                    return _vm.validateField(
+                                      "headOfFamily.birthdate"
+                                    )
+                                  },
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "birthdate",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "invalid-feedback d-flex align-items-center",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "ri-error-warning-line me-1",
+                                  }),
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(
+                                        _vm.fieldErrors[
+                                          "headOfFamily.birthdate"
+                                        ]
+                                      ) +
+                                      "\n                      "
+                                  ),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.formData.headOfFamily.birthdate
+                            ? _c("div", { staticClass: "form-text" }, [
+                                _vm._v(
+                                  "\n                      Age:\n                      " +
+                                    _vm._s(
+                                      _vm.calculateAge(
+                                        _vm.formData.headOfFamily.birthdate
+                                      )
+                                    ) +
+                                    "\n                      years old\n                    "
+                                ),
+                              ])
+                            : _vm._e(),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c("label", { staticClass: "form-label fw-medium" }, [
+                            _vm._v(" Civil Status "),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formData.headOfFamily.civilStatus,
+                                  expression:
+                                    "formData.headOfFamily.civilStatus",
+                                },
+                              ],
+                              staticClass: "form-select",
+                              on: {
+                                change: function ($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function (o) {
+                                      return o.selected
+                                    })
+                                    .map(function (o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formData.headOfFamily,
+                                    "civilStatus",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("Select Status"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Single" } }, [
+                                _vm._v("Single"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Married" } }, [
+                                _vm._v("Married"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Widowed" } }, [
+                                _vm._v("Widowed"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Separated" } }, [
+                                _vm._v("Separated"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Divorced" } }, [
+                                _vm._v("Divorced"),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 mb-4" }, [
+                      _vm._m(18),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row g-3" }, [
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _vm._m(19),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "input-group" }, [
+                            _vm._m(20),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formData.headOfFamily.nationalId,
+                                  expression:
+                                    "formData.headOfFamily.nationalId",
+                                },
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                placeholder: "1234-5678-9012-3456",
+                              },
+                              domProps: {
+                                value: _vm.formData.headOfFamily.nationalId,
+                              },
+                              on: {
+                                input: function ($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.formData.headOfFamily,
+                                    "nationalId",
+                                    $event.target.value
+                                  )
+                                },
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-text" }, [
+                            _vm._v(
+                              "\n                      Optional: Philippine Identification System Number\n                    "
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _vm._m(21),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "btn-group w-100",
+                              attrs: { role: "group" },
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.formData.headOfFamily.voterStatus,
+                                    expression:
+                                      "formData.headOfFamily.voterStatus",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  value: "Voter",
+                                  id: "voterYes",
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.formData.headOfFamily.voterStatus,
+                                    "Voter"
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "voterStatus",
+                                      "Voter"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._m(22),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.formData.headOfFamily.voterStatus,
+                                    expression:
+                                      "formData.headOfFamily.voterStatus",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  value: "Non-Voter",
+                                  id: "voterNo",
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.formData.headOfFamily.voterStatus,
+                                    "Non-Voter"
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "voterStatus",
+                                      "Non-Voter"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._m(23),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _vm._m(24),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "btn-group w-100",
+                              attrs: { role: "group" },
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.formData.headOfFamily.is4psMember,
+                                    expression:
+                                      "formData.headOfFamily.is4psMember",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  value: "Yes",
+                                  id: "4psYes",
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.formData.headOfFamily.is4psMember,
+                                    "Yes"
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "is4psMember",
+                                      "Yes"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._m(25),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.formData.headOfFamily.is4psMember,
+                                    expression:
+                                      "formData.headOfFamily.is4psMember",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  value: "No",
+                                  id: "4psNo",
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.formData.headOfFamily.is4psMember,
+                                    "No"
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "is4psMember",
+                                      "No"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._m(26),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-text" }, [
+                            _vm._v(
+                              "\n                      Pantawid Pamilyang Pilipino Program\n                    "
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _vm._m(27),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "btn-group w-100",
+                              attrs: { role: "group" },
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.headOfFamily.isDeceased,
+                                    expression:
+                                      "formData.headOfFamily.isDeceased",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  value: "No",
+                                  id: "alive",
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.formData.headOfFamily.isDeceased,
+                                    "No"
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "isDeceased",
+                                      "No"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._m(28),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.headOfFamily.isDeceased,
+                                    expression:
+                                      "formData.headOfFamily.isDeceased",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  value: "Yes",
+                                  id: "deceased",
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.formData.headOfFamily.isDeceased,
+                                    "Yes"
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "isDeceased",
+                                      "Yes"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._m(29),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 mb-4" }, [
+                      _vm._m(30),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row g-3" }, [
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _vm._m(31),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    _vm.formData.headOfFamily.highestEducation,
+                                  expression:
+                                    "formData.headOfFamily.highestEducation",
+                                },
+                              ],
+                              staticClass: "form-select",
+                              on: {
+                                change: function ($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function (o) {
+                                      return o.selected
+                                    })
+                                    .map(function (o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formData.headOfFamily,
+                                    "highestEducation",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("Select Education Level"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "No Formal Education" } },
+                                [
+                                  _vm._v(
+                                    "\n                        No Formal Education\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Elementary Level" } },
+                                [
+                                  _vm._v(
+                                    "\n                        Elementary Level\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Elementary Graduate" } },
+                                [
+                                  _vm._v(
+                                    "\n                        Elementary Graduate\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "High School Level" } },
+                                [
+                                  _vm._v(
+                                    "\n                        High School Level\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "High School Graduate" } },
+                                [
+                                  _vm._v(
+                                    "\n                        High School Graduate\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "College Level" } },
+                                [_vm._v("College Level")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "College Graduate" } },
+                                [
+                                  _vm._v(
+                                    "\n                        College Graduate\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Vocational/Tech Course" } },
+                                [
+                                  _vm._v(
+                                    "\n                        Vocational/Tech Course\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Post Graduate" } },
+                                [_vm._v("Post Graduate")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Master's Degree" } },
+                                [_vm._v("Master's Degree")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Doctorate Degree" } },
+                                [
+                                  _vm._v(
+                                    "\n                        Doctorate Degree\n                      "
+                                  ),
+                                ]
+                              ),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _vm._m(32),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    _vm.formData.headOfFamily.educationalStatus,
+                                  expression:
+                                    "formData.headOfFamily.educationalStatus",
+                                },
+                              ],
+                              staticClass: "form-select",
+                              on: {
+                                change: function ($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function (o) {
+                                      return o.selected
+                                    })
+                                    .map(function (o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formData.headOfFamily,
+                                    "educationalStatus",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("Select Status"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Not Attending School" } },
+                                [
+                                  _vm._v(
+                                    "\n                        Not Attending School\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Currently Enrolled" } },
+                                [
+                                  _vm._v(
+                                    "\n                        Currently Enrolled\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Graduated" } }, [
+                                _vm._v("Graduated"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Dropout" } }, [
+                                _vm._v("Dropout"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "ALS Graduate" } },
+                                [_vm._v("ALS Graduate")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "ALS Student" } },
+                                [_vm._v("ALS Student")]
+                              ),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _vm._m(33),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row g-2" }, [
+                            _c("div", { staticClass: "col-6" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.formData.headOfFamily
+                                        .employmentStatus,
+                                    expression:
+                                      "formData.headOfFamily.employmentStatus",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  value: "Employed",
+                                  id: "employed",
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.formData.headOfFamily.employmentStatus,
+                                    "Employed"
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "employmentStatus",
+                                      "Employed"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._m(34),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.formData.headOfFamily
+                                        .employmentStatus,
+                                    expression:
+                                      "formData.headOfFamily.employmentStatus",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  value: "Unemployed",
+                                  id: "unemployed",
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.formData.headOfFamily.employmentStatus,
+                                    "Unemployed"
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "employmentStatus",
+                                      "Unemployed"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._m(35),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _vm.fieldErrors["headOfFamily.employmentStatus"]
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "text-danger small d-flex align-items-center mt-1",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "ri-error-warning-line me-1",
+                                  }),
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(
+                                        _vm.fieldErrors[
+                                          "headOfFamily.employmentStatus"
+                                        ]
+                                      ) +
+                                      "\n                    "
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]),
+                        _vm._v(" "),
+                        _vm.formData.headOfFamily.employmentStatus ===
+                        "Employed"
+                          ? _c("div", { staticClass: "col-md-6" }, [
+                              _vm._m(36),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.formData.headOfFamily.occupation,
+                                    expression:
+                                      "formData.headOfFamily.occupation",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  placeholder:
+                                    "e.g., Teacher, Engineer, Farmer",
+                                },
+                                domProps: {
+                                  value: _vm.formData.headOfFamily.occupation,
+                                },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.formData.headOfFamily,
+                                      "occupation",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.formData.headOfFamily.employmentStatus ===
+                        "Employed"
+                          ? _c("div", { staticClass: "col-md-6" }, [
+                              _vm._m(37),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value:
+                                        _vm.formData.headOfFamily
+                                          .natureOfEmployment,
+                                      expression:
+                                        "formData.headOfFamily.natureOfEmployment",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.formData.headOfFamily,
+                                        "natureOfEmployment",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                  },
+                                },
+                                [
+                                  _c("option", { attrs: { value: "" } }, [
+                                    _vm._v("Select Nature"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Government Employee" } },
+                                    [
+                                      _vm._v(
+                                        "\n                        Government Employee\n                      "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Private Employee" } },
+                                    [
+                                      _vm._v(
+                                        "\n                        Private Employee\n                      "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Self-Employed" } },
+                                    [_vm._v("Self-Employed")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "OFW" } }, [
+                                    _vm._v(
+                                      "\n                        Overseas Filipino Worker (OFW)\n                      "
+                                    ),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "Casual" } }, [
+                                    _vm._v("Casual Worker"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Seasonal" } },
+                                    [_vm._v("Seasonal Worker")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Contractual" } },
+                                    [_vm._v("Contractual Worker")]
+                                  ),
+                                ]
+                              ),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.formData.headOfFamily.employmentStatus ===
+                        "Employed"
+                          ? _c("div", { staticClass: "col-md-6" }, [
+                              _vm._m(38),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "input-group" }, [
+                                _vm._m(39),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value:
+                                        _vm.formData.headOfFamily.monthlyIncome,
+                                      expression:
+                                        "formData.headOfFamily.monthlyIncome",
+                                    },
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "number",
+                                    placeholder: "0.00",
+                                    min: "0",
+                                    step: "0.01",
+                                  },
+                                  domProps: {
+                                    value:
+                                      _vm.formData.headOfFamily.monthlyIncome,
+                                  },
+                                  on: {
+                                    input: function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.formData.headOfFamily,
+                                        "monthlyIncome",
+                                        $event.target.value
+                                      )
+                                    },
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  { staticClass: "input-group-text" },
+                                  [_vm._v("PHP")]
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-text" }, [
+                                _vm._v("Average monthly income"),
+                              ]),
+                            ])
+                          : _vm._e(),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _vm._m(40),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row g-3" }, [
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _vm._m(41),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "input-group has-validation" },
+                            [
+                              _vm._m(42),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.formData.headOfFamily.contactNumber,
+                                    expression:
+                                      "formData.headOfFamily.contactNumber",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid":
+                                    _vm.fieldErrors[
+                                      "headOfFamily.contactNumber"
+                                    ],
+                                },
+                                attrs: {
+                                  type: "tel",
+                                  placeholder: "09123456789",
+                                },
+                                domProps: {
+                                  value:
+                                    _vm.formData.headOfFamily.contactNumber,
+                                },
+                                on: {
+                                  input: [
+                                    function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.formData.headOfFamily,
+                                        "contactNumber",
+                                        $event.target.value
+                                      )
+                                    },
+                                    _vm.formatPhoneNumber,
+                                  ],
+                                  blur: function ($event) {
+                                    return _vm.validateField(
+                                      "headOfFamily.contactNumber"
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "invalid-feedback d-flex align-items-center",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "ri-error-warning-line me-1",
+                                  }),
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(
+                                        _vm.fieldErrors[
+                                          "headOfFamily.contactNumber"
+                                        ]
+                                      ) +
+                                      "\n                      "
+                                  ),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-text" }, [
+                            _vm._v("Format: 09XX-XXX-XXXX"),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("label", { staticClass: "form-label fw-medium" }, [
+                            _vm._v(
+                              "\n                      Email Address (Optional)\n                    "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "input-group" }, [
+                            _vm._m(43),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formData.headOfFamily.email,
+                                  expression: "formData.headOfFamily.email",
+                                },
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "email",
+                                placeholder: "name@example.com",
+                              },
+                              domProps: {
+                                value: _vm.formData.headOfFamily.email,
+                              },
+                              on: {
+                                input: function ($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.formData.headOfFamily,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                },
+                              },
+                            }),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "card-footer bg-transparent border-0 pt-4 pb-0",
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex justify-content-between align-items-center",
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-secondary px-4",
+                              attrs: { type: "button" },
+                              on: { click: _vm.prevStep },
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-arrow-left-line me-2",
+                              }),
+                              _vm._v(" Previous\n                "),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "d-flex gap-2" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-primary px-4",
+                                attrs: { type: "button" },
+                                on: { click: _vm.saveAsDraft },
+                              },
+                              [
+                                _c("i", { staticClass: "ri-save-line me-2" }),
+                                _vm._v(" Save Draft\n                  "),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary px-4",
+                                attrs: { type: "button" },
+                                on: { click: _vm.nextStep },
+                              },
+                              [
+                                _vm._v("\n                    Next "),
+                                _c("i", {
+                                  staticClass: "ri-arrow-right-line ms-2",
+                                }),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ])
+      : _vm.currentStep === 3
+      ? _c("div", [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card border-0 shadow-sm" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25",
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "d-flex align-items-center justify-content-between",
+                      },
+                      [
+                        _vm._m(44),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary btn-sm",
+                            attrs: { type: "button" },
+                            on: { click: _vm.addMember },
+                          },
+                          [
+                            _c("i", { staticClass: "ri-user-add-line me-1" }),
+                            _vm._v(" Add Member\n              "),
+                          ]
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-body" },
+                  [
+                    _c("div", { staticClass: "row mb-4" }, [
+                      _c("div", { staticClass: "col-12" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "alert alert-info border-0 bg-info bg-opacity-10",
+                          },
+                          [
+                            _c("div", { staticClass: "d-flex" }, [
+                              _c("i", {
+                                staticClass:
+                                  "ri-information-line text-info fs-5 me-2",
+                              }),
+                              _vm._v(" "),
+                              _c("div", [
+                                _c("p", { staticClass: "mb-1 fw-medium" }, [
+                                  _vm._v(
+                                    "\n                        Total Members: " +
+                                      _vm._s(_vm.formData.members.length + 1) +
+                                      "\n                      "
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("small", { staticClass: "text-muted" }, [
+                                  _vm._v(
+                                    "Head of family +\n                        " +
+                                      _vm._s(_vm.formData.members.length) +
+                                      " additional\n                        member(s)"
+                                  ),
+                                ]),
+                              ]),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.formData.members, function (member, index) {
+                      return _c(
+                        "div",
+                        { key: index, staticClass: "member-card mb-4" },
+                        [
+                          _c("div", { staticClass: "card border" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "card-header bg-light-subtle border-bottom d-flex justify-content-between align-items-center",
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "d-flex align-items-center" },
+                                  [
+                                    _vm._m(45, true),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "ms-3" }, [
+                                      _c("h6", { staticClass: "mb-0" }, [
+                                        _vm._v("Member " + _vm._s(index + 1)),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "small",
+                                        { staticClass: "text-muted" },
+                                        [_vm._v("Complete all required fields")]
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "d-flex gap-2" }, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-sm btn-outline-secondary",
+                                      attrs: {
+                                        type: "button",
+                                        title: "Duplicate",
+                                      },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.duplicateMember(index)
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "ri-file-copy-line",
+                                      }),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.formData.members.length > 1
+                                    ? _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "btn btn-sm btn-outline-danger",
+                                          attrs: {
+                                            type: "button",
+                                            title: "Remove",
+                                          },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.removeMember(index)
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "ri-delete-bin-line",
+                                          }),
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                ]),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "card-body" }, [
+                              _vm._m(46, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row g-3 mb-4" }, [
+                                _c("div", { staticClass: "col-md-3" }, [
+                                  _vm._m(47, true),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: member.firstName,
+                                        expression: "member.firstName",
+                                      },
+                                    ],
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid":
+                                        _vm.fieldErrors[
+                                          "members." + index + ".firstName"
+                                        ],
+                                    },
+                                    attrs: {
+                                      type: "text",
+                                      placeholder: "Enter first name",
+                                    },
+                                    domProps: { value: member.firstName },
+                                    on: {
+                                      blur: function ($event) {
+                                        return _vm.validateMemberField(
+                                          index,
+                                          "firstName"
+                                        )
+                                      },
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          member,
+                                          "firstName",
+                                          $event.target.value
+                                        )
+                                      },
+                                    },
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            _vm.fieldErrors[
+                                              "members." + index + ".firstName"
+                                            ]
+                                          ) +
+                                          "\n                      "
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-2" }, [
+                                  _c(
+                                    "label",
+                                    { staticClass: "form-label fw-medium" },
+                                    [_vm._v("M.I.")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: member.middleInitial,
+                                        expression: "member.middleInitial",
+                                      },
+                                    ],
+                                    staticClass: "form-control text-uppercase",
+                                    attrs: {
+                                      type: "text",
+                                      maxlength: "1",
+                                      placeholder: "M",
+                                    },
+                                    domProps: { value: member.middleInitial },
+                                    on: {
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          member,
+                                          "middleInitial",
+                                          $event.target.value
+                                        )
+                                      },
+                                    },
+                                  }),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-3" }, [
+                                  _vm._m(48, true),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: member.lastName,
+                                        expression: "member.lastName",
+                                      },
+                                    ],
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid":
+                                        _vm.fieldErrors[
+                                          "members." + index + ".lastName"
+                                        ],
+                                    },
+                                    attrs: {
+                                      type: "text",
+                                      placeholder: "Enter last name",
+                                    },
+                                    domProps: { value: member.lastName },
+                                    on: {
+                                      blur: function ($event) {
+                                        return _vm.validateMemberField(
+                                          index,
+                                          "lastName"
+                                        )
+                                      },
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          member,
+                                          "lastName",
+                                          $event.target.value
+                                        )
+                                      },
+                                    },
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            _vm.fieldErrors[
+                                              "members." + index + ".lastName"
+                                            ]
+                                          ) +
+                                          "\n                      "
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-2" }, [
+                                  _c(
+                                    "label",
+                                    { staticClass: "form-label fw-medium" },
+                                    [_vm._v("Extension")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: member.extension,
+                                          expression: "member.extension",
+                                        },
+                                      ],
+                                      staticClass: "form-select",
+                                      on: {
+                                        change: function ($event) {
+                                          var $$selectedVal =
+                                            Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function (o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function (o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                          _vm.$set(
+                                            member,
+                                            "extension",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c("option", { attrs: { value: "" } }, [
+                                        _vm._v("None"),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "Jr" } }, [
+                                        _vm._v("Jr"),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "Sr" } }, [
+                                        _vm._v("Sr"),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "II" } }, [
+                                        _vm._v("II"),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "III" } },
+                                        [_vm._v("III")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "IV" } }, [
+                                        _vm._v("IV"),
+                                      ]),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-2" }, [
+                                  _vm._m(49, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: member.relationship,
+                                          expression: "member.relationship",
+                                        },
+                                      ],
+                                      staticClass: "form-select",
+                                      class: {
+                                        "is-invalid":
+                                          _vm.fieldErrors[
+                                            "members." + index + ".relationship"
+                                          ],
+                                      },
+                                      on: {
+                                        blur: function ($event) {
+                                          return _vm.validateMemberField(
+                                            index,
+                                            "relationship"
+                                          )
+                                        },
+                                        change: function ($event) {
+                                          var $$selectedVal =
+                                            Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function (o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function (o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                          _vm.$set(
+                                            member,
+                                            "relationship",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "", disabled: "" } },
+                                        [_vm._v("Select")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Spouse" } },
+                                        [_vm._v("Spouse")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Child" } },
+                                        [_vm._v("Child")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Parent" } },
+                                        [_vm._v("Parent")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Sibling" } },
+                                        [_vm._v("Sibling")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Grandchild" } },
+                                        [_vm._v("Grandchild")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Relative" } },
+                                        [_vm._v("Relative")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Non-relative" } },
+                                        [_vm._v("Non-relative")]
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            _vm.fieldErrors[
+                                              "members." +
+                                                index +
+                                                ".relationship"
+                                            ]
+                                          ) +
+                                          "\n                      "
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(50, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row g-3 mb-4" }, [
+                                _c("div", { staticClass: "col-md-3" }, [
+                                  _vm._m(51, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn-group w-100",
+                                      attrs: { role: "group" },
+                                    },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.sex,
+                                            expression: "member.sex",
+                                          },
+                                        ],
+                                        staticClass: "btn-check",
+                                        attrs: {
+                                          type: "radio",
+                                          value: "Male",
+                                          id: "genderMale_" + index,
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(member.sex, "Male"),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              member,
+                                              "sex",
+                                              "Male"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "btn btn-outline-primary",
+                                          attrs: { for: "genderMale_" + index },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "ri-men-line me-2",
+                                          }),
+                                          _vm._v(
+                                            "Male\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.sex,
+                                            expression: "member.sex",
+                                          },
+                                        ],
+                                        staticClass: "btn-check",
+                                        attrs: {
+                                          type: "radio",
+                                          value: "Female",
+                                          id: "genderFemale_" + index,
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(member.sex, "Female"),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              member,
+                                              "sex",
+                                              "Female"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "btn btn-outline-primary",
+                                          attrs: {
+                                            for: "genderFemale_" + index,
+                                          },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "ri-women-line me-2",
+                                          }),
+                                          _vm._v(
+                                            "Female\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.fieldErrors["members." + index + ".sex"]
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "text-danger small d-flex align-items-center mt-1",
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ri-error-warning-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "\n                        " +
+                                              _vm._s(
+                                                _vm.fieldErrors[
+                                                  "members." + index + ".sex"
+                                                ]
+                                              ) +
+                                              "\n                      "
+                                          ),
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-3" }, [
+                                  _vm._m(52, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "input-group has-validation",
+                                    },
+                                    [
+                                      _vm._m(53, true),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.birthdate,
+                                            expression: "member.birthdate",
+                                          },
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid":
+                                            _vm.fieldErrors[
+                                              "members." + index + ".birthdate"
+                                            ],
+                                        },
+                                        attrs: { type: "date" },
+                                        domProps: { value: member.birthdate },
+                                        on: {
+                                          blur: function ($event) {
+                                            return _vm.validateMemberField(
+                                              index,
+                                              "birthdate"
+                                            )
+                                          },
+                                          input: function ($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              member,
+                                              "birthdate",
+                                              $event.target.value
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "invalid-feedback d-flex align-items-center",
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ri-error-warning-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "\n                          " +
+                                              _vm._s(
+                                                _vm.fieldErrors[
+                                                  "members." +
+                                                    index +
+                                                    ".birthdate"
+                                                ]
+                                              ) +
+                                              "\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  member.birthdate
+                                    ? _c("div", { staticClass: "form-text" }, [
+                                        _vm._v(
+                                          "\n                        Age: " +
+                                            _vm._s(
+                                              _vm.calculateAge(member.birthdate)
+                                            ) +
+                                            " years old\n                      "
+                                        ),
+                                      ])
+                                    : _vm._e(),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-3" }, [
+                                  _c(
+                                    "label",
+                                    { staticClass: "form-label fw-medium" },
+                                    [
+                                      _vm._v(
+                                        "\n                        Civil Status\n                      "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: member.civilStatus,
+                                          expression: "member.civilStatus",
+                                        },
+                                      ],
+                                      staticClass: "form-select",
+                                      on: {
+                                        change: function ($event) {
+                                          var $$selectedVal =
+                                            Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function (o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function (o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                          _vm.$set(
+                                            member,
+                                            "civilStatus",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c("option", { attrs: { value: "" } }, [
+                                        _vm._v("Select Status"),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Single" } },
+                                        [_vm._v("Single")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Married" } },
+                                        [_vm._v("Married")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Widowed" } },
+                                        [_vm._v("Widowed")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Separated" } },
+                                        [_vm._v("Separated")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Divorced" } },
+                                        [_vm._v("Divorced")]
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(54, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row g-3 mb-4" }, [
+                                _c("div", { staticClass: "col-md-4" }, [
+                                  _vm._m(55, true),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "input-group" }, [
+                                    _vm._m(56, true),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: member.nationalId,
+                                          expression: "member.nationalId",
+                                        },
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid":
+                                          _vm.fieldErrors[
+                                            "members." + index + ".nationalId"
+                                          ],
+                                      },
+                                      attrs: {
+                                        type: "text",
+                                        placeholder: "1234-5678-9012-3456",
+                                      },
+                                      domProps: { value: member.nationalId },
+                                      on: {
+                                        blur: function ($event) {
+                                          return _vm.validateMemberField(
+                                            index,
+                                            "nationalId"
+                                          )
+                                        },
+                                        input: function ($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            member,
+                                            "nationalId",
+                                            $event.target.value
+                                          )
+                                        },
+                                      },
+                                    }),
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm.fieldErrors[
+                                    "members." + index + ".nationalId"
+                                  ]
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "invalid-feedback d-block",
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                        " +
+                                              _vm._s(
+                                                _vm.fieldErrors[
+                                                  "members." +
+                                                    index +
+                                                    ".nationalId"
+                                                ]
+                                              ) +
+                                              "\n                      "
+                                          ),
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-text" }, [
+                                    _vm._v(
+                                      "\n                        Optional: Philippine Identification System Number\n                      "
+                                    ),
+                                  ]),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-4" }, [
+                                  _vm._m(57, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn-group w-100",
+                                      attrs: { role: "group" },
+                                    },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.voterStatus,
+                                            expression: "member.voterStatus",
+                                          },
+                                        ],
+                                        staticClass: "btn-check",
+                                        attrs: {
+                                          type: "radio",
+                                          value: "Voter",
+                                          id: "voterYes_" + index,
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            member.voterStatus,
+                                            "Voter"
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              member,
+                                              "voterStatus",
+                                              "Voter"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "btn btn-outline-success",
+                                          attrs: { for: "voterYes_" + index },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "ri-check-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "Voter\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.voterStatus,
+                                            expression: "member.voterStatus",
+                                          },
+                                        ],
+                                        staticClass: "btn-check",
+                                        attrs: {
+                                          type: "radio",
+                                          value: "Non-Voter",
+                                          id: "voterNo_" + index,
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            member.voterStatus,
+                                            "Non-Voter"
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              member,
+                                              "voterStatus",
+                                              "Non-Voter"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "btn btn-outline-secondary",
+                                          attrs: { for: "voterNo_" + index },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "ri-close-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "Non-Voter\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-4" }, [
+                                  _vm._m(58, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn-group w-100",
+                                      attrs: { role: "group" },
+                                    },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.is4psMember,
+                                            expression: "member.is4psMember",
+                                          },
+                                        ],
+                                        staticClass: "btn-check",
+                                        attrs: {
+                                          type: "radio",
+                                          value: "Yes",
+                                          id: "4psYes_" + index,
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            member.is4psMember,
+                                            "Yes"
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              member,
+                                              "is4psMember",
+                                              "Yes"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "btn btn-outline-info",
+                                          attrs: { for: "4psYes_" + index },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ri-check-double-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "Yes\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.is4psMember,
+                                            expression: "member.is4psMember",
+                                          },
+                                        ],
+                                        staticClass: "btn-check",
+                                        attrs: {
+                                          type: "radio",
+                                          value: "No",
+                                          id: "4psNo_" + index,
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            member.is4psMember,
+                                            "No"
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              member,
+                                              "is4psMember",
+                                              "No"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "btn btn-outline-secondary",
+                                          attrs: { for: "4psNo_" + index },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "ri-close-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "No\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-text" }, [
+                                    _vm._v(
+                                      "\n                        Pantawid Pamilyang Pilipino Program\n                      "
+                                    ),
+                                  ]),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-4" }, [
+                                  _vm._m(59, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn-group w-100",
+                                      attrs: { role: "group" },
+                                    },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.isDeceased,
+                                            expression: "member.isDeceased",
+                                          },
+                                        ],
+                                        staticClass: "btn-check",
+                                        attrs: {
+                                          type: "radio",
+                                          value: "No",
+                                          id: "alive_" + index,
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            member.isDeceased,
+                                            "No"
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              member,
+                                              "isDeceased",
+                                              "No"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "btn btn-outline-success",
+                                          attrs: { for: "alive_" + index },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "ri-heart-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "Alive\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.isDeceased,
+                                            expression: "member.isDeceased",
+                                          },
+                                        ],
+                                        staticClass: "btn-check",
+                                        attrs: {
+                                          type: "radio",
+                                          value: "Yes",
+                                          id: "deceased_" + index,
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            member.isDeceased,
+                                            "Yes"
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              member,
+                                              "isDeceased",
+                                              "Yes"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "btn btn-outline-dark",
+                                          attrs: { for: "deceased_" + index },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ri-rest-time-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "Deceased\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(60, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row g-3 mb-4" }, [
+                                _c("div", { staticClass: "col-md-4" }, [
+                                  _vm._m(61, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: member.highestEducation,
+                                          expression: "member.highestEducation",
+                                        },
+                                      ],
+                                      staticClass: "form-select",
+                                      on: {
+                                        change: function ($event) {
+                                          var $$selectedVal =
+                                            Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function (o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function (o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                          _vm.$set(
+                                            member,
+                                            "highestEducation",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c("option", { attrs: { value: "" } }, [
+                                        _vm._v("Select Education Level"),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: {
+                                            value: "No Formal Education",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                          No Formal Education\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "Elementary Level" },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                          Elementary Level\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: {
+                                            value: "Elementary Graduate",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                          Elementary Graduate\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "High School Level" },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                          High School Level\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: {
+                                            value: "High School Graduate",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                          High School Graduate\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "College Level" } },
+                                        [_vm._v("College Level")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "College Graduate" },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                          College Graduate\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: {
+                                            value: "Vocational/Tech Course",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                          Vocational/Tech Course\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Post Graduate" } },
+                                        [_vm._v("Post Graduate")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Master's Degree" } },
+                                        [
+                                          _vm._v(
+                                            "\n                          Master's Degree\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "Doctorate Degree" },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                          Doctorate Degree\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-4" }, [
+                                  _vm._m(62, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: member.educationalStatus,
+                                          expression:
+                                            "member.educationalStatus",
+                                        },
+                                      ],
+                                      staticClass: "form-select",
+                                      on: {
+                                        change: function ($event) {
+                                          var $$selectedVal =
+                                            Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function (o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function (o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                          _vm.$set(
+                                            member,
+                                            "educationalStatus",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c("option", { attrs: { value: "" } }, [
+                                        _vm._v("Select Status"),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: {
+                                            value: "Not Attending School",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                          Not Attending School\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: {
+                                            value: "Currently Enrolled",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                          Currently Enrolled\n                        "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Graduated" } },
+                                        [_vm._v("Graduated")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Dropout" } },
+                                        [_vm._v("Dropout")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "ALS Graduate" } },
+                                        [_vm._v("ALS Graduate")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "ALS Student" } },
+                                        [_vm._v("ALS Student")]
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-4" }, [
+                                  _vm._m(63, true),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row g-2" }, [
+                                    _c("div", { staticClass: "col-6" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.employmentStatus,
+                                            expression:
+                                              "member.employmentStatus",
+                                          },
+                                        ],
+                                        staticClass: "btn-check",
+                                        attrs: {
+                                          type: "radio",
+                                          value: "Employed",
+                                          id: "employed_" + index,
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            member.employmentStatus,
+                                            "Employed"
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              member,
+                                              "employmentStatus",
+                                              "Employed"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "btn btn-outline-success w-100",
+                                          attrs: { for: "employed_" + index },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ri-briefcase-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "Employed\n                          "
+                                          ),
+                                        ]
+                                      ),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-6" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.employmentStatus,
+                                            expression:
+                                              "member.employmentStatus",
+                                          },
+                                        ],
+                                        staticClass: "btn-check",
+                                        attrs: {
+                                          type: "radio",
+                                          value: "Unemployed",
+                                          id: "unemployed_" + index,
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            member.employmentStatus,
+                                            "Unemployed"
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              member,
+                                              "employmentStatus",
+                                              "Unemployed"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "btn btn-outline-warning w-100",
+                                          attrs: { for: "unemployed_" + index },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ri-user-unfollow-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "Unemployed\n                          "
+                                          ),
+                                        ]
+                                      ),
+                                    ]),
+                                  ]),
+                                ]),
+                                _vm._v(" "),
+                                member.employmentStatus === "Employed"
+                                  ? _c("div", { staticClass: "col-md-4" }, [
+                                      _vm._m(64, true),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.occupation,
+                                            expression: "member.occupation",
+                                          },
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          placeholder:
+                                            "e.g., Teacher, Engineer, Farmer",
+                                        },
+                                        domProps: { value: member.occupation },
+                                        on: {
+                                          input: function ($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              member,
+                                              "occupation",
+                                              $event.target.value
+                                            )
+                                          },
+                                        },
+                                      }),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                member.employmentStatus === "Employed"
+                                  ? _c("div", { staticClass: "col-md-4" }, [
+                                      _vm._m(65, true),
+                                      _vm._v(" "),
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: member.natureOfEmployment,
+                                              expression:
+                                                "member.natureOfEmployment",
+                                            },
+                                          ],
+                                          staticClass: "form-select",
+                                          on: {
+                                            change: function ($event) {
+                                              var $$selectedVal =
+                                                Array.prototype.filter
+                                                  .call(
+                                                    $event.target.options,
+                                                    function (o) {
+                                                      return o.selected
+                                                    }
+                                                  )
+                                                  .map(function (o) {
+                                                    var val =
+                                                      "_value" in o
+                                                        ? o._value
+                                                        : o.value
+                                                    return val
+                                                  })
+                                              _vm.$set(
+                                                member,
+                                                "natureOfEmployment",
+                                                $event.target.multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              )
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "" } },
+                                            [_vm._v("Select Nature")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            {
+                                              attrs: {
+                                                value: "Government Employee",
+                                              },
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                          Government Employee\n                        "
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            {
+                                              attrs: {
+                                                value: "Private Employee",
+                                              },
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                          Private Employee\n                        "
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            {
+                                              attrs: { value: "Self-Employed" },
+                                            },
+                                            [_vm._v("Self-Employed")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "OFW" } },
+                                            [
+                                              _vm._v(
+                                                "\n                          Overseas Filipino Worker (OFW)\n                        "
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "Casual" } },
+                                            [_vm._v("Casual Worker")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "Seasonal" } },
+                                            [_vm._v("Seasonal Worker")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "Contractual" } },
+                                            [
+                                              _vm._v(
+                                                "\n                          Contractual Worker\n                        "
+                                              ),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                member.employmentStatus === "Employed"
+                                  ? _c("div", { staticClass: "col-md-4" }, [
+                                      _vm._m(66, true),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "input-group" },
+                                        [
+                                          _vm._m(67, true),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: member.monthlyIncome,
+                                                expression:
+                                                  "member.monthlyIncome",
+                                              },
+                                            ],
+                                            staticClass: "form-control",
+                                            class: {
+                                              "is-invalid":
+                                                _vm.fieldErrors[
+                                                  "members." +
+                                                    index +
+                                                    ".monthlyIncome"
+                                                ],
+                                            },
+                                            attrs: {
+                                              type: "number",
+                                              placeholder: "0.00",
+                                              min: "0",
+                                              step: "0.01",
+                                            },
+                                            domProps: {
+                                              value: member.monthlyIncome,
+                                            },
+                                            on: {
+                                              blur: function ($event) {
+                                                return _vm.validateMemberField(
+                                                  index,
+                                                  "monthlyIncome"
+                                                )
+                                              },
+                                              input: function ($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  member,
+                                                  "monthlyIncome",
+                                                  $event.target.value
+                                                )
+                                              },
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            { staticClass: "input-group-text" },
+                                            [_vm._v("PHP")]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm.fieldErrors[
+                                            "members." +
+                                              index +
+                                              ".monthlyIncome"
+                                          ]
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "invalid-feedback d-block",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(
+                                                        _vm.fieldErrors[
+                                                          "members." +
+                                                            index +
+                                                            ".monthlyIncome"
+                                                        ]
+                                                      ) +
+                                                      "\n                        "
+                                                  ),
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "form-text" }, [
+                                        _vm._v("Average monthly income"),
+                                      ]),
+                                    ])
+                                  : _vm._e(),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(68, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row g-3" }, [
+                                _c("div", { staticClass: "col-md-6" }, [
+                                  _c(
+                                    "label",
+                                    { staticClass: "form-label fw-medium" },
+                                    [
+                                      _vm._v(
+                                        "\n                        Contact Numberss\n                      "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "input-group has-validation",
+                                    },
+                                    [
+                                      _vm._m(69, true),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: member.contactNumber,
+                                            expression: "member.contactNumber",
+                                          },
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid":
+                                            _vm.fieldErrors[
+                                              "members." +
+                                                index +
+                                                ".contactNumber"
+                                            ],
+                                        },
+                                        attrs: {
+                                          type: "tel",
+                                          placeholder: "09123456789",
+                                        },
+                                        domProps: {
+                                          value: member.contactNumber,
+                                        },
+                                        on: {
+                                          input: [
+                                            function ($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                member,
+                                                "contactNumber",
+                                                $event.target.value
+                                              )
+                                            },
+                                            function (e) {
+                                              return _vm.formatMemberPhoneNumber(
+                                                e,
+                                                index
+                                              )
+                                            },
+                                          ],
+                                          blur: function ($event) {
+                                            return _vm.validateMemberField(
+                                              index,
+                                              "contactNumber"
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _vm.fieldErrors[
+                                        "members." + index + ".contactNumber"
+                                      ]
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "invalid-feedback d-block",
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                          " +
+                                                  _vm._s(
+                                                    _vm.fieldErrors[
+                                                      "members." +
+                                                        index +
+                                                        ".contactNumber"
+                                                    ]
+                                                  ) +
+                                                  "\n                        "
+                                              ),
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-text" }, [
+                                    _vm._v("Format: 09XX-XXX-XXXX"),
+                                  ]),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-md-6" }, [
+                                  _c(
+                                    "label",
+                                    { staticClass: "form-label fw-medium" },
+                                    [
+                                      _vm._v(
+                                        "\n                        Email Address (Optional)\n                      "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "input-group" }, [
+                                    _vm._m(70, true),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: member.email,
+                                          expression: "member.email",
+                                        },
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        type: "email",
+                                        placeholder: "name@example.com",
+                                      },
+                                      domProps: { value: member.email },
+                                      on: {
+                                        input: function ($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            member,
+                                            "email",
+                                            $event.target.value
+                                          )
+                                        },
+                                      },
+                                    }),
+                                  ]),
+                                ]),
+                              ]),
+                            ]),
+                          ]),
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _vm.formData.members.length === 0
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "text-center py-5 border rounded bg-light-subtle",
+                          },
+                          [
+                            _vm._m(71),
+                            _vm._v(" "),
+                            _c(
+                              "h6",
+                              { staticClass: "fw-medium text-muted mb-2" },
+                              [
+                                _vm._v(
+                                  "\n                No family members added yet\n              "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "text-muted mb-4" }, [
+                              _vm._v(
+                                '\n                Click "Add Member" to start adding family members\n              '
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "button" },
+                                on: { click: _vm.addMember },
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "ri-user-add-line me-2",
+                                }),
+                                _vm._v(" Add First Member\n              "),
+                              ]
+                            ),
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "card-footer bg-transparent border-0 pt-4 pb-0",
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "d-flex justify-content-between align-items-center",
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-secondary px-4",
+                                attrs: { type: "button" },
+                                on: { click: _vm.prevStep },
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "ri-arrow-left-line me-2",
+                                }),
+                                _vm._v(" Previous\n                "),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "d-flex gap-2" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-primary px-4",
+                                  attrs: { type: "button" },
+                                  on: { click: _vm.saveAsDraft },
+                                },
+                                [
+                                  _c("i", { staticClass: "ri-save-line me-2" }),
+                                  _vm._v(" Save Draft\n                  "),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary px-4",
+                                  attrs: { type: "button" },
+                                  on: { click: _vm.nextStep },
+                                },
+                                [
+                                  _vm._v("\n                    Next "),
+                                  _c("i", {
+                                    staticClass: "ri-arrow-right-line ms-2",
+                                  }),
+                                ]
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]
+                    ),
+                  ],
+                  2
+                ),
+              ]),
+            ]),
+          ]),
+        ])
+      : _vm.currentStep === 4
+      ? _c("div", [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card border-0 shadow-sm" }, [
+                _vm._m(72),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-6 mb-4" }, [
+                      _vm._m(73),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.householdInfo.type,
+                              expression: "formData.householdInfo.type",
+                            },
+                          ],
+                          staticClass: "form-select",
+                          class: {
+                            "is-invalid": _vm.fieldErrors["householdInfo.type"],
+                          },
+                          on: {
+                            blur: function ($event) {
+                              return _vm.validateField("householdInfo.type")
+                            },
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.formData.householdInfo,
+                                "type",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                          },
+                        },
+                        [
+                          _c("option", { attrs: { value: "", disabled: "" } }, [
+                            _vm._v("Select Type"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Single Family" } }, [
+                            _vm._v("Single Family"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Nuclear Family" } }, [
+                            _vm._v("Nuclear Family"),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            { attrs: { value: "Extended Family" } },
+                            [_vm._v("Extended Family")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            { attrs: { value: "Multi-generational" } },
+                            [
+                              _vm._v(
+                                "\n                    Multi-generational\n                  "
+                              ),
+                            ]
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "invalid-feedback d-flex align-items-center",
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "ri-error-warning-line me-1",
+                          }),
+                          _vm._v(
+                            "\n                  " +
+                              _vm._s(_vm.fieldErrors["householdInfo.type"]) +
+                              "\n                "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6 mb-4" }, [
+                      _vm._m(74),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "row g-2" },
+                        _vm._l(_vm.housingStatuses, function (status) {
+                          return _c(
+                            "div",
+                            { key: status.value, staticClass: "col-4" },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.formData.householdInfo.housingStatus,
+                                    expression:
+                                      "formData.householdInfo.housingStatus",
+                                  },
+                                ],
+                                staticClass: "btn-check",
+                                attrs: {
+                                  type: "radio",
+                                  id: "status" + status.value,
+                                },
+                                domProps: {
+                                  value: status.value,
+                                  checked: _vm._q(
+                                    _vm.formData.householdInfo.housingStatus,
+                                    status.value
+                                  ),
+                                },
+                                on: {
+                                  change: function ($event) {
+                                    return _vm.$set(
+                                      _vm.formData.householdInfo,
+                                      "housingStatus",
+                                      status.value
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "btn btn-outline-primary w-100",
+                                  attrs: { for: "status" + status.value },
+                                },
+                                [
+                                  _c("i", { class: status.icon + " me-1" }),
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(status.label) +
+                                      "\n                    "
+                                  ),
+                                ]
+                              ),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _vm.fieldErrors["householdInfo.housingStatus"]
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "text-danger small d-flex align-items-center mt-1",
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-error-warning-line me-1",
+                              }),
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(
+                                    _vm.fieldErrors[
+                                      "householdInfo.housingStatus"
+                                    ]
+                                  ) +
+                                  "\n                "
+                              ),
+                            ]
+                          )
+                        : _vm._e(),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 mb-4" }, [
+                      _vm._m(75),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row g-3" }, [
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _vm._m(76),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "input-group" }, [
+                            _vm._m(77),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    _vm.formData.householdInfo.numberOfRooms,
+                                  expression:
+                                    "formData.householdInfo.numberOfRooms",
+                                },
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid":
+                                  _vm.fieldErrors[
+                                    "householdInfo.numberOfRooms"
+                                  ],
+                              },
+                              attrs: { type: "number", min: "1", max: "20" },
+                              domProps: {
+                                value: _vm.formData.householdInfo.numberOfRooms,
+                              },
+                              on: {
+                                blur: function ($event) {
+                                  return _vm.validateField(
+                                    "householdInfo.numberOfRooms"
+                                  )
+                                },
+                                input: function ($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.formData.householdInfo,
+                                    "numberOfRooms",
+                                    $event.target.value
+                                  )
+                                },
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                      " +
+                                _vm._s(
+                                  _vm.fieldErrors["householdInfo.numberOfRooms"]
+                                ) +
+                                "\n                    "
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _vm._m(78),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formData.householdInfo.waterSource,
+                                  expression:
+                                    "formData.householdInfo.waterSource",
+                                },
+                              ],
+                              staticClass: "form-select",
+                              class: {
+                                "is-invalid":
+                                  _vm.fieldErrors["householdInfo.waterSource"],
+                              },
+                              on: {
+                                blur: function ($event) {
+                                  return _vm.validateField(
+                                    "householdInfo.waterSource"
+                                  )
+                                },
+                                change: function ($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function (o) {
+                                      return o.selected
+                                    })
+                                    .map(function (o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formData.householdInfo,
+                                    "waterSource",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c(
+                                "option",
+                                { attrs: { value: "", disabled: "" } },
+                                [_vm._v("Select Source")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Level I (Point Source)" } },
+                                [
+                                  _vm._v(
+                                    "\n                        Level I (Point Source)\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                {
+                                  attrs: {
+                                    value: "Level II (Communal Faucet)",
+                                  },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        Level II (Communal Faucet)\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                {
+                                  attrs: {
+                                    value: "Level III (Waterworks System)",
+                                  },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        Level III (Waterworks System)\n                      "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Deep Well" } }, [
+                                _vm._v("Deep Well"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Bottled Water" } },
+                                [_vm._v("Bottled Water")]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                      " +
+                                _vm._s(
+                                  _vm.fieldErrors["householdInfo.waterSource"]
+                                ) +
+                                "\n                    "
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _vm._m(79),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    _vm.formData.householdInfo.toiletFacility,
+                                  expression:
+                                    "formData.householdInfo.toiletFacility",
+                                },
+                              ],
+                              staticClass: "form-select",
+                              class: {
+                                "is-invalid":
+                                  _vm.fieldErrors[
+                                    "householdInfo.toiletFacility"
+                                  ],
+                              },
+                              on: {
+                                blur: function ($event) {
+                                  return _vm.validateField(
+                                    "householdInfo.toiletFacility"
+                                  )
+                                },
+                                change: function ($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function (o) {
+                                      return o.selected
+                                    })
+                                    .map(function (o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.formData.householdInfo,
+                                    "toiletFacility",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c(
+                                "option",
+                                { attrs: { value: "", disabled: "" } },
+                                [_vm._v("Select Facility")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Water-sealed" } },
+                                [_vm._v("Water-sealed")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "Antipolo type" } },
+                                [_vm._v("Antipolo type")]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Closed Pit" } }, [
+                                _vm._v("Closed Pit"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Open Pit" } }, [
+                                _vm._v("Open Pit"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "None" } }, [
+                                _vm._v("None"),
+                              ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                      " +
+                                _vm._s(
+                                  _vm.fieldErrors[
+                                    "householdInfo.toiletFacility"
+                                  ]
+                                ) +
+                                "\n                    "
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 mb-4" }, [
+                      _vm._m(80),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row g-3" }, [
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", { staticClass: "card h-100 border" }, [
+                            _c(
+                              "div",
+                              { staticClass: "card-body text-center" },
+                              [
+                                _c("i", {
+                                  staticClass:
+                                    "ri-flashlight-line display-6 text-warning mb-3",
+                                }),
+                                _vm._v(" "),
+                                _c("h6", { staticClass: "fw-semibold" }, [
+                                  _vm._v("Electricity"),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "btn-group w-100 mt-2",
+                                    attrs: { role: "group" },
+                                  },
+                                  [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value:
+                                            _vm.formData.householdInfo
+                                              .hasElectricity,
+                                          expression:
+                                            "formData.householdInfo.hasElectricity",
+                                        },
+                                      ],
+                                      staticClass: "btn-check",
+                                      attrs: {
+                                        type: "radio",
+                                        value: "true",
+                                        id: "hasElectricity",
+                                      },
+                                      domProps: {
+                                        checked: _vm._q(
+                                          _vm.formData.householdInfo
+                                            .hasElectricity,
+                                          "true"
+                                        ),
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          return _vm.$set(
+                                            _vm.formData.householdInfo,
+                                            "hasElectricity",
+                                            "true"
+                                          )
+                                        },
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "btn btn-outline-success",
+                                        attrs: { for: "hasElectricity" },
+                                      },
+                                      [_vm._v("Yes")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value:
+                                            _vm.formData.householdInfo
+                                              .hasElectricity,
+                                          expression:
+                                            "formData.householdInfo.hasElectricity",
+                                        },
+                                      ],
+                                      staticClass: "btn-check",
+                                      attrs: {
+                                        type: "radio",
+                                        value: "false",
+                                        id: "noElectricity",
+                                      },
+                                      domProps: {
+                                        checked: _vm._q(
+                                          _vm.formData.householdInfo
+                                            .hasElectricity,
+                                          "false"
+                                        ),
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          return _vm.$set(
+                                            _vm.formData.householdInfo,
+                                            "hasElectricity",
+                                            "false"
+                                          )
+                                        },
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "btn btn-outline-danger",
+                                        attrs: { for: "noElectricity" },
+                                      },
+                                      [_vm._v("No")]
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", { staticClass: "card h-100 border" }, [
+                            _c(
+                              "div",
+                              { staticClass: "card-body text-center" },
+                              [
+                                _c("i", {
+                                  staticClass:
+                                    "ri-wifi-line display-6 text-info mb-3",
+                                }),
+                                _vm._v(" "),
+                                _c("h6", { staticClass: "fw-semibold" }, [
+                                  _vm._v("Internet Connection"),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "btn-group w-100 mt-2",
+                                    attrs: { role: "group" },
+                                  },
+                                  [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value:
+                                            _vm.formData.householdInfo
+                                              .hasInternet,
+                                          expression:
+                                            "formData.householdInfo.hasInternet",
+                                        },
+                                      ],
+                                      staticClass: "btn-check",
+                                      attrs: {
+                                        type: "radio",
+                                        value: "true",
+                                        id: "hasInternet",
+                                      },
+                                      domProps: {
+                                        checked: _vm._q(
+                                          _vm.formData.householdInfo
+                                            .hasInternet,
+                                          "true"
+                                        ),
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          return _vm.$set(
+                                            _vm.formData.householdInfo,
+                                            "hasInternet",
+                                            "true"
+                                          )
+                                        },
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "btn btn-outline-success",
+                                        attrs: { for: "hasInternet" },
+                                      },
+                                      [_vm._v("Yes")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value:
+                                            _vm.formData.householdInfo
+                                              .hasInternet,
+                                          expression:
+                                            "formData.householdInfo.hasInternet",
+                                        },
+                                      ],
+                                      staticClass: "btn-check",
+                                      attrs: {
+                                        type: "radio",
+                                        value: "false",
+                                        id: "noInternet",
+                                      },
+                                      domProps: {
+                                        checked: _vm._q(
+                                          _vm.formData.householdInfo
+                                            .hasInternet,
+                                          "false"
+                                        ),
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          return _vm.$set(
+                                            _vm.formData.householdInfo,
+                                            "hasInternet",
+                                            "false"
+                                          )
+                                        },
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "btn btn-outline-danger",
+                                        attrs: { for: "noInternet" },
+                                      },
+                                      [_vm._v("No")]
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", { staticClass: "card h-100 border" }, [
+                            _c(
+                              "div",
+                              { staticClass: "card-body text-center" },
+                              [
+                                _c("i", {
+                                  staticClass:
+                                    "ri-gas-station-line display-6 text-danger mb-3",
+                                }),
+                                _vm._v(" "),
+                                _c("h6", { staticClass: "fw-semibold" }, [
+                                  _vm._v("Cooking Fuel"),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value:
+                                          _vm.formData.householdInfo
+                                            .cookingFuel,
+                                        expression:
+                                          "formData.householdInfo.cookingFuel",
+                                      },
+                                    ],
+                                    staticClass: "form-select mt-2",
+                                    on: {
+                                      change: function ($event) {
+                                        var $$selectedVal =
+                                          Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function (o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function (o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                        _vm.$set(
+                                          _vm.formData.householdInfo,
+                                          "cookingFuel",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "" } }, [
+                                      _vm._v("Select Fuel"),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "LPG" } }, [
+                                      _vm._v("LPG"),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "Electric" } },
+                                      [_vm._v("Electric")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "Charcoal" } },
+                                      [_vm._v("Charcoal")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "Wood" } }, [
+                                      _vm._v("Wood"),
+                                    ]),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _vm._m(81),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.formData.householdInfo.notes,
+                            expression: "formData.householdInfo.notes",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          rows: "4",
+                          placeholder:
+                            "Any additional information about the household...",
+                        },
+                        domProps: { value: _vm.formData.householdInfo.notes },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.formData.householdInfo,
+                              "notes",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-text" }, [
+                        _vm._v(
+                          "\n                  Optional: You may add any relevant information about your\n                  household\n                "
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "card-footer bg-transparent border-0 pt-4 pb-0",
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex justify-content-between align-items-center",
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-secondary px-4",
+                              attrs: { type: "button" },
+                              on: { click: _vm.prevStep },
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-arrow-left-line me-2",
+                              }),
+                              _vm._v(" Previous\n                "),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "d-flex gap-2" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-primary px-4",
+                                attrs: { type: "button" },
+                                on: { click: _vm.saveAsDraft },
+                              },
+                              [
+                                _c("i", { staticClass: "ri-save-line me-2" }),
+                                _vm._v(" Save Draft\n                  "),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary px-4",
+                                attrs: { type: "button" },
+                                on: { click: _vm.nextStep },
+                              },
+                              [
+                                _vm._v("\n                    Next "),
+                                _c("i", {
+                                  staticClass: "ri-arrow-right-line ms-2",
+                                }),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ])
+      : _vm.currentStep === 5
+      ? _c("div", [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card border-0 shadow-sm" }, [
+                _vm._m(82),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row g-4" }, [
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "card border h-100" }, [
+                        _vm._m(83),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "d-flex align-items-start mb-3" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "ri-community-line text-muted me-3 mt-1",
+                              }),
+                              _vm._v(" "),
+                              _c("div", [
+                                _vm._m(84),
+                                _vm._v(" "),
+                                _c(
+                                  "p",
+                                  { staticClass: "text-primary fw-medium" },
+                                  [
+                                    _vm._v(
+                                      "\n                          " +
+                                        _vm._s(
+                                          _vm.formData.address.purok ||
+                                            "Not provided"
+                                        ) +
+                                        "\n                        "
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "d-flex align-items-start" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "ri-roadster-line text-muted me-3 mt-1",
+                              }),
+                              _vm._v(" "),
+                              _c("div", [
+                                _vm._m(85),
+                                _vm._v(" "),
+                                _c(
+                                  "p",
+                                  { staticClass: "text-primary fw-medium" },
+                                  [
+                                    _vm._v(
+                                      "\n                          " +
+                                        _vm._s(
+                                          _vm.formData.address.street ||
+                                            "Not provided"
+                                        ) +
+                                        "\n                        "
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "card border h-100" }, [
+                        _vm._m(86),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "d-flex align-items-center mb-3" },
+                            [
+                              _vm._m(87),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "ms-3" }, [
+                                _c("h6", { staticClass: "mb-0 fw-semibold" }, [
+                                  _vm._v(
+                                    "\n                          " +
+                                      _vm._s(
+                                        _vm.formatName(
+                                          _vm.formData.headOfFamily
+                                        )
+                                      ) +
+                                      "\n                        "
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("small", { staticClass: "text-muted" }, [
+                                  _vm._v(
+                                    _vm._s(_vm.formData.headOfFamily.sex) +
+                                      " •\n                          " +
+                                      _vm._s(
+                                        _vm.calculateAge(
+                                          _vm.formData.headOfFamily.birthdate
+                                        )
+                                      ) +
+                                      "\n                          years old"
+                                  ),
+                                ]),
+                              ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6" }, [
+                              _c(
+                                "small",
+                                { staticClass: "text-muted d-block" },
+                                [_vm._v("Contact")]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "fw-medium" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.formData.headOfFamily.contactNumber ||
+                                      "Not provided"
+                                  )
+                                ),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6" }, [
+                              _c(
+                                "small",
+                                { staticClass: "text-muted d-block" },
+                                [_vm._v("Birthdate")]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "fw-medium" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.formatDate(
+                                      _vm.formData.headOfFamily.birthdate
+                                    )
+                                  )
+                                ),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6" }, [
+                              _c(
+                                "small",
+                                { staticClass: "text-muted d-block" },
+                                [_vm._v("Employment")]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "fw-medium" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.formData.headOfFamily
+                                      .employmentStatus || "Not specified"
+                                  )
+                                ),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6" }, [
+                              _c(
+                                "small",
+                                { staticClass: "text-muted d-block" },
+                                [_vm._v("4Ps Member")]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "fw-medium" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.formData.headOfFamily.is4psMember ||
+                                      "No"
+                                  )
+                                ),
+                              ]),
+                            ]),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("div", { staticClass: "card border" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "card-header bg-light-subtle border-bottom d-flex justify-content-between align-items-center",
+                          },
+                          [
+                            _c("h6", { staticClass: "mb-0 fw-semibold" }, [
+                              _c("i", {
+                                staticClass: "ri-group-line text-primary me-2",
+                              }),
+                              _vm._v(
+                                "Family\n                      Members\n                      "
+                              ),
+                              _c(
+                                "span",
+                                { staticClass: "badge bg-primary ms-2" },
+                                [_vm._v(_vm._s(_vm.formData.members.length))]
+                              ),
+                            ]),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("div", { staticClass: "table-responsive" }, [
+                            _c(
+                              "table",
+                              { staticClass: "table table-hover mb-0" },
+                              [
+                                _vm._m(88),
+                                _vm._v(" "),
+                                _c(
+                                  "tbody",
+                                  [
+                                    _c("tr", { staticClass: "table-primary" }, [
+                                      _vm._m(89),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.formatName(
+                                              _vm.formData.headOfFamily
+                                            )
+                                          )
+                                        ),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
+                                          _vm._s(_vm.formData.headOfFamily.sex)
+                                        ),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
+                                          "\n                              " +
+                                            _vm._s(
+                                              _vm.calculateAge(
+                                                _vm.formData.headOfFamily
+                                                  .birthdate
+                                              )
+                                            ) +
+                                            "\n                            "
+                                        ),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [_vm._v("Head")]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
+                                          "\n                              " +
+                                            _vm._s(
+                                              _vm.formData.headOfFamily
+                                                .occupation || "Not specified"
+                                            ) +
+                                            "\n                            "
+                                        ),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm._l(
+                                      _vm.formData.members,
+                                      function (member, index) {
+                                        return _c("tr", { key: index }, [
+                                          _c("td", [_vm._v(_vm._s(index + 1))]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(_vm.formatName(member))
+                                            ),
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(_vm._s(member.sex)),
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.calculateAge(
+                                                  member.birthdate
+                                                )
+                                              )
+                                            ),
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(_vm._s(member.relationship)),
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              "\n                              " +
+                                                _vm._s(
+                                                  member.occupation ||
+                                                    "Not specified"
+                                                ) +
+                                                "\n                            "
+                                            ),
+                                          ]),
+                                        ])
+                                      }
+                                    ),
+                                  ],
+                                  2
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("div", { staticClass: "card border" }, [
+                        _vm._m(90),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("div", { staticClass: "row g-3" }, [
+                            _c("div", { staticClass: "col-md-3" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "border rounded p-3 text-center h-100",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass:
+                                      "ri-home-4-line text-primary fs-4 mb-2",
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "mb-1 fw-medium" }, [
+                                    _vm._v("Type"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    { staticClass: "text-primary mb-0" },
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(
+                                            _vm.formData.householdInfo.type ||
+                                              "Not specified"
+                                          ) +
+                                          "\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-3" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "border rounded p-3 text-center h-100",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass:
+                                      "ri-door-line text-primary fs-4 mb-2",
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "mb-1 fw-medium" }, [
+                                    _vm._v("Rooms"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    { staticClass: "text-primary mb-0" },
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(
+                                            _vm.formData.householdInfo
+                                              .numberOfRooms || "Not specified"
+                                          ) +
+                                          "\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-3" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "border rounded p-3 text-center h-100",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass:
+                                      "ri-drop-line text-primary fs-4 mb-2",
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "mb-1 fw-medium" }, [
+                                    _vm._v("Water Source"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    { staticClass: "text-primary mb-0" },
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(
+                                            _vm.formData.householdInfo
+                                              .waterSource || "Not specified"
+                                          ) +
+                                          "\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-3" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "border rounded p-3 text-center h-100",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass:
+                                      "ri-flashlight-line text-primary fs-4 mb-2",
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "mb-1 fw-medium" }, [
+                                    _vm._v("Electricity"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    { staticClass: "text-primary mb-0" },
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(
+                                            _vm.formData.householdInfo
+                                              .hasElectricity === "true"
+                                              ? "Yes"
+                                              : "No"
+                                          ) +
+                                          "\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "alert alert-warning border-0 bg-warning bg-opacity-10",
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "d-flex align-items-center" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "ri-alarm-warning-line fs-4 text-warning me-3",
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "flex-grow-1" }, [
+                                _c("h6", { staticClass: "fw-semibold mb-1" }, [
+                                  _vm._v("Final Confirmation"),
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "mb-2" }, [
+                                  _vm._v(
+                                    "\n                        Please review all information carefully. Once\n                        submitted, changes will require administrator\n                        approval.\n                      "
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "form-check" }, [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.acceptTerms,
+                                        expression: "acceptTerms",
+                                      },
+                                    ],
+                                    staticClass: "form-check-input",
+                                    attrs: {
+                                      type: "checkbox",
+                                      id: "acceptTerms",
+                                    },
+                                    domProps: {
+                                      checked: Array.isArray(_vm.acceptTerms)
+                                        ? _vm._i(_vm.acceptTerms, null) > -1
+                                        : _vm.acceptTerms,
+                                    },
+                                    on: {
+                                      change: function ($event) {
+                                        var $$a = _vm.acceptTerms,
+                                          $$el = $event.target,
+                                          $$c = $$el.checked ? true : false
+                                        if (Array.isArray($$a)) {
+                                          var $$v = null,
+                                            $$i = _vm._i($$a, $$v)
+                                          if ($$el.checked) {
+                                            $$i < 0 &&
+                                              (_vm.acceptTerms = $$a.concat([
+                                                $$v,
+                                              ]))
+                                          } else {
+                                            $$i > -1 &&
+                                              (_vm.acceptTerms = $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1)))
+                                          }
+                                        } else {
+                                          _vm.acceptTerms = $$c
+                                        }
+                                      },
+                                    },
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "form-check-label",
+                                      attrs: { for: "acceptTerms" },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                          I certify that all information provided is true and\n                          accurate to the best of my knowledge.\n                        "
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                              ]),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "card-footer bg-transparent border-0 pt-4 pb-0",
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex justify-content-between align-items-center",
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-secondary px-4",
+                              attrs: { type: "button" },
+                              on: { click: _vm.prevStep },
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-arrow-left-line me-2",
+                              }),
+                              _vm._v(" Previous\n                "),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "d-flex gap-2" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-primary px-4",
+                                attrs: { type: "button" },
+                                on: { click: _vm.saveAsDraft },
+                              },
+                              [
+                                _c("i", { staticClass: "ri-save-line me-2" }),
+                                _vm._v(" Save Draft\n                  "),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success px-4",
+                                attrs: {
+                                  type: "button",
+                                  disabled: !_vm.acceptTerms,
+                                },
+                                on: { click: _vm.submitForm },
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "ri-check-double-line me-2",
+                                }),
+                                _vm._v(
+                                  " Submit\n                    Registration\n                  "
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.showSuccessModal
+      ? _c(
+          "div",
+          {
+            staticClass: "modal fade show",
+            staticStyle: { display: "block", background: "rgba(0, 0, 0, 0.5)" },
+          },
+          [
+            _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+              _c("div", { staticClass: "modal-content border-0 shadow-lg" }, [
+                _c("div", { staticClass: "modal-body text-center p-5" }, [
+                  _vm._m(91),
+                  _vm._v(" "),
+                  _c("h4", { staticClass: "fw-semibold mb-3 text-success" }, [
+                    _vm._v(
+                      "\n            Registration Successful!\n          "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-muted mb-4" }, [
+                    _vm._v(
+                      "\n            Your household registration has been submitted successfully. You\n            will receive a confirmation email within 24 hours.\n          "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "alert alert-info bg-info bg-opacity-10 text-start",
+                    },
+                    [
+                      _c("div", { staticClass: "d-flex" }, [
+                        _c("i", {
+                          staticClass: "ri-information-line text-info me-2",
+                        }),
+                        _vm._v(" "),
+                        _c("small", [
+                          _vm._v("Reference ID:\n                "),
+                          _c("strong", { staticClass: "text-primary" }, [
+                            _vm._v(_vm._s(_vm.referenceId)),
+                          ]),
+                        ]),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex justify-content-center gap-3 mt-4" },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-primary",
+                          attrs: { type: "button" },
+                          on: { click: _vm.printConfirmation },
+                        },
+                        [
+                          _c("i", { staticClass: "ri-printer-line me-2" }),
+                          _vm._v(" Print\n            "),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "button" },
+                          on: { click: _vm.resetForm },
+                        },
+                        [
+                          _c("i", { staticClass: "ri-add-line me-2" }),
+                          _vm._v(" New Registration\n            "),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]
+        )
+      : _vm._e(),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25",
+      },
+      [
+        _c("div", { staticClass: "d-flex align-items-center" }, [
+          _c("div", { staticClass: "step-header-icon" }, [
+            _c("i", { staticClass: "ri-map-pin-line text-primary fs-5" }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "ms-3" }, [
+            _c("h6", { staticClass: "mb-0 fw-semibold text-primary" }, [
+              _vm._v(
+                "\n                  Address Information\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "text-muted" }, [
+              _vm._v("Enter your household address details"),
+            ]),
+          ]),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-map-pin-line text-primary me-2" }),
+        _vm._v("\n                  Purok "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      { staticClass: "input-group-text bg-light-subtle border-end-0" },
+      [_c("i", { staticClass: "ri-community-line text-primary" })]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-road-map-line text-primary me-2" }),
+        _vm._v("\n                  Street Name "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      { staticClass: "input-group-text bg-light-subtle border-end-0" },
+      [_c("i", { staticClass: "ri-roadster-line text-primary" })]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "card bg-light-subtle border-0" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "d-flex align-items-center" }, [
+            _c("i", {
+              staticClass: "ri-building-2-line text-primary me-3 fs-4",
+            }),
+            _vm._v(" "),
+            _c("div", [
+              _c("p", { staticClass: "mb-0 fw-medium" }, [
+                _vm._v(
+                  "\n                          Barangay:\n                          "
+                ),
+                _c("span", { staticClass: "text-primary" }, [
+                  _vm._v("San Roque"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "mb-0" }, [
+                _vm._v(
+                  "\n                          Municipality:\n                          "
+                ),
+                _c("span", { staticClass: "fw-medium" }, [
+                  _vm._v("Sample Municipality"),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-gps-line text-primary me-2" }),
+        _vm._v(
+          "\n                    GPS Coordinates (Optional)\n                  "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      { staticClass: "input-group-text bg-light-subtle border-end-0" },
+      [_c("i", { staticClass: "ri-map-2-line text-primary" })]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25",
+      },
+      [
+        _c("div", { staticClass: "d-flex align-items-center" }, [
+          _c("div", { staticClass: "step-header-icon" }, [
+            _c("i", { staticClass: "ri-user-line text-primary fs-5" }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "ms-3" }, [
+            _c("h6", { staticClass: "mb-0 fw-semibold text-primary" }, [
+              _vm._v("Head of Family"),
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "text-muted" }, [
+              _vm._v("Information about the household head"),
+            ]),
+          ]),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-id-card-line text-primary me-2" }),
+      _vm._v("Personal\n                  Information\n                "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                      First Name "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                      Last Name "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-user-heart-line text-primary me-2" }),
+      _vm._v("Demographics\n                "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium d-block" }, [
+      _vm._v("\n                      Sex "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "btn btn-outline-primary", attrs: { for: "genderMale" } },
+      [
+        _c("i", { staticClass: "ri-men-line me-2" }),
+        _vm._v("Male\n                      "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "btn btn-outline-primary",
+        attrs: { for: "genderFemale" },
+      },
+      [
+        _c("i", { staticClass: "ri-women-line me-2" }),
+        _vm._v("Female\n                      "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                      Birthdate "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-calendar-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-fingerprint-line text-primary me-2" }),
+      _vm._v("Identification & Status\n                "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-id-card-line text-primary me-2" }),
+        _vm._v(
+          "\n                      National ID / PhilSys Number\n                    "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-fingerprint-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-vote-line text-primary me-2" }),
+        _vm._v("\n                      Voter Status\n                    "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "btn btn-outline-success", attrs: { for: "voterYes" } },
+      [
+        _c("i", { staticClass: "ri-check-line me-1" }),
+        _vm._v("Voter\n                      "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "btn btn-outline-secondary", attrs: { for: "voterNo" } },
+      [
+        _c("i", { staticClass: "ri-close-line me-1" }),
+        _vm._v("Non-Voter\n                      "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-group-line text-primary me-2" }),
+        _vm._v(
+          "\n                      4Ps Member Status\n                    "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "btn btn-outline-info", attrs: { for: "4psYes" } },
+      [
+        _c("i", { staticClass: "ri-check-double-line me-1" }),
+        _vm._v("Yes\n                      "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "btn btn-outline-secondary", attrs: { for: "4psNo" } },
+      [
+        _c("i", { staticClass: "ri-close-line me-1" }),
+        _vm._v("No\n                      "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-heart-line text-primary me-2" }),
+        _vm._v("\n                      Living Status\n                    "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "btn btn-outline-success", attrs: { for: "alive" } },
+      [
+        _c("i", { staticClass: "ri-heart-line me-1" }),
+        _vm._v("Alive\n                      "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "btn btn-outline-dark", attrs: { for: "deceased" } },
+      [
+        _c("i", { staticClass: "ri-rest-time-line me-1" }),
+        _vm._v("Deceased\n                      "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-graduation-cap-line text-primary me-2" }),
+      _vm._v("Education & Employment\n                "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-award-line text-primary me-2" }),
+        _vm._v(
+          "\n                      Highest Educational Attainment\n                    "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-book-line text-primary me-2" }),
+        _vm._v(
+          "\n                      Educational Status\n                    "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-briefcase-line text-primary me-2" }),
+        _vm._v(
+          "\n                      Employment Status\n                      "
+        ),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "btn btn-outline-success w-100",
+        attrs: { for: "employed" },
+      },
+      [
+        _c("i", { staticClass: "ri-briefcase-line me-1" }),
+        _vm._v("Employed\n                        "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "btn btn-outline-warning w-100",
+        attrs: { for: "unemployed" },
+      },
+      [
+        _c("i", { staticClass: "ri-user-unfollow-line me-1" }),
+        _vm._v("Unemployed\n                        "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-suitcase-line text-primary me-2" }),
+        _vm._v(
+          "\n                      Occupation / Job Title\n                    "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-building-line text-primary me-2" }),
+        _vm._v(
+          "\n                      Nature of Employment\n                    "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", {
+          staticClass: "ri-money-dollar-circle-line text-primary me-2",
+        }),
+        _vm._v(
+          "\n                      Monthly Income (PHP)\n                    "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-money-dollar-box-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-contacts-line text-primary me-2" }),
+      _vm._v("Contact\n                  Information\n                "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                      Contact Number "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-phone-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-mail-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex align-items-center" }, [
+      _c("div", { staticClass: "step-header-icon" }, [
+        _c("i", { staticClass: "ri-group-line text-primary fs-5" }),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ms-3" }, [
+        _c("h6", { staticClass: "mb-0 fw-semibold text-primary" }, [
+          _vm._v("\n                    Family Members\n                  "),
+        ]),
+        _vm._v(" "),
+        _c("small", { staticClass: "text-muted" }, [
+          _vm._v("Add all household members"),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "member-avatar" }, [
+      _c("i", { staticClass: "ri-user-line" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-id-card-line text-primary me-2" }),
+      _vm._v("Personal\n                    Information\n                  "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                        First Name "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                        Last Name "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                        Relationship "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-user-heart-line text-primary me-2" }),
+      _vm._v("Demographics\n                  "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium d-block" }, [
+      _vm._v("\n                        Sex "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                        Birthdate "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-calendar-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-fingerprint-line text-primary me-2" }),
+      _vm._v("Identification & Status\n                  "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-id-card-line text-primary me-2" }),
+        _vm._v(
+          "\n                        National ID / PhilSys Number\n                      "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-fingerprint-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-vote-line text-primary me-2" }),
+        _vm._v(
+          "\n                        Voter Status\n                      "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-group-line text-primary me-2" }),
+        _vm._v(
+          "\n                        4Ps Member Status\n                      "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-heart-line text-primary me-2" }),
+        _vm._v(
+          "\n                        Living Status\n                      "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-graduation-cap-line text-primary me-2" }),
+      _vm._v("Education & Employment\n                  "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-award-line text-primary me-2" }),
+        _vm._v(
+          "\n                        Highest Educational Attainment\n                      "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-book-line text-primary me-2" }),
+        _vm._v(
+          "\n                        Educational Status\n                      "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-briefcase-line text-primary me-2" }),
+        _vm._v(
+          "\n                        Employment Status\n                      "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-suitcase-line text-primary me-2" }),
+        _vm._v(
+          "\n                        Occupation / Job Title\n                      "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-building-line text-primary me-2" }),
+        _vm._v(
+          "\n                        Nature of Employment\n                      "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", {
+          staticClass: "ri-money-dollar-circle-line text-primary me-2",
+        }),
+        _vm._v(
+          "\n                        Monthly Income (PHP)\n                      "
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-money-dollar-box-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-contacts-line text-primary me-2" }),
+      _vm._v("Contact\n                    Informationsss\n                  "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-phone-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-mail-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-3" }, [
+      _c("i", { staticClass: "ri-group-line display-5 text-muted" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25",
+      },
+      [
+        _c("div", { staticClass: "d-flex align-items-center" }, [
+          _c("div", { staticClass: "step-header-icon" }, [
+            _c("i", { staticClass: "ri-home-line text-primary fs-5" }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "ms-3" }, [
+            _c("h6", { staticClass: "mb-0 fw-semibold text-primary" }, [
+              _vm._v(
+                "\n                  Household Information\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "text-muted" }, [
+              _vm._v("Details about your household facilities"),
+            ]),
+          ]),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-home-4-line text-primary me-2" }),
+        _vm._v("\n                  Household Type "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-key-line text-primary me-2" }),
+        _vm._v("\n                  Housing Status "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-tools-line text-primary me-2" }),
+      _vm._v("Household\n                  Facilities\n                "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                      Number of Rooms "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light-subtle" }, [
+      _c("i", { staticClass: "ri-door-line text-primary" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                      Water Source "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                      Toilet Facility "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
+      _c("i", { staticClass: "ri-flashlight-line text-primary me-2" }),
+      _vm._v("Utilities\n                "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-label fw-medium d-flex align-items-center" },
+      [
+        _c("i", { staticClass: "ri-file-text-line text-primary me-2" }),
+        _vm._v("\n                  Additional Notes\n                "),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25",
+      },
+      [
+        _c("div", { staticClass: "d-flex align-items-center" }, [
+          _c("div", { staticClass: "step-header-icon" }, [
+            _c("i", { staticClass: "ri-eye-line text-primary fs-5" }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "ms-3" }, [
+            _c("h6", { staticClass: "mb-0 fw-semibold text-primary" }, [
+              _vm._v("\n                  Review and Submit\n                "),
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "text-muted" }, [
+              _vm._v("Review all information before submission"),
+            ]),
+          ]),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header bg-light-subtle border-bottom" },
+      [
+        _c("h6", { staticClass: "mb-0 fw-semibold" }, [
+          _c("i", { staticClass: "ri-map-pin-line text-primary me-2" }),
+          _vm._v("Address\n                    "),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "mb-1" }, [_c("strong", [_vm._v("Purok:")])])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "mb-1" }, [_c("strong", [_vm._v("Street:")])])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header bg-light-subtle border-bottom" },
+      [
+        _c("h6", { staticClass: "mb-0 fw-semibold" }, [
+          _c("i", { staticClass: "ri-user-line text-primary me-2" }),
+          _vm._v("Head of\n                      Family\n                    "),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "avatar-circle bg-primary bg-opacity-10 text-primary" },
+      [_c("i", { staticClass: "ri-user-line" })]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Sex")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Age")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Relationship")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Occupation")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("span", { staticClass: "badge bg-primary" }, [_vm._v("Head")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header bg-light-subtle border-bottom" },
+      [
+        _c("h6", { staticClass: "mb-0 fw-semibold" }, [
+          _c("i", { staticClass: "ri-home-line text-primary me-2" }),
+          _vm._v(
+            "Household\n                      Information\n                    "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "success-animation mb-4" }, [
+      _c("div", { staticClass: "checkmark-circle" }, [
+        _c("div", { staticClass: "background" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "checkmark draw" }),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ },
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=template&id=5f7a018c&scoped=true&"
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=template&id=5f7a018c&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _vm._m(3),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-12" }, [
+      _c("div", { staticClass: "card border-0 shadow-sm" }, [
+        _vm._m(4),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body border-bottom" }, [
+          _c("div", { staticClass: "row g-3 align-items-center" }, [
+            _vm._m(5),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "input-group input-group" }, [
+                _vm._m(6),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.searchQuery,
+                      expression: "searchQuery",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Search  Purok..." },
+                  domProps: { value: _vm.searchQuery },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.searchQuery = $event.target.value
+                    },
+                  },
+                }),
+              ]),
+            ]),
+            _vm._v(" "),
+            _vm._m(7),
+          ]),
+        ]),
+        _vm._v(" "),
+        _vm._m(8),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+      _c("div", { staticClass: "card stat-card stat-card-1" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "div",
+            {
+              staticClass: "d-flex align-items-center justify-content-between",
+            },
+            [
+              _c("div", [
+                _c("h6", { staticClass: "card-subtitle text-muted" }, [
+                  _vm._v("Total Households"),
+                ]),
+                _vm._v(" "),
+                _c("h2", { staticClass: "card-title mt-2 mb-0" }, [
+                  _vm._v("1,247"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-3" }, [
+                  _c(
+                    "span",
+                    { staticClass: "badge bg-success-subtle text-success" },
+                    [
+                      _c("i", { staticClass: "ri-arrow-up-line me-1" }),
+                      _vm._v(" 5.2% increase\n              "),
+                    ]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "stat-icon" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "bg-primary bg-opacity-10 rounded-circle p-3",
+                  },
+                  [_c("i", { staticClass: "ri-home-8-line text-primary fs-3" })]
+                ),
+              ]),
+            ]
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+      _c("div", { staticClass: "card stat-card stat-card-2" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "div",
+            {
+              staticClass: "d-flex align-items-center justify-content-between",
+            },
+            [
+              _c("div", [
+                _c("h6", { staticClass: "card-subtitle text-muted" }, [
+                  _vm._v("Active Households"),
+                ]),
+                _vm._v(" "),
+                _c("h2", { staticClass: "card-title mt-2 mb-0" }, [
+                  _vm._v("1,189"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-3" }, [
+                  _c(
+                    "span",
+                    { staticClass: "badge bg-success-subtle text-success" },
+                    [
+                      _c("i", { staticClass: "ri-check-line me-1" }),
+                      _vm._v(" 95.3% active\n              "),
+                    ]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "stat-icon" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "bg-success bg-opacity-10 rounded-circle p-3",
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "ri-checkbox-circle-line text-success fs-3",
+                    }),
+                  ]
+                ),
+              ]),
+            ]
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+      _c("div", { staticClass: "card stat-card stat-card-3" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "div",
+            {
+              staticClass: "d-flex align-items-center justify-content-between",
+            },
+            [
+              _c("div", [
+                _c("h6", { staticClass: "card-subtitle text-muted" }, [
+                  _vm._v("Puroks Covered"),
+                ]),
+                _vm._v(" "),
+                _c("h2", { staticClass: "card-title mt-2 mb-0" }, [
+                  _vm._v("7"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-3" }, [
+                  _c(
+                    "span",
+                    { staticClass: "badge bg-info-subtle text-info" },
+                    [
+                      _c("i", { staticClass: "ri-map-pin-line me-1" }),
+                      _vm._v(" All covered\n              "),
+                    ]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "stat-icon" }, [
+                _c(
+                  "div",
+                  { staticClass: "bg-info bg-opacity-10 rounded-circle p-3" },
+                  [_c("i", { staticClass: "ri-map-pin-line text-info fs-3" })]
+                ),
+              ]),
+            ]
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+      _c("div", { staticClass: "card stat-card stat-card-4" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "div",
+            {
+              staticClass: "d-flex align-items-center justify-content-between",
+            },
+            [
+              _c("div", [
+                _c("h6", { staticClass: "card-subtitle text-muted" }, [
+                  _vm._v("This Month"),
+                ]),
+                _vm._v(" "),
+                _c("h2", { staticClass: "card-title mt-2 mb-0" }, [
+                  _vm._v("23"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-3" }, [
+                  _c(
+                    "span",
+                    { staticClass: "badge bg-warning-subtle text-warning" },
+                    [
+                      _c("i", { staticClass: "ri-add-line me-1" }),
+                      _vm._v(" New households\n              "),
+                    ]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "stat-icon" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "bg-warning bg-opacity-10 rounded-circle p-3",
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "ri-calendar-event-line text-warning fs-3",
+                    }),
+                  ]
+                ),
+              ]),
+            ]
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header bg-primary border-0 bg-gradient-primary" },
+      [
+        _c("div", { staticClass: "row align-items-center" }, [
+          _c("div", { staticClass: "col-md-8" }, [
+            _c("div", { staticClass: "d-flex align-items-center" }, [
+              _c("div", { staticClass: "bg-white rounded-circle p-2 me-3" }, [
+                _c("i", {
+                  staticClass: "ri-government-line text-primary fs-4",
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("h5", { staticClass: "card-title mb-0 text-white" }, [
+                  _c("i", { staticClass: "ri-building-3-line me-2" }),
+                  _vm._v(
+                    "\n                  Household Management\n                "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-white-50 mb-0 small" }, [
+                  _c("i", { staticClass: "ri-list-check me-1" }),
+                  _vm._v(
+                    "\n                  Barangay Information Management System\n                "
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4 text-end" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-light btn-sm",
+                attrs: { href: "/bims/create/member", type: "button" },
+              },
+              [
+                _c("i", { staticClass: "ri-add-circle-line me-1" }),
+                _vm._v("\n              Create Member\n            "),
+              ]
+            ),
+          ]),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c("div", { staticClass: "input-group input-group" }, [
+        _c("span", { staticClass: "input-group-text bg-light" }, [
+          _c("i", { staticClass: "ri-list-settings-line" }),
+        ]),
+        _vm._v(" "),
+        _c("select", { staticClass: "form-control form-control" }, [
+          _c("option", { attrs: { value: "5" } }, [_vm._v("5 per page")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "10" } }, [_vm._v("10 per page")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "20" } }, [_vm._v("20 per page")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "50" } }, [_vm._v("50 per page")]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text bg-light" }, [
+      _c("i", { staticClass: "ri-search-line" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 text-end" }, [
+      _c("button", { staticClass: "btn btn-outline-primary btn-lg me-1" }, [
+        _c("i", { staticClass: "ri-refresh-line" }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body p-0" }, [
+      _c("div", { staticClass: "table-responsive" }, [
+        _c("table", { staticClass: "table table-hover mb-0" }, [
+          _c("thead", { staticClass: "table-light" }, [
+            _c("tr", [
+              _c("th", { staticClass: "ps-4", attrs: { width: "50" } }, [
+                _c("i", { staticClass: "ri-list-check" }),
+              ]),
+              _vm._v(" "),
+              _c("th", [
+                _c("i", { staticClass: "ri-user-line me-1" }),
+                _vm._v("\n                  Househhold #\n                "),
+              ]),
+              _vm._v(" "),
+              _c("th", [
+                _c("i", { staticClass: "ri-user-line me-1" }),
+                _vm._v("\n                  Purok\n                "),
+              ]),
+              _vm._v(" "),
+              _c("th", [
+                _c("i", { staticClass: "ri-user-line me-1" }),
+                _vm._v("\n                  Street\n                "),
+              ]),
+              _vm._v(" "),
+              _c("th", [
+                _c("i", { staticClass: "ri-user-line me-1" }),
+                _vm._v("\n                  Head of Family\n                "),
+              ]),
+              _vm._v(" "),
+              _c("th", [
+                _c("i", { staticClass: "ri-leaf-line me-1" }),
+                _vm._v("\n                  Status\n                "),
+              ]),
+              _vm._v(" "),
+              _c("th", [
+                _c("i", { staticClass: "ri-calendar-line me-1" }),
+                _vm._v("\n                  Date Created\n                "),
+              ]),
+              _vm._v(" "),
+              _c("th", { staticClass: "text-center" }, [
+                _c("i", { staticClass: "ri-settings-3-line me-1" }),
+                _vm._v("\n                  Actions\n                "),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", { staticClass: "ps-4" }),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "d-flex align-items-center" }, [
+                  _c("div"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "d-flex align-items-center" }, [
+                  _c("div"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "d-flex align-items-center" }, [
+                  _c("div"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "d-flex align-items-center" }, [
+                  _c("div"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "d-flex align-items-center" }, [
+                  _c("div"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "d-flex align-items-center" }, [
+                  _c("div"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("td", [_c("div")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "text-center" }, [
+                _c(
+                  "div",
+                  { staticClass: "btn-group", attrs: { role: "group" } },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-outline-primary",
+                        attrs: { title: "Edit" },
+                      },
+                      [_c("i", { staticClass: "ri-edit-line" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-outline-info",
+                        attrs: { title: "View" },
+                      },
+                      [_c("i", { staticClass: "ri-eye-line" })]
+                    ),
+                  ]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c(
+                "td",
+                { staticClass: "text-center py-5", attrs: { colspan: "8" } },
+                [
+                  _c("div", { staticClass: "text-muted" }, [
+                    _c("i", { staticClass: "ri-search-line display-5" }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mt-3 mb-0" }, [
+                      _vm._v("No records found"),
+                    ]),
+                  ]),
+                ]
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
     ])
   },
 ]
@@ -68190,6 +79247,8 @@ Vue.component('Position', (__webpack_require__(/*! ./components/Admin/Position.v
 Vue.component('User', (__webpack_require__(/*! ./components/Admin/User.vue */ "./resources/js/components/Admin/User.vue")["default"]));
 Vue.component('Purok', (__webpack_require__(/*! ./components/Barangay/Purok.vue */ "./resources/js/components/Barangay/Purok.vue")["default"]));
 Vue.component('Barangayofficial', (__webpack_require__(/*! ./components/Barangay/Barangayofficial.vue */ "./resources/js/components/Barangay/Barangayofficial.vue")["default"]));
+Vue.component('Household', (__webpack_require__(/*! ./components/Barangay/Household.vue */ "./resources/js/components/Barangay/Household.vue")["default"]));
+Vue.component('Createmember', (__webpack_require__(/*! ./components/Barangay/Createmember.vue */ "./resources/js/components/Barangay/Createmember.vue")["default"]));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -68766,6 +79825,182 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Barangayofficial_vue_vue_type_template_id_f9582182_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Barangayofficial_vue_vue_type_template_id_f9582182_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Barangayofficial.vue?vue&type=template&id=f9582182&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Barangayofficial.vue?vue&type=template&id=f9582182&scoped=true&");
+
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Createmember.vue"
+/*!***********************************************************!*\
+  !*** ./resources/js/components/Barangay/Createmember.vue ***!
+  \***********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Createmember_vue_vue_type_template_id_6ddc430b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Createmember.vue?vue&type=template&id=6ddc430b&scoped=true& */ "./resources/js/components/Barangay/Createmember.vue?vue&type=template&id=6ddc430b&scoped=true&");
+/* harmony import */ var _Createmember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Createmember.vue?vue&type=script&lang=js& */ "./resources/js/components/Barangay/Createmember.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Createmember_vue_vue_type_style_index_0_id_6ddc430b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css& */ "./resources/js/components/Barangay/Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Createmember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Createmember_vue_vue_type_template_id_6ddc430b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Createmember_vue_vue_type_template_id_6ddc430b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "6ddc430b",
+  null
+  
+)
+
+/* hot reload */
+if (false) // removed by dead control flow
+{ var api; }
+component.options.__file = "resources/js/components/Barangay/Createmember.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Createmember.vue?vue&type=script&lang=js&"
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/Barangay/Createmember.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Createmember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Createmember.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Createmember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css&"
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/Barangay/Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css& ***!
+  \********************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Createmember_vue_vue_type_style_index_0_id_6ddc430b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=style&index=0&id=6ddc430b&scoped=true&lang=css&");
+
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Createmember.vue?vue&type=template&id=6ddc430b&scoped=true&"
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/Barangay/Createmember.vue?vue&type=template&id=6ddc430b&scoped=true& ***!
+  \******************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Createmember_vue_vue_type_template_id_6ddc430b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Createmember_vue_vue_type_template_id_6ddc430b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Createmember_vue_vue_type_template_id_6ddc430b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Createmember.vue?vue&type=template&id=6ddc430b&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Createmember.vue?vue&type=template&id=6ddc430b&scoped=true&");
+
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Household.vue"
+/*!********************************************************!*\
+  !*** ./resources/js/components/Barangay/Household.vue ***!
+  \********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Household_vue_vue_type_template_id_5f7a018c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Household.vue?vue&type=template&id=5f7a018c&scoped=true& */ "./resources/js/components/Barangay/Household.vue?vue&type=template&id=5f7a018c&scoped=true&");
+/* harmony import */ var _Household_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Household.vue?vue&type=script&lang=js& */ "./resources/js/components/Barangay/Household.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Household_vue_vue_type_style_index_0_id_5f7a018c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css& */ "./resources/js/components/Barangay/Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Household_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Household_vue_vue_type_template_id_5f7a018c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Household_vue_vue_type_template_id_5f7a018c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "5f7a018c",
+  null
+  
+)
+
+/* hot reload */
+if (false) // removed by dead control flow
+{ var api; }
+component.options.__file = "resources/js/components/Barangay/Household.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Household.vue?vue&type=script&lang=js&"
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/Barangay/Household.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Household_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Household.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Household_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css&"
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/Barangay/Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Household_vue_vue_type_style_index_0_id_5f7a018c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=style&index=0&id=5f7a018c&scoped=true&lang=css&");
+
+
+/***/ },
+
+/***/ "./resources/js/components/Barangay/Household.vue?vue&type=template&id=5f7a018c&scoped=true&"
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/Barangay/Household.vue?vue&type=template&id=5f7a018c&scoped=true& ***!
+  \***************************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Household_vue_vue_type_template_id_5f7a018c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Household_vue_vue_type_template_id_5f7a018c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Household_vue_vue_type_template_id_5f7a018c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Household.vue?vue&type=template&id=5f7a018c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Barangay/Household.vue?vue&type=template&id=5f7a018c&scoped=true&");
 
 
 /***/ },

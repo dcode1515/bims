@@ -74,7 +74,6 @@
                                      <li class="nav-item">
                                         <a href="" class="nav-link" data-key="t-chat">Household</a>
                                     </li>
-                                    
                                 </ul>
                             </div>
                         </li>
@@ -143,7 +142,7 @@
                                 <a href="apps-chat.html" class="nav-link">Inhabitants</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Household</a>
+                                <a href="{{route('household')}}" class="nav-link">Household</a>
                             </li>
                         </ul>
                     </div>

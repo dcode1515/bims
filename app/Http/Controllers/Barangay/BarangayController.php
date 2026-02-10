@@ -779,6 +779,13 @@ public function getDataBarangayOfficial(Request $request){
               'data' => $officials
           ]);
     }
+     public function household(){
+        return view('barangay.household');
+     }
+
+     public function create_member(){
+        return view('barangay.create_member');
+     }
 
 
 }
