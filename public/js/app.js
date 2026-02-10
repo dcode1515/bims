@@ -11772,6 +11772,142 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "EnhancedHouseholdForm",
@@ -11839,14 +11975,13 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
           contactNumber: "",
           email: "",
           occupation: "",
-          // New fields
           nationalId: "",
           highestEducation: "",
           educationalStatus: "",
           employmentStatus: "",
           is4psMember: "",
           voterStatus: "",
-          isDeceased: "No",
+          isDeceased: "",
           natureOfEmployment: "",
           monthlyIncome: ""
         },
@@ -11870,7 +12005,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
       return "".concat((this.currentStep - 1) / (this.steps.length - 1) * 100, "%");
     },
     totalMembers: function totalMembers() {
-      return this.formData.members.length + 1; // +1 for head of family
+      return this.formData.members.length + 1;
     }
   },
   methods: {
@@ -11905,16 +12040,16 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
       }
     },
     hasStepError: function hasStepError(stepId) {
-      var _this = this;
       switch (stepId) {
         case 1:
           return !this.formData.address.purok || !this.formData.address.street;
         case 2:
-          return !this.formData.headOfFamily.firstName || !this.formData.headOfFamily.lastName || !this.formData.headOfFamily.sex || !this.formData.headOfFamily.birthdate || !this.formData.headOfFamily.contactNumber || !this.formData.headOfFamily.employmentStatus;
+          var head = this.formData.headOfFamily;
+          return !head.firstName || !head.lastName || !head.sex || !head.birthdate || !head.contactNumber || !head.civilStatus || !head.employmentStatus || !head.voterStatus || !head.is4psMember || !head.isDeceased || !head.highestEducation || !head.educationalStatus || head.employmentStatus === "Employed" && (!head.occupation || !head.natureOfEmployment || !head.monthlyIncome);
         case 3:
           if (this.formData.members.length === 0) return false;
           return this.formData.members.some(function (member, index) {
-            var hasErrors = !member.firstName || !member.lastName || !member.sex || !member.birthdate || !member.relationship || _this.fieldErrors["members.".concat(index, ".firstName")] || _this.fieldErrors["members.".concat(index, ".lastName")] || _this.fieldErrors["members.".concat(index, ".sex")] || _this.fieldErrors["members.".concat(index, ".birthdate")] || _this.fieldErrors["members.".concat(index, ".relationship")];
+            var hasErrors = !member.firstName || !member.lastName || !member.sex || !member.birthdate || !member.relationship || !member.civilStatus || !member.voterStatus || !member.is4psMember || !member.isDeceased || !member.highestEducation || !member.educationalStatus || !member.employmentStatus || member.employmentStatus === "Employed" && (!member.occupation || !member.natureOfEmployment || !member.monthlyIncome);
             return hasErrors;
           });
         case 4:
@@ -11956,55 +12091,86 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
       }
     },
     validateStep2: function validateStep2() {
+      var head = this.formData.headOfFamily;
+
       // Validate first name
-      if (!this.formData.headOfFamily.firstName) {
+      if (!head.firstName) {
         this.fieldErrors["headOfFamily.firstName"] = "First name is required";
         this.validationErrors.push("First name is required");
-      } else if (!/^[A-Za-z\s]+$/.test(this.formData.headOfFamily.firstName)) {
-        this.fieldErrors["headOfFamily.firstName"] = "First name can only contain letters";
-        this.validationErrors.push("First name contains invalid characters");
+      } else if (head.firstName.length < 2) {
+        this.fieldErrors["headOfFamily.firstName"] = "First name must be at least 2 characters";
+        this.validationErrors.push("First name must be at least 2 characters");
       }
 
       // Validate last name
-      if (!this.formData.headOfFamily.lastName) {
+      if (!head.lastName) {
         this.fieldErrors["headOfFamily.lastName"] = "Last name is required";
         this.validationErrors.push("Last name is required");
-      } else if (!/^[A-Za-z\s]+$/.test(this.formData.headOfFamily.lastName)) {
-        this.fieldErrors["headOfFamily.lastName"] = "Last name can only contain letters";
-        this.validationErrors.push("Last name contains invalid characters");
+      } else if (head.lastName.length < 2) {
+        this.fieldErrors["headOfFamily.lastName"] = "Last name must be at least 2 characters";
+        this.validationErrors.push("Last name must be at least 2 characters");
+      }
+
+      // Validate middle initial if provided
+      if (head.middleInitial) {
+        if (!this.isValidMiddleInitial(head.middleInitial)) {
+          this.fieldErrors["headOfFamily.middleInitial"] = "Middle initial must be 1-3 letters";
+          this.validationErrors.push("Middle initial must be 1-3 letters");
+        }
+      }
+
+      // Validate extension if provided
+      if (head.extension) {
+        if (!this.isValidExtension(head.extension)) {
+          this.fieldErrors["headOfFamily.extension"] = "Extension must be valid (Jr, Sr, II, III, IV)";
+          this.validationErrors.push("Invalid extension");
+        }
       }
 
       // Validate sex
-      if (!this.formData.headOfFamily.sex) {
+      if (!head.sex) {
         this.fieldErrors["headOfFamily.sex"] = "Please select gender";
         this.validationErrors.push("Gender selection is required");
       }
 
       // Validate birthdate
-      if (!this.formData.headOfFamily.birthdate) {
+      if (!head.birthdate) {
         this.fieldErrors["headOfFamily.birthdate"] = "Birthdate is required";
         this.validationErrors.push("Birthdate is required");
       } else {
-        var birthdate = new Date(this.formData.headOfFamily.birthdate);
+        var birthdate = new Date(head.birthdate);
         var today = new Date();
-        var age = today.getFullYear() - birthdate.getFullYear();
-        if (age < 18) {
-          this.fieldErrors["headOfFamily.birthdate"] = "Head of family must be at least 18 years old";
-          this.validationErrors.push("Head of family must be at least 18 years old");
-        }
-        if (age > 120) {
-          this.fieldErrors["headOfFamily.birthdate"] = "Please enter a valid birthdate";
-          this.validationErrors.push("Please enter a valid birthdate");
+        if (isNaN(birthdate.getTime())) {
+          this.fieldErrors["headOfFamily.birthdate"] = "Invalid date format";
+          this.validationErrors.push("Invalid date format");
+        } else {
+          var age = today.getFullYear() - birthdate.getFullYear();
+          var monthDiff = today.getMonth() - birthdate.getMonth();
+          var dayDiff = today.getDate() - birthdate.getDate();
+          var adjustedAge = monthDiff < 0 || monthDiff === 0 && dayDiff < 0 ? age - 1 : age;
+          if (adjustedAge > 130) {
+            this.fieldErrors["headOfFamily.birthdate"] = "Age cannot exceed 130 years";
+            this.validationErrors.push("Age cannot exceed 130 years");
+          } else if (adjustedAge < 0) {
+            this.fieldErrors["headOfFamily.birthdate"] = "Birthdate cannot be in the future";
+            this.validationErrors.push("Birthdate cannot be in the future");
+          }
         }
       }
 
+      // Validate civil status
+      if (!head.civilStatus) {
+        this.fieldErrors["headOfFamily.civilStatus"] = "Civil status is required";
+        this.validationErrors.push("Civil status is required");
+      }
+
       // Validate contact number
-      if (!this.formData.headOfFamily.contactNumber) {
+      if (!head.contactNumber) {
         this.fieldErrors["headOfFamily.contactNumber"] = "Contact number is required";
         this.validationErrors.push("Contact number is required");
       } else {
         var phoneRegex = /^09\d{9}$/;
-        var cleanNumber = this.formData.headOfFamily.contactNumber.replace(/\D/g, "");
+        var cleanNumber = head.contactNumber.replace(/\D/g, "");
         if (!phoneRegex.test(cleanNumber)) {
           this.fieldErrors["headOfFamily.contactNumber"] = "Please enter a valid Philippine mobile number (09XXXXXXXXX)";
           this.validationErrors.push("Invalid contact number format");
@@ -12012,13 +12178,70 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
       }
 
       // Validate employment status
-      if (!this.formData.headOfFamily.employmentStatus) {
+      if (!head.employmentStatus) {
         this.fieldErrors["headOfFamily.employmentStatus"] = "Employment status is required";
         this.validationErrors.push("Employment status is required");
       }
+
+      // Validate Voter Status
+      if (!head.voterStatus) {
+        this.fieldErrors["headOfFamily.voterStatus"] = "Voter status is required";
+        this.validationErrors.push("Voter status is required");
+      }
+
+      // Validate 4Ps Member Status
+      if (!head.is4psMember) {
+        this.fieldErrors["headOfFamily.is4psMember"] = "4Ps member status is required";
+        this.validationErrors.push("4Ps member status is required");
+      }
+
+      // Validate Living Status
+      if (!head.isDeceased) {
+        this.fieldErrors["headOfFamily.isDeceased"] = "Living status is required";
+        this.validationErrors.push("Living status is required");
+      }
+
+      // Validate Highest Educational Attainment
+      if (!head.highestEducation) {
+        this.fieldErrors["headOfFamily.highestEducation"] = "Highest educational attainment is required";
+        this.validationErrors.push("Highest educational attainment is required");
+      }
+
+      // Validate Educational Status
+      if (!head.educationalStatus) {
+        this.fieldErrors["headOfFamily.educationalStatus"] = "Educational status is required";
+        this.validationErrors.push("Educational status is required");
+      }
+
+      // CONDITIONAL VALIDATIONS FOR EMPLOYED STATUS
+      if (head.employmentStatus === "Employed") {
+        // Validate Occupation
+        if (!head.occupation) {
+          this.fieldErrors["headOfFamily.occupation"] = "Occupation is required when employed";
+          this.validationErrors.push("Occupation is required when employed");
+        }
+
+        // Validate Nature of Employment
+        if (!head.natureOfEmployment) {
+          this.fieldErrors["headOfFamily.natureOfEmployment"] = "Nature of employment is required when employed";
+          this.validationErrors.push("Nature of employment is required when employed");
+        }
+
+        // Validate Monthly Income
+        if (!head.monthlyIncome) {
+          this.fieldErrors["headOfFamily.monthlyIncome"] = "Monthly income is required when employed";
+          this.validationErrors.push("Monthly income is required when employed");
+        } else {
+          var income = parseFloat(head.monthlyIncome);
+          if (isNaN(income) || income < 0) {
+            this.fieldErrors["headOfFamily.monthlyIncome"] = "Monthly income must be a positive number";
+            this.validationErrors.push("Monthly income must be a positive number");
+          }
+        }
+      }
     },
     validateStep3: function validateStep3() {
-      var _this2 = this;
+      var _this = this;
       this.validationErrors = [];
       this.fieldErrors = {};
       this.formData.members.forEach(function (member, index) {
@@ -12026,110 +12249,168 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
         // Validate first name
         if (!member.firstName) {
-          _this2.fieldErrors["members.".concat(index, ".firstName")] = "First name is required";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": First name is required"));
-        } else if (!/^[A-Za-z\sñÑ]+$/.test(member.firstName)) {
-          _this2.fieldErrors["members.".concat(index, ".firstName")] = "First name can only contain letters";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": First name contains invalid characters"));
+          _this.fieldErrors["members.".concat(index, ".firstName")] = "First name is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": First name is required"));
         } else if (member.firstName.length < 2) {
-          _this2.fieldErrors["members.".concat(index, ".firstName")] = "First name must be at least 2 characters";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": First name is too short"));
+          _this.fieldErrors["members.".concat(index, ".firstName")] = "First name must be at least 2 characters";
+          _this.validationErrors.push("Member ".concat(memberNum, ": First name is too short"));
         }
 
         // Validate last name
         if (!member.lastName) {
-          _this2.fieldErrors["members.".concat(index, ".lastName")] = "Last name is required";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": Last name is required"));
-        } else if (!/^[A-Za-z\sñÑ]+$/.test(member.lastName)) {
-          _this2.fieldErrors["members.".concat(index, ".lastName")] = "Last name can only contain letters";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": Last name contains invalid characters"));
+          _this.fieldErrors["members.".concat(index, ".lastName")] = "Last name is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Last name is required"));
         } else if (member.lastName.length < 2) {
-          _this2.fieldErrors["members.".concat(index, ".lastName")] = "Last name must be at least 2 characters";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": Last name is too short"));
+          _this.fieldErrors["members.".concat(index, ".lastName")] = "Last name must be at least 2 characters";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Last name is too short"));
         }
 
-        // Validate middle initial
-        if (member.middleInitial && !/^[A-Z]$/.test(member.middleInitial)) {
-          _this2.fieldErrors["members.".concat(index, ".middleInitial")] = "Must be a single capital letter";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": Middle initial must be a single capital letter"));
+        // Validate middle initial if provided
+        if (member.middleInitial) {
+          if (!_this.isValidMiddleInitial(member.middleInitial)) {
+            _this.fieldErrors["members.".concat(index, ".middleInitial")] = "Middle initial must be 1-3 letters";
+            _this.validationErrors.push("Member ".concat(memberNum, ": Middle initial must be 1-3 letters"));
+          }
+        }
+
+        // Validate extension if provided
+        if (member.extension) {
+          if (!_this.isValidExtension(member.extension)) {
+            _this.fieldErrors["members.".concat(index, ".extension")] = "Extension must be valid (Jr, Sr, II, III, IV)";
+            _this.validationErrors.push("Member ".concat(memberNum, ": Invalid extension"));
+          }
         }
 
         // Validate sex
         if (!member.sex) {
-          _this2.fieldErrors["members.".concat(index, ".sex")] = "Gender is required";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": Gender is required"));
+          _this.fieldErrors["members.".concat(index, ".sex")] = "Gender is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Gender is required"));
         } else if (!["Male", "Female"].includes(member.sex)) {
-          _this2.fieldErrors["members.".concat(index, ".sex")] = "Invalid gender selection";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid gender selection"));
+          _this.fieldErrors["members.".concat(index, ".sex")] = "Invalid gender selection";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Invalid gender selection"));
         }
 
         // Validate birthdate
         if (!member.birthdate) {
-          _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Birthdate is required";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": Birthdate is required"));
+          _this.fieldErrors["members.".concat(index, ".birthdate")] = "Birthdate is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Birthdate is required"));
         } else {
           var birthdate = new Date(member.birthdate);
           var today = new Date();
-
-          // Check if date is valid
           if (isNaN(birthdate.getTime())) {
-            _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Invalid date format";
-            _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid date format"));
+            _this.fieldErrors["members.".concat(index, ".birthdate")] = "Invalid date format";
+            _this.validationErrors.push("Member ".concat(memberNum, ": Invalid date format"));
           } else {
             var age = today.getFullYear() - birthdate.getFullYear();
             var monthDiff = today.getMonth() - birthdate.getMonth();
             var dayDiff = today.getDate() - birthdate.getDate();
             var adjustedAge = monthDiff < 0 || monthDiff === 0 && dayDiff < 0 ? age - 1 : age;
-
-            // Validate age range
-            if (adjustedAge > 120) {
-              _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Age cannot exceed 120 years";
-              _this2.validationErrors.push("Member ".concat(memberNum, ": Age cannot exceed 120 years"));
+            if (adjustedAge > 130) {
+              _this.fieldErrors["members.".concat(index, ".birthdate")] = "Age cannot exceed 130 years";
+              _this.validationErrors.push("Member ".concat(memberNum, ": Age cannot exceed 130 years"));
             } else if (adjustedAge < 0) {
-              _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Birthdate cannot be in the future";
-              _this2.validationErrors.push("Member ".concat(memberNum, ": Birthdate cannot be in the future"));
-            }
-
-            // Additional validations based on relationship
-            if (member.relationship === "Child") {
-              if (adjustedAge > 18) {
-                _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Child must be under 18 years old";
-                _this2.validationErrors.push("Member ".concat(memberNum, ": Child must be under 18 years old"));
-              }
-            }
-            if (member.relationship === "Spouse") {
-              if (adjustedAge < 18) {
-                _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Spouse must be at least 18 years old";
-                _this2.validationErrors.push("Member ".concat(memberNum, ": Spouse must be at least 18 years old"));
-              }
+              _this.fieldErrors["members.".concat(index, ".birthdate")] = "Birthdate cannot be in the future";
+              _this.validationErrors.push("Member ".concat(memberNum, ": Birthdate cannot be in the future"));
             }
           }
+        }
+
+        // Validate civil status
+        if (!member.civilStatus) {
+          _this.fieldErrors["members.".concat(index, ".civilStatus")] = "Civil status is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Civil status is required"));
         }
 
         // Validate relationship
         if (!member.relationship) {
-          _this2.fieldErrors["members.".concat(index, ".relationship")] = "Relationship is required";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": Relationship is required"));
+          _this.fieldErrors["members.".concat(index, ".relationship")] = "Relationship is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Relationship is required"));
         } else if (!["Spouse", "Child", "Parent", "Sibling", "Grandchild", "Relative", "Non-relative"].includes(member.relationship)) {
-          _this2.fieldErrors["members.".concat(index, ".relationship")] = "Invalid relationship";
-          _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid relationship selection"));
+          _this.fieldErrors["members.".concat(index, ".relationship")] = "Invalid relationship";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Invalid relationship selection"));
         }
 
-        // Validate contact number
-        if (member.contactNumber) {
-          var cleanNumber = member.contactNumber.replace(/\D/g, "");
-          if (!/^09\d{9}$/.test(cleanNumber)) {
-            _this2.fieldErrors["members.".concat(index, ".contactNumber")] = "Invalid Philippine mobile number format (09XXXXXXXXX)";
-            _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid contact number format"));
+        // Validate Voter Status
+        if (!member.voterStatus) {
+          _this.fieldErrors["members.".concat(index, ".voterStatus")] = "Voter status is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Voter status is required"));
+        }
+
+        // Validate 4Ps Member Status
+        if (!member.is4psMember) {
+          _this.fieldErrors["members.".concat(index, ".is4psMember")] = "4Ps member status is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": 4Ps member status is required"));
+        }
+
+        // Validate Living Status
+        if (!member.isDeceased) {
+          _this.fieldErrors["members.".concat(index, ".isDeceased")] = "Living status is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Living status is required"));
+        }
+
+        // Validate Highest Educational Attainment
+        if (!member.highestEducation) {
+          _this.fieldErrors["members.".concat(index, ".highestEducation")] = "Highest educational attainment is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Highest educational attainment is required"));
+        }
+
+        // Validate Educational Status
+        if (!member.educationalStatus) {
+          _this.fieldErrors["members.".concat(index, ".educationalStatus")] = "Educational status is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Educational status is required"));
+        }
+
+        // Validate Employment Status
+        if (!member.employmentStatus) {
+          _this.fieldErrors["members.".concat(index, ".employmentStatus")] = "Employment status is required";
+          _this.validationErrors.push("Member ".concat(memberNum, ": Employment status is required"));
+        }
+
+        // CONDITIONAL VALIDATIONS FOR EMPLOYED STATUS
+        if (member.employmentStatus === "Employed") {
+          // Validate Occupation
+          if (!member.occupation) {
+            _this.fieldErrors["members.".concat(index, ".occupation")] = "Occupation is required when employed";
+            _this.validationErrors.push("Member ".concat(memberNum, ": Occupation is required when employed"));
+          }
+
+          // Validate Nature of Employment
+          if (!member.natureOfEmployment) {
+            _this.fieldErrors["members.".concat(index, ".natureOfEmployment")] = "Nature of employment is required when employed";
+            _this.validationErrors.push("Member ".concat(memberNum, ": Nature of employment is required when employed"));
+          }
+
+          // Validate Monthly Income
+          if (!member.monthlyIncome) {
+            _this.fieldErrors["members.".concat(index, ".monthlyIncome")] = "Monthly income is required when employed";
+            _this.validationErrors.push("Member ".concat(memberNum, ": Monthly income is required when employed"));
+          } else {
+            var income = parseFloat(member.monthlyIncome);
+            if (isNaN(income) || income < 0) {
+              _this.fieldErrors["members.".concat(index, ".monthlyIncome")] = "Monthly income must be a positive number";
+              _this.validationErrors.push("Member ".concat(memberNum, ": Monthly income must be a positive number"));
+            } else if (income > 1000000) {
+              _this.fieldErrors["members.".concat(index, ".monthlyIncome")] = "Monthly income cannot exceed ₱1,000,000";
+              _this.validationErrors.push("Member ".concat(memberNum, ": Monthly income cannot exceed \u20B11,000,000"));
+            }
           }
         }
 
-        // Validate email
+        // Validate contact number if provided
+        if (member.contactNumber) {
+          var cleanNumber = member.contactNumber.replace(/\D/g, "");
+          if (!/^09\d{9}$/.test(cleanNumber)) {
+            _this.fieldErrors["members.".concat(index, ".contactNumber")] = "Invalid Philippine mobile number format (09XXXXXXXXX)";
+            _this.validationErrors.push("Member ".concat(memberNum, ": Invalid contact number format"));
+          }
+        }
+
+        // Validate email if provided
         if (member.email) {
           var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailRegex.test(member.email)) {
-            _this2.fieldErrors["members.".concat(index, ".email")] = "Invalid email format";
-            _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid email format"));
+            _this.fieldErrors["members.".concat(index, ".email")] = "Invalid email format";
+            _this.validationErrors.push("Member ".concat(memberNum, ": Invalid email format"));
           }
         }
 
@@ -12137,29 +12418,8 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
         if (member.nationalId) {
           var cleanedId = member.nationalId.replace(/\s|-/g, "");
           if (!/^\d{12,19}$/.test(cleanedId)) {
-            _this2.fieldErrors["members.".concat(index, ".nationalId")] = "National ID must be 12-19 digits";
-            _this2.validationErrors.push("Member ".concat(memberNum, ": National ID must be 12-19 digits"));
-          }
-        }
-
-        // Validate monthly income if provided
-        if (member.monthlyIncome) {
-          var income = parseFloat(member.monthlyIncome);
-          if (isNaN(income) || income < 0) {
-            _this2.fieldErrors["members.".concat(index, ".monthlyIncome")] = "Monthly income must be a positive number";
-            _this2.validationErrors.push("Member ".concat(memberNum, ": Monthly income must be a positive number"));
-          } else if (income > 1000000) {
-            _this2.fieldErrors["members.".concat(index, ".monthlyIncome")] = "Monthly income cannot exceed ₱1,000,000";
-            _this2.validationErrors.push("Member ".concat(memberNum, ": Monthly income cannot exceed \u20B11,000,000"));
-          }
-        }
-
-        // Validate birthdate format on blur
-        if (member.birthdate) {
-          var dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-          if (!dateRegex.test(member.birthdate)) {
-            _this2.fieldErrors["members.".concat(index, ".birthdate")] = "Invalid date format (YYYY-MM-DD)";
-            _this2.validationErrors.push("Member ".concat(memberNum, ": Invalid date format"));
+            _this.fieldErrors["members.".concat(index, ".nationalId")] = "National ID must be 12-19 digits";
+            _this.validationErrors.push("Member ".concat(memberNum, ": National ID must be 12-19 digits"));
           }
         }
       });
@@ -12173,8 +12433,6 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
         for (var j = i + 1; j < members.length; j++) {
           var member1 = members[i];
           var member2 = members[j];
-
-          // Compare key fields
           if (member1.firstName.toLowerCase() === member2.firstName.toLowerCase() && member1.lastName.toLowerCase() === member2.lastName.toLowerCase() && member1.birthdate === member2.birthdate) {
             this.validationErrors.push("Members ".concat(i + 1, " and ").concat(j + 1, " appear to be duplicates"));
             break;
@@ -12212,11 +12470,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
         _fieldPath$split2 = _slicedToArray(_fieldPath$split, 2),
         category = _fieldPath$split2[0],
         field = _fieldPath$split2[1];
-
-      // Clear previous error
       delete this.fieldErrors[fieldPath];
-
-      // Validate based on field
       var value;
       if (category === "headOfFamily") {
         value = this.formData.headOfFamily[field];
@@ -12225,8 +12479,49 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
           case "lastName":
             if (!value) {
               this.fieldErrors[fieldPath] = "This field is required";
-            } else if (!/^[A-Za-z\s]+$/.test(value)) {
-              this.fieldErrors[fieldPath] = "Can only contain letters";
+            } else if (value.length < 2) {
+              this.fieldErrors[fieldPath] = "Must be at least 2 characters";
+            }
+            break;
+          case "middleInitial":
+            if (value && !this.isValidMiddleInitial(value)) {
+              this.fieldErrors[fieldPath] = "Must be 1-3 letters";
+            }
+            break;
+          case "extension":
+            if (value && !this.isValidExtension(value)) {
+              this.fieldErrors[fieldPath] = "Invalid extension";
+            }
+            break;
+          case "sex":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Please select gender";
+            }
+            break;
+          case "birthdate":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Birthdate is required";
+            } else {
+              var birthdate = new Date(value);
+              var today = new Date();
+              if (isNaN(birthdate.getTime())) {
+                this.fieldErrors[fieldPath] = "Invalid date format";
+              } else {
+                var age = today.getFullYear() - birthdate.getFullYear();
+                var monthDiff = today.getMonth() - birthdate.getMonth();
+                var dayDiff = today.getDate() - birthdate.getDate();
+                var adjustedAge = monthDiff < 0 || monthDiff === 0 && dayDiff < 0 ? age - 1 : age;
+                if (adjustedAge > 130) {
+                  this.fieldErrors[fieldPath] = "Age cannot exceed 130 years";
+                } else if (adjustedAge < 0) {
+                  this.fieldErrors[fieldPath] = "Birthdate cannot be in the future";
+                }
+              }
+            }
+            break;
+          case "civilStatus":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Civil status is required";
             }
             break;
           case "contactNumber":
@@ -12239,26 +12534,54 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
               }
             }
             break;
-          case "birthdate":
-            if (!value) {
-              this.fieldErrors[fieldPath] = "Birthdate is required";
-            } else {
-              var birthdate = new Date(value);
-              var today = new Date();
-              var age = today.getFullYear() - birthdate.getFullYear();
-              if (age < 18) {
-                this.fieldErrors[fieldPath] = "Must be at least 18 years old";
-              }
-            }
-            break;
-          case "sex":
-            if (!value) {
-              this.fieldErrors[fieldPath] = "Please select gender";
-            }
-            break;
           case "employmentStatus":
             if (!value) {
               this.fieldErrors[fieldPath] = "Employment status is required";
+            }
+            break;
+          case "voterStatus":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Voter status is required";
+            }
+            break;
+          case "is4psMember":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "4Ps member status is required";
+            }
+            break;
+          case "isDeceased":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Living status is required";
+            }
+            break;
+          case "highestEducation":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Highest educational attainment is required";
+            }
+            break;
+          case "educationalStatus":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Educational status is required";
+            }
+            break;
+          case "occupation":
+            if (this.formData.headOfFamily.employmentStatus === "Employed" && !value) {
+              this.fieldErrors[fieldPath] = "Occupation is required when employed";
+            }
+            break;
+          case "natureOfEmployment":
+            if (this.formData.headOfFamily.employmentStatus === "Employed" && !value) {
+              this.fieldErrors[fieldPath] = "Nature of employment is required when employed";
+            }
+            break;
+          case "monthlyIncome":
+            if (this.formData.headOfFamily.employmentStatus === "Employed" && !value) {
+              this.fieldErrors[fieldPath] = "Monthly income is required when employed";
+            } else if (value && this.formData.headOfFamily.employmentStatus === "Employed") {
+              var income = parseFloat(value);
+              if (isNaN(income) || income < 0) {
+                this.fieldErrors[fieldPath] = "Monthly income must be a positive number";
+              }
             }
             break;
         }
@@ -12302,28 +12625,27 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
     validateMemberField: function validateMemberField(index, field) {
       var member = this.formData.members[index];
       var fieldPath = "members.".concat(index, ".").concat(field);
-
-      // Clear previous error
       delete this.fieldErrors[fieldPath];
-      if (!member[field] && field !== "middleInitial" && field !== "extension" && field !== "contactNumber" && field !== "email" && field !== "nationalId" && field !== "occupation" && field !== "monthlyIncome") {
+      var requiredFields = ["firstName", "lastName", "sex", "birthdate", "civilStatus", "relationship", "voterStatus", "is4psMember", "isDeceased", "highestEducation", "educationalStatus", "employmentStatus"];
+      if (requiredFields.includes(field) && !member[field]) {
         this.fieldErrors[fieldPath] = "This field is required";
         return;
       }
-
-      // Additional validations
       switch (field) {
         case "firstName":
         case "lastName":
-          if (!member[field]) return;
-          if (!/^[A-Za-z\sñÑ]+$/.test(member[field])) {
-            this.fieldErrors[fieldPath] = "Can only contain letters";
-          } else if (member[field].length < 2) {
+          if (member[field] && member[field].length < 2) {
             this.fieldErrors[fieldPath] = "Must be at least 2 characters";
           }
           break;
         case "middleInitial":
-          if (member[field] && !/^[A-Z]$/.test(member[field])) {
-            this.fieldErrors[fieldPath] = "Must be a single capital letter";
+          if (member[field] && !this.isValidMiddleInitial(member[field])) {
+            this.fieldErrors[fieldPath] = "Must be 1-3 letters";
+          }
+          break;
+        case "extension":
+          if (member[field] && !this.isValidExtension(member[field])) {
+            this.fieldErrors[fieldPath] = "Invalid extension";
           }
           break;
         case "sex":
@@ -12342,26 +12664,33 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
             var monthDiff = today.getMonth() - birthdate.getMonth();
             var dayDiff = today.getDate() - birthdate.getDate();
             var adjustedAge = monthDiff < 0 || monthDiff === 0 && dayDiff < 0 ? age - 1 : age;
-            if (adjustedAge > 120) {
-              this.fieldErrors[fieldPath] = "Age cannot exceed 120 years";
+            if (adjustedAge > 130) {
+              this.fieldErrors[fieldPath] = "Age cannot exceed 130 years";
             } else if (adjustedAge < 0) {
               this.fieldErrors[fieldPath] = "Birthdate cannot be in the future";
             }
-
-            // Relationship-specific validations
-            if (member.relationship === "Child" && adjustedAge > 18) {
-              this.fieldErrors[fieldPath] = "Child must be under 18 years old";
-            }
-            if (member.relationship === "Spouse" && adjustedAge < 18) {
-              this.fieldErrors[fieldPath] = "Spouse must be at least 18 years old";
-            }
           }
           break;
-        case "relationship":
-          if (!member[field]) return;
-          var validRelationships = ["Spouse", "Child", "Parent", "Sibling", "Grandchild", "Relative", "Non-relative"];
-          if (!validRelationships.includes(member[field])) {
-            this.fieldErrors[fieldPath] = "Please select a valid relationship";
+        case "occupation":
+          if (member.employmentStatus === "Employed" && !member[field]) {
+            this.fieldErrors[fieldPath] = "Occupation is required when employed";
+          }
+          break;
+        case "natureOfEmployment":
+          if (member.employmentStatus === "Employed" && !member[field]) {
+            this.fieldErrors[fieldPath] = "Nature of employment is required when employed";
+          }
+          break;
+        case "monthlyIncome":
+          if (member.employmentStatus === "Employed" && !member[field]) {
+            this.fieldErrors[fieldPath] = "Monthly income is required when employed";
+          } else if (member[field] && member.employmentStatus === "Employed") {
+            var income = parseFloat(member[field]);
+            if (isNaN(income) || income < 0) {
+              this.fieldErrors[fieldPath] = "Monthly income must be a positive number";
+            } else if (income > 1000000) {
+              this.fieldErrors[fieldPath] = "Monthly income cannot exceed ₱1,000,000";
+            }
           }
           break;
         case "contactNumber":
@@ -12385,16 +12714,14 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
             this.fieldErrors[fieldPath] = "Must be 12-19 digits";
           }
           break;
-        case "monthlyIncome":
-          if (!member[field]) return;
-          var income = parseFloat(member[field]);
-          if (isNaN(income) || income < 0) {
-            this.fieldErrors[fieldPath] = "Must be a positive number";
-          } else if (income > 1000000) {
-            this.fieldErrors[fieldPath] = "Cannot exceed ₱1,000,000";
-          }
-          break;
       }
+    },
+    isValidMiddleInitial: function isValidMiddleInitial(mi) {
+      return /^[A-Za-z]{1,3}$/.test(mi);
+    },
+    isValidExtension: function isValidExtension(ext) {
+      var validExtensions = ["Jr", "Sr", "II", "III", "IV"];
+      return validExtensions.includes(ext);
     },
     addMember: function addMember() {
       this.formData.members.push({
@@ -12409,26 +12736,20 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
         contactNumber: "",
         email: "",
         occupation: "",
-        // New fields matching head of family
         nationalId: "",
         highestEducation: "",
         educationalStatus: "",
         employmentStatus: "",
         is4psMember: "",
         voterStatus: "",
-        isDeceased: "No",
+        isDeceased: "",
         natureOfEmployment: "",
-        monthlyIncome: "",
-        education: "" // Keep this for backward compatibility if needed
+        monthlyIncome: ""
       });
     },
     formatMemberPhoneNumber: function formatMemberPhoneNumber(event, index) {
       var value = event.target.value.replace(/\D/g, "");
-
-      // Limit to 11 digits
       if (value.length > 11) value = value.slice(0, 11);
-
-      // Format: 09XX-XXX-XXXX
       if (value.length > 4) {
         value = value.slice(0, 4) + "-" + value.slice(4);
       }
@@ -12439,13 +12760,12 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
       this.formData.members[index].contactNumber = value;
     },
     removeMember: function removeMember(index) {
-      var _this3 = this;
+      var _this2 = this;
       if (confirm("Are you sure you want to remove this member?")) {
         this.formData.members.splice(index, 1);
-        // Clear errors for removed member
         Object.keys(this.fieldErrors).forEach(function (key) {
           if (key.startsWith("members.".concat(index))) {
-            delete _this3.fieldErrors[key];
+            delete _this2.fieldErrors[key];
           }
         });
       }
@@ -12457,11 +12777,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
     },
     formatPhoneNumber: function formatPhoneNumber(event) {
       var value = event.target.value.replace(/\D/g, "");
-
-      // Limit to 11 digits
       if (value.length > 11) value = value.slice(0, 11);
-
-      // Format: 09XX-XXX-XXXX
       if (value.length > 4) {
         value = value.slice(0, 4) + "-" + value.slice(4);
       }
@@ -12485,7 +12801,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
     formatName: function formatName(person) {
       if (!person.firstName && !person.lastName) return "Not specified";
       var name = "".concat(person.firstName || "");
-      if (person.middleInitial) name += " ".concat(person.middleInitial, ".");
+      if (person.middleInitial) name += " ".concat(person.middleInitial);
       name += " ".concat(person.lastName || "");
       if (person.extension) name += " ".concat(person.extension);
       return name.trim();
@@ -12522,18 +12838,11 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
         return;
       }
       if (this.validateCurrentStep()) {
-        // Generate reference ID
         this.referenceId = this.generateReferenceId();
-
-        // Show success modal
         this.showSuccessModal = true;
-
-        // In real application, send to backend
         console.log("Form submitted:", _objectSpread({
           referenceId: this.referenceId
         }, this.formData));
-
-        // Clear draft
         localStorage.removeItem("householdDraft");
       }
     },
@@ -12560,14 +12869,13 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
           contactNumber: "",
           email: "",
           occupation: "",
-          // New fields
           nationalId: "",
           highestEducation: "",
           educationalStatus: "",
           employmentStatus: "",
           is4psMember: "",
           voterStatus: "",
-          isDeceased: "No",
+          isDeceased: "",
           natureOfEmployment: "",
           monthlyIncome: ""
         },
@@ -18359,7 +18667,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Progress Steps */\n.step-container[data-v-6ddc430b] {\r\n  position: relative;\r\n  z-index: 2;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.step-line[data-v-6ddc430b] {\r\n  height: 3px;\r\n  background-color: #e9ecef;\r\n  z-index: 1;\n}\n.step-line-progress[data-v-6ddc430b] {\r\n  height: 3px;\r\n  background-color: #0d6efd;\r\n  z-index: 1;\r\n  transition: width 0.3s ease;\n}\n.step-circle[data-v-6ddc430b] {\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\r\n  background-color: #e9ecef;\r\n  color: #6c757d;\r\n  font-weight: 600;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  border: 3px solid #e9ecef;\n}\n.step-circle.step-active[data-v-6ddc430b] {\r\n  background-color: #0d6efd;\r\n  color: white;\r\n  border-color: #0d6efd;\r\n  transform: scale(1.1);\r\n  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2);\n}\n.step-circle.step-completed[data-v-6ddc430b] {\r\n  background-color: #198754;\r\n  color: white;\r\n  border-color: #198754;\n}\n.step-circle.step-error[data-v-6ddc430b] {\r\n  border-color: #dc3545;\r\n  background-color: #dc3545;\r\n  color: white;\n}\n.step-icon[data-v-6ddc430b] {\r\n  font-size: 1.25rem;\n}\n.step-number[data-v-6ddc430b] {\r\n  font-size: 1.1rem;\n}\n.step-label[data-v-6ddc430b] {\r\n  font-size: 0.875rem;\r\n  text-align: center;\r\n  min-width: 80px;\n}\r\n\r\n/* Card Header Icons */\n.step-header-icon[data-v-6ddc430b] {\r\n  width: 40px;\r\n  height: 40px;\r\n  background-color: rgba(13, 110, 253, 0.1);\r\n  border-radius: 10px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\r\n\r\n/* Member Cards */\n.member-card[data-v-6ddc430b] {\r\n  position: relative;\n}\n.member-card[data-v-6ddc430b]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  left: -15px;\r\n  top: 50%;\r\n  transform: translateY(-50%);\r\n  width: 10px;\r\n  height: 10px;\r\n  border-radius: 50%;\r\n  background-color: #0d6efd;\r\n  opacity: 0.5;\n}\n.member-avatar[data-v-6ddc430b] {\r\n  width: 40px;\r\n  height: 40px;\r\n  background-color: #e9ecef;\r\n  border-radius: 50%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  color: #6c757d;\n}\r\n\r\n/* Avatar Circle */\n.avatar-circle[data-v-6ddc430b] {\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  font-size: 1.5rem;\n}\r\n\r\n/* Form Validation Styles */\n.is-invalid[data-v-6ddc430b] {\r\n  border-color: #dc3545 !important;\r\n  background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e\") !important;\r\n  background-repeat: no-repeat;\r\n  background-position: right calc(0.375em + 0.1875rem) center;\r\n  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);\n}\n.invalid-feedback[data-v-6ddc430b] {\r\n  display: block;\r\n  font-size: 0.875rem;\n}\r\n\r\n/* Button Group Styles */\n.btn-group .btn-check:checked + .btn[data-v-6ddc430b] {\r\n  background-color: #0d6efd;\r\n  border-color: #0d6efd;\r\n  color: white;\n}\r\n\r\n/* Success Animation */\n.success-animation[data-v-6ddc430b] {\r\n  width: 80px;\r\n  height: 80px;\r\n  margin: 0 auto;\n}\n.checkmark-circle[data-v-6ddc430b] {\r\n  width: 80px;\r\n  height: 80px;\r\n  position: relative;\r\n  display: inline-block;\r\n  vertical-align: top;\n}\n.checkmark-circle .background[data-v-6ddc430b] {\r\n  width: 80px;\r\n  height: 80px;\r\n  border-radius: 50%;\r\n  background: #198754;\r\n  position: absolute;\n}\n.checkmark-circle .checkmark[data-v-6ddc430b] {\r\n  border-radius: 5px;\n}\n.checkmark-circle .checkmark.draw[data-v-6ddc430b]:after {\r\n  animation-delay: 100ms;\r\n  animation-duration: 1s;\r\n  animation-timing-function: ease;\r\n  animation-name: checkmark-data-v-6ddc430b;\r\n  transform: scaleX(-1) rotate(135deg);\r\n  animation-fill-mode: forwards;\n}\n.checkmark-circle .checkmark[data-v-6ddc430b]:after {\r\n  opacity: 1;\r\n  height: 40px;\r\n  width: 20px;\r\n  transform-origin: left top;\r\n  border-right: 6px solid white;\r\n  border-top: 6px solid white;\r\n  content: \"\";\r\n  left: 20px;\r\n  top: 40px;\r\n  position: absolute;\n}\n@keyframes checkmark-data-v-6ddc430b {\n0% {\r\n    height: 0;\r\n    width: 0;\r\n    opacity: 1;\n}\n20% {\r\n    height: 0;\r\n    width: 20px;\r\n    opacity: 1;\n}\n40% {\r\n    height: 40px;\r\n    width: 20px;\r\n    opacity: 1;\n}\n100% {\r\n    height: 40px;\r\n    width: 20px;\r\n    opacity: 1;\n}\n}\r\n\r\n/* Print Styles */\n@media print {\n.modal[data-v-6ddc430b] {\r\n    position: static !important;\r\n    display: block !important;\r\n    background: none !important;\n}\n.modal-dialog[data-v-6ddc430b] {\r\n    max-width: 100% !important;\r\n    margin: 0 !important;\n}\n.btn[data-v-6ddc430b] {\r\n    display: none !important;\n}\n}\r\n\r\n/* Responsive Adjustments */\n@media (max-width: 768px) {\n.step-circle[data-v-6ddc430b] {\r\n    width: 40px;\r\n    height: 40px;\n}\n.step-label[data-v-6ddc430b] {\r\n    font-size: 0.75rem;\r\n    min-width: 60px;\n}\n.btn[data-v-6ddc430b] {\r\n    padding: 0.375rem 0.75rem;\r\n    font-size: 0.875rem;\n}\n}\r\n\r\n/* Custom Scrollbar */\n[data-v-6ddc430b]::-webkit-scrollbar {\r\n  width: 8px;\r\n  height: 8px;\n}\n[data-v-6ddc430b]::-webkit-scrollbar-track {\r\n  background: #f1f1f1;\r\n  border-radius: 4px;\n}\n[data-v-6ddc430b]::-webkit-scrollbar-thumb {\r\n  background: #c1c1c1;\r\n  border-radius: 4px;\n}\n[data-v-6ddc430b]::-webkit-scrollbar-thumb:hover {\r\n  background: #a8a8a8;\n}\r\n\r\n/* Card Footer Styling */\n.card-footer[data-v-6ddc430b] {\r\n  border-top: 1px solid rgba(0, 0, 0, 0.125);\r\n  padding-top: 1.5rem;\r\n  margin-top: 1rem;\n}\n@media (max-width: 576px) {\n.card-footer .d-flex[data-v-6ddc430b] {\r\n    flex-direction: column;\r\n    gap: 1rem;\n}\n.card-footer .d-flex > *[data-v-6ddc430b] {\r\n    width: 100%;\n}\n.card-footer .btn[data-v-6ddc430b] {\r\n    width: 100%;\r\n    justify-content: center;\n}\n}\r\n\r\n/* Additional styling for new sections */\n.conditional-field[data-v-6ddc430b] {\r\n  animation: fadeIn-data-v-6ddc430b 0.3s ease-in;\n}\n@keyframes fadeIn-data-v-6ddc430b {\nfrom {\r\n    opacity: 0;\r\n    transform: translateY(-10px);\n}\nto {\r\n    opacity: 1;\r\n    transform: translateY(0);\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.step-container[data-v-6ddc430b] {\r\n  position: relative;\r\n  z-index: 2;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.step-line[data-v-6ddc430b] {\r\n  height: 3px;\r\n  background-color: #e9ecef;\r\n  z-index: 1;\n}\n.step-line-progress[data-v-6ddc430b] {\r\n  height: 3px;\r\n  background-color: #0d6efd;\r\n  z-index: 1;\r\n  transition: width 0.3s ease;\n}\n.step-circle[data-v-6ddc430b] {\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\r\n  background-color: #e9ecef;\r\n  color: #6c757d;\r\n  font-weight: 600;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  border: 3px solid #e9ecef;\n}\n.step-circle.step-active[data-v-6ddc430b] {\r\n  background-color: #0d6efd;\r\n  color: white;\r\n  border-color: #0d6efd;\r\n  transform: scale(1.1);\r\n  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2);\n}\n.step-circle.step-completed[data-v-6ddc430b] {\r\n  background-color: #198754;\r\n  color: white;\r\n  border-color: #198754;\n}\n.step-circle.step-error[data-v-6ddc430b] {\r\n  border-color: #dc3545;\r\n  background-color: #dc3545;\r\n  color: white;\n}\n.step-icon[data-v-6ddc430b] {\r\n  font-size: 1.25rem;\n}\n.step-number[data-v-6ddc430b] {\r\n  font-size: 1.1rem;\n}\n.step-label[data-v-6ddc430b] {\r\n  font-size: 0.875rem;\r\n  text-align: center;\r\n  min-width: 80px;\n}\n.step-header-icon[data-v-6ddc430b] {\r\n  width: 40px;\r\n  height: 40px;\r\n  background-color: rgba(13, 110, 253, 0.1);\r\n  border-radius: 10px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.member-card[data-v-6ddc430b] {\r\n  position: relative;\n}\n.member-card[data-v-6ddc430b]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  left: -15px;\r\n  top: 50%;\r\n  transform: translateY(-50%);\r\n  width: 10px;\r\n  height: 10px;\r\n  border-radius: 50%;\r\n  background-color: #0d6efd;\r\n  opacity: 0.5;\n}\n.member-avatar[data-v-6ddc430b] {\r\n  width: 40px;\r\n  height: 40px;\r\n  background-color: #e9ecef;\r\n  border-radius: 50%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  color: #6c757d;\n}\n.avatar-circle[data-v-6ddc430b] {\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  font-size: 1.5rem;\n}\n.is-invalid[data-v-6ddc430b] {\r\n  border-color: #dc3545 !important;\r\n  background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e\") !important;\r\n  background-repeat: no-repeat;\r\n  background-position: right calc(0.375em + 0.1875rem) center;\r\n  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);\n}\n.invalid-feedback[data-v-6ddc430b] {\r\n  display: block;\r\n  font-size: 0.875rem;\n}\n.btn-group .btn-check:checked + .btn[data-v-6ddc430b] {\r\n  background-color: #0d6efd;\r\n  border-color: #0d6efd;\r\n  color: white;\n}\n.success-animation[data-v-6ddc430b] {\r\n  width: 80px;\r\n  height: 80px;\r\n  margin: 0 auto;\n}\n.checkmark-circle[data-v-6ddc430b] {\r\n  width: 80px;\r\n  height: 80px;\r\n  position: relative;\r\n  display: inline-block;\r\n  vertical-align: top;\n}\n.checkmark-circle .background[data-v-6ddc430b] {\r\n  width: 80px;\r\n  height: 80px;\r\n  border-radius: 50%;\r\n  background: #198754;\r\n  position: absolute;\n}\n.checkmark-circle .checkmark[data-v-6ddc430b] {\r\n  border-radius: 5px;\n}\n.checkmark-circle .checkmark.draw[data-v-6ddc430b]:after {\r\n  animation-delay: 100ms;\r\n  animation-duration: 1s;\r\n  animation-timing-function: ease;\r\n  animation-name: checkmark-data-v-6ddc430b;\r\n  transform: scaleX(-1) rotate(135deg);\r\n  animation-fill-mode: forwards;\n}\n.checkmark-circle .checkmark[data-v-6ddc430b]:after {\r\n  opacity: 1;\r\n  height: 40px;\r\n  width: 20px;\r\n  transform-origin: left top;\r\n  border-right: 6px solid white;\r\n  border-top: 6px solid white;\r\n  content: \"\";\r\n  left: 20px;\r\n  top: 40px;\r\n  position: absolute;\n}\n@keyframes checkmark-data-v-6ddc430b {\n0% {\r\n    height: 0;\r\n    width: 0;\r\n    opacity: 1;\n}\n20% {\r\n    height: 0;\r\n    width: 20px;\r\n    opacity: 1;\n}\n40% {\r\n    height: 40px;\r\n    width: 20px;\r\n    opacity: 1;\n}\n100% {\r\n    height: 40px;\r\n    width: 20px;\r\n    opacity: 1;\n}\n}\n@media print {\n.modal[data-v-6ddc430b] {\r\n    position: static !important;\r\n    display: block !important;\r\n    background: none !important;\n}\n.modal-dialog[data-v-6ddc430b] {\r\n    max-width: 100% !important;\r\n    margin: 0 !important;\n}\n.btn[data-v-6ddc430b] {\r\n    display: none !important;\n}\n}\n@media (max-width: 768px) {\n.step-circle[data-v-6ddc430b] {\r\n    width: 40px;\r\n    height: 40px;\n}\n.step-label[data-v-6ddc430b] {\r\n    font-size: 0.75rem;\r\n    min-width: 60px;\n}\n.btn[data-v-6ddc430b] {\r\n    padding: 0.375rem 0.75rem;\r\n    font-size: 0.875rem;\n}\n}\n[data-v-6ddc430b]::-webkit-scrollbar {\r\n  width: 8px;\r\n  height: 8px;\n}\n[data-v-6ddc430b]::-webkit-scrollbar-track {\r\n  background: #f1f1f1;\r\n  border-radius: 4px;\n}\n[data-v-6ddc430b]::-webkit-scrollbar-thumb {\r\n  background: #c1c1c1;\r\n  border-radius: 4px;\n}\n[data-v-6ddc430b]::-webkit-scrollbar-thumb:hover {\r\n  background: #a8a8a8;\n}\n.card-footer[data-v-6ddc430b] {\r\n  border-top: 1px solid rgba(0, 0, 0, 0.125);\r\n  padding-top: 1.5rem;\r\n  margin-top: 1rem;\n}\n@media (max-width: 576px) {\n.card-footer .d-flex[data-v-6ddc430b] {\r\n    flex-direction: column;\r\n    gap: 1rem;\n}\n.card-footer .d-flex > *[data-v-6ddc430b] {\r\n    width: 100%;\n}\n.card-footer .btn[data-v-6ddc430b] {\r\n    width: 100%;\r\n    justify-content: center;\n}\n}\n.conditional-field[data-v-6ddc430b] {\r\n  animation: fadeIn-data-v-6ddc430b 0.3s ease-in;\n}\n@keyframes fadeIn-data-v-6ddc430b {\nfrom {\r\n    opacity: 0;\r\n    transform: translateY(-10px);\n}\nto {\r\n    opacity: 1;\r\n    transform: translateY(0);\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -46197,7 +46505,7 @@ module.exports = function (list, options) {
 (module) {
 
 /*!
-* sweetalert2 v11.26.18
+* sweetalert2 v11.26.17
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -49832,23 +50140,23 @@ module.exports = function (list, options) {
   };
 
   /**
-   * @param {unknown} elem
+   * @param {any} elem
    * @returns {boolean}
    */
-  const isJqueryElement = elem => typeof elem === 'object' && elem !== null && 'jquery' in elem;
+  const isJqueryElement = elem => typeof elem === 'object' && elem.jquery;
 
   /**
-   * @param {unknown} elem
+   * @param {any} elem
    * @returns {boolean}
    */
   const isElement = elem => elem instanceof Element || isJqueryElement(elem);
 
   /**
-   * @param {ReadonlyArray<unknown>} args
+   * @param {any[]} args
    * @returns {SweetAlertOptions}
    */
   const argsToParams = args => {
-    /** @type {Record<string, unknown>} */
+    /** @type {Record<string, any>} */
     const params = {};
     if (typeof args[0] === 'object' && !isElement(args[0])) {
       Object.assign(params, args[0]);
@@ -49862,7 +50170,7 @@ module.exports = function (list, options) {
         }
       });
     }
-    return /** @type {SweetAlertOptions} */params;
+    return params;
   };
 
   /**
@@ -51009,7 +51317,7 @@ module.exports = function (list, options) {
     };
   });
   SweetAlert.DismissReason = DismissReason;
-  SweetAlert.version = '11.26.18';
+  SweetAlert.version = '11.26.17';
 
   const Swal = SweetAlert;
   // @ts-ignore
@@ -58827,16 +59135,21 @@ var render = function () {
                                   "formData.headOfFamily.middleInitial",
                               },
                             ],
-                            staticClass: "form-control text-uppercase",
-                            attrs: {
-                              type: "text",
-                              maxlength: "1",
-                              placeholder: "M",
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid":
+                                _vm.fieldErrors["headOfFamily.middleInitial"],
                             },
+                            attrs: { type: "text", placeholder: "M" },
                             domProps: {
                               value: _vm.formData.headOfFamily.middleInitial,
                             },
                             on: {
+                              blur: function ($event) {
+                                return _vm.validateField(
+                                  "headOfFamily.middleInitial"
+                                )
+                              },
                               input: function ($event) {
                                 if ($event.target.composing) {
                                   return
@@ -58849,6 +59162,28 @@ var render = function () {
                               },
                             },
                           }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "invalid-feedback d-flex align-items-center",
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-error-warning-line me-1",
+                              }),
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(
+                                    _vm.fieldErrors[
+                                      "headOfFamily.middleInitial"
+                                    ]
+                                  ) +
+                                  "\n                    "
+                              ),
+                            ]
+                          ),
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-4" }, [
@@ -58932,7 +59267,16 @@ var render = function () {
                                 },
                               ],
                               staticClass: "form-select",
+                              class: {
+                                "is-invalid":
+                                  _vm.fieldErrors["headOfFamily.extension"],
+                              },
                               on: {
+                                blur: function ($event) {
+                                  return _vm.validateField(
+                                    "headOfFamily.extension"
+                                  )
+                                },
                                 change: function ($event) {
                                   var $$selectedVal = Array.prototype.filter
                                     .call($event.target.options, function (o) {
@@ -58977,6 +59321,26 @@ var render = function () {
                               _c("option", { attrs: { value: "IV" } }, [
                                 _vm._v("IV"),
                               ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "invalid-feedback d-flex align-items-center",
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-error-warning-line me-1",
+                              }),
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(
+                                    _vm.fieldErrors["headOfFamily.extension"]
+                                  ) +
+                                  "\n                    "
+                              ),
                             ]
                           ),
                         ]),
@@ -59177,9 +59541,7 @@ var render = function () {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-4" }, [
-                          _c("label", { staticClass: "form-label fw-medium" }, [
-                            _vm._v(" Civil Status "),
-                          ]),
+                          _vm._m(18),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -59194,7 +59556,16 @@ var render = function () {
                                 },
                               ],
                               staticClass: "form-select",
+                              class: {
+                                "is-invalid":
+                                  _vm.fieldErrors["headOfFamily.civilStatus"],
+                              },
                               on: {
+                                blur: function ($event) {
+                                  return _vm.validateField(
+                                    "headOfFamily.civilStatus"
+                                  )
+                                },
                                 change: function ($event) {
                                   var $$selectedVal = Array.prototype.filter
                                     .call($event.target.options, function (o) {
@@ -59216,9 +59587,11 @@ var render = function () {
                               },
                             },
                             [
-                              _c("option", { attrs: { value: "" } }, [
-                                _vm._v("Select Status"),
-                              ]),
+                              _c(
+                                "option",
+                                { attrs: { value: "", disabled: "" } },
+                                [_vm._v("Select Status")]
+                              ),
                               _vm._v(" "),
                               _c("option", { attrs: { value: "Single" } }, [
                                 _vm._v("Single"),
@@ -59241,19 +59614,39 @@ var render = function () {
                               ]),
                             ]
                           ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "invalid-feedback d-flex align-items-center",
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-error-warning-line me-1",
+                              }),
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(
+                                    _vm.fieldErrors["headOfFamily.civilStatus"]
+                                  ) +
+                                  "\n                    "
+                              ),
+                            ]
+                          ),
                         ]),
                       ]),
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-12 mb-4" }, [
-                      _vm._m(18),
+                      _vm._m(19),
                       _vm._v(" "),
                       _c("div", { staticClass: "row g-3" }, [
                         _c("div", { staticClass: "col-md-6" }, [
-                          _vm._m(19),
+                          _vm._m(20),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(20),
+                            _vm._m(21),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -59296,7 +59689,7 @@ var render = function () {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-6" }, [
-                          _vm._m(21),
+                          _vm._m(22),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -59339,7 +59732,7 @@ var render = function () {
                                 },
                               }),
                               _vm._v(" "),
-                              _vm._m(22),
+                              _vm._m(23),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
@@ -59375,13 +59768,37 @@ var render = function () {
                                 },
                               }),
                               _vm._v(" "),
-                              _vm._m(23),
+                              _vm._m(24),
                             ]
                           ),
+                          _vm._v(" "),
+                          _vm.fieldErrors["headOfFamily.voterStatus"]
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "text-danger small d-flex align-items-center mt-1",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "ri-error-warning-line me-1",
+                                  }),
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(
+                                        _vm.fieldErrors[
+                                          "headOfFamily.voterStatus"
+                                        ]
+                                      ) +
+                                      "\n                    "
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-6" }, [
-                          _vm._m(24),
+                          _vm._m(25),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -59424,7 +59841,7 @@ var render = function () {
                                 },
                               }),
                               _vm._v(" "),
-                              _vm._m(25),
+                              _vm._m(26),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
@@ -59460,9 +59877,33 @@ var render = function () {
                                 },
                               }),
                               _vm._v(" "),
-                              _vm._m(26),
+                              _vm._m(27),
                             ]
                           ),
+                          _vm._v(" "),
+                          _vm.fieldErrors["headOfFamily.is4psMember"]
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "text-danger small d-flex align-items-center mt-1",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "ri-error-warning-line me-1",
+                                  }),
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(
+                                        _vm.fieldErrors[
+                                          "headOfFamily.is4psMember"
+                                        ]
+                                      ) +
+                                      "\n                    "
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-text" }, [
                             _vm._v(
@@ -59472,7 +59913,7 @@ var render = function () {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-6" }, [
-                          _vm._m(27),
+                          _vm._m(28),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -59514,7 +59955,7 @@ var render = function () {
                                 },
                               }),
                               _vm._v(" "),
-                              _vm._m(28),
+                              _vm._m(29),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
@@ -59549,19 +59990,43 @@ var render = function () {
                                 },
                               }),
                               _vm._v(" "),
-                              _vm._m(29),
+                              _vm._m(30),
                             ]
                           ),
+                          _vm._v(" "),
+                          _vm.fieldErrors["headOfFamily.isDeceased"]
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "text-danger small d-flex align-items-center mt-1",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "ri-error-warning-line me-1",
+                                  }),
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(
+                                        _vm.fieldErrors[
+                                          "headOfFamily.isDeceased"
+                                        ]
+                                      ) +
+                                      "\n                    "
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
                         ]),
                       ]),
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-12 mb-4" }, [
-                      _vm._m(30),
+                      _vm._m(31),
                       _vm._v(" "),
                       _c("div", { staticClass: "row g-3" }, [
                         _c("div", { staticClass: "col-md-6" }, [
-                          _vm._m(31),
+                          _vm._m(32),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -59577,7 +60042,18 @@ var render = function () {
                                 },
                               ],
                               staticClass: "form-select",
+                              class: {
+                                "is-invalid":
+                                  _vm.fieldErrors[
+                                    "headOfFamily.highestEducation"
+                                  ],
+                              },
                               on: {
+                                blur: function ($event) {
+                                  return _vm.validateField(
+                                    "headOfFamily.highestEducation"
+                                  )
+                                },
                                 change: function ($event) {
                                   var $$selectedVal = Array.prototype.filter
                                     .call($event.target.options, function (o) {
@@ -59599,9 +60075,11 @@ var render = function () {
                               },
                             },
                             [
-                              _c("option", { attrs: { value: "" } }, [
-                                _vm._v("Select Education Level"),
-                              ]),
+                              _c(
+                                "option",
+                                { attrs: { value: "", disabled: "" } },
+                                [_vm._v("Select Education Level")]
+                              ),
                               _vm._v(" "),
                               _c(
                                 "option",
@@ -59702,10 +60180,32 @@ var render = function () {
                               ),
                             ]
                           ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "invalid-feedback d-flex align-items-center",
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-error-warning-line me-1",
+                              }),
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(
+                                    _vm.fieldErrors[
+                                      "headOfFamily.highestEducation"
+                                    ]
+                                  ) +
+                                  "\n                    "
+                              ),
+                            ]
+                          ),
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-6" }, [
-                          _vm._m(32),
+                          _vm._m(33),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -59721,7 +60221,18 @@ var render = function () {
                                 },
                               ],
                               staticClass: "form-select",
+                              class: {
+                                "is-invalid":
+                                  _vm.fieldErrors[
+                                    "headOfFamily.educationalStatus"
+                                  ],
+                              },
                               on: {
+                                blur: function ($event) {
+                                  return _vm.validateField(
+                                    "headOfFamily.educationalStatus"
+                                  )
+                                },
                                 change: function ($event) {
                                   var $$selectedVal = Array.prototype.filter
                                     .call($event.target.options, function (o) {
@@ -59743,9 +60254,11 @@ var render = function () {
                               },
                             },
                             [
-                              _c("option", { attrs: { value: "" } }, [
-                                _vm._v("Select Status"),
-                              ]),
+                              _c(
+                                "option",
+                                { attrs: { value: "", disabled: "" } },
+                                [_vm._v("Select Status")]
+                              ),
                               _vm._v(" "),
                               _c(
                                 "option",
@@ -59788,10 +60301,32 @@ var render = function () {
                               ),
                             ]
                           ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "invalid-feedback d-flex align-items-center",
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "ri-error-warning-line me-1",
+                              }),
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(
+                                    _vm.fieldErrors[
+                                      "headOfFamily.educationalStatus"
+                                    ]
+                                  ) +
+                                  "\n                    "
+                              ),
+                            ]
+                          ),
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-6" }, [
-                          _vm._m(33),
+                          _vm._m(34),
                           _vm._v(" "),
                           _c("div", { staticClass: "row g-2" }, [
                             _c("div", { staticClass: "col-6" }, [
@@ -59830,7 +60365,7 @@ var render = function () {
                                 },
                               }),
                               _vm._v(" "),
-                              _vm._m(34),
+                              _vm._m(35),
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-6" }, [
@@ -59869,7 +60404,7 @@ var render = function () {
                                 },
                               }),
                               _vm._v(" "),
-                              _vm._m(35),
+                              _vm._m(36),
                             ]),
                           ]),
                           _vm._v(" "),
@@ -59901,7 +60436,7 @@ var render = function () {
                         _vm.formData.headOfFamily.employmentStatus ===
                         "Employed"
                           ? _c("div", { staticClass: "col-md-6" }, [
-                              _vm._m(36),
+                              _vm._m(37),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
@@ -59914,6 +60449,10 @@ var render = function () {
                                   },
                                 ],
                                 staticClass: "form-control",
+                                class: {
+                                  "is-invalid":
+                                    _vm.fieldErrors["headOfFamily.occupation"],
+                                },
                                 attrs: {
                                   type: "text",
                                   placeholder:
@@ -59923,6 +60462,11 @@ var render = function () {
                                   value: _vm.formData.headOfFamily.occupation,
                                 },
                                 on: {
+                                  blur: function ($event) {
+                                    return _vm.validateField(
+                                      "headOfFamily.occupation"
+                                    )
+                                  },
                                   input: function ($event) {
                                     if ($event.target.composing) {
                                       return
@@ -59935,13 +60479,35 @@ var render = function () {
                                   },
                                 },
                               }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "invalid-feedback d-flex align-items-center",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "ri-error-warning-line me-1",
+                                  }),
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(
+                                        _vm.fieldErrors[
+                                          "headOfFamily.occupation"
+                                        ]
+                                      ) +
+                                      "\n                    "
+                                  ),
+                                ]
+                              ),
                             ])
                           : _vm._e(),
                         _vm._v(" "),
                         _vm.formData.headOfFamily.employmentStatus ===
                         "Employed"
                           ? _c("div", { staticClass: "col-md-6" }, [
-                              _vm._m(37),
+                              _vm._m(38),
                               _vm._v(" "),
                               _c(
                                 "select",
@@ -59958,7 +60524,18 @@ var render = function () {
                                     },
                                   ],
                                   staticClass: "form-select",
+                                  class: {
+                                    "is-invalid":
+                                      _vm.fieldErrors[
+                                        "headOfFamily.natureOfEmployment"
+                                      ],
+                                  },
                                   on: {
+                                    blur: function ($event) {
+                                      return _vm.validateField(
+                                        "headOfFamily.natureOfEmployment"
+                                      )
+                                    },
                                     change: function ($event) {
                                       var $$selectedVal = Array.prototype.filter
                                         .call(
@@ -59983,9 +60560,11 @@ var render = function () {
                                   },
                                 },
                                 [
-                                  _c("option", { attrs: { value: "" } }, [
-                                    _vm._v("Select Nature"),
-                                  ]),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "", disabled: "" } },
+                                    [_vm._v("Select Nature")]
+                                  ),
                                   _vm._v(" "),
                                   _c(
                                     "option",
@@ -60036,16 +60615,38 @@ var render = function () {
                                   ),
                                 ]
                               ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "invalid-feedback d-flex align-items-center",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "ri-error-warning-line me-1",
+                                  }),
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(
+                                        _vm.fieldErrors[
+                                          "headOfFamily.natureOfEmployment"
+                                        ]
+                                      ) +
+                                      "\n                    "
+                                  ),
+                                ]
+                              ),
                             ])
                           : _vm._e(),
                         _vm._v(" "),
                         _vm.formData.headOfFamily.employmentStatus ===
                         "Employed"
                           ? _c("div", { staticClass: "col-md-6" }, [
-                              _vm._m(38),
+                              _vm._m(39),
                               _vm._v(" "),
                               _c("div", { staticClass: "input-group" }, [
-                                _vm._m(39),
+                                _vm._m(40),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -60059,6 +60660,12 @@ var render = function () {
                                     },
                                   ],
                                   staticClass: "form-control",
+                                  class: {
+                                    "is-invalid":
+                                      _vm.fieldErrors[
+                                        "headOfFamily.monthlyIncome"
+                                      ],
+                                  },
                                   attrs: {
                                     type: "number",
                                     placeholder: "0.00",
@@ -60070,6 +60677,11 @@ var render = function () {
                                       _vm.formData.headOfFamily.monthlyIncome,
                                   },
                                   on: {
+                                    blur: function ($event) {
+                                      return _vm.validateField(
+                                        "headOfFamily.monthlyIncome"
+                                      )
+                                    },
                                     input: function ($event) {
                                       if ($event.target.composing) {
                                         return
@@ -60090,6 +60702,28 @@ var render = function () {
                                 ),
                               ]),
                               _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "invalid-feedback d-flex align-items-center",
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "ri-error-warning-line me-1",
+                                  }),
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(
+                                        _vm.fieldErrors[
+                                          "headOfFamily.monthlyIncome"
+                                        ]
+                                      ) +
+                                      "\n                    "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
                               _c("div", { staticClass: "form-text" }, [
                                 _vm._v("Average monthly income"),
                               ]),
@@ -60099,17 +60733,17 @@ var render = function () {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-12" }, [
-                      _vm._m(40),
+                      _vm._m(41),
                       _vm._v(" "),
                       _c("div", { staticClass: "row g-3" }, [
                         _c("div", { staticClass: "col-md-6" }, [
-                          _vm._m(41),
+                          _vm._m(42),
                           _vm._v(" "),
                           _c(
                             "div",
                             { staticClass: "input-group has-validation" },
                             [
-                              _vm._m(42),
+                              _vm._m(43),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
@@ -60196,7 +60830,7 @@ var render = function () {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(43),
+                            _vm._m(44),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -60320,7 +60954,7 @@ var render = function () {
                           "d-flex align-items-center justify-content-between",
                       },
                       [
-                        _vm._m(44),
+                        _vm._m(45),
                         _vm._v(" "),
                         _c(
                           "button",
@@ -60398,7 +61032,7 @@ var render = function () {
                                   "div",
                                   { staticClass: "d-flex align-items-center" },
                                   [
-                                    _vm._m(45, true),
+                                    _vm._m(46, true),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "ms-3" }, [
                                       _c("h6", { staticClass: "mb-0" }, [
@@ -60465,11 +61099,11 @@ var render = function () {
                             ),
                             _vm._v(" "),
                             _c("div", { staticClass: "card-body" }, [
-                              _vm._m(46, true),
+                              _vm._m(47, true),
                               _vm._v(" "),
                               _c("div", { staticClass: "row g-3 mb-4" }, [
                                 _c("div", { staticClass: "col-md-3" }, [
-                                  _vm._m(47, true),
+                                  _vm._m(48, true),
                                   _vm._v(" "),
                                   _c("input", {
                                     directives: [
@@ -60545,14 +61179,22 @@ var render = function () {
                                         expression: "member.middleInitial",
                                       },
                                     ],
-                                    staticClass: "form-control text-uppercase",
-                                    attrs: {
-                                      type: "text",
-                                      maxlength: "1",
-                                      placeholder: "M",
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid":
+                                        _vm.fieldErrors[
+                                          "members." + index + ".middleInitial"
+                                        ],
                                     },
+                                    attrs: { type: "text", placeholder: "M" },
                                     domProps: { value: member.middleInitial },
                                     on: {
+                                      blur: function ($event) {
+                                        return _vm.validateMemberField(
+                                          index,
+                                          "middleInitial"
+                                        )
+                                      },
                                       input: function ($event) {
                                         if ($event.target.composing) {
                                           return
@@ -60565,10 +61207,28 @@ var render = function () {
                                       },
                                     },
                                   }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            _vm.fieldErrors[
+                                              "members." +
+                                                index +
+                                                ".middleInitial"
+                                            ]
+                                          ) +
+                                          "\n                      "
+                                      ),
+                                    ]
+                                  ),
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-md-3" }, [
-                                  _vm._m(48, true),
+                                  _vm._m(49, true),
                                   _vm._v(" "),
                                   _c("input", {
                                     directives: [
@@ -60647,7 +61307,19 @@ var render = function () {
                                         },
                                       ],
                                       staticClass: "form-select",
+                                      class: {
+                                        "is-invalid":
+                                          _vm.fieldErrors[
+                                            "members." + index + ".extension"
+                                          ],
+                                      },
                                       on: {
+                                        blur: function ($event) {
+                                          return _vm.validateMemberField(
+                                            index,
+                                            "extension"
+                                          )
+                                        },
                                         change: function ($event) {
                                           var $$selectedVal =
                                             Array.prototype.filter
@@ -60702,10 +61374,26 @@ var render = function () {
                                       ]),
                                     ]
                                   ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            _vm.fieldErrors[
+                                              "members." + index + ".extension"
+                                            ]
+                                          ) +
+                                          "\n                      "
+                                      ),
+                                    ]
+                                  ),
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-md-2" }, [
-                                  _vm._m(49, true),
+                                  _vm._m(50, true),
                                   _vm._v(" "),
                                   _c(
                                     "select",
@@ -60829,11 +61517,11 @@ var render = function () {
                                 ]),
                               ]),
                               _vm._v(" "),
-                              _vm._m(50, true),
+                              _vm._m(51, true),
                               _vm._v(" "),
                               _c("div", { staticClass: "row g-3 mb-4" }, [
                                 _c("div", { staticClass: "col-md-3" }, [
-                                  _vm._m(51, true),
+                                  _vm._m(52, true),
                                   _vm._v(" "),
                                   _c(
                                     "div",
@@ -60965,7 +61653,7 @@ var render = function () {
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-md-3" }, [
-                                  _vm._m(52, true),
+                                  _vm._m(53, true),
                                   _vm._v(" "),
                                   _c(
                                     "div",
@@ -60973,7 +61661,7 @@ var render = function () {
                                       staticClass: "input-group has-validation",
                                     },
                                     [
-                                      _vm._m(53, true),
+                                      _vm._m(54, true),
                                       _vm._v(" "),
                                       _c("input", {
                                         directives: [
@@ -61054,15 +61742,7 @@ var render = function () {
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-md-3" }, [
-                                  _c(
-                                    "label",
-                                    { staticClass: "form-label fw-medium" },
-                                    [
-                                      _vm._v(
-                                        "\n                        Civil Status\n                      "
-                                      ),
-                                    ]
-                                  ),
+                                  _vm._m(55, true),
                                   _vm._v(" "),
                                   _c(
                                     "select",
@@ -61076,7 +61756,19 @@ var render = function () {
                                         },
                                       ],
                                       staticClass: "form-select",
+                                      class: {
+                                        "is-invalid":
+                                          _vm.fieldErrors[
+                                            "members." + index + ".civilStatus"
+                                          ],
+                                      },
                                       on: {
+                                        blur: function ($event) {
+                                          return _vm.validateMemberField(
+                                            index,
+                                            "civilStatus"
+                                          )
+                                        },
                                         change: function ($event) {
                                           var $$selectedVal =
                                             Array.prototype.filter
@@ -61104,9 +61796,11 @@ var render = function () {
                                       },
                                     },
                                     [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("Select Status"),
-                                      ]),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "", disabled: "" } },
+                                        [_vm._v("Select Status")]
+                                      ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
@@ -61139,17 +61833,35 @@ var render = function () {
                                       ),
                                     ]
                                   ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            _vm.fieldErrors[
+                                              "members." +
+                                                index +
+                                                ".civilStatus"
+                                            ]
+                                          ) +
+                                          "\n                      "
+                                      ),
+                                    ]
+                                  ),
                                 ]),
                               ]),
                               _vm._v(" "),
-                              _vm._m(54, true),
+                              _vm._m(56, true),
                               _vm._v(" "),
                               _c("div", { staticClass: "row g-3 mb-4" }, [
                                 _c("div", { staticClass: "col-md-4" }, [
-                                  _vm._m(55, true),
+                                  _vm._m(57, true),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "input-group" }, [
-                                    _vm._m(56, true),
+                                    _vm._m(58, true),
                                     _vm._v(" "),
                                     _c("input", {
                                       directives: [
@@ -61161,24 +61873,12 @@ var render = function () {
                                         },
                                       ],
                                       staticClass: "form-control",
-                                      class: {
-                                        "is-invalid":
-                                          _vm.fieldErrors[
-                                            "members." + index + ".nationalId"
-                                          ],
-                                      },
                                       attrs: {
                                         type: "text",
                                         placeholder: "1234-5678-9012-3456",
                                       },
                                       domProps: { value: member.nationalId },
                                       on: {
-                                        blur: function ($event) {
-                                          return _vm.validateMemberField(
-                                            index,
-                                            "nationalId"
-                                          )
-                                        },
                                         input: function ($event) {
                                           if ($event.target.composing) {
                                             return
@@ -61193,31 +61893,6 @@ var render = function () {
                                     }),
                                   ]),
                                   _vm._v(" "),
-                                  _vm.fieldErrors[
-                                    "members." + index + ".nationalId"
-                                  ]
-                                    ? _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "invalid-feedback d-block",
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                        " +
-                                              _vm._s(
-                                                _vm.fieldErrors[
-                                                  "members." +
-                                                    index +
-                                                    ".nationalId"
-                                                ]
-                                              ) +
-                                              "\n                      "
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
                                   _c("div", { staticClass: "form-text" }, [
                                     _vm._v(
                                       "\n                        Optional: Philippine Identification System Number\n                      "
@@ -61226,7 +61901,7 @@ var render = function () {
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-md-4" }, [
-                                  _vm._m(57, true),
+                                  _vm._m(59, true),
                                   _vm._v(" "),
                                   _c(
                                     "div",
@@ -61334,10 +62009,39 @@ var render = function () {
                                       ),
                                     ]
                                   ),
+                                  _vm._v(" "),
+                                  _vm.fieldErrors[
+                                    "members." + index + ".voterStatus"
+                                  ]
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "text-danger small d-flex align-items-center mt-1",
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ri-error-warning-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "\n                        " +
+                                              _vm._s(
+                                                _vm.fieldErrors[
+                                                  "members." +
+                                                    index +
+                                                    ".voterStatus"
+                                                ]
+                                              ) +
+                                              "\n                      "
+                                          ),
+                                        ]
+                                      )
+                                    : _vm._e(),
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-md-4" }, [
-                                  _vm._m(58, true),
+                                  _vm._m(60, true),
                                   _vm._v(" "),
                                   _c(
                                     "div",
@@ -61446,6 +62150,35 @@ var render = function () {
                                     ]
                                   ),
                                   _vm._v(" "),
+                                  _vm.fieldErrors[
+                                    "members." + index + ".is4psMember"
+                                  ]
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "text-danger small d-flex align-items-center mt-1",
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ri-error-warning-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "\n                        " +
+                                              _vm._s(
+                                                _vm.fieldErrors[
+                                                  "members." +
+                                                    index +
+                                                    ".is4psMember"
+                                                ]
+                                              ) +
+                                              "\n                      "
+                                          ),
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
                                   _c("div", { staticClass: "form-text" }, [
                                     _vm._v(
                                       "\n                        Pantawid Pamilyang Pilipino Program\n                      "
@@ -61454,7 +62187,7 @@ var render = function () {
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-md-4" }, [
-                                  _vm._m(59, true),
+                                  _vm._m(61, true),
                                   _vm._v(" "),
                                   _c(
                                     "div",
@@ -61562,14 +62295,43 @@ var render = function () {
                                       ),
                                     ]
                                   ),
+                                  _vm._v(" "),
+                                  _vm.fieldErrors[
+                                    "members." + index + ".isDeceased"
+                                  ]
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "text-danger small d-flex align-items-center mt-1",
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ri-error-warning-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "\n                        " +
+                                              _vm._s(
+                                                _vm.fieldErrors[
+                                                  "members." +
+                                                    index +
+                                                    ".isDeceased"
+                                                ]
+                                              ) +
+                                              "\n                      "
+                                          ),
+                                        ]
+                                      )
+                                    : _vm._e(),
                                 ]),
                               ]),
                               _vm._v(" "),
-                              _vm._m(60, true),
+                              _vm._m(62, true),
                               _vm._v(" "),
                               _c("div", { staticClass: "row g-3 mb-4" }, [
                                 _c("div", { staticClass: "col-md-4" }, [
-                                  _vm._m(61, true),
+                                  _vm._m(63, true),
                                   _vm._v(" "),
                                   _c(
                                     "select",
@@ -61583,7 +62345,21 @@ var render = function () {
                                         },
                                       ],
                                       staticClass: "form-select",
+                                      class: {
+                                        "is-invalid":
+                                          _vm.fieldErrors[
+                                            "members." +
+                                              index +
+                                              ".highestEducation"
+                                          ],
+                                      },
                                       on: {
+                                        blur: function ($event) {
+                                          return _vm.validateMemberField(
+                                            index,
+                                            "highestEducation"
+                                          )
+                                        },
                                         change: function ($event) {
                                           var $$selectedVal =
                                             Array.prototype.filter
@@ -61611,9 +62387,11 @@ var render = function () {
                                       },
                                     },
                                     [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("Select Education Level"),
-                                      ]),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "", disabled: "" } },
+                                        [_vm._v("Select Education Level")]
+                                      ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
@@ -61742,10 +62520,28 @@ var render = function () {
                                       ),
                                     ]
                                   ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            _vm.fieldErrors[
+                                              "members." +
+                                                index +
+                                                ".highestEducation"
+                                            ]
+                                          ) +
+                                          "\n                      "
+                                      ),
+                                    ]
+                                  ),
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-md-4" }, [
-                                  _vm._m(62, true),
+                                  _vm._m(64, true),
                                   _vm._v(" "),
                                   _c(
                                     "select",
@@ -61760,7 +62556,21 @@ var render = function () {
                                         },
                                       ],
                                       staticClass: "form-select",
+                                      class: {
+                                        "is-invalid":
+                                          _vm.fieldErrors[
+                                            "members." +
+                                              index +
+                                              ".educationalStatus"
+                                          ],
+                                      },
                                       on: {
+                                        blur: function ($event) {
+                                          return _vm.validateMemberField(
+                                            index,
+                                            "educationalStatus"
+                                          )
+                                        },
                                         change: function ($event) {
                                           var $$selectedVal =
                                             Array.prototype.filter
@@ -61788,9 +62598,11 @@ var render = function () {
                                       },
                                     },
                                     [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("Select Status"),
-                                      ]),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "", disabled: "" } },
+                                        [_vm._v("Select Status")]
+                                      ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
@@ -61845,10 +62657,28 @@ var render = function () {
                                       ),
                                     ]
                                   ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            _vm.fieldErrors[
+                                              "members." +
+                                                index +
+                                                ".educationalStatus"
+                                            ]
+                                          ) +
+                                          "\n                      "
+                                      ),
+                                    ]
+                                  ),
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-md-4" }, [
-                                  _vm._m(63, true),
+                                  _vm._m(65, true),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row g-2" }, [
                                     _c("div", { staticClass: "col-6" }, [
@@ -61957,11 +62787,40 @@ var render = function () {
                                       ),
                                     ]),
                                   ]),
+                                  _vm._v(" "),
+                                  _vm.fieldErrors[
+                                    "members." + index + ".employmentStatus"
+                                  ]
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "text-danger small d-flex align-items-center mt-1",
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ri-error-warning-line me-1",
+                                          }),
+                                          _vm._v(
+                                            "\n                        " +
+                                              _vm._s(
+                                                _vm.fieldErrors[
+                                                  "members." +
+                                                    index +
+                                                    ".employmentStatus"
+                                                ]
+                                              ) +
+                                              "\n                      "
+                                          ),
+                                        ]
+                                      )
+                                    : _vm._e(),
                                 ]),
                                 _vm._v(" "),
                                 member.employmentStatus === "Employed"
                                   ? _c("div", { staticClass: "col-md-4" }, [
-                                      _vm._m(64, true),
+                                      _vm._m(66, true),
                                       _vm._v(" "),
                                       _c("input", {
                                         directives: [
@@ -61973,6 +62832,12 @@ var render = function () {
                                           },
                                         ],
                                         staticClass: "form-control",
+                                        class: {
+                                          "is-invalid":
+                                            _vm.fieldErrors[
+                                              "members." + index + ".occupation"
+                                            ],
+                                        },
                                         attrs: {
                                           type: "text",
                                           placeholder:
@@ -61980,6 +62845,12 @@ var render = function () {
                                         },
                                         domProps: { value: member.occupation },
                                         on: {
+                                          blur: function ($event) {
+                                            return _vm.validateMemberField(
+                                              index,
+                                              "occupation"
+                                            )
+                                          },
                                           input: function ($event) {
                                             if ($event.target.composing) {
                                               return
@@ -61992,12 +62863,30 @@ var render = function () {
                                           },
                                         },
                                       }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "invalid-feedback" },
+                                        [
+                                          _vm._v(
+                                            "\n                        " +
+                                              _vm._s(
+                                                _vm.fieldErrors[
+                                                  "members." +
+                                                    index +
+                                                    ".occupation"
+                                                ]
+                                              ) +
+                                              "\n                      "
+                                          ),
+                                        ]
+                                      ),
                                     ])
                                   : _vm._e(),
                                 _vm._v(" "),
                                 member.employmentStatus === "Employed"
                                   ? _c("div", { staticClass: "col-md-4" }, [
-                                      _vm._m(65, true),
+                                      _vm._m(67, true),
                                       _vm._v(" "),
                                       _c(
                                         "select",
@@ -62012,7 +62901,21 @@ var render = function () {
                                             },
                                           ],
                                           staticClass: "form-select",
+                                          class: {
+                                            "is-invalid":
+                                              _vm.fieldErrors[
+                                                "members." +
+                                                  index +
+                                                  ".natureOfEmployment"
+                                              ],
+                                          },
                                           on: {
+                                            blur: function ($event) {
+                                              return _vm.validateMemberField(
+                                                index,
+                                                "natureOfEmployment"
+                                              )
+                                            },
                                             change: function ($event) {
                                               var $$selectedVal =
                                                 Array.prototype.filter
@@ -62042,7 +62945,12 @@ var render = function () {
                                         [
                                           _c(
                                             "option",
-                                            { attrs: { value: "" } },
+                                            {
+                                              attrs: {
+                                                value: "",
+                                                disabled: "",
+                                              },
+                                            },
                                             [_vm._v("Select Nature")]
                                           ),
                                           _vm._v(" "),
@@ -62115,18 +63023,36 @@ var render = function () {
                                           ),
                                         ]
                                       ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "invalid-feedback" },
+                                        [
+                                          _vm._v(
+                                            "\n                        " +
+                                              _vm._s(
+                                                _vm.fieldErrors[
+                                                  "members." +
+                                                    index +
+                                                    ".natureOfEmployment"
+                                                ]
+                                              ) +
+                                              "\n                      "
+                                          ),
+                                        ]
+                                      ),
                                     ])
                                   : _vm._e(),
                                 _vm._v(" "),
                                 member.employmentStatus === "Employed"
                                   ? _c("div", { staticClass: "col-md-4" }, [
-                                      _vm._m(66, true),
+                                      _vm._m(68, true),
                                       _vm._v(" "),
                                       _c(
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(67, true),
+                                          _vm._m(69, true),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
@@ -62181,33 +63107,24 @@ var render = function () {
                                             { staticClass: "input-group-text" },
                                             [_vm._v("PHP")]
                                           ),
-                                          _vm._v(" "),
-                                          _vm.fieldErrors[
-                                            "members." +
-                                              index +
-                                              ".monthlyIncome"
-                                          ]
-                                            ? _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "invalid-feedback d-block",
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                          " +
-                                                      _vm._s(
-                                                        _vm.fieldErrors[
-                                                          "members." +
-                                                            index +
-                                                            ".monthlyIncome"
-                                                        ]
-                                                      ) +
-                                                      "\n                        "
-                                                  ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "invalid-feedback" },
+                                        [
+                                          _vm._v(
+                                            "\n                        " +
+                                              _vm._s(
+                                                _vm.fieldErrors[
+                                                  "members." +
+                                                    index +
+                                                    ".monthlyIncome"
                                                 ]
-                                              )
-                                            : _vm._e(),
+                                              ) +
+                                              "\n                      "
+                                          ),
                                         ]
                                       ),
                                       _vm._v(" "),
@@ -62218,7 +63135,7 @@ var render = function () {
                                   : _vm._e(),
                               ]),
                               _vm._v(" "),
-                              _vm._m(68, true),
+                              _vm._m(70, true),
                               _vm._v(" "),
                               _c("div", { staticClass: "row g-3" }, [
                                 _c("div", { staticClass: "col-md-6" }, [
@@ -62227,98 +63144,51 @@ var render = function () {
                                     { staticClass: "form-label fw-medium" },
                                     [
                                       _vm._v(
-                                        "\n                        Contact Numberss\n                      "
+                                        "\n                        Contact Number\n                      "
                                       ),
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "input-group has-validation",
-                                    },
-                                    [
-                                      _vm._m(69, true),
-                                      _vm._v(" "),
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: member.contactNumber,
-                                            expression: "member.contactNumber",
-                                          },
-                                        ],
-                                        staticClass: "form-control",
-                                        class: {
-                                          "is-invalid":
-                                            _vm.fieldErrors[
-                                              "members." +
-                                                index +
-                                                ".contactNumber"
-                                            ],
-                                        },
-                                        attrs: {
-                                          type: "tel",
-                                          placeholder: "09123456789",
-                                        },
-                                        domProps: {
+                                  _c("div", { staticClass: "input-group" }, [
+                                    _vm._m(71, true),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
                                           value: member.contactNumber,
+                                          expression: "member.contactNumber",
                                         },
-                                        on: {
-                                          input: [
-                                            function ($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.$set(
-                                                member,
-                                                "contactNumber",
-                                                $event.target.value
-                                              )
-                                            },
-                                            function (e) {
-                                              return _vm.formatMemberPhoneNumber(
-                                                e,
-                                                index
-                                              )
-                                            },
-                                          ],
-                                          blur: function ($event) {
-                                            return _vm.validateMemberField(
-                                              index,
-                                              "contactNumber"
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        type: "tel",
+                                        placeholder: "09123456789",
+                                      },
+                                      domProps: { value: member.contactNumber },
+                                      on: {
+                                        input: [
+                                          function ($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              member,
+                                              "contactNumber",
+                                              $event.target.value
                                             )
                                           },
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _vm.fieldErrors[
-                                        "members." + index + ".contactNumber"
-                                      ]
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "invalid-feedback d-block",
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                          " +
-                                                  _vm._s(
-                                                    _vm.fieldErrors[
-                                                      "members." +
-                                                        index +
-                                                        ".contactNumber"
-                                                    ]
-                                                  ) +
-                                                  "\n                        "
-                                              ),
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                    ]
-                                  ),
+                                          function (e) {
+                                            return _vm.formatMemberPhoneNumber(
+                                              e,
+                                              index
+                                            )
+                                          },
+                                        ],
+                                      },
+                                    }),
+                                  ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "form-text" }, [
                                     _vm._v("Format: 09XX-XXX-XXXX"),
@@ -62337,7 +63207,7 @@ var render = function () {
                                   ),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "input-group" }, [
-                                    _vm._m(70, true),
+                                    _vm._m(72, true),
                                     _vm._v(" "),
                                     _c("input", {
                                       directives: [
@@ -62384,7 +63254,7 @@ var render = function () {
                               "text-center py-5 border rounded bg-light-subtle",
                           },
                           [
-                            _vm._m(71),
+                            _vm._m(73),
                             _vm._v(" "),
                             _c(
                               "h6",
@@ -62494,12 +63364,12 @@ var render = function () {
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "card border-0 shadow-sm" }, [
-                _vm._m(72),
+                _vm._m(74),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-6 mb-4" }, [
-                      _vm._m(73),
+                      _vm._m(75),
                       _vm._v(" "),
                       _c(
                         "select",
@@ -62590,7 +63460,7 @@ var render = function () {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-6 mb-4" }, [
-                      _vm._m(74),
+                      _vm._m(76),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -62681,14 +63551,14 @@ var render = function () {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-12 mb-4" }, [
-                      _vm._m(75),
+                      _vm._m(77),
                       _vm._v(" "),
                       _c("div", { staticClass: "row g-3" }, [
                         _c("div", { staticClass: "col-md-4" }, [
-                          _vm._m(76),
+                          _vm._m(78),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(77),
+                            _vm._m(79),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -62744,7 +63614,7 @@ var render = function () {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-4" }, [
-                          _vm._m(78),
+                          _vm._m(80),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -62858,7 +63728,7 @@ var render = function () {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-4" }, [
-                          _vm._m(79),
+                          _vm._m(81),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -62955,7 +63825,7 @@ var render = function () {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-12 mb-4" }, [
-                      _vm._m(80),
+                      _vm._m(82),
                       _vm._v(" "),
                       _c("div", { staticClass: "row g-3" }, [
                         _c("div", { staticClass: "col-md-4" }, [
@@ -63285,7 +64155,7 @@ var render = function () {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-12" }, [
-                      _vm._m(81),
+                      _vm._m(83),
                       _vm._v(" "),
                       _c("textarea", {
                         directives: [
@@ -63397,13 +64267,13 @@ var render = function () {
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "card border-0 shadow-sm" }, [
-                _vm._m(82),
+                _vm._m(84),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "row g-4" }, [
                     _c("div", { staticClass: "col-md-6" }, [
                       _c("div", { staticClass: "card border h-100" }, [
-                        _vm._m(83),
+                        _vm._m(85),
                         _vm._v(" "),
                         _c("div", { staticClass: "card-body" }, [
                           _c(
@@ -63416,7 +64286,7 @@ var render = function () {
                               }),
                               _vm._v(" "),
                               _c("div", [
-                                _vm._m(84),
+                                _vm._m(86),
                                 _vm._v(" "),
                                 _c(
                                   "p",
@@ -63446,7 +64316,7 @@ var render = function () {
                               }),
                               _vm._v(" "),
                               _c("div", [
-                                _vm._m(85),
+                                _vm._m(87),
                                 _vm._v(" "),
                                 _c(
                                   "p",
@@ -63471,14 +64341,14 @@ var render = function () {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-6" }, [
                       _c("div", { staticClass: "card border h-100" }, [
-                        _vm._m(86),
+                        _vm._m(88),
                         _vm._v(" "),
                         _c("div", { staticClass: "card-body" }, [
                           _c(
                             "div",
                             { staticClass: "d-flex align-items-center mb-3" },
                             [
-                              _vm._m(87),
+                              _vm._m(89),
                               _vm._v(" "),
                               _c("div", { staticClass: "ms-3" }, [
                                 _c("h6", { staticClass: "mb-0 fw-semibold" }, [
@@ -63614,13 +64484,13 @@ var render = function () {
                               "table",
                               { staticClass: "table table-hover mb-0" },
                               [
-                                _vm._m(88),
+                                _vm._m(90),
                                 _vm._v(" "),
                                 _c(
                                   "tbody",
                                   [
                                     _c("tr", { staticClass: "table-primary" }, [
-                                      _vm._m(89),
+                                      _vm._m(91),
                                       _vm._v(" "),
                                       _c("td", [
                                         _vm._v(
@@ -63720,7 +64590,7 @@ var render = function () {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-12" }, [
                       _c("div", { staticClass: "card border" }, [
-                        _vm._m(90),
+                        _vm._m(92),
                         _vm._v(" "),
                         _c("div", { staticClass: "card-body" }, [
                           _c("div", { staticClass: "row g-3" }, [
@@ -64050,7 +64920,7 @@ var render = function () {
             _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
               _c("div", { staticClass: "modal-content border-0 shadow-lg" }, [
                 _c("div", { staticClass: "modal-body text-center p-5" }, [
-                  _vm._m(91),
+                  _vm._m(93),
                   _vm._v(" "),
                   _c("h4", { staticClass: "fw-semibold mb-3 text-success" }, [
                     _vm._v(
@@ -64390,6 +65260,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                      Civil Status "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
       _c("i", { staticClass: "ri-fingerprint-line text-primary me-2" }),
       _vm._v("Identification & Status\n                "),
@@ -64427,7 +65306,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-vote-line text-primary me-2" }),
-        _vm._v("\n                      Voter Status\n                    "),
+        _vm._v("\n                      Voter Status "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64466,9 +65346,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-group-line text-primary me-2" }),
-        _vm._v(
-          "\n                      4Ps Member Status\n                    "
-        ),
+        _vm._v("\n                      4Ps Member Status "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64507,7 +65386,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-heart-line text-primary me-2" }),
-        _vm._v("\n                      Living Status\n                    "),
+        _vm._v("\n                      Living Status "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64555,9 +65435,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-award-line text-primary me-2" }),
-        _vm._v(
-          "\n                      Highest Educational Attainment\n                    "
-        ),
+        _vm._v("\n                      Highest Educational Attainment "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64570,9 +65449,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-book-line text-primary me-2" }),
-        _vm._v(
-          "\n                      Educational Status\n                    "
-        ),
+        _vm._v("\n                      Educational Status "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64633,9 +65511,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-suitcase-line text-primary me-2" }),
-        _vm._v(
-          "\n                      Occupation / Job Title\n                    "
-        ),
+        _vm._v("\n                      Occupation / Job Title "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64648,9 +65525,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-building-line text-primary me-2" }),
-        _vm._v(
-          "\n                      Nature of Employment\n                    "
-        ),
+        _vm._v("\n                      Nature of Employment "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64665,9 +65541,8 @@ var staticRenderFns = [
         _c("i", {
           staticClass: "ri-money-dollar-circle-line text-primary me-2",
         }),
-        _vm._v(
-          "\n                      Monthly Income (PHP)\n                    "
-        ),
+        _vm._v("\n                      Monthly Income (PHP) "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64816,6 +65691,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label fw-medium" }, [
+      _vm._v("\n                        Civil Status "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
       _c("i", { staticClass: "ri-fingerprint-line text-primary me-2" }),
       _vm._v("Identification & Status\n                  "),
@@ -64853,9 +65737,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-vote-line text-primary me-2" }),
-        _vm._v(
-          "\n                        Voter Status\n                      "
-        ),
+        _vm._v("\n                        Voter Status "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64868,9 +65751,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-group-line text-primary me-2" }),
-        _vm._v(
-          "\n                        4Ps Member Status\n                      "
-        ),
+        _vm._v("\n                        4Ps Member Status "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64883,9 +65765,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-heart-line text-primary me-2" }),
-        _vm._v(
-          "\n                        Living Status\n                      "
-        ),
+        _vm._v("\n                        Living Status "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64907,9 +65788,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-award-line text-primary me-2" }),
-        _vm._v(
-          "\n                        Highest Educational Attainment\n                      "
-        ),
+        _vm._v("\n                        Highest Educational Attainment "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64922,9 +65802,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-book-line text-primary me-2" }),
-        _vm._v(
-          "\n                        Educational Status\n                      "
-        ),
+        _vm._v("\n                        Educational Status "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64937,9 +65816,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-briefcase-line text-primary me-2" }),
-        _vm._v(
-          "\n                        Employment Status\n                      "
-        ),
+        _vm._v("\n                        Employment Status "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64952,9 +65830,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-suitcase-line text-primary me-2" }),
-        _vm._v(
-          "\n                        Occupation / Job Title\n                      "
-        ),
+        _vm._v("\n                        Occupation / Job Title "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64967,9 +65844,8 @@ var staticRenderFns = [
       { staticClass: "form-label fw-medium d-flex align-items-center" },
       [
         _c("i", { staticClass: "ri-building-line text-primary me-2" }),
-        _vm._v(
-          "\n                        Nature of Employment\n                      "
-        ),
+        _vm._v("\n                        Nature of Employment "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -64984,9 +65860,8 @@ var staticRenderFns = [
         _c("i", {
           staticClass: "ri-money-dollar-circle-line text-primary me-2",
         }),
-        _vm._v(
-          "\n                        Monthly Income (PHP)\n                      "
-        ),
+        _vm._v("\n                        Monthly Income (PHP) "),
+        _c("span", { staticClass: "text-danger ms-1" }, [_vm._v("*")]),
       ]
     )
   },
@@ -65004,7 +65879,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h6", { staticClass: "border-bottom pb-2 mb-3 fw-semibold" }, [
       _c("i", { staticClass: "ri-contacts-line text-primary me-2" }),
-      _vm._v("Contact\n                    Informationsss\n                  "),
+      _vm._v("Contact\n                    Information\n                  "),
     ])
   },
   function () {

@@ -274,10 +274,18 @@
                       <input
                         v-model="formData.headOfFamily.middleInitial"
                         type="text"
-                        class="form-control text-uppercase"
-                        maxlength="1"
+                        class="form-control"
+                        :class="{
+                          'is-invalid':
+                            fieldErrors['headOfFamily.middleInitial'],
+                        }"
                         placeholder="M"
+                        @blur="validateField('headOfFamily.middleInitial')"
                       />
+                      <div class="invalid-feedback d-flex align-items-center">
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.middleInitial"] }}
+                      </div>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label fw-medium">
@@ -303,6 +311,10 @@
                       <select
                         v-model="formData.headOfFamily.extension"
                         class="form-select"
+                        :class="{
+                          'is-invalid': fieldErrors['headOfFamily.extension'],
+                        }"
+                        @blur="validateField('headOfFamily.extension')"
                       >
                         <option value="">None</option>
                         <option value="Jr">Jr</option>
@@ -311,6 +323,10 @@
                         <option value="III">III</option>
                         <option value="IV">IV</option>
                       </select>
+                      <div class="invalid-feedback d-flex align-items-center">
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.extension"] }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -393,18 +409,28 @@
                     </div>
 
                     <div class="col-md-4">
-                      <label class="form-label fw-medium"> Civil Status </label>
+                      <label class="form-label fw-medium">
+                        Civil Status <span class="text-danger">*</span>
+                      </label>
                       <select
                         v-model="formData.headOfFamily.civilStatus"
                         class="form-select"
+                        :class="{
+                          'is-invalid': fieldErrors['headOfFamily.civilStatus'],
+                        }"
+                        @blur="validateField('headOfFamily.civilStatus')"
                       >
-                        <option value="">Select Status</option>
+                        <option value="" disabled>Select Status</option>
                         <option value="Single">Single</option>
                         <option value="Married">Married</option>
                         <option value="Widowed">Widowed</option>
                         <option value="Separated">Separated</option>
                         <option value="Divorced">Divorced</option>
                       </select>
+                      <div class="invalid-feedback d-flex align-items-center">
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.civilStatus"] }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -440,13 +466,13 @@
                       </div>
                     </div>
 
-                    <!-- Voter Status -->
+                    <!-- Voter Status - NOW REQUIRED -->
                     <div class="col-md-6">
                       <label
                         class="form-label fw-medium d-flex align-items-center"
                       >
                         <i class="ri-vote-line text-primary me-2"></i>
-                        Voter Status
+                        Voter Status <span class="text-danger ms-1">*</span>
                       </label>
                       <div class="btn-group w-100" role="group">
                         <input
@@ -470,15 +496,22 @@
                           <i class="ri-close-line me-1"></i>Non-Voter
                         </label>
                       </div>
+                      <div
+                        v-if="fieldErrors['headOfFamily.voterStatus']"
+                        class="text-danger small d-flex align-items-center mt-1"
+                      >
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.voterStatus"] }}
+                      </div>
                     </div>
 
-                    <!-- 4Ps Member Status -->
+                    <!-- 4Ps Member Status - NOW REQUIRED -->
                     <div class="col-md-6">
                       <label
                         class="form-label fw-medium d-flex align-items-center"
                       >
                         <i class="ri-group-line text-primary me-2"></i>
-                        4Ps Member Status
+                        4Ps Member Status <span class="text-danger ms-1">*</span>
                       </label>
                       <div class="btn-group w-100" role="group">
                         <input
@@ -502,18 +535,25 @@
                           <i class="ri-close-line me-1"></i>No
                         </label>
                       </div>
+                      <div
+                        v-if="fieldErrors['headOfFamily.is4psMember']"
+                        class="text-danger small d-flex align-items-center mt-1"
+                      >
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.is4psMember"] }}
+                      </div>
                       <div class="form-text">
                         Pantawid Pamilyang Pilipino Program
                       </div>
                     </div>
 
-                    <!-- Deceased Status -->
+                    <!-- Deceased Status - NOW REQUIRED -->
                     <div class="col-md-6">
                       <label
                         class="form-label fw-medium d-flex align-items-center"
                       >
                         <i class="ri-heart-line text-primary me-2"></i>
-                        Living Status
+                        Living Status <span class="text-danger ms-1">*</span>
                       </label>
                       <div class="btn-group w-100" role="group">
                         <input
@@ -537,6 +577,13 @@
                           <i class="ri-rest-time-line me-1"></i>Deceased
                         </label>
                       </div>
+                      <div
+                        v-if="fieldErrors['headOfFamily.isDeceased']"
+                        class="text-danger small d-flex align-items-center mt-1"
+                      >
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.isDeceased"] }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -548,19 +595,23 @@
                     >Education & Employment
                   </h6>
                   <div class="row g-3">
-                    <!-- Highest Educational Attainment -->
+                    <!-- Highest Educational Attainment - NOW REQUIRED -->
                     <div class="col-md-6">
                       <label
                         class="form-label fw-medium d-flex align-items-center"
                       >
                         <i class="ri-award-line text-primary me-2"></i>
-                        Highest Educational Attainment
+                        Highest Educational Attainment <span class="text-danger ms-1">*</span>
                       </label>
                       <select
                         v-model="formData.headOfFamily.highestEducation"
                         class="form-select"
+                        :class="{
+                          'is-invalid': fieldErrors['headOfFamily.highestEducation'],
+                        }"
+                        @blur="validateField('headOfFamily.highestEducation')"
                       >
-                        <option value="">Select Education Level</option>
+                        <option value="" disabled>Select Education Level</option>
                         <option value="No Formal Education">
                           No Formal Education
                         </option>
@@ -589,21 +640,29 @@
                           Doctorate Degree
                         </option>
                       </select>
+                      <div class="invalid-feedback d-flex align-items-center">
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.highestEducation"] }}
+                      </div>
                     </div>
 
-                    <!-- Educational Status -->
+                    <!-- Educational Status - NOW REQUIRED -->
                     <div class="col-md-6">
                       <label
                         class="form-label fw-medium d-flex align-items-center"
                       >
                         <i class="ri-book-line text-primary me-2"></i>
-                        Educational Status
+                        Educational Status <span class="text-danger ms-1">*</span>
                       </label>
                       <select
                         v-model="formData.headOfFamily.educationalStatus"
                         class="form-select"
+                        :class="{
+                          'is-invalid': fieldErrors['headOfFamily.educationalStatus'],
+                        }"
+                        @blur="validateField('headOfFamily.educationalStatus')"
                       >
-                        <option value="">Select Status</option>
+                        <option value="" disabled>Select Status</option>
                         <option value="Not Attending School">
                           Not Attending School
                         </option>
@@ -615,6 +674,10 @@
                         <option value="ALS Graduate">ALS Graduate</option>
                         <option value="ALS Student">ALS Student</option>
                       </select>
+                      <div class="invalid-feedback d-flex align-items-center">
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.educationalStatus"] }}
+                      </div>
                     </div>
 
                     <!-- Employment Status -->
@@ -667,45 +730,53 @@
                       </div>
                     </div>
 
-                    <!-- Occupation/Job Title (Shows when Employed is selected) -->
+                    <!-- Occupation/Job Title (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
                     <div
                       class="col-md-6"
-                      v-if="
-                        formData.headOfFamily.employmentStatus === 'Employed'
-                      "
+                      v-if="formData.headOfFamily.employmentStatus === 'Employed'"
                     >
                       <label
                         class="form-label fw-medium d-flex align-items-center"
                       >
                         <i class="ri-suitcase-line text-primary me-2"></i>
-                        Occupation / Job Title
+                        Occupation / Job Title <span class="text-danger ms-1">*</span>
                       </label>
                       <input
                         v-model="formData.headOfFamily.occupation"
                         type="text"
                         class="form-control"
+                        :class="{
+                          'is-invalid': fieldErrors['headOfFamily.occupation'],
+                        }"
                         placeholder="e.g., Teacher, Engineer, Farmer"
+                        @blur="validateField('headOfFamily.occupation')"
                       />
+                      <div class="invalid-feedback d-flex align-items-center">
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.occupation"] }}
+                      </div>
                     </div>
 
-                    <!-- Nature of Employment (Shows when Employed is selected) -->
+                    <!-- Nature of Employment (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
                     <div
                       class="col-md-6"
-                      v-if="
-                        formData.headOfFamily.employmentStatus === 'Employed'
-                      "
+                      v-if="formData.headOfFamily.employmentStatus === 'Employed'"
                     >
                       <label
                         class="form-label fw-medium d-flex align-items-center"
                       >
                         <i class="ri-building-line text-primary me-2"></i>
-                        Nature of Employment
+                        Nature of Employment <span class="text-danger ms-1">*</span>
                       </label>
                       <select
                         v-model="formData.headOfFamily.natureOfEmployment"
                         class="form-select"
+                        :class="{
+                          'is-invalid': fieldErrors['headOfFamily.natureOfEmployment'],
+                        }"
+                        @blur="validateField('headOfFamily.natureOfEmployment')"
                       >
-                        <option value="">Select Nature</option>
+                        <option value="" disabled>Select Nature</option>
                         <option value="Government Employee">
                           Government Employee
                         </option>
@@ -720,14 +791,16 @@
                         <option value="Seasonal">Seasonal Worker</option>
                         <option value="Contractual">Contractual Worker</option>
                       </select>
+                      <div class="invalid-feedback d-flex align-items-center">
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.natureOfEmployment"] }}
+                      </div>
                     </div>
 
-                    <!-- Monthly Income (Shows when Employed is selected) -->
+                    <!-- Monthly Income (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
                     <div
                       class="col-md-6"
-                      v-if="
-                        formData.headOfFamily.employmentStatus === 'Employed'
-                      "
+                      v-if="formData.headOfFamily.employmentStatus === 'Employed'"
                     >
                       <label
                         class="form-label fw-medium d-flex align-items-center"
@@ -735,7 +808,7 @@
                         <i
                           class="ri-money-dollar-circle-line text-primary me-2"
                         ></i>
-                        Monthly Income (PHP)
+                        Monthly Income (PHP) <span class="text-danger ms-1">*</span>
                       </label>
                       <div class="input-group">
                         <span class="input-group-text bg-light-subtle">
@@ -745,11 +818,19 @@
                           v-model="formData.headOfFamily.monthlyIncome"
                           type="number"
                           class="form-control"
+                          :class="{
+                            'is-invalid': fieldErrors['headOfFamily.monthlyIncome'],
+                          }"
                           placeholder="0.00"
                           min="0"
                           step="0.01"
+                          @blur="validateField('headOfFamily.monthlyIncome')"
                         />
                         <span class="input-group-text">PHP</span>
+                      </div>
+                      <div class="invalid-feedback d-flex align-items-center">
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.monthlyIncome"] }}
                       </div>
                       <div class="form-text">Average monthly income</div>
                     </div>
@@ -845,7 +926,6 @@
       </div>
     </div>
 
-    <!-- Step 3: Family Members -->
     <!-- Step 3: Family Members -->
     <div v-else-if="currentStep === 3">
       <div class="row">
@@ -967,10 +1047,17 @@
                         <input
                           v-model="member.middleInitial"
                           type="text"
-                          class="form-control text-uppercase"
-                          maxlength="1"
+                          class="form-control"
+                          :class="{
+                            'is-invalid':
+                              fieldErrors[`members.${index}.middleInitial`],
+                          }"
                           placeholder="M"
+                          @blur="validateMemberField(index, 'middleInitial')"
                         />
+                        <div class="invalid-feedback">
+                          {{ fieldErrors[`members.${index}.middleInitial`] }}
+                        </div>
                       </div>
                       <div class="col-md-3">
                         <label class="form-label fw-medium">
@@ -993,7 +1080,15 @@
                       </div>
                       <div class="col-md-2">
                         <label class="form-label fw-medium">Extension</label>
-                        <select v-model="member.extension" class="form-select">
+                        <select
+                          v-model="member.extension"
+                          class="form-select"
+                          :class="{
+                            'is-invalid':
+                              fieldErrors[`members.${index}.extension`],
+                          }"
+                          @blur="validateMemberField(index, 'extension')"
+                        >
                           <option value="">None</option>
                           <option value="Jr">Jr</option>
                           <option value="Sr">Sr</option>
@@ -1001,6 +1096,9 @@
                           <option value="III">III</option>
                           <option value="IV">IV</option>
                         </select>
+                        <div class="invalid-feedback">
+                          {{ fieldErrors[`members.${index}.extension`] }}
+                        </div>
                       </div>
                       <div class="col-md-2">
                         <label class="form-label fw-medium">
@@ -1109,19 +1207,27 @@
 
                       <div class="col-md-3">
                         <label class="form-label fw-medium">
-                          Civil Status
+                          Civil Status <span class="text-danger">*</span>
                         </label>
                         <select
                           v-model="member.civilStatus"
                           class="form-select"
+                          :class="{
+                            'is-invalid':
+                              fieldErrors[`members.${index}.civilStatus`],
+                          }"
+                          @blur="validateMemberField(index, 'civilStatus')"
                         >
-                          <option value="">Select Status</option>
+                          <option value="" disabled>Select Status</option>
                           <option value="Single">Single</option>
                           <option value="Married">Married</option>
                           <option value="Widowed">Widowed</option>
                           <option value="Separated">Separated</option>
                           <option value="Divorced">Divorced</option>
                         </select>
+                        <div class="invalid-feedback">
+                          {{ fieldErrors[`members.${index}.civilStatus`] }}
+                        </div>
                       </div>
                     </div>
 
@@ -1147,32 +1253,21 @@
                             v-model="member.nationalId"
                             type="text"
                             class="form-control"
-                            :class="{
-                              'is-invalid':
-                                fieldErrors[`members.${index}.nationalId`],
-                            }"
                             placeholder="1234-5678-9012-3456"
-                            @blur="validateMemberField(index, 'nationalId')"
                           />
-                        </div>
-                        <div
-                          v-if="fieldErrors[`members.${index}.nationalId`]"
-                          class="invalid-feedback d-block"
-                        >
-                          {{ fieldErrors[`members.${index}.nationalId`] }}
                         </div>
                         <div class="form-text">
                           Optional: Philippine Identification System Number
                         </div>
                       </div>
 
-                      <!-- Voter Status -->
+                      <!-- Voter Status - NOW REQUIRED -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
                         >
                           <i class="ri-vote-line text-primary me-2"></i>
-                          Voter Status
+                          Voter Status <span class="text-danger ms-1">*</span>
                         </label>
                         <div class="btn-group w-100" role="group">
                           <input
@@ -1202,15 +1297,22 @@
                             <i class="ri-close-line me-1"></i>Non-Voter
                           </label>
                         </div>
+                        <div
+                          v-if="fieldErrors[`members.${index}.voterStatus`]"
+                          class="text-danger small d-flex align-items-center mt-1"
+                        >
+                          <i class="ri-error-warning-line me-1"></i>
+                          {{ fieldErrors[`members.${index}.voterStatus`] }}
+                        </div>
                       </div>
 
-                      <!-- 4Ps Member Status -->
+                      <!-- 4Ps Member Status - NOW REQUIRED -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
                         >
                           <i class="ri-group-line text-primary me-2"></i>
-                          4Ps Member Status
+                          4Ps Member Status <span class="text-danger ms-1">*</span>
                         </label>
                         <div class="btn-group w-100" role="group">
                           <input
@@ -1240,18 +1342,25 @@
                             <i class="ri-close-line me-1"></i>No
                           </label>
                         </div>
+                        <div
+                          v-if="fieldErrors[`members.${index}.is4psMember`]"
+                          class="text-danger small d-flex align-items-center mt-1"
+                        >
+                          <i class="ri-error-warning-line me-1"></i>
+                          {{ fieldErrors[`members.${index}.is4psMember`] }}
+                        </div>
                         <div class="form-text">
                           Pantawid Pamilyang Pilipino Program
                         </div>
                       </div>
 
-                      <!-- Deceased Status -->
+                      <!-- Deceased Status - NOW REQUIRED -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
                         >
                           <i class="ri-heart-line text-primary me-2"></i>
-                          Living Status
+                          Living Status <span class="text-danger ms-1">*</span>
                         </label>
                         <div class="btn-group w-100" role="group">
                           <input
@@ -1281,6 +1390,13 @@
                             <i class="ri-rest-time-line me-1"></i>Deceased
                           </label>
                         </div>
+                        <div
+                          v-if="fieldErrors[`members.${index}.isDeceased`]"
+                          class="text-danger small d-flex align-items-center mt-1"
+                        >
+                          <i class="ri-error-warning-line me-1"></i>
+                          {{ fieldErrors[`members.${index}.isDeceased`] }}
+                        </div>
                       </div>
                     </div>
 
@@ -1290,19 +1406,23 @@
                       >Education & Employment
                     </h6>
                     <div class="row g-3 mb-4">
-                      <!-- Highest Educational Attainment -->
+                      <!-- Highest Educational Attainment - NOW REQUIRED -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
                         >
                           <i class="ri-award-line text-primary me-2"></i>
-                          Highest Educational Attainment
+                          Highest Educational Attainment <span class="text-danger ms-1">*</span>
                         </label>
                         <select
                           v-model="member.highestEducation"
                           class="form-select"
+                          :class="{
+                            'is-invalid': fieldErrors[`members.${index}.highestEducation`],
+                          }"
+                          @blur="validateMemberField(index, 'highestEducation')"
                         >
-                          <option value="">Select Education Level</option>
+                          <option value="" disabled>Select Education Level</option>
                           <option value="No Formal Education">
                             No Formal Education
                           </option>
@@ -1333,21 +1453,28 @@
                             Doctorate Degree
                           </option>
                         </select>
+                        <div class="invalid-feedback">
+                          {{ fieldErrors[`members.${index}.highestEducation`] }}
+                        </div>
                       </div>
 
-                      <!-- Educational Status -->
+                      <!-- Educational Status - NOW REQUIRED -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
                         >
                           <i class="ri-book-line text-primary me-2"></i>
-                          Educational Status
+                          Educational Status <span class="text-danger ms-1">*</span>
                         </label>
                         <select
                           v-model="member.educationalStatus"
                           class="form-select"
+                          :class="{
+                            'is-invalid': fieldErrors[`members.${index}.educationalStatus`],
+                          }"
+                          @blur="validateMemberField(index, 'educationalStatus')"
                         >
-                          <option value="">Select Status</option>
+                          <option value="" disabled>Select Status</option>
                           <option value="Not Attending School">
                             Not Attending School
                           </option>
@@ -1359,15 +1486,18 @@
                           <option value="ALS Graduate">ALS Graduate</option>
                           <option value="ALS Student">ALS Student</option>
                         </select>
+                        <div class="invalid-feedback">
+                          {{ fieldErrors[`members.${index}.educationalStatus`] }}
+                        </div>
                       </div>
 
-                      <!-- Employment Status -->
+                      <!-- Employment Status - NOW REQUIRED -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
                         >
                           <i class="ri-briefcase-line text-primary me-2"></i>
-                          Employment Status
+                          Employment Status <span class="text-danger ms-1">*</span>
                         </label>
                         <div class="row g-2">
                           <div class="col-6">
@@ -1402,9 +1532,16 @@
                             </label>
                           </div>
                         </div>
+                        <div
+                          v-if="fieldErrors[`members.${index}.employmentStatus`]"
+                          class="text-danger small d-flex align-items-center mt-1"
+                        >
+                          <i class="ri-error-warning-line me-1"></i>
+                          {{ fieldErrors[`members.${index}.employmentStatus`] }}
+                        </div>
                       </div>
 
-                      <!-- Occupation/Job Title (Shows when Employed is selected) -->
+                      <!-- Occupation/Job Title (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
                       <div
                         class="col-md-4"
                         v-if="member.employmentStatus === 'Employed'"
@@ -1413,17 +1550,24 @@
                           class="form-label fw-medium d-flex align-items-center"
                         >
                           <i class="ri-suitcase-line text-primary me-2"></i>
-                          Occupation / Job Title
+                          Occupation / Job Title <span class="text-danger ms-1">*</span>
                         </label>
                         <input
                           v-model="member.occupation"
                           type="text"
                           class="form-control"
+                          :class="{
+                            'is-invalid': fieldErrors[`members.${index}.occupation`],
+                          }"
                           placeholder="e.g., Teacher, Engineer, Farmer"
+                          @blur="validateMemberField(index, 'occupation')"
                         />
+                        <div class="invalid-feedback">
+                          {{ fieldErrors[`members.${index}.occupation`] }}
+                        </div>
                       </div>
 
-                      <!-- Nature of Employment (Shows when Employed is selected) -->
+                      <!-- Nature of Employment (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
                       <div
                         class="col-md-4"
                         v-if="member.employmentStatus === 'Employed'"
@@ -1432,13 +1576,17 @@
                           class="form-label fw-medium d-flex align-items-center"
                         >
                           <i class="ri-building-line text-primary me-2"></i>
-                          Nature of Employment
+                          Nature of Employment <span class="text-danger ms-1">*</span>
                         </label>
                         <select
                           v-model="member.natureOfEmployment"
                           class="form-select"
+                          :class="{
+                            'is-invalid': fieldErrors[`members.${index}.natureOfEmployment`],
+                          }"
+                          @blur="validateMemberField(index, 'natureOfEmployment')"
                         >
-                          <option value="">Select Nature</option>
+                          <option value="" disabled>Select Nature</option>
                           <option value="Government Employee">
                             Government Employee
                           </option>
@@ -1455,10 +1603,12 @@
                             Contractual Worker
                           </option>
                         </select>
+                        <div class="invalid-feedback">
+                          {{ fieldErrors[`members.${index}.natureOfEmployment`] }}
+                        </div>
                       </div>
 
-                      <!-- Monthly Income (Shows when Employed is selected) -->
-                      <!-- Monthly Income Field with validation -->
+                      <!-- Monthly Income (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
                       <div
                         class="col-md-4"
                         v-if="member.employmentStatus === 'Employed'"
@@ -1469,7 +1619,7 @@
                           <i
                             class="ri-money-dollar-circle-line text-primary me-2"
                           ></i>
-                          Monthly Income (PHP)
+                          Monthly Income (PHP) <span class="text-danger ms-1">*</span>
                         </label>
                         <div class="input-group">
                           <span class="input-group-text bg-light-subtle">
@@ -1491,12 +1641,9 @@
                             @blur="validateMemberField(index, 'monthlyIncome')"
                           />
                           <span class="input-group-text">PHP</span>
-                          <div
-                            v-if="fieldErrors[`members.${index}.monthlyIncome`]"
-                            class="invalid-feedback d-block"
-                          >
-                            {{ fieldErrors[`members.${index}.monthlyIncome`] }}
-                          </div>
+                        </div>
+                        <div class="invalid-feedback">
+                          {{ fieldErrors[`members.${index}.monthlyIncome`] }}
                         </div>
                         <div class="form-text">Average monthly income</div>
                       </div>
@@ -1505,15 +1652,15 @@
                     <!-- CONTACT INFORMATION -->
                     <h6 class="border-bottom pb-2 mb-3 fw-semibold">
                       <i class="ri-contacts-line text-primary me-2"></i>Contact
-                      Informationsss
+                      Information
                     </h6>
                     <div class="row g-3">
                       <!-- Contact Number Field with validation -->
                       <div class="col-md-6">
                         <label class="form-label fw-medium">
-                          Contact Numberss
+                          Contact Number
                         </label>
-                        <div class="input-group has-validation">
+                        <div class="input-group">
                           <span class="input-group-text bg-light-subtle">
                             <i class="ri-phone-line text-primary"></i>
                           </span>
@@ -1521,20 +1668,9 @@
                             v-model="member.contactNumber"
                             type="tel"
                             class="form-control"
-                            :class="{
-                              'is-invalid':
-                                fieldErrors[`members.${index}.contactNumber`],
-                            }"
                             placeholder="09123456789"
                             @input="(e) => formatMemberPhoneNumber(e, index)"
-                            @blur="validateMemberField(index, 'contactNumber')"
                           />
-                          <div
-                            v-if="fieldErrors[`members.${index}.contactNumber`]"
-                            class="invalid-feedback d-block"
-                          >
-                            {{ fieldErrors[`members.${index}.contactNumber`] }}
-                          </div>
                         </div>
                         <div class="form-text">Format: 09XX-XXX-XXXX</div>
                       </div>
@@ -2367,15 +2503,13 @@ export default {
           contactNumber: "",
           email: "",
           occupation: "",
-
-          // New fields
           nationalId: "",
           highestEducation: "",
           educationalStatus: "",
           employmentStatus: "",
           is4psMember: "",
           voterStatus: "",
-          isDeceased: "No",
+          isDeceased: "",
           natureOfEmployment: "",
           monthlyIncome: "",
         },
@@ -2399,7 +2533,7 @@ export default {
       return `${((this.currentStep - 1) / (this.steps.length - 1)) * 100}%`;
     },
     totalMembers() {
-      return this.formData.members.length + 1; // +1 for head of family
+      return this.formData.members.length + 1;
     },
   },
   methods: {
@@ -2429,13 +2563,24 @@ export default {
         case 1:
           return !this.formData.address.purok || !this.formData.address.street;
         case 2:
+          const head = this.formData.headOfFamily;
           return (
-            !this.formData.headOfFamily.firstName ||
-            !this.formData.headOfFamily.lastName ||
-            !this.formData.headOfFamily.sex ||
-            !this.formData.headOfFamily.birthdate ||
-            !this.formData.headOfFamily.contactNumber ||
-            !this.formData.headOfFamily.employmentStatus
+            !head.firstName ||
+            !head.lastName ||
+            !head.sex ||
+            !head.birthdate ||
+            !head.contactNumber ||
+            !head.civilStatus ||
+            !head.employmentStatus ||
+            !head.voterStatus ||
+            !head.is4psMember ||
+            !head.isDeceased ||
+            !head.highestEducation ||
+            !head.educationalStatus ||
+            (head.employmentStatus === "Employed" &&
+              (!head.occupation ||
+                !head.natureOfEmployment ||
+                !head.monthlyIncome))
           );
         case 3:
           if (this.formData.members.length === 0) return false;
@@ -2447,11 +2592,17 @@ export default {
               !member.sex ||
               !member.birthdate ||
               !member.relationship ||
-              this.fieldErrors[`members.${index}.firstName`] ||
-              this.fieldErrors[`members.${index}.lastName`] ||
-              this.fieldErrors[`members.${index}.sex`] ||
-              this.fieldErrors[`members.${index}.birthdate`] ||
-              this.fieldErrors[`members.${index}.relationship`];
+              !member.civilStatus ||
+              !member.voterStatus ||
+              !member.is4psMember ||
+              !member.isDeceased ||
+              !member.highestEducation ||
+              !member.educationalStatus ||
+              !member.employmentStatus ||
+              (member.employmentStatus === "Employed" &&
+                (!member.occupation ||
+                  !member.natureOfEmployment ||
+                  !member.monthlyIncome));
 
             return hasErrors;
           });
@@ -2502,65 +2653,97 @@ export default {
       }
     },
     validateStep2() {
+      const head = this.formData.headOfFamily;
+
       // Validate first name
-      if (!this.formData.headOfFamily.firstName) {
+      if (!head.firstName) {
         this.fieldErrors["headOfFamily.firstName"] = "First name is required";
         this.validationErrors.push("First name is required");
-      } else if (!/^[A-Za-z\s]+$/.test(this.formData.headOfFamily.firstName)) {
+      } else if (head.firstName.length < 2) {
         this.fieldErrors["headOfFamily.firstName"] =
-          "First name can only contain letters";
-        this.validationErrors.push("First name contains invalid characters");
+          "First name must be at least 2 characters";
+        this.validationErrors.push("First name must be at least 2 characters");
       }
 
       // Validate last name
-      if (!this.formData.headOfFamily.lastName) {
+      if (!head.lastName) {
         this.fieldErrors["headOfFamily.lastName"] = "Last name is required";
         this.validationErrors.push("Last name is required");
-      } else if (!/^[A-Za-z\s]+$/.test(this.formData.headOfFamily.lastName)) {
+      } else if (head.lastName.length < 2) {
         this.fieldErrors["headOfFamily.lastName"] =
-          "Last name can only contain letters";
-        this.validationErrors.push("Last name contains invalid characters");
+          "Last name must be at least 2 characters";
+        this.validationErrors.push("Last name must be at least 2 characters");
+      }
+
+      // Validate middle initial if provided
+      if (head.middleInitial) {
+        if (!this.isValidMiddleInitial(head.middleInitial)) {
+          this.fieldErrors["headOfFamily.middleInitial"] =
+            "Middle initial must be 1-3 letters";
+          this.validationErrors.push("Middle initial must be 1-3 letters");
+        }
+      }
+
+      // Validate extension if provided
+      if (head.extension) {
+        if (!this.isValidExtension(head.extension)) {
+          this.fieldErrors["headOfFamily.extension"] =
+            "Extension must be valid (Jr, Sr, II, III, IV)";
+          this.validationErrors.push("Invalid extension");
+        }
       }
 
       // Validate sex
-      if (!this.formData.headOfFamily.sex) {
+      if (!head.sex) {
         this.fieldErrors["headOfFamily.sex"] = "Please select gender";
         this.validationErrors.push("Gender selection is required");
       }
 
       // Validate birthdate
-      if (!this.formData.headOfFamily.birthdate) {
+      if (!head.birthdate) {
         this.fieldErrors["headOfFamily.birthdate"] = "Birthdate is required";
         this.validationErrors.push("Birthdate is required");
       } else {
-        const birthdate = new Date(this.formData.headOfFamily.birthdate);
+        const birthdate = new Date(head.birthdate);
         const today = new Date();
-        const age = today.getFullYear() - birthdate.getFullYear();
-        if (age < 18) {
-          this.fieldErrors["headOfFamily.birthdate"] =
-            "Head of family must be at least 18 years old";
-          this.validationErrors.push(
-            "Head of family must be at least 18 years old"
-          );
-        }
-        if (age > 120) {
-          this.fieldErrors["headOfFamily.birthdate"] =
-            "Please enter a valid birthdate";
-          this.validationErrors.push("Please enter a valid birthdate");
+
+        if (isNaN(birthdate.getTime())) {
+          this.fieldErrors["headOfFamily.birthdate"] = "Invalid date format";
+          this.validationErrors.push("Invalid date format");
+        } else {
+          const age = today.getFullYear() - birthdate.getFullYear();
+          const monthDiff = today.getMonth() - birthdate.getMonth();
+          const dayDiff = today.getDate() - birthdate.getDate();
+          const adjustedAge =
+            monthDiff < 0 || (monthDiff === 0 && dayDiff < 0) ? age - 1 : age;
+
+          if (adjustedAge > 130) {
+            this.fieldErrors["headOfFamily.birthdate"] =
+              "Age cannot exceed 130 years";
+            this.validationErrors.push("Age cannot exceed 130 years");
+          } else if (adjustedAge < 0) {
+            this.fieldErrors["headOfFamily.birthdate"] =
+              "Birthdate cannot be in the future";
+            this.validationErrors.push("Birthdate cannot be in the future");
+          }
         }
       }
 
+      // Validate civil status
+      if (!head.civilStatus) {
+        this.fieldErrors["headOfFamily.civilStatus"] =
+          "Civil status is required";
+        this.validationErrors.push("Civil status is required");
+      }
+
       // Validate contact number
-      if (!this.formData.headOfFamily.contactNumber) {
+      if (!head.contactNumber) {
         this.fieldErrors["headOfFamily.contactNumber"] =
           "Contact number is required";
         this.validationErrors.push("Contact number is required");
       } else {
         const phoneRegex = /^09\d{9}$/;
-        const cleanNumber = this.formData.headOfFamily.contactNumber.replace(
-          /\D/g,
-          ""
-        );
+        const cleanNumber = head.contactNumber.replace(/\D/g, "");
         if (!phoneRegex.test(cleanNumber)) {
           this.fieldErrors["headOfFamily.contactNumber"] =
             "Please enter a valid Philippine mobile number (09XXXXXXXXX)";
@@ -2569,10 +2752,80 @@ export default {
       }
 
       // Validate employment status
-      if (!this.formData.headOfFamily.employmentStatus) {
+      if (!head.employmentStatus) {
         this.fieldErrors["headOfFamily.employmentStatus"] =
           "Employment status is required";
         this.validationErrors.push("Employment status is required");
+      }
+
+      // Validate Voter Status
+      if (!head.voterStatus) {
+        this.fieldErrors["headOfFamily.voterStatus"] =
+          "Voter status is required";
+        this.validationErrors.push("Voter status is required");
+      }
+
+      // Validate 4Ps Member Status
+      if (!head.is4psMember) {
+        this.fieldErrors["headOfFamily.is4psMember"] =
+          "4Ps member status is required";
+        this.validationErrors.push("4Ps member status is required");
+      }
+
+      // Validate Living Status
+      if (!head.isDeceased) {
+        this.fieldErrors["headOfFamily.isDeceased"] =
+          "Living status is required";
+        this.validationErrors.push("Living status is required");
+      }
+
+      // Validate Highest Educational Attainment
+      if (!head.highestEducation) {
+        this.fieldErrors["headOfFamily.highestEducation"] =
+          "Highest educational attainment is required";
+        this.validationErrors.push("Highest educational attainment is required");
+      }
+
+      // Validate Educational Status
+      if (!head.educationalStatus) {
+        this.fieldErrors["headOfFamily.educationalStatus"] =
+          "Educational status is required";
+        this.validationErrors.push("Educational status is required");
+      }
+
+      // CONDITIONAL VALIDATIONS FOR EMPLOYED STATUS
+      if (head.employmentStatus === "Employed") {
+        // Validate Occupation
+        if (!head.occupation) {
+          this.fieldErrors["headOfFamily.occupation"] =
+            "Occupation is required when employed";
+          this.validationErrors.push("Occupation is required when employed");
+        }
+
+        // Validate Nature of Employment
+        if (!head.natureOfEmployment) {
+          this.fieldErrors["headOfFamily.natureOfEmployment"] =
+            "Nature of employment is required when employed";
+          this.validationErrors.push(
+            "Nature of employment is required when employed"
+          );
+        }
+
+        // Validate Monthly Income
+        if (!head.monthlyIncome) {
+          this.fieldErrors["headOfFamily.monthlyIncome"] =
+            "Monthly income is required when employed";
+          this.validationErrors.push("Monthly income is required when employed");
+        } else {
+          const income = parseFloat(head.monthlyIncome);
+          if (isNaN(income) || income < 0) {
+            this.fieldErrors["headOfFamily.monthlyIncome"] =
+              "Monthly income must be a positive number";
+            this.validationErrors.push(
+              "Monthly income must be a positive number"
+            );
+          }
+        }
       }
     },
     validateStep3() {
@@ -2589,12 +2842,6 @@ export default {
           this.validationErrors.push(
             `Member ${memberNum}: First name is required`
           );
-        } else if (!/^[A-Za-z\sñÑ]+$/.test(member.firstName)) {
-          this.fieldErrors[`members.${index}.firstName`] =
-            "First name can only contain letters";
-          this.validationErrors.push(
-            `Member ${memberNum}: First name contains invalid characters`
-          );
         } else if (member.firstName.length < 2) {
           this.fieldErrors[`members.${index}.firstName`] =
             "First name must be at least 2 characters";
@@ -2610,12 +2857,6 @@ export default {
           this.validationErrors.push(
             `Member ${memberNum}: Last name is required`
           );
-        } else if (!/^[A-Za-z\sñÑ]+$/.test(member.lastName)) {
-          this.fieldErrors[`members.${index}.lastName`] =
-            "Last name can only contain letters";
-          this.validationErrors.push(
-            `Member ${memberNum}: Last name contains invalid characters`
-          );
         } else if (member.lastName.length < 2) {
           this.fieldErrors[`members.${index}.lastName`] =
             "Last name must be at least 2 characters";
@@ -2624,13 +2865,26 @@ export default {
           );
         }
 
-        // Validate middle initial
-        if (member.middleInitial && !/^[A-Z]$/.test(member.middleInitial)) {
-          this.fieldErrors[`members.${index}.middleInitial`] =
-            "Must be a single capital letter";
-          this.validationErrors.push(
-            `Member ${memberNum}: Middle initial must be a single capital letter`
-          );
+        // Validate middle initial if provided
+        if (member.middleInitial) {
+          if (!this.isValidMiddleInitial(member.middleInitial)) {
+            this.fieldErrors[`members.${index}.middleInitial`] =
+              "Middle initial must be 1-3 letters";
+            this.validationErrors.push(
+              `Member ${memberNum}: Middle initial must be 1-3 letters`
+            );
+          }
+        }
+
+        // Validate extension if provided
+        if (member.extension) {
+          if (!this.isValidExtension(member.extension)) {
+            this.fieldErrors[`members.${index}.extension`] =
+              "Extension must be valid (Jr, Sr, II, III, IV)";
+            this.validationErrors.push(
+              `Member ${memberNum}: Invalid extension`
+            );
+          }
         }
 
         // Validate sex
@@ -2655,7 +2909,6 @@ export default {
           const birthdate = new Date(member.birthdate);
           const today = new Date();
 
-          // Check if date is valid
           if (isNaN(birthdate.getTime())) {
             this.fieldErrors[`members.${index}.birthdate`] =
               "Invalid date format";
@@ -2669,12 +2922,11 @@ export default {
             const adjustedAge =
               monthDiff < 0 || (monthDiff === 0 && dayDiff < 0) ? age - 1 : age;
 
-            // Validate age range
-            if (adjustedAge > 120) {
+            if (adjustedAge > 130) {
               this.fieldErrors[`members.${index}.birthdate`] =
-                "Age cannot exceed 120 years";
+                "Age cannot exceed 130 years";
               this.validationErrors.push(
-                `Member ${memberNum}: Age cannot exceed 120 years`
+                `Member ${memberNum}: Age cannot exceed 130 years`
               );
             } else if (adjustedAge < 0) {
               this.fieldErrors[`members.${index}.birthdate`] =
@@ -2683,28 +2935,16 @@ export default {
                 `Member ${memberNum}: Birthdate cannot be in the future`
               );
             }
-
-            // Additional validations based on relationship
-            if (member.relationship === "Child") {
-              if (adjustedAge > 18) {
-                this.fieldErrors[`members.${index}.birthdate`] =
-                  "Child must be under 18 years old";
-                this.validationErrors.push(
-                  `Member ${memberNum}: Child must be under 18 years old`
-                );
-              }
-            }
-
-            if (member.relationship === "Spouse") {
-              if (adjustedAge < 18) {
-                this.fieldErrors[`members.${index}.birthdate`] =
-                  "Spouse must be at least 18 years old";
-                this.validationErrors.push(
-                  `Member ${memberNum}: Spouse must be at least 18 years old`
-                );
-              }
-            }
           }
+        }
+
+        // Validate civil status
+        if (!member.civilStatus) {
+          this.fieldErrors[`members.${index}.civilStatus`] =
+            "Civil status is required";
+          this.validationErrors.push(
+            `Member ${memberNum}: Civil status is required`
+          );
         }
 
         // Validate relationship
@@ -2732,7 +2972,106 @@ export default {
           );
         }
 
-        // Validate contact number
+        // Validate Voter Status
+        if (!member.voterStatus) {
+          this.fieldErrors[`members.${index}.voterStatus`] =
+            "Voter status is required";
+          this.validationErrors.push(
+            `Member ${memberNum}: Voter status is required`
+          );
+        }
+
+        // Validate 4Ps Member Status
+        if (!member.is4psMember) {
+          this.fieldErrors[`members.${index}.is4psMember`] =
+            "4Ps member status is required";
+          this.validationErrors.push(
+            `Member ${memberNum}: 4Ps member status is required`
+          );
+        }
+
+        // Validate Living Status
+        if (!member.isDeceased) {
+          this.fieldErrors[`members.${index}.isDeceased`] =
+            "Living status is required";
+          this.validationErrors.push(
+            `Member ${memberNum}: Living status is required`
+          );
+        }
+
+        // Validate Highest Educational Attainment
+        if (!member.highestEducation) {
+          this.fieldErrors[`members.${index}.highestEducation`] =
+            "Highest educational attainment is required";
+          this.validationErrors.push(
+            `Member ${memberNum}: Highest educational attainment is required`
+          );
+        }
+
+        // Validate Educational Status
+        if (!member.educationalStatus) {
+          this.fieldErrors[`members.${index}.educationalStatus`] =
+            "Educational status is required";
+          this.validationErrors.push(
+            `Member ${memberNum}: Educational status is required`
+          );
+        }
+
+        // Validate Employment Status
+        if (!member.employmentStatus) {
+          this.fieldErrors[`members.${index}.employmentStatus`] =
+            "Employment status is required";
+          this.validationErrors.push(
+            `Member ${memberNum}: Employment status is required`
+          );
+        }
+
+        // CONDITIONAL VALIDATIONS FOR EMPLOYED STATUS
+        if (member.employmentStatus === "Employed") {
+          // Validate Occupation
+          if (!member.occupation) {
+            this.fieldErrors[`members.${index}.occupation`] =
+              "Occupation is required when employed";
+            this.validationErrors.push(
+              `Member ${memberNum}: Occupation is required when employed`
+            );
+          }
+
+          // Validate Nature of Employment
+          if (!member.natureOfEmployment) {
+            this.fieldErrors[`members.${index}.natureOfEmployment`] =
+              "Nature of employment is required when employed";
+            this.validationErrors.push(
+              `Member ${memberNum}: Nature of employment is required when employed`
+            );
+          }
+
+          // Validate Monthly Income
+          if (!member.monthlyIncome) {
+            this.fieldErrors[`members.${index}.monthlyIncome`] =
+              "Monthly income is required when employed";
+            this.validationErrors.push(
+              `Member ${memberNum}: Monthly income is required when employed`
+            );
+          } else {
+            const income = parseFloat(member.monthlyIncome);
+            if (isNaN(income) || income < 0) {
+              this.fieldErrors[`members.${index}.monthlyIncome`] =
+                "Monthly income must be a positive number";
+              this.validationErrors.push(
+                `Member ${memberNum}: Monthly income must be a positive number`
+              );
+            } else if (income > 1000000) {
+              this.fieldErrors[`members.${index}.monthlyIncome`] =
+                "Monthly income cannot exceed ₱1,000,000";
+              this.validationErrors.push(
+                `Member ${memberNum}: Monthly income cannot exceed ₱1,000,000`
+              );
+            }
+          }
+        }
+
+        // Validate contact number if provided
         if (member.contactNumber) {
           const cleanNumber = member.contactNumber.replace(/\D/g, "");
           if (!/^09\d{9}$/.test(cleanNumber)) {
@@ -2744,7 +3083,7 @@ export default {
           }
         }
 
-        // Validate email
+        // Validate email if provided
         if (member.email) {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailRegex.test(member.email)) {
@@ -2766,42 +3105,11 @@ export default {
             );
           }
         }
-
-        // Validate monthly income if provided
-        if (member.monthlyIncome) {
-          const income = parseFloat(member.monthlyIncome);
-          if (isNaN(income) || income < 0) {
-            this.fieldErrors[`members.${index}.monthlyIncome`] =
-              "Monthly income must be a positive number";
-            this.validationErrors.push(
-              `Member ${memberNum}: Monthly income must be a positive number`
-            );
-          } else if (income > 1000000) {
-            this.fieldErrors[`members.${index}.monthlyIncome`] =
-              "Monthly income cannot exceed ₱1,000,000";
-            this.validationErrors.push(
-              `Member ${memberNum}: Monthly income cannot exceed ₱1,000,000`
-            );
-          }
-        }
-
-        // Validate birthdate format on blur
-        if (member.birthdate) {
-          const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-          if (!dateRegex.test(member.birthdate)) {
-            this.fieldErrors[`members.${index}.birthdate`] =
-              "Invalid date format (YYYY-MM-DD)";
-            this.validationErrors.push(
-              `Member ${memberNum}: Invalid date format`
-            );
-          }
-        }
       });
 
       // Check for duplicate members
       this.checkForDuplicateMembers();
     },
-
     checkForDuplicateMembers() {
       const members = this.formData.members;
       for (let i = 0; i < members.length; i++) {
@@ -2809,7 +3117,6 @@ export default {
           const member1 = members[i];
           const member2 = members[j];
 
-          // Compare key fields
           if (
             member1.firstName.toLowerCase() ===
               member2.firstName.toLowerCase() &&
@@ -2864,10 +3171,8 @@ export default {
     validateField(fieldPath) {
       const [category, field] = fieldPath.split(".");
 
-      // Clear previous error
       delete this.fieldErrors[fieldPath];
 
-      // Validate based on field
       let value;
       if (category === "headOfFamily") {
         value = this.formData.headOfFamily[field];
@@ -2876,8 +3181,55 @@ export default {
           case "lastName":
             if (!value) {
               this.fieldErrors[fieldPath] = "This field is required";
-            } else if (!/^[A-Za-z\s]+$/.test(value)) {
-              this.fieldErrors[fieldPath] = "Can only contain letters";
+            } else if (value.length < 2) {
+              this.fieldErrors[fieldPath] = "Must be at least 2 characters";
+            }
+            break;
+          case "middleInitial":
+            if (value && !this.isValidMiddleInitial(value)) {
+              this.fieldErrors[fieldPath] = "Must be 1-3 letters";
+            }
+            break;
+          case "extension":
+            if (value && !this.isValidExtension(value)) {
+              this.fieldErrors[fieldPath] = "Invalid extension";
+            }
+            break;
+          case "sex":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Please select gender";
+            }
+            break;
+          case "birthdate":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Birthdate is required";
+            } else {
+              const birthdate = new Date(value);
+              const today = new Date();
+
+              if (isNaN(birthdate.getTime())) {
+                this.fieldErrors[fieldPath] = "Invalid date format";
+              } else {
+                const age = today.getFullYear() - birthdate.getFullYear();
+                const monthDiff = today.getMonth() - birthdate.getMonth();
+                const dayDiff = today.getDate() - birthdate.getDate();
+                const adjustedAge =
+                  monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)
+                    ? age - 1
+                    : age;
+
+                if (adjustedAge > 130) {
+                  this.fieldErrors[fieldPath] = "Age cannot exceed 130 years";
+                } else if (adjustedAge < 0) {
+                  this.fieldErrors[fieldPath] =
+                    "Birthdate cannot be in the future";
+                }
+              }
+            }
+            break;
+          case "civilStatus":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Civil status is required";
             }
             break;
           case "contactNumber":
@@ -2890,26 +3242,71 @@ export default {
               }
             }
             break;
-          case "birthdate":
-            if (!value) {
-              this.fieldErrors[fieldPath] = "Birthdate is required";
-            } else {
-              const birthdate = new Date(value);
-              const today = new Date();
-              const age = today.getFullYear() - birthdate.getFullYear();
-              if (age < 18) {
-                this.fieldErrors[fieldPath] = "Must be at least 18 years old";
-              }
-            }
-            break;
-          case "sex":
-            if (!value) {
-              this.fieldErrors[fieldPath] = "Please select gender";
-            }
-            break;
           case "employmentStatus":
             if (!value) {
               this.fieldErrors[fieldPath] = "Employment status is required";
+            }
+            break;
+          case "voterStatus":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Voter status is required";
+            }
+            break;
+          case "is4psMember":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "4Ps member status is required";
+            }
+            break;
+          case "isDeceased":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Living status is required";
+            }
+            break;
+          case "highestEducation":
+            if (!value) {
+              this.fieldErrors[fieldPath] =
+                "Highest educational attainment is required";
+            }
+            break;
+          case "educationalStatus":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Educational status is required";
+            }
+            break;
+          case "occupation":
+            if (
+              this.formData.headOfFamily.employmentStatus === "Employed" &&
+              !value
+            ) {
+              this.fieldErrors[fieldPath] =
+                "Occupation is required when employed";
+            }
+            break;
+          case "natureOfEmployment":
+            if (
+              this.formData.headOfFamily.employmentStatus === "Employed" &&
+              !value
+            ) {
+              this.fieldErrors[fieldPath] =
+                "Nature of employment is required when employed";
+            }
+            break;
+          case "monthlyIncome":
+            if (
+              this.formData.headOfFamily.employmentStatus === "Employed" &&
+              !value
+            ) {
+              this.fieldErrors[fieldPath] =
+                "Monthly income is required when employed";
+            } else if (
+              value &&
+              this.formData.headOfFamily.employmentStatus === "Employed"
+            ) {
+              const income = parseFloat(value);
+              if (isNaN(income) || income < 0) {
+                this.fieldErrors[fieldPath] =
+                  "Monthly income must be a positive number";
+              }
             }
             break;
         }
@@ -2956,47 +3353,50 @@ export default {
       const member = this.formData.members[index];
       const fieldPath = `members.${index}.${field}`;
 
-      // Clear previous error
       delete this.fieldErrors[fieldPath];
 
-      if (
-        !member[field] &&
-        field !== "middleInitial" &&
-        field !== "extension" &&
-        field !== "contactNumber" &&
-        field !== "email" &&
-        field !== "nationalId" &&
-        field !== "occupation" &&
-        field !== "monthlyIncome"
-      ) {
+      const requiredFields = [
+        "firstName",
+        "lastName",
+        "sex",
+        "birthdate",
+        "civilStatus",
+        "relationship",
+        "voterStatus",
+        "is4psMember",
+        "isDeceased",
+        "highestEducation",
+        "educationalStatus",
+        "employmentStatus",
+      ];
+
+      if (requiredFields.includes(field) && !member[field]) {
         this.fieldErrors[fieldPath] = "This field is required";
         return;
       }
 
-      // Additional validations
       switch (field) {
         case "firstName":
         case "lastName":
-          if (!member[field]) return;
-          if (!/^[A-Za-z\sñÑ]+$/.test(member[field])) {
-            this.fieldErrors[fieldPath] = "Can only contain letters";
-          } else if (member[field].length < 2) {
+          if (member[field] && member[field].length < 2) {
             this.fieldErrors[fieldPath] = "Must be at least 2 characters";
           }
           break;
-
         case "middleInitial":
-          if (member[field] && !/^[A-Z]$/.test(member[field])) {
-            this.fieldErrors[fieldPath] = "Must be a single capital letter";
+          if (member[field] && !this.isValidMiddleInitial(member[field])) {
+            this.fieldErrors[fieldPath] = "Must be 1-3 letters";
           }
           break;
-
+        case "extension":
+          if (member[field] && !this.isValidExtension(member[field])) {
+            this.fieldErrors[fieldPath] = "Invalid extension";
+          }
+          break;
         case "sex":
           if (member[field] && !["Male", "Female"].includes(member[field])) {
             this.fieldErrors[fieldPath] = "Please select a valid gender";
           }
           break;
-
         case "birthdate":
           if (!member[field]) return;
           const birthdate = new Date(member[field]);
@@ -3011,39 +3411,39 @@ export default {
             const adjustedAge =
               monthDiff < 0 || (monthDiff === 0 && dayDiff < 0) ? age - 1 : age;
 
-            if (adjustedAge > 120) {
-              this.fieldErrors[fieldPath] = "Age cannot exceed 120 years";
+            if (adjustedAge > 130) {
+              this.fieldErrors[fieldPath] = "Age cannot exceed 130 years";
             } else if (adjustedAge < 0) {
               this.fieldErrors[fieldPath] = "Birthdate cannot be in the future";
             }
-
-            // Relationship-specific validations
-            if (member.relationship === "Child" && adjustedAge > 18) {
-              this.fieldErrors[fieldPath] = "Child must be under 18 years old";
-            }
-            if (member.relationship === "Spouse" && adjustedAge < 18) {
+          }
+          break;
+        case "occupation":
+          if (member.employmentStatus === "Employed" && !member[field]) {
+            this.fieldErrors[fieldPath] = "Occupation is required when employed";
+          }
+          break;
+        case "natureOfEmployment":
+          if (member.employmentStatus === "Employed" && !member[field]) {
+            this.fieldErrors[fieldPath] =
+              "Nature of employment is required when employed";
+          }
+          break;
+        case "monthlyIncome":
+          if (member.employmentStatus === "Employed" && !member[field]) {
+            this.fieldErrors[fieldPath] =
+              "Monthly income is required when employed";
+          } else if (member[field] && member.employmentStatus === "Employed") {
+            const income = parseFloat(member[field]);
+            if (isNaN(income) || income < 0) {
               this.fieldErrors[fieldPath] =
-                "Spouse must be at least 18 years old";
+                "Monthly income must be a positive number";
+            } else if (income > 1000000) {
+              this.fieldErrors[fieldPath] =
+                "Monthly income cannot exceed ₱1,000,000";
             }
           }
           break;
-
-        case "relationship":
-          if (!member[field]) return;
-          const validRelationships = [
-            "Spouse",
-            "Child",
-            "Parent",
-            "Sibling",
-            "Grandchild",
-            "Relative",
-            "Non-relative",
-          ];
-          if (!validRelationships.includes(member[field])) {
-            this.fieldErrors[fieldPath] = "Please select a valid relationship";
-          }
-          break;
-
         case "contactNumber":
           if (!member[field]) return;
           const cleanNumber = member[field].replace(/\D/g, "");
@@ -3051,7 +3451,6 @@ export default {
             this.fieldErrors[fieldPath] = "Invalid format (09XXXXXXXXX)";
           }
           break;
-
         case "email":
           if (!member[field]) return;
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -3059,7 +3458,6 @@ export default {
             this.fieldErrors[fieldPath] = "Invalid email format";
           }
           break;
-
         case "nationalId":
           if (!member[field]) return;
           const cleanedId = member[field].replace(/\s|-/g, "");
@@ -3067,17 +3465,14 @@ export default {
             this.fieldErrors[fieldPath] = "Must be 12-19 digits";
           }
           break;
-
-        case "monthlyIncome":
-          if (!member[field]) return;
-          const income = parseFloat(member[field]);
-          if (isNaN(income) || income < 0) {
-            this.fieldErrors[fieldPath] = "Must be a positive number";
-          } else if (income > 1000000) {
-            this.fieldErrors[fieldPath] = "Cannot exceed ₱1,000,000";
-          }
-          break;
       }
+    },
+    isValidMiddleInitial(mi) {
+      return /^[A-Za-z]{1,3}$/.test(mi);
+    },
+    isValidExtension(ext) {
+      const validExtensions = ["Jr", "Sr", "II", "III", "IV"];
+      return validExtensions.includes(ext);
     },
     addMember() {
       this.formData.members.push({
@@ -3092,42 +3487,32 @@ export default {
         contactNumber: "",
         email: "",
         occupation: "",
-
-        // New fields matching head of family
         nationalId: "",
         highestEducation: "",
         educationalStatus: "",
         employmentStatus: "",
         is4psMember: "",
         voterStatus: "",
-        isDeceased: "No",
+        isDeceased: "",
         natureOfEmployment: "",
         monthlyIncome: "",
-        education: "", // Keep this for backward compatibility if needed
       });
     },
     formatMemberPhoneNumber(event, index) {
       let value = event.target.value.replace(/\D/g, "");
-
-      // Limit to 11 digits
       if (value.length > 11) value = value.slice(0, 11);
-
-      // Format: 09XX-XXX-XXXX
       if (value.length > 4) {
         value = value.slice(0, 4) + "-" + value.slice(4);
       }
       if (value.length > 8) {
         value = value.slice(0, 9) + "-" + value.slice(9);
       }
-
       event.target.value = value;
       this.formData.members[index].contactNumber = value;
     },
-
     removeMember(index) {
       if (confirm("Are you sure you want to remove this member?")) {
         this.formData.members.splice(index, 1);
-        // Clear errors for removed member
         Object.keys(this.fieldErrors).forEach((key) => {
           if (key.startsWith(`members.${index}`)) {
             delete this.fieldErrors[key];
@@ -3142,22 +3527,16 @@ export default {
     },
     formatPhoneNumber(event) {
       let value = event.target.value.replace(/\D/g, "");
-
-      // Limit to 11 digits
       if (value.length > 11) value = value.slice(0, 11);
-
-      // Format: 09XX-XXX-XXXX
       if (value.length > 4) {
         value = value.slice(0, 4) + "-" + value.slice(4);
       }
       if (value.length > 8) {
         value = value.slice(0, 9) + "-" + value.slice(9);
       }
-
       event.target.value = value;
       this.formData.headOfFamily.contactNumber = value;
     },
-
     calculateAge(birthdate) {
       if (!birthdate) return "N/A";
       const birth = new Date(birthdate);
@@ -3174,9 +3553,8 @@ export default {
     },
     formatName(person) {
       if (!person.firstName && !person.lastName) return "Not specified";
-
       let name = `${person.firstName || ""}`;
-      if (person.middleInitial) name += ` ${person.middleInitial}.`;
+      if (person.middleInitial) name += ` ${person.middleInitial}`;
       name += ` ${person.lastName || ""}`;
       if (person.extension) name += ` ${person.extension}`;
       return name.trim();
@@ -3216,19 +3594,12 @@ export default {
       }
 
       if (this.validateCurrentStep()) {
-        // Generate reference ID
         this.referenceId = this.generateReferenceId();
-
-        // Show success modal
         this.showSuccessModal = true;
-
-        // In real application, send to backend
         console.log("Form submitted:", {
           referenceId: this.referenceId,
           ...this.formData,
         });
-
-        // Clear draft
         localStorage.removeItem("householdDraft");
       }
     },
@@ -3256,15 +3627,13 @@ export default {
           contactNumber: "",
           email: "",
           occupation: "",
-
-          // New fields
           nationalId: "",
           highestEducation: "",
           educationalStatus: "",
           employmentStatus: "",
           is4psMember: "",
           voterStatus: "",
-          isDeceased: "No",
+          isDeceased: "",
           natureOfEmployment: "",
           monthlyIncome: "",
         },
@@ -3293,7 +3662,6 @@ export default {
 </script>
 
 <style scoped>
-/* Progress Steps */
 .step-container {
   position: relative;
   z-index: 2;
@@ -3361,7 +3729,6 @@ export default {
   min-width: 80px;
 }
 
-/* Card Header Icons */
 .step-header-icon {
   width: 40px;
   height: 40px;
@@ -3372,7 +3739,6 @@ export default {
   justify-content: center;
 }
 
-/* Member Cards */
 .member-card {
   position: relative;
 }
@@ -3401,7 +3767,6 @@ export default {
   color: #6c757d;
 }
 
-/* Avatar Circle */
 .avatar-circle {
   width: 50px;
   height: 50px;
@@ -3412,7 +3777,6 @@ export default {
   font-size: 1.5rem;
 }
 
-/* Form Validation Styles */
 .is-invalid {
   border-color: #dc3545 !important;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e") !important;
@@ -3426,14 +3790,12 @@ export default {
   font-size: 0.875rem;
 }
 
-/* Button Group Styles */
 .btn-group .btn-check:checked + .btn {
   background-color: #0d6efd;
   border-color: #0d6efd;
   color: white;
 }
 
-/* Success Animation */
 .success-animation {
   width: 80px;
   height: 80px;
@@ -3505,7 +3867,6 @@ export default {
   }
 }
 
-/* Print Styles */
 @media print {
   .modal {
     position: static !important;
@@ -3521,7 +3882,6 @@ export default {
   }
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .step-circle {
     width: 40px;
@@ -3537,7 +3897,6 @@ export default {
   }
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -3557,7 +3916,6 @@ export default {
   background: #a8a8a8;
 }
 
-/* Card Footer Styling */
 .card-footer {
   border-top: 1px solid rgba(0, 0, 0, 0.125);
   padding-top: 1.5rem;
@@ -3580,7 +3938,6 @@ export default {
   }
 }
 
-/* Additional styling for new sections */
 .conditional-field {
   animation: fadeIn 0.3s ease-in;
 }
