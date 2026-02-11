@@ -4187,31 +4187,6 @@ export default {
      removeOtherLivestock(index) {
       this.otherLivestock.splice(index, 1);
     },
-    
-    validatePreparedData() {
-      // Check crops data
-      if (this.formData.householdInfo.cropsPlanted) {
-        for (const crop of this.formData.householdInfo.cropsPlanted) {
-          if (!crop.unit) {
-            console.error('Crop missing unit:', crop);
-            return false;
-          }
-        }
-      }
-      
-      // Check livestock data
-      if (this.formData.householdInfo.livestockRaised) {
-        for (const livestock of this.formData.householdInfo.livestockRaised) {
-          if (!livestock.unit) {
-            console.error('Livestock missing unit:', livestock);
-            return false;
-          }
-        }
-      }
-      
-      return true;
-    },
-    
     prepareHouseholdData() {
       // Prepare crops data
       const cropsData = [];
@@ -4220,14 +4195,12 @@ export default {
       this.selectedCrops.forEach(cropType => {
         if (this.cropQuantities[cropType]) {
           const crop = this.cropsOptions.find(c => c.value === cropType);
-          if (crop) {
-            cropsData.push({
-              name: crop.label,
-              type: cropType,
-              quantity: parseFloat(this.cropQuantities[cropType]) || 0,
-              unit: this.getCropUnit(cropType)
-            });
-          }
+          cropsData.push({
+            name: crop.label,
+            type: cropType,
+            quantity: parseFloat(this.cropQuantities[cropType]) || 0,
+            unit: this.getCropUnit(cropType)
+          });
         }
       });
       
@@ -4252,14 +4225,12 @@ export default {
         .forEach(animalType => {
           if (this.livestockQuantities[animalType]) {
             const animal = this.livestockOptions.find(a => a.value === animalType);
-            if (animal) {
-              livestockData.push({
-                type: animal.label,
-                category: animalType,
-                quantity: parseInt(this.livestockQuantities[animalType]) || 0,
-                unit: this.getLivestockUnit(animalType)
-              });
-            }
+            livestockData.push({
+              type: animal.label,
+              category: animalType,
+              quantity: parseInt(this.livestockQuantities[animalType]) || 0,
+              unit: this.getLivestockUnit(animalType)
+            });
           }
         });
       
@@ -4305,11 +4276,7 @@ export default {
         }
         
         if (poultryData.details.length > 0) {
-          livestockData.push({
-            ...poultryData,
-            quantity: poultryData.totalQuantity,
-            unit: "birds"
-          });
+          livestockData.push(poultryData);
         }
       }
       
@@ -4333,6 +4300,7 @@ export default {
         quantities: this.poultryQuantities
       };
     },
+    
     
     hasStepError(stepId) {
       switch (stepId) {
@@ -5389,25 +5357,6 @@ export default {
         .padStart(3, "0");
       return `HH-${timestamp}${random}`;
     },
-    
-    detectErrorSteps(errors) {
-      const errorSteps = new Set();
-      
-      Object.keys(errors).forEach(key => {
-        if (key.startsWith('address.')) {
-          errorSteps.add(1);
-        } else if (key.startsWith('headOfFamily.')) {
-          errorSteps.add(2);
-        } else if (key.startsWith('members.')) {
-          errorSteps.add(3);
-        } else if (key.startsWith('householdInfo.')) {
-          errorSteps.add(4);
-        }
-      });
-      
-      return Array.from(errorSteps);
-    },
-
     async submitForm() {
       if (!this.acceptTerms) {
         alert("Please accept the terms and conditions before submitting.");
@@ -5428,101 +5377,91 @@ export default {
 
       // Prepare household data
       this.prepareHouseholdData();
-      
-      // Validate prepared data
-      if (!this.validatePreparedData()) {
-        alert('There are issues with the crops or livestock data. Please check all fields.');
-        return;
-      }
 
       // Show loading state
       this.isSubmitting = true;
       
       try {
-        // Prepare the data for API - make sure all required fields are included
+        // Prepare the data for API
         const formData = {
           address: {
             purok: this.formData.address.purok,
             street: this.formData.address.street,
-            householdNumber: this.formData.address.householdNumber || '',
-            // Make sure only one source for coordinates
-            longitude: this.formData.householdInfo.longitude || '',
-            latitude: this.formData.householdInfo.latitude || ''
+            householdNumber: this.formData.address.householdNumber,
+            longitude: this.formData.householdInfo.longitude,
+            latitude: this.formData.householdInfo.latitude
           },
           headOfFamily: {
             firstName: this.formData.headOfFamily.firstName,
-            middleInitial: this.formData.headOfFamily.middleInitial || '',
+            middleInitial: this.formData.headOfFamily.middleInitial,
             lastName: this.formData.headOfFamily.lastName,
-            extension: this.formData.headOfFamily.extension || '',
+            extension: this.formData.headOfFamily.extension,
             sex: this.formData.headOfFamily.sex,
             birthdate: this.formData.headOfFamily.birthdate,
             civilStatus: this.formData.headOfFamily.civilStatus,
             contactNumber: this.formData.headOfFamily.contactNumber,
-            email: this.formData.headOfFamily.email || '',
-            occupation: this.formData.headOfFamily.occupation || '',
-            nationalId: this.formData.headOfFamily.nationalId || '',
+            email: this.formData.headOfFamily.email,
+            occupation: this.formData.headOfFamily.occupation,
+            nationalId: this.formData.headOfFamily.nationalId,
             highestEducation: this.formData.headOfFamily.highestEducation,
             educationalStatus: this.formData.headOfFamily.educationalStatus,
             employmentStatus: this.formData.headOfFamily.employmentStatus,
             voterStatus: this.formData.headOfFamily.voterStatus,
             is4psMember: this.formData.headOfFamily.is4psMember,
             isDeceased: this.formData.headOfFamily.isDeceased,
-            natureOfEmployment: this.formData.headOfFamily.natureOfEmployment || '',
-            monthlyIncome: this.formData.headOfFamily.monthlyIncome || 0
+            natureOfEmployment: this.formData.headOfFamily.natureOfEmployment,
+            monthlyIncome: this.formData.headOfFamily.monthlyIncome
           },
           householdInfo: {
             type: this.formData.householdInfo.type,
             housingType: this.formData.householdInfo.housingType,
-            housingTypeOther: this.formData.householdInfo.housingTypeOther || '',
+            housingTypeOther: this.formData.householdInfo.housingTypeOther,
             houseMaterials: this.formData.householdInfo.houseMaterials,
-            houseMaterialsOther: this.formData.householdInfo.houseMaterialsOther || '',
+            houseMaterialsOther: this.formData.householdInfo.houseMaterialsOther,
             waterSource: this.formData.householdInfo.waterSource,
-            waterSourceICWS: this.formData.householdInfo.waterSourceICWS || '',
-            waterSourceOther: this.formData.householdInfo.waterSourceOther || '',
+            waterSourceICWS: this.formData.householdInfo.waterSourceICWS,
+            waterSourceOther: this.formData.householdInfo.waterSourceOther,
             powerSupply: this.formData.householdInfo.powerSupply,
-            powerSupplyOther: this.formData.householdInfo.powerSupplyOther || '',
-            wasteBiodegradable: this.formData.householdInfo.wasteBiodegradable || false,
-            wastePlastics: this.formData.householdInfo.wastePlastics || false,
-            wasteOthers: this.formData.householdInfo.wasteOthers || '',
+            powerSupplyOther: this.formData.householdInfo.powerSupplyOther,
+            wasteBiodegradable: this.formData.householdInfo.wasteBiodegradable,
+            wastePlastics: this.formData.householdInfo.wastePlastics,
+            wasteOthers: this.formData.householdInfo.wasteOthers,
             internetProvider: this.formData.householdInfo.internetProvider,
-            internetProviderOther: this.formData.householdInfo.internetProviderOther || '',
+            internetProviderOther: this.formData.householdInfo.internetProviderOther,
             garbageDisposal: this.formData.householdInfo.garbageDisposal,
-            garbageDisposalOther: this.formData.householdInfo.garbageDisposalOther || '',
-            fishingVessel: this.formData.householdInfo.fishingVessel || '',
-            avgFishCatch: this.formData.householdInfo.avgFishCatch || '',
-            fishingFrequency: this.formData.householdInfo.fishingFrequency || '',
-            longitude: this.formData.householdInfo.longitude || '',
-            latitude: this.formData.householdInfo.latitude || '',
-            notes: this.formData.householdInfo.notes || ''
+            garbageDisposalOther: this.formData.householdInfo.garbageDisposalOther,
+            fishingVessel: this.formData.householdInfo.fishingVessel,
+            avgFishCatch: this.formData.householdInfo.avgFishCatch,
+            fishingFrequency: this.formData.householdInfo.fishingFrequency,
+            longitude: this.formData.householdInfo.longitude,
+            latitude: this.formData.householdInfo.latitude,
+            notes: this.formData.householdInfo.notes
           },
           members: this.formData.members.map(member => ({
             firstName: member.firstName,
-            middleInitial: member.middleInitial || '',
+            middleInitial: member.middleInitial,
             lastName: member.lastName,
-            extension: member.extension || '',
+            extension: member.extension,
             sex: member.sex,
             birthdate: member.birthdate,
             civilStatus: member.civilStatus,
             relationship: member.relationship,
-            contactNumber: member.contactNumber || '',
-            email: member.email || '',
-            occupation: member.occupation || '',
-            nationalId: member.nationalId || '',
+            contactNumber: member.contactNumber,
+            email: member.email,
+            occupation: member.occupation,
+            nationalId: member.nationalId,
             highestEducation: member.highestEducation,
             educationalStatus: member.educationalStatus,
             employmentStatus: member.employmentStatus,
             voterStatus: member.voterStatus,
             is4psMember: member.is4psMember,
             isDeceased: member.isDeceased,
-            natureOfEmployment: member.natureOfEmployment || '',
-            monthlyIncome: member.monthlyIncome || 0
+            natureOfEmployment: member.natureOfEmployment,
+            monthlyIncome: member.monthlyIncome
           })),
-          cropsPlanted: this.formData.householdInfo.cropsPlanted || [],
-          livestockRaised: this.formData.householdInfo.livestockRaised || []
+          cropsPlanted: this.formData.householdInfo.cropsPlanted,
+          livestockRaised: this.formData.householdInfo.livestockRaised
         };
-
-        // Log the data for debugging (remove in production)
-        console.log('Submitting data:', JSON.stringify(formData, null, 2));
 
         // Make API call
         const response = await fetch('/bims/api/households/store', {
@@ -5536,8 +5475,6 @@ export default {
         });
 
         const data = await response.json();
-        
-        console.log('API Response:', data); // Debug log
 
         if (!response.ok) {
           throw new Error(data.message || 'Failed to submit household registration');
@@ -5587,6 +5524,25 @@ export default {
         // Reset loading state
         this.isSubmitting = false;
       }
+    },
+
+    // Helper method to detect which steps have errors
+    detectErrorSteps(errors) {
+      const errorSteps = new Set();
+      
+      Object.keys(errors).forEach(key => {
+        if (key.startsWith('address.')) {
+          errorSteps.add(1);
+        } else if (key.startsWith('headOfFamily.')) {
+          errorSteps.add(2);
+        } else if (key.startsWith('members.')) {
+          errorSteps.add(3);
+        } else if (key.startsWith('householdInfo.')) {
+          errorSteps.add(4);
+        }
+      });
+      
+      return Array.from(errorSteps);
     },
 
     resetForm() {

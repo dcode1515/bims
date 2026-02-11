@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\BarangayCommitee;
 use App\Models\BarangayOfficial;
+use App\Models\Household;
+use App\Models\HouseholdMember;
+use App\Models\HouseholdCrop;
+use App\Models\HouseholdLivestock;
+use Illuminate\Support\Facades\DB;
+
 
 
 class BarangayController extends Controller
@@ -786,6 +792,226 @@ public function getDataBarangayOfficial(Request $request){
      public function create_member(){
         return view('barangay.create_member');
      }
+
+    
+      public function store_household(Request $request){
+             DB::beginTransaction();
+        
+        try {
+            // Validate the request
+            // $validator = Validator::make($request->all(), [
+            //     'address.purok' => 'required|string|max:50',
+            //     'address.street' => 'required|string|max:255',
+            //     'address.household_number' => 'nullable|string|max:50',
+            //     'address.longitude' => 'nullable|string|max:20',
+            //     'address.latitude' => 'nullable|string|max:20',
+                
+            //     'headOfFamily.firstName' => 'required|string|max:100',
+            //     'headOfFamily.middleInitial' => 'nullable|string|max:3',
+            //     'headOfFamily.lastName' => 'required|string|max:100',
+            //     'headOfFamily.extension' => 'nullable|in:Jr,Sr,II,III,IV',
+            //     'headOfFamily.sex' => 'required|in:Male,Female',
+            //     'headOfFamily.birthdate' => 'required|date|before:today',
+            //     'headOfFamily.civilStatus' => 'required|in:Single,Married,Widowed,Separated,Divorced',
+            //     'headOfFamily.contactNumber' => 'required|string|max:20',
+            //     'headOfFamily.email' => 'nullable|email|max:100',
+            //     'headOfFamily.nationalId' => 'nullable|string|max:50',
+            //     'headOfFamily.highestEducation' => 'required|string|max:100',
+            //     'headOfFamily.educationalStatus' => 'required|string|max:50',
+            //     'headOfFamily.employmentStatus' => 'required|in:Employed,Unemployed',
+            //     'headOfFamily.voterStatus' => 'required|in:Voter,Non-Voter',
+            //     'headOfFamily.is4psMember' => 'required|in:Yes,No',
+            //     'headOfFamily.isDeceased' => 'required|in:Yes,No',
+                
+            //     'householdInfo.type' => 'nullable|string|max:50',
+            //     'householdInfo.housingType' => 'nullable|string|max:50',
+            //     'householdInfo.housingTypeOther' => 'nullable|string|max:100',
+            //     'householdInfo.houseMaterials' => 'nullable|string|max:50',
+            //     'householdInfo.houseMaterialsOther' => 'nullable|string|max:100',
+            //     'householdInfo.waterSource' => 'nullable|string|max:50',
+            //     'householdInfo.waterSourceICWS' => 'nullable|string|max:50',
+            //     'householdInfo.waterSourceOther' => 'nullable|string|max:100',
+            //     'householdInfo.powerSupply' => 'nullable|string|max:50',
+            //     'householdInfo.powerSupplyOther' => 'nullable|string|max:100',
+            //     'householdInfo.internetProvider' => 'nullable|string|max:50',
+            //     'householdInfo.internetProviderOther' => 'nullable|string|max:100',
+            //     'householdInfo.garbageDisposal' => 'nullable|string|max:50',
+            //     'householdInfo.garbageDisposalOther' => 'nullable|string|max:100',
+            //     'householdInfo.fishingVessel' => 'nullable|string|max:50',
+            //     'householdInfo.avgFishCatch' => 'nullable|numeric|min:0',
+            //     'householdInfo.fishingFrequency' => 'nullable|string|max:50',
+            //     'householdInfo.longitude' => 'nullable|string|max:20',
+            //     'householdInfo.latitude' => 'nullable|string|max:20',
+            //     'householdInfo.notes' => 'nullable|string',
+                
+            //     'members' => 'nullable|array',
+            //     'members.*.firstName' => 'required|string|max:100',
+            //     'members.*.lastName' => 'required|string|max:100',
+            //     'members.*.middleInitial' => 'nullable|string|max:3',
+            //     'members.*.extension' => 'nullable|in:Jr,Sr,II,III,IV',
+            //     'members.*.sex' => 'required|in:Male,Female',
+            //     'members.*.birthdate' => 'required|date|before:today',
+            //     'members.*.civilStatus' => 'required|in:Single,Married,Widowed,Separated,Divorced',
+            //     'members.*.relationship' => 'required|string|max:50',
+            //     'members.*.voterStatus' => 'required|in:Voter,Non-Voter',
+            //     'members.*.is4psMember' => 'required|in:Yes,No',
+            //     'members.*.isDeceased' => 'required|in:Yes,No',
+            //     'members.*.highestEducation' => 'required|string|max:100',
+            //     'members.*.educationalStatus' => 'required|string|max:50',
+            //     'members.*.employmentStatus' => 'required|in:Employed,Unemployed',
+            //     'members.*.contactNumber' => 'nullable|string|max:20',
+            //     'members.*.email' => 'nullable|email|max:100',
+                
+            //     'cropsPlanted' => 'nullable|array',
+            //     'livestockRaised' => 'nullable|array',
+            // ]);
+
+            // if ($validator->fails()) {
+            //     return response()->json([
+            //         'success' => false,
+            //         'message' => 'Validation errors',
+            //         'errors' => $validator->errors()
+            //     ], 422);
+            // }
+
+            // Create household
+            $household = Household::create([
+                'barangay_info_id' => Auth::user()->barangay_info_id,
+                'purok' => $request->input('address.purok'),
+                'street' => $request->input('address.street'),
+                'household_number' => $request->input('address.householdNumber'),
+                'longitude' => $request->input('address.longitude') ?? $request->input('householdInfo.longitude'),
+                'latitude' => $request->input('address.latitude') ?? $request->input('householdInfo.latitude'),
+                
+                'household_type' => $request->input('householdInfo.type'),
+                'housing_type' => $request->input('householdInfo.housingType'),
+                'housing_type_other' => $request->input('householdInfo.housingTypeOther'),
+                'house_materials' => $request->input('householdInfo.houseMaterials'),
+                'house_materials_other' => $request->input('householdInfo.houseMaterialsOther'),
+                'water_source' => $request->input('householdInfo.waterSource'),
+                'water_source_icws' => $request->input('householdInfo.waterSourceICWS'),
+                'water_source_other' => $request->input('householdInfo.waterSourceOther'),
+                'power_supply' => $request->input('householdInfo.powerSupply'),
+                'power_supply_other' => $request->input('householdInfo.powerSupplyOther'),
+                'waste_biodegradable' => $request->input('householdInfo.wasteBiodegradable', false),
+                'waste_plastics' => $request->input('householdInfo.wastePlastics', false),
+                'waste_others' => $request->input('householdInfo.wasteOthers'),
+                'internet_provider' => $request->input('householdInfo.internetProvider'),
+                'internet_provider_other' => $request->input('householdInfo.internetProviderOther'),
+                'garbage_disposal' => $request->input('householdInfo.garbageDisposal'),
+                'garbage_disposal_other' => $request->input('householdInfo.garbageDisposalOther'),
+                
+                'fishing_vessel' => $request->input('householdInfo.fishingVessel'),
+                'avg_fish_catch' => $request->input('householdInfo.avgFishCatch'),
+                'fishing_frequency' => $request->input('householdInfo.fishingFrequency'),
+            ]);
+
+            // Create head of family
+            $headData = $request->input('headOfFamily');
+            $household->members()->create([
+                'is_head' => true,
+                'barangay_info_id' => Auth::user()->barangay_info_id,
+                'first_name' => $headData['firstName'],
+                'middle_initial' => $headData['middleInitial'] ?? null,
+                'last_name' => $headData['lastName'],
+                'extension' => $headData['extension'] ?? null,
+                'sex' => $headData['sex'],
+                'birthdate' => $headData['birthdate'],
+                'civil_status' => $headData['civilStatus'],
+                'relationship' => 'Head',
+                'national_id' => $headData['nationalId'] ?? null,
+                'voter_status' => $headData['voterStatus'],
+                'is_4ps_member' => $headData['is4psMember'],
+                'is_deceased' => $headData['isDeceased'],
+                'highest_education' => $headData['highestEducation'],
+                'educational_status' => $headData['educationalStatus'],
+                'employment_status' => $headData['employmentStatus'],
+                'occupation' => $headData['occupation'] ?? null,
+                'nature_of_employment' => $headData['natureOfEmployment'] ?? null,
+                'monthly_income' => $headData['monthlyIncome'] ?? null,
+                'contact_number' => $headData['contactNumber'],
+                'email' => $headData['email'] ?? null,
+            ]);
+
+            // Create family members
+            if ($request->has('members')) {
+                foreach ($request->input('members') as $memberData) {
+                    $household->members()->create([
+                        'is_head' => false,
+                          'barangay_info_id' => Auth::user()->barangay_info_id,
+                        'first_name' => $memberData['firstName'],
+                        'middle_initial' => $memberData['middleInitial'] ?? null,
+                        'last_name' => $memberData['lastName'],
+                        'extension' => $memberData['extension'] ?? null,
+                        'sex' => $memberData['sex'],
+                        'birthdate' => $memberData['birthdate'],
+                        'civil_status' => $memberData['civilStatus'],
+                        'relationship' => $memberData['relationship'],
+                        'national_id' => $memberData['nationalId'] ?? null,
+                        'voter_status' => $memberData['voterStatus'],
+                        'is_4ps_member' => $memberData['is4psMember'],
+                        'is_deceased' => $memberData['isDeceased'],
+                        'highest_education' => $memberData['highestEducation'],
+                        'educational_status' => $memberData['educationalStatus'],
+                        'employment_status' => $memberData['employmentStatus'],
+                        'occupation' => $memberData['occupation'] ?? null,
+                        'nature_of_employment' => $memberData['natureOfEmployment'] ?? null,
+                        'monthly_income' => $memberData['monthlyIncome'] ?? null,
+                        'contact_number' => $memberData['contactNumber'] ?? null,
+                        'email' => $memberData['email'] ?? null,
+                    ]);
+                }
+            }
+
+            // Create crops
+            if ($request->has('cropsPlanted')) {
+                foreach ($request->input('cropsPlanted') as $cropData) {
+                    $household->crops()->create([
+                        'name' => $cropData['name'],
+                        'type' => $cropData['type'],
+                        'quantity' => $cropData['quantity'],
+                        'unit' => $cropData['unit'],
+                    ]);
+                }
+            }
+
+            // Create livestock
+            if ($request->has('livestockRaised')) {
+                foreach ($request->input('livestockRaised') as $livestockData) {
+                    $household->livestock()->create([
+                        'type' => $livestockData['type'],
+                          'barangay_info_id' => Auth::user()->barangay_info_id,
+                        'category' => $livestockData['category'],
+                        'quantity' => $livestockData['quantity'] ?? 0,
+                        'unit' => $livestockData['unit'],
+                        'details' => $livestockData['details'] ?? null,
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Household registration submitted successfully',
+                'data' => [
+                    'reference_id' => $household->reference_id,
+                    'household_id' => $household->id,
+                    'total_members' => $household->members()->count(),
+                ]
+            ], 201);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to submit household registration',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+      }
+      
 
 
 }

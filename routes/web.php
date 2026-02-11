@@ -66,6 +66,7 @@ Route::get('/api/get/data/all/barangay/official', [App\Http\Controllers\Barangay
 Route::post('/api/update/official/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_barangay_official']);
 Route::get('/household', [App\Http\Controllers\Barangay\BarangayController::class, 'household'])->name('household');
 Route::get('/create/member', [App\Http\Controllers\Barangay\BarangayController::class, 'create_member'])->name('create.member');
+Route::post('/api/households/store', [App\Http\Controllers\Barangay\BarangayController::class, 'store_household']);
 
 
 
