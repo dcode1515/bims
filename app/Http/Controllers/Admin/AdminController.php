@@ -451,7 +451,7 @@ class AdminController extends Controller
                     $q->where('barangay_name', 'like', '%' . $search . '%');
                 });
           })
-        
+        ->where('role', '!=', 'Super Admin') // Exclude Admin users
           ->paginate($perPage);
       
           return response()->json([
