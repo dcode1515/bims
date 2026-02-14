@@ -6,7 +6,7 @@
           <div class="d-flex align-items-center justify-content-between">
             <div>
               <h6 class="card-subtitle text-muted">Total Households</h6>
-              <h2 class="card-title mt-2 mb-0">1,247</h2>
+              <h2 class="card-title mt-2 mb-0">{{ totalHouseholds }}</h2>
               <div class="mt-3">
                 <span class="badge bg-success-subtle text-success">
                   <i class="ri-arrow-up-line me-1"></i> 5.2% increase
@@ -113,7 +113,11 @@
               </div>
             </div>
             <div class="col-md-4 text-end">
-              <a href="/bims/create/member" type="button" class="btn btn-light btn-sm">
+              <a
+                href="/bims/create/member"
+                type="button"
+                class="btn btn-light btn-sm"
+              >
                 <i class="ri-add-circle-line me-1"></i>
                 Create Member
               </a>
@@ -129,7 +133,11 @@
                 <span class="input-group-text bg-light">
                   <i class="ri-list-settings-line"></i>
                 </span>
-                <select class="form-control form-control">
+                <select
+                  class="form-control form-control"
+                  v-model="perPage"
+                  @change="getDataHousehold"
+                >
                   <option value="5">5 per page</option>
                   <option value="10">10 per page</option>
                   <option value="20">20 per page</option>
@@ -144,6 +152,7 @@
                 </span>
                 <input
                   v-model="searchQuery"
+                  @input="getDataHousehold"
                   type="text"
                   class="form-control"
                   placeholder="Search  Purok..."
@@ -151,7 +160,10 @@
               </div>
             </div>
             <div class="col-md-3 text-end">
-              <button class="btn btn-outline-primary btn-lg me-1">
+              <button
+                class="btn btn-outline-primary btn-lg me-1"
+                @click="refreshData"
+              >
                 <i class="ri-refresh-line"></i>
               </button>
             </div>
@@ -201,66 +213,81 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="ps-4"></td>
+                <tr
+                  v-for="(household, index) in households.data"
+                  :key="household.id"
+                >
+                  <td class="ps-4">
+                    {{
+                      (households.current_page - 1) * households.per_page +
+                      index +
+                      1
+                    }}
+                  </td>
                   <td>
                     <div class="d-flex align-items-center">
-                      <div></div>
+                      <div>{{ household.household_number }}</div>
                     </div>
                   </td>
                   <td>
                     <div class="d-flex align-items-center">
-                      <div></div>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div></div>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div></div>
+                      <div>{{ household.purok.purok_name }}</div>
                     </div>
                   </td>
 
                   <td>
                     <div class="d-flex align-items-center">
-                      <div></div>
+                      <div>{{ household.street }}</div>
                     </div>
                   </td>
 
                   <td>
                     <div class="d-flex align-items-center">
-                      <div></div>
+                      <div>
+                        {{ household.head_of_family.first_name }}
+                        {{ household.head_of_family.middle_initial }}.
+                        {{ household.head_of_family.last_name }}
+                      </div>
                     </div>
                   </td>
 
                   <td>
-                    <div></div>
+                    <div class="d-flex align-items-center">
+                      <div>{{ household.status }}</div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div>
+                        {{
+                          new Date(household.created_at).toLocaleDateString()
+                        }}
+                      </div>
+                    </div>
                   </td>
 
                   <td class="text-center">
                     <div class="btn-group" role="group">
-                      <button
-                        class="btn btn-sm btn-outline-primary"
-                        title="Edit"
+                        <a :href="`/bims/household/view/${household.id}`"
+                        class="btn btn-sm btn-outline-info d-flex align-items-center gap-1"
+                        title="View Profile"
+                      >
+                        <i class="ri-eye-line"></i>
+                        View Profile
+                      </a>
+                      <a :href="`/bims/household/edit/${household.id}`"
+                        class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"
+                        title="Edit Profile"
                       >
                         <i class="ri-edit-line"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-info" title="View">
-                        <i class="ri-eye-line"></i>
-                      </button>
-                      <!-- <button class="btn btn-sm btn-outline-danger" @click="confirmDelete(purok)"
-                                                title="Delete">
-                                                <i class="ri-delete-bin-line"></i>
-                                            </button> -->
+                        Edit Profile
+                      </a>
+                    
                     </div>
                   </td>
                 </tr>
-                <tr>
+                <tr v-if="households.data.length === 0">
                   <td colspan="8" class="text-center py-5">
                     <div class="text-muted">
                       <i class="ri-search-line display-5"></i>
@@ -270,6 +297,89 @@
                 </tr>
               </tbody>
             </table>
+            <div v-if="households.total > 0" class="card-footer bg-white">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <span class="text-muted small">
+                    <i class="ri-file-list-line me-1"></i>
+                    Showing {{ households.from }} to {{ households.to }} of
+                    {{ households.total }} entries
+                  </span>
+                </div>
+                <div class="col-md-6">
+                  <nav class="float-end">
+                    <ul class="pagination pagination-sm mb-0">
+                      <li
+                        class="page-item"
+                        :class="{ disabled: households.current_page === 1 }"
+                      >
+                        <button
+                          class="page-link"
+                          @click="changePage(1)"
+                          title="First"
+                        >
+                          <i class="ri-skip-back-line"></i>
+                        </button>
+                      </li>
+                      <li
+                        class="page-item"
+                        :class="{ disabled: households.current_page === 1 }"
+                      >
+                        <button
+                          class="page-link"
+                          @click="changePage(households.current_page - 1)"
+                          title="Previous"
+                        >
+                          <i class="ri-arrow-left-s-line"></i>
+                        </button>
+                      </li>
+
+                      <li
+                        v-for="page in pages"
+                        :key="page"
+                        class="page-item"
+                        :class="{ active: page === households.current_page }"
+                      >
+                        <button class="page-link" @click="changePage(page)">
+                          {{ page }}
+                        </button>
+                      </li>
+
+                      <li
+                        class="page-item"
+                        :class="{
+                          disabled:
+                            households.current_page === households.last_page,
+                        }"
+                      >
+                        <button
+                          class="page-link"
+                          @click="changePage(households.current_page + 1)"
+                          title="Next"
+                        >
+                          <i class="ri-arrow-right-s-line"></i>
+                        </button>
+                      </li>
+                      <li
+                        class="page-item"
+                        :class="{
+                          disabled:
+                            households.current_page === households.last_page,
+                        }"
+                      >
+                        <button
+                          class="page-link"
+                          @click="changePage(households.last_page)"
+                          title="Last"
+                        >
+                          <i class="ri-skip-forward-line"></i>
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -284,14 +394,97 @@ import Swal from "sweetalert2";
 
 export default {
   data() {
-    return {};
+    return {
+      households: {
+        data: [],
+        current_page: 1,
+        from: 1,
+        to: 1,
+        last_page: 1,
+        per_page: 10,
+        total: 0,
+      },
+      searchQuery: "",
+      perPage: 10,
+      loading: false,
+    };
   },
 
   computed: {},
 
-  methods: {},
+  methods: {
+    async getDataHousehold() {
+      try {
+        const response = await axios.get("/bims/api/get/data/household", {
+          params: {
+            page: this.households.current_page,
+            per_page: this.perPage,
+            search: this.searchQuery,
+          },
+        });
+        this.totalHouseholds = response.data.total_count; // Store the total count
+        this.households = response.data.data;
+       
+      } catch (error) {
+        this.showError("Failed to load data. Please try again.");
+      }
+    },
+    refreshData() {
+      this.getDataHousehold();
+      this.showSuccess("Data refreshed successfully!");
+    },
+    changePage(page) {
+      if (page >= 1 && page <= this.households.last_page) {
+        this.households.current_page = page;
+        this.getDataHousehold();
+      }
+    },
 
-  mounted() {},
+    showError(message) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: message,
+        confirmButtonColor: "#dc3545",
+      });
+    },
+
+    showSuccess(message) {
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: message,
+        confirmButtonColor: "#198754",
+        timer: 1500,
+      });
+    },
+  },
+  computed: {
+    pages() {
+      const pages = [];
+      const total = this.households.last_page;
+      const current = this.households.current_page;
+      const maxVisible = 5;
+
+      if (total <= maxVisible) {
+        for (let i = 1; i <= total; i++) pages.push(i);
+      } else {
+        let start = Math.max(1, current - 2);
+        let end = Math.min(total, start + maxVisible - 1);
+
+        if (end - start + 1 < maxVisible) {
+          start = Math.max(1, end - maxVisible + 1);
+        }
+
+        for (let i = start; i <= end; i++) pages.push(i);
+      }
+
+      return pages;
+    },
+  },
+  mounted() {
+    this.getDataHousehold();
+  },
 };
 </script>
 
@@ -437,15 +630,14 @@ export default {
   opacity: 0.8;
 }
 .main-content-card {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 .card-header {
-    border-radius: 12px 12px 0 0 !important;
-    padding: 1.5rem !important;
-    position: relative;
+  border-radius: 12px 12px 0 0 !important;
+  padding: 1.5rem !important;
+  position: relative;
 }
-
 </style>

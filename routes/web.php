@@ -67,7 +67,10 @@ Route::post('/api/update/official/{id}', [App\Http\Controllers\Barangay\Barangay
 Route::get('/household', [App\Http\Controllers\Barangay\BarangayController::class, 'household'])->name('household');
 Route::get('/create/member', [App\Http\Controllers\Barangay\BarangayController::class, 'create_member'])->name('create.member');
 Route::post('/api/households/store', [App\Http\Controllers\Barangay\BarangayController::class, 'store_household']);
-
-
+Route::get('/api/get/data/purok-per-household', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataPurokPerHousehold']);
+Route::get('/api/get/data/household', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataHousehold']);
+Route::get('/household/edit/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'edit_household']);
+Route::put('/api/update/households/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_household']);
+Route::get('/household/view/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'view_household']);
 
 /*End Admin Routes */

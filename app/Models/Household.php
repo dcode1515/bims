@@ -72,6 +72,11 @@ class Household extends Model
     {
         return $this->hasMany(HouseholdMember::class)->where('is_head', false);
     }
+        public function purok()
+    {
+
+        return $this->belongsTo(Purok::class, 'purok');
+    }
      protected static function boot()
     {
         parent::boot();
@@ -80,6 +85,7 @@ class Household extends Model
             $household->reference_id = 'HH-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
         });
     }
+
 
 
 }

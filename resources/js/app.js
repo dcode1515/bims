@@ -29,6 +29,8 @@ Vue.component('Purok', require('./components/Barangay/Purok.vue').default);
 Vue.component('Barangayofficial', require('./components/Barangay/Barangayofficial.vue').default);
 Vue.component('Household', require('./components/Barangay/Household.vue').default);
 Vue.component('Createmember', require('./components/Barangay/Createmember.vue').default);
+Vue.component('Edithousehold', require('./components/Barangay/Edithousehold.vue').default);
+Vue.component('Viewhousehold', require('./components/Barangay/Viewhousehold.vue').default);
 
 
 /**

@@ -251,17 +251,6 @@ class AdminController extends Controller
 
    
     
-
-     
-
-   
-
-  
-
-
-   
-    
-
     public function user_management(){
         return view('admin.user_management');
     }
@@ -464,6 +453,7 @@ class AdminController extends Controller
     public function purok(){
         return view('barangay.purok');
     }
+     
 
 
 }

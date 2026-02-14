@@ -904,6 +904,8 @@ public function getDataBarangayOfficial(Request $request){
                 'fishing_vessel' => $request->input('householdInfo.fishingVessel'),
                 'avg_fish_catch' => $request->input('householdInfo.avgFishCatch'),
                 'fishing_frequency' => $request->input('householdInfo.fishingFrequency'),
+                'notes' => $request->input('householdInfo.notes'),
+                'status' => 'Active',
             ]);
 
             // Create head of family
@@ -1011,6 +1013,351 @@ public function getDataBarangayOfficial(Request $request){
             ], 500);
         }
       }
+
+   public function update_household(Request $request, $id)
+{
+    try {
+        DB::beginTransaction();
+        
+        // Find the existing household
+        $household = Household::findOrFail($id);
+        
+        // Update household main information
+        $household->update([
+            'purok' => $request->input('address.purok'),
+            'street' => $request->input('address.street'),
+            'household_number' => $request->input('address.household_number'),
+            'longitude' => $request->input('householdInfo.longitude'),
+            'latitude' => $request->input('householdInfo.latitude'),
+            
+            'household_type' => $request->input('householdInfo.type'),
+            'housing_type' => $request->input('householdInfo.housing_type'),
+            'housing_type_other' => $request->input('householdInfo.housing_type_other'),
+            'house_materials' => $request->input('householdInfo.house_materials'),
+            'house_materials_other' => $request->input('householdInfo.house_materials_other'),
+            'water_source' => $request->input('householdInfo.water_source'),
+            'water_source_icws' => $request->input('householdInfo.water_source_icws'),
+            'water_source_other' => $request->input('householdInfo.water_source_other'),
+            'power_supply' => $request->input('householdInfo.power_supply'),
+            'power_supply_other' => $request->input('householdInfo.power_supply_other'),
+            'waste_biodegradable' => $request->input('householdInfo.waste_biodegradable', false),
+            'waste_plastics' => $request->input('householdInfo.waste_plastics', false),
+            'waste_others' => $request->input('householdInfo.waste_others'),
+            'internet_provider' => $request->input('householdInfo.internet_provider'),
+            'internet_provider_other' => $request->input('householdInfo.internet_provider_other'),
+            'garbage_disposal' => $request->input('householdInfo.garbage_disposal'),
+            'garbage_disposal_other' => $request->input('householdInfo.garbage_disposal_other'),
+            
+            'fishing_vessel' => $request->input('householdInfo.fishing_vessel'),
+            'avg_fish_catch' => $request->input('householdInfo.avg_fish_catch'),
+            'fishing_frequency' => $request->input('householdInfo.fishing_frequency'),
+            'notes' => $request->input('householdInfo.notes'),
+            'status' => $request->input('status', 'Active'),
+        ]);
+
+        // Update or create head of family
+        $headData = $request->input('headOfFamily');
+        
+        // Check if head of family exists
+        $existingHead = $household->headOfFamily;
+        
+        if ($existingHead) {
+            // Update existing head
+            $existingHead->update([
+                'first_name' => $headData['first_name'],
+                'middle_initial' => $headData['middle_initial'] ?? null,
+                'last_name' => $headData['last_name'],
+                'extension' => $headData['extension'] ?? null,
+                'sex' => $headData['sex'],
+                'birthdate' => $headData['birthdate'],
+                'civil_status' => $headData['civil_status'],
+                'relationship' => 'Head',
+                'national_id' => $headData['national_id'] ?? null,
+                'voter_status' => $headData['voter_status'],
+                'is_4ps_member' => $headData['is_4ps_member'],
+                'is_deceased' => $headData['is_deceased'],
+                'highest_education' => $headData['highest_education'],
+                'educational_status' => $headData['educational_status'],
+                'employment_status' => $headData['employment_status'],
+                'occupation' => $headData['occupation'] ?? null,
+                'nature_of_employment' => $headData['nature_of_employment'] ?? null,
+                'monthly_income' => $headData['monthly_income'] ?? null,
+                'contact_number' => $headData['contact_number'],
+                'email' => $headData['email'] ?? null,
+            ]);
+        } else {
+            // Create new head if doesn't exist
+            $household->members()->create([
+                'is_head' => true,
+                'barangay_info_id' => Auth::user()->barangay_info_id,
+                'first_name' => $headData['first_name'],
+                'middle_initial' => $headData['middle_initial'] ?? null,
+                'last_name' => $headData['last_name'],
+                'extension' => $headData['extension'] ?? null,
+                'sex' => $headData['sex'],
+                'birthdate' => $headData['birthdate'],
+                'civil_status' => $headData['civil_status'],
+                'relationship' => 'Head',
+                'national_id' => $headData['national_id'] ?? null,
+                'voter_status' => $headData['voter_status'],
+                'is_4ps_member' => $headData['is_4ps_member'],
+                'is_deceased' => $headData['is_deceased'],
+                'highest_education' => $headData['highest_education'],
+                'educational_status' => $headData['educational_status'],
+                'employment_status' => $headData['employment_status'],
+                'occupation' => $headData['occupation'] ?? null,
+                'nature_of_employment' => $headData['nature_of_employment'] ?? null,
+                'monthly_income' => $headData['monthly_income'] ?? null,
+                'contact_number' => $headData['contact_number'],
+                'email' => $headData['email'] ?? null,
+            ]);
+        }
+
+        // Handle family members - sync approach
+        if ($request->has('members')) {
+            // Get existing member IDs
+            $existingMemberIds = $household->familyMembers->pluck('id')->toArray();
+            $updatedMemberIds = [];
+            
+            foreach ($request->input('members') as $memberData) {
+                // Check if member has ID (existing)
+                if (isset($memberData['id'])) {
+                    // Update existing member
+                    $member = $household->familyMembers()->find($memberData['id']);
+                    if ($member) {
+                        $member->update([
+                            'first_name' => $memberData['first_name'],
+                            'middle_initial' => $memberData['middle_initial'] ?? null,
+                            'last_name' => $memberData['last_name'],
+                            'extension' => $memberData['extension'] ?? null,
+                            'sex' => $memberData['sex'],
+                            'birthdate' => $memberData['birthdate'],
+                            'civil_status' => $memberData['civil_status'],
+                            'relationship' => $memberData['relationship'],
+                            'national_id' => $memberData['national_id'] ?? null,
+                            'voter_status' => $memberData['voter_status'],
+                            'is_4ps_member' => $memberData['is_4ps_member'],
+                            'is_deceased' => $memberData['is_deceased'],
+                            'highest_education' => $memberData['highest_education'],
+                            'educational_status' => $memberData['educational_status'],
+                            'employment_status' => $memberData['employment_status'],
+                            'occupation' => $memberData['occupation'] ?? null,
+                            'nature_of_employment' => $memberData['nature_of_employment'] ?? null,
+                            'monthly_income' => $memberData['monthly_income'] ?? null,
+                            'contact_number' => $memberData['contact_number'] ?? null,
+                            'email' => $memberData['email'] ?? null,
+                        ]);
+                        $updatedMemberIds[] = $member->id;
+                    }
+                } else {
+                    // Create new member
+                    $newMember = $household->members()->create([
+                        'is_head' => false,
+                        'barangay_info_id' => Auth::user()->barangay_info_id,
+                        'first_name' => $memberData['first_name'],
+                        'middle_initial' => $memberData['middle_initial'] ?? null,
+                        'last_name' => $memberData['last_name'],
+                        'extension' => $memberData['extension'] ?? null,
+                        'sex' => $memberData['sex'],
+                        'birthdate' => $memberData['birthdate'],
+                        'civil_status' => $memberData['civil_status'],
+                        'relationship' => $memberData['relationship'],
+                        'national_id' => $memberData['national_id'] ?? null,
+                        'voter_status' => $memberData['voter_status'],
+                        'is_4ps_member' => $memberData['is_4ps_member'],
+                        'is_deceased' => $memberData['is_deceased'],
+                        'highest_education' => $memberData['highest_education'],
+                        'educational_status' => $memberData['educational_status'],
+                        'employment_status' => $memberData['employment_status'],
+                        'occupation' => $memberData['occupation'] ?? null,
+                        'nature_of_employment' => $memberData['nature_of_employment'] ?? null,
+                        'monthly_income' => $memberData['monthly_income'] ?? null,
+                        'contact_number' => $memberData['contact_number'] ?? null,
+                        'email' => $memberData['email'] ?? null,
+                    ]);
+                    $updatedMemberIds[] = $newMember->id;
+                }
+            }
+            
+            // Delete members that are no longer in the list
+            $membersToDelete = array_diff($existingMemberIds, $updatedMemberIds);
+            if (!empty($membersToDelete)) {
+                $household->familyMembers()->whereIn('id', $membersToDelete)->delete();
+            }
+        } else {
+            // If no members provided, delete all family members (keep head only)
+            $household->familyMembers()->delete();
+        }
+
+        // Handle crops - sync approach
+        if ($request->has('crops_planted')) {
+            // Delete existing crops
+            $household->crops()->delete();
+            
+            // Create new crops
+            foreach ($request->input('crops_planted') as $cropData) {
+                $household->crops()->create([
+                    'name' => $cropData['name'],
+                    'type' => $cropData['type'] ?? 'Other',
+                    'quantity' => $cropData['quantity'],
+                    'unit' => $cropData['unit'],
+                ]);
+            }
+        } else {
+            $household->crops()->delete();
+        }
+
+        // Handle livestock - sync approach
+        if ($request->has('livestock_raised')) {
+            // Delete existing livestock
+            $household->livestock()->delete();
+            
+            // Create new livestock
+            foreach ($request->input('livestock_raised') as $livestockData) {
+                $livestock = $household->livestock()->create([
+                    'type' => $livestockData['type'],
+                       'barangay_info_id' => Auth::user()->barangay_info_id,
+                    'category' => $livestockData['category'] ?? 'Other',
+                    'quantity' => $livestockData['quantity'] ?? 0,
+                    'unit' => $livestockData['unit'] ?? 'head',
+                    'details' => isset($livestockData['details']) ? json_encode($livestockData['details']) : null,
+                ]);
+            }
+        } else {
+            $household->livestock()->delete();
+        }
+
+        DB::commit();
+
+        // Load relationships for response
+        $household->load(['crops', 'livestock', 'headOfFamily', 'familyMembers', 'purok']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Household information updated successfully',
+            'data' => [
+                'id' => $household->id,
+                'reference_id' => $household->reference_id,
+                'total_members' => $household->members()->count(),
+                'household' => $household
+            ]
+        ], 200);
+
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        DB::rollBack();
+        return response()->json([
+            'success' => false,
+            'message' => 'Household not found'
+        ], 404);
+        
+    } catch (\Exception $e) {
+        DB::rollBack();
+        
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to update household information',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+      public function getDataPurokPerHousehold()
+    {
+        $purok = Purok::where('barangay_info_id', Auth::user()->barangay_info_id)->orderBy('purok_name')->get();
+        return response()->json($purok);
+    }
+    public function getDataHousehold(Request $request){
+          $search = $request->query('search');
+          $perPage = $request->query('per_page', 10); // Default to 10 if per_page is not provided
+         $barangayInfoId = Auth::user()->barangay_info_id;
+          // Query certifications with optional search
+          $household = Household::with(['crops','livestock','headOfFamily','familyMembers','purok'])->when($search, function ($query, $search) {
+                  return $query
+                    ->where('reference_id', 'like', '%' . $search . '%')
+                    ->OrWhere('street', 'like', '%' . $search . '%')
+                    ->OrWhere('household_number', 'like', '%' . $search . '%')
+                 
+                    ->OrWhere('longitude', 'like', '%' . $search . '%')
+                    ->OrWhere('latitude', 'like', '%' . $search . '%')
+                    ->OrWhere('household_type', 'like', '%' . $search . '%')
+                    ->OrWhere('housing_type', 'like', '%' . $search . '%')
+                    ->OrWhere('house_materials', 'like', '%' . $search . '%')
+                    ->OrWhere('water_source', 'like', '%' . $search . '%')
+                    ->OrWhere('power_supply', 'like', '%' . $search . '%')
+                    ->OrWhere('internet_provider', 'like', '%' . $search . '%')
+                    ->OrWhere('garbage_disposal', 'like', '%' . $search . '%')
+
+                  ->orWhereHas('purok', function ($q) use ($search) {
+                    $q->where('purok_name', 'like', '%' . $search . '%');
+                })
+                ->orWhereHas('headOfFamily', function ($q) use ($search) {
+                    $q->where('first_name', 'like', '%' . $search . '%')
+                      ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                      ->orWhere('last_name', 'like', '%' . $search . '%');
+                })
+                 ->orWhereHas('familyMembers', function ($q) use ($search) {
+                    $q->where('first_name', 'like', '%' . $search . '%')
+                      ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                      ->orWhere('last_name', 'like', '%' . $search . '%');
+                })
+                  ->orWhereHas('crops', function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%')
+                     ->orWhere('type', 'like', '%' . $search . '%')
+                    ->orWhere('quantity', 'like', '%' . $search . '%')
+                    ->orWhere('unit', 'like', '%' . $search . '%');
+                })
+                 ->orWhereHas('livestock', function ($q) use ($search) {
+                    $q->where('type', 'like', '%' . $search . '%')
+                     ->orWhere('category', 'like', '%' . $search . '%')
+                    ->orWhere('quantity', 'like', '%' . $search . '%');
+                  
+                });
+          })
+          ->where('barangay_info_id', $barangayInfoId)
+          ->paginate($perPage);
+
+              // Get total count of all households in this barangay
+    $totalCount = Household::where('barangay_info_id', $barangayInfoId)->count();
+    
+    // Get count of active households
+    $activeCount = Household::where('barangay_info_id', $barangayInfoId)
+        ->where('status', 'Active') // Adjust field name if different (e.g., 'is_active', 'status')
+        ->count();
+    
+  
+  
+    
+    // Get count of households created this month
+    $createdThisMonthCount = Household::where('barangay_info_id', $barangayInfoId)
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+    
+    // Get count of households by status (if you have multiple statuses)
+    $statusCounts = Household::where('barangay_info_id', $barangayInfoId)
+        ->selectRaw('status, count(*) as count')
+        ->groupBy('status')
+        ->pluck('count', 'status');
+      
+          return response()->json([
+        'success' => true,
+        'data' => $household,
+        'total_count' => $totalCount,
+        'active_count' => $activeCount,
+      
+        'created_this_month_count' => $createdThisMonthCount,
+        'status_counts' => $statusCounts // Optional: counts by all statuses
+    ]);
+    }
+
+    public function edit_household($id){
+        $household = Household::with(['crops','livestock','headOfFamily','familyMembers','purok'])->findOrFail($id);
+       return view('barangay.edit_household', compact('household'));
+    }
+    public function view_household($id){
+        $household = Household::with(['crops','livestock','headOfFamily','familyMembers','purok'])->findOrFail($id);
+       return view('barangay.view_household', compact('household'));
+    }
       
 
 

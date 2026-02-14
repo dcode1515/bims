@@ -73,7 +73,7 @@
                     Address Information
                   </h6>
                   <small class="text-muted"
-                    >Enter your household address details</small
+                    >Edit household address details</small
                   >
                 </div>
               </div>
@@ -96,9 +96,7 @@
                       :class="{ 'is-invalid': fieldErrors['address.purok'] }"
                       @blur="validateField('address.purok')"
                     >
-                      <option value="" disabled selected>
-                        Select an Barangay
-                      </option>
+                      <option value="" disabled selected>Select Purok</option>
                       <option
                         v-for="purok in puroks"
                         :key="purok.id"
@@ -169,13 +167,13 @@
                   </div>
                 </div>
 
-                <!-- GPS COORDINATES (Optional) -->
+                <!-- HOUSEHOLD NUMBER -->
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label
                       class="form-label fw-medium d-flex align-items-center"
                     >
-                      <i class="ri-gps-line text-primary me-2"></i>
+                      <i class="ri-hashtag text-primary me-2"></i>
                       Household #
                     </label>
                     <div class="input-group">
@@ -188,9 +186,10 @@
                         v-model="formData.address.householdNumber"
                         type="text"
                         class="form-control"
+                        placeholder="Enter household number"
                       />
                     </div>
-                    <div class="form-text">Enter Househol Number</div>
+                    <div class="form-text">Enter Household Number</div>
                   </div>
                 </div>
               </div>
@@ -240,7 +239,7 @@
                 <div class="ms-3">
                   <h6 class="mb-0 fw-semibold text-primary">Head of Family</h6>
                   <small class="text-muted"
-                    >Information about the household head</small
+                    >Edit information about the household head</small
                   >
                 </div>
               </div>
@@ -470,7 +469,7 @@
                       </div>
                     </div>
 
-                    <!-- Voter Status - NOW REQUIRED -->
+                    <!-- Voter Status -->
                     <div class="col-md-6">
                       <label
                         class="form-label fw-medium d-flex align-items-center"
@@ -509,7 +508,7 @@
                       </div>
                     </div>
 
-                    <!-- 4Ps Member Status - NOW REQUIRED -->
+                    <!-- 4Ps Member Status -->
                     <div class="col-md-6">
                       <label
                         class="form-label fw-medium d-flex align-items-center"
@@ -552,7 +551,7 @@
                       </div>
                     </div>
 
-                    <!-- Deceased Status - NOW REQUIRED -->
+                    <!-- Deceased Status -->
                     <div class="col-md-6">
                       <label
                         class="form-label fw-medium d-flex align-items-center"
@@ -565,7 +564,7 @@
                           v-model="formData.headOfFamily.isDeceased"
                           type="radio"
                           class="btn-check"
-                          value="Alive "
+                          value="No"
                           id="alive"
                         />
                         <label class="btn btn-outline-success" for="alive">
@@ -575,7 +574,7 @@
                           v-model="formData.headOfFamily.isDeceased"
                           type="radio"
                           class="btn-check"
-                          value="Deceased"
+                          value="Yes"
                           id="deceased"
                         />
                         <label class="btn btn-outline-dark" for="deceased">
@@ -600,7 +599,7 @@
                     >Education & Employment
                   </h6>
                   <div class="row g-3">
-                    <!-- Highest Educational Attainment - NOW REQUIRED -->
+                    <!-- Highest Educational Attainment -->
                     <div class="col-md-6">
                       <label
                         class="form-label fw-medium d-flex align-items-center"
@@ -655,7 +654,7 @@
                       </div>
                     </div>
 
-                    <!-- Educational Status - NOW REQUIRED -->
+                    <!-- Educational Status -->
                     <div class="col-md-6">
                       <label
                         class="form-label fw-medium d-flex align-items-center"
@@ -741,7 +740,7 @@
                       </div>
                     </div>
 
-                    <!-- Occupation/Job Title (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
+                    <!-- Occupation/Job Title (Shows when Employed is selected) -->
                     <div
                       class="col-md-6"
                       v-if="
@@ -771,7 +770,7 @@
                       </div>
                     </div>
 
-                    <!-- Nature of Employment (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
+                    <!-- Nature of Employment (Shows when Employed is selected) -->
                     <div
                       class="col-md-6"
                       v-if="
@@ -815,7 +814,7 @@
                       </div>
                     </div>
 
-                    <!-- Monthly Income (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
+                    <!-- Monthly Income (Shows when Employed is selected) -->
                     <div
                       class="col-md-6"
                       v-if="
@@ -965,7 +964,7 @@
                     <h6 class="mb-0 fw-semibold text-primary">
                       Family Members
                     </h6>
-                    <small class="text-muted">Add all household members</small>
+                    <small class="text-muted">Edit household members</small>
                   </div>
                 </div>
                 <button
@@ -985,7 +984,7 @@
                       <i class="ri-information-line text-info fs-5 me-2"></i>
                       <div>
                         <p class="mb-1 fw-medium">
-                          Total Members: {{ formData.members.length + 1 }}
+                          Total Members: {{ totalMembers }}
                         </p>
                         <small class="text-muted"
                           >Head of family +
@@ -1283,7 +1282,7 @@
                         </div>
                       </div>
 
-                      <!-- Voter Status - NOW REQUIRED -->
+                      <!-- Voter Status -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
@@ -1328,7 +1327,7 @@
                         </div>
                       </div>
 
-                      <!-- 4Ps Member Status - NOW REQUIRED -->
+                      <!-- 4Ps Member Status -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
@@ -1377,7 +1376,7 @@
                         </div>
                       </div>
 
-                      <!-- Deceased Status - NOW REQUIRED -->
+                      <!-- Deceased Status -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
@@ -1429,7 +1428,7 @@
                       >Education & Employment
                     </h6>
                     <div class="row g-3 mb-4">
-                      <!-- Highest Educational Attainment - NOW REQUIRED -->
+                      <!-- Highest Educational Attainment -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
@@ -1485,7 +1484,7 @@
                         </div>
                       </div>
 
-                      <!-- Educational Status - NOW REQUIRED -->
+                      <!-- Educational Status -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
@@ -1524,7 +1523,7 @@
                         </div>
                       </div>
 
-                      <!-- Employment Status - NOW REQUIRED -->
+                      <!-- Employment Status -->
                       <div class="col-md-4">
                         <label
                           class="form-label fw-medium d-flex align-items-center"
@@ -1577,7 +1576,7 @@
                         </div>
                       </div>
 
-                      <!-- Occupation/Job Title (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
+                      <!-- Occupation/Job Title (Shows when Employed is selected) -->
                       <div
                         class="col-md-4"
                         v-if="member.employmentStatus === 'Employed'"
@@ -1605,7 +1604,7 @@
                         </div>
                       </div>
 
-                      <!-- Nature of Employment (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
+                      <!-- Nature of Employment (Shows when Employed is selected) -->
                       <div
                         class="col-md-4"
                         v-if="member.employmentStatus === 'Employed'"
@@ -1654,7 +1653,7 @@
                         </div>
                       </div>
 
-                      <!-- Monthly Income (Shows when Employed is selected) - REQUIRED IF EMPLOYED -->
+                      <!-- Monthly Income (Shows when Employed is selected) -->
                       <div
                         class="col-md-4"
                         v-if="member.employmentStatus === 'Employed'"
@@ -1799,7 +1798,6 @@
     </div>
 
     <!-- Step 4: Additional Household Information -->
-    <!-- Step 4: Additional Household Information -->
     <div v-else-if="currentStep === 4">
       <div class="row">
         <div class="col-12">
@@ -1816,7 +1814,7 @@
                     Additional Household Information
                   </h6>
                   <small class="text-muted"
-                    >Complete household details and facilities</small
+                    >Edit household details and facilities</small
                   >
                 </div>
               </div>
@@ -2996,7 +2994,6 @@
     </div>
 
     <!-- Step 5: Review and Submit -->
-    <!-- Step 5: Review and Submit -->
     <div v-else-if="currentStep === 5">
       <div class="row">
         <div class="col-12">
@@ -3010,10 +3007,10 @@
                 </div>
                 <div class="ms-3">
                   <h6 class="mb-0 fw-semibold text-primary">
-                    Review and Submit
+                    Review and Update
                   </h6>
                   <small class="text-muted"
-                    >Review all information before submission</small
+                    >Review all information before updating</small
                   >
                 </div>
               </div>
@@ -3036,7 +3033,7 @@
                         <div>
                           <p class="mb-1"><strong>Purok:</strong></p>
                           <p class="text-primary fw-medium">
-                            {{ formData.address.purok || "Not provided" }}
+                            {{ selectedPurokName }}
                           </p>
                         </div>
                       </div>
@@ -3050,12 +3047,12 @@
                         </div>
                       </div>
                       <div class="d-flex align-items-start">
-                        <i class="ri-globe-line text-muted me-3 mt-1"></i>
+                        <i class="ri-hashtag text-muted me-3 mt-1"></i>
                         <div>
-                          <p class="mb-1"><strong>GPS Coordinates:</strong></p>
+                          <p class="mb-1"><strong>Household #:</strong></p>
                           <p class="text-primary fw-medium">
                             {{
-                              formData.address.gpsCoordinates || "Not provided"
+                              formData.address.householdNumber || "Not provided"
                             }}
                           </p>
                         </div>
@@ -3506,19 +3503,6 @@
                             </div>
                           </div>
                         </div>
-
-                        <!-- Additional Notes -->
-                        <div class="col-12" v-if="formData.householdInfo.notes">
-                          <div class="border rounded p-3">
-                            <h6 class="fw-semibold mb-3">
-                              <i class="ri-file-text-line text-primary me-2"></i
-                              >Additional Notes
-                            </h6>
-                            <p class="mb-0">
-                              {{ formData.householdInfo.notes }}
-                            </p>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -3701,11 +3685,10 @@
                         class="ri-alarm-warning-line fs-4 text-warning me-3"
                       ></i>
                       <div class="flex-grow-1">
-                        <h6 class="fw-semibold mb-1">Final Confirmation</h6>
+                        <h6 class="fw-semibold mb-1">Update Confirmation</h6>
                         <p class="mb-2">
-                          Please review all information carefully. Once
-                          submitted, changes will require administrator
-                          approval.
+                          Please review all information carefully before
+                          updating.
                         </p>
                         <div class="form-check">
                           <input
@@ -3715,8 +3698,8 @@
                             id="acceptTerms"
                           />
                           <label class="form-check-label" for="acceptTerms">
-                            I certify that all information provided is true and
-                            accurate to the best of my knowledge.
+                            I confirm that the updated information is true and
+                            accurate.
                           </label>
                         </div>
                       </div>
@@ -3746,11 +3729,10 @@
                     <button
                       type="button"
                       class="btn btn-success px-4"
-                      @click="submitForm"
+                      @click="updateForm"
                       :disabled="!acceptTerms"
                     >
-                      <i class="ri-check-double-line me-2"></i> Submit
-                      Registration
+                      <i class="ri-check-double-line me-2"></i> Update Household
                     </button>
                   </div>
                 </div>
@@ -3777,9 +3759,9 @@
             >
               <span class="visually-hidden">Loading...</span>
             </div>
-            <h4 class="fw-semibold mb-3">Submitting Registration</h4>
+            <h4 class="fw-semibold mb-3">Updating Household</h4>
             <p class="text-muted mb-0">
-              Please wait while we process your household registration...
+              Please wait while we update the household information...
             </p>
           </div>
         </div>
@@ -3801,12 +3783,9 @@
                 <div class="checkmark draw"></div>
               </div>
             </div>
-            <h4 class="fw-semibold mb-3 text-success">
-              Registration Successful!
-            </h4>
+            <h4 class="fw-semibold mb-3 text-success">Update Successful!</h4>
             <p class="text-muted mb-4">
-              Your household registration has been submitted successfully. You
-              will receive a confirmation email within 24 hours.
+              The household information has been updated successfully.
             </p>
             <div class="alert alert-info bg-info bg-opacity-10 text-start">
               <div class="d-flex">
@@ -3825,8 +3804,8 @@
               >
                 <i class="ri-printer-line me-2"></i> Print
               </button>
-              <button type="button" class="btn btn-primary" @click="resetForm">
-                <i class="ri-add-line me-2"></i> New Registration
+              <button type="button" class="btn btn-primary" @click="goToList">
+                <i class="ri-list-check me-2"></i> View All Households
               </button>
             </div>
           </div>
@@ -3838,7 +3817,13 @@
 
 <script>
 export default {
-  name: "EnhancedHouseholdForm",
+  name: "Edithousehold",
+  props: {
+    household: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       currentStep: 1,
@@ -3859,7 +3844,6 @@ export default {
         { value: "Eggplant", label: "Eggplant" },
         { value: "Rice", label: "Rice" },
       ],
-
       livestockOptions: [
         { value: "Swine", label: "Swine (Pig)" },
         { value: "Cattle", label: "Cattle (Cow)" },
@@ -3888,13 +3872,6 @@ export default {
         otherQuantity: "",
       },
       otherLivestock: [{ type: "", quantity: "", unit: "head" }],
-
-      housingStatuses: [
-        { value: "Owned", label: "Owned", icon: "ri-home-3-line" },
-        { value: "Rented", label: "Rented", icon: "ri-contract-line" },
-        { value: "Family-owned", label: "Family", icon: "ri-group-line" },
-        { value: "Mortgaged", label: "Mortgaged", icon: "ri-bank-line" },
-      ],
       formData: {
         address: {
           purok: "",
@@ -3957,7 +3934,7 @@ export default {
   computed: {
     selectedPurokName() {
       const selected = this.puroks.find(
-        (p) => p.id === this.formData.address.purok
+        (p) => p.id == this.formData.address.purok
       );
       return selected ? selected.purok_name : "Not provided";
     },
@@ -4005,11 +3982,250 @@ export default {
     },
   },
   methods: {
+    initializeFormData() {
+      if (this.household) {
+        console.log("Initializing form with household data:", this.household);
+
+        // Map address data
+        this.formData.address = {
+          purok: this.household.purok?.id || this.household.purok || "",
+          street: this.household.street || "",
+          householdNumber: this.household.household_number || "",
+        };
+
+        // Map head of family data
+        const headOfFamily =
+          this.household.head_of_family || this.household.headOfFamily || {};
+        this.formData.headOfFamily = {
+          firstName: headOfFamily.first_name || headOfFamily.firstName || "",
+          middleInitial:
+            headOfFamily.middle_initial || headOfFamily.middleInitial || "",
+          lastName: headOfFamily.last_name || headOfFamily.lastName || "",
+          extension: headOfFamily.extension || "",
+          sex: headOfFamily.sex || "",
+          birthdate: headOfFamily.birthdate || "",
+          civilStatus:
+            headOfFamily.civil_status || headOfFamily.civilStatus || "",
+          contactNumber:
+            headOfFamily.contact_number || headOfFamily.contactNumber || "",
+          email: headOfFamily.email || "",
+          occupation: headOfFamily.occupation || "",
+          nationalId: headOfFamily.national_id || headOfFamily.nationalId || "",
+          highestEducation:
+            headOfFamily.highest_education ||
+            headOfFamily.highestEducation ||
+            "",
+          educationalStatus:
+            headOfFamily.educational_status ||
+            headOfFamily.educationalStatus ||
+            "",
+          employmentStatus:
+            headOfFamily.employment_status ||
+            headOfFamily.employmentStatus ||
+            "",
+          is4psMember:
+            headOfFamily.is_4ps_member || headOfFamily.is4psMember || "",
+          voterStatus:
+            headOfFamily.voter_status || headOfFamily.voterStatus || "",
+          isDeceased: headOfFamily.is_deceased || headOfFamily.isDeceased || "",
+          natureOfEmployment:
+            headOfFamily.nature_of_employment ||
+            headOfFamily.natureOfEmployment ||
+            "",
+          monthlyIncome:
+            headOfFamily.monthly_income || headOfFamily.monthlyIncome || "",
+        };
+
+        // Map family members data
+        const familyMembers =
+          this.household.family_members || this.household.familyMembers || [];
+        this.formData.members = familyMembers.map((member) => ({
+          firstName: member.first_name || member.firstName || "",
+          middleInitial: member.middle_initial || member.middleInitial || "",
+          lastName: member.last_name || member.lastName || "",
+          extension: member.extension || "",
+          sex: member.sex || "",
+          birthdate: member.birthdate || "",
+          civilStatus: member.civil_status || member.civilStatus || "",
+          relationship: member.relationship || "",
+          contactNumber: member.contact_number || member.contactNumber || "",
+          email: member.email || "",
+          occupation: member.occupation || "",
+          nationalId: member.national_id || member.nationalId || "",
+          highestEducation:
+            member.highest_education || member.highestEducation || "",
+          educationalStatus:
+            member.educational_status || member.educationalStatus || "",
+          employmentStatus:
+            member.employment_status || member.employmentStatus || "",
+          is4psMember: member.is_4ps_member || member.is4psMember || "",
+          voterStatus: member.voter_status || member.voterStatus || "",
+          isDeceased: member.is_deceased || member.isDeceased || "",
+          natureOfEmployment:
+            member.nature_of_employment || member.natureOfEmployment || "",
+          monthlyIncome: member.monthly_income || member.monthlyIncome || "",
+        }));
+
+        // Map household info
+        this.formData.householdInfo = {
+          type: this.household.household_type || this.household.type || "",
+          housingType:
+            this.household.housing_type || this.household.housingType || "",
+          housingTypeOther:
+            this.household.housing_type_other ||
+            this.household.housingTypeOther ||
+            "",
+          houseMaterials:
+            this.household.house_materials ||
+            this.household.houseMaterials ||
+            "",
+          houseMaterialsOther:
+            this.household.house_materials_other ||
+            this.household.houseMaterialsOther ||
+            "",
+          waterSource:
+            this.household.water_source || this.household.waterSource || "",
+          waterSourceICWS:
+            this.household.water_source_icws ||
+            this.household.waterSourceICWS ||
+            "",
+          waterSourceOther:
+            this.household.water_source_other ||
+            this.household.waterSourceOther ||
+            "",
+          powerSupply:
+            this.household.power_supply || this.household.powerSupply || "",
+          powerSupplyOther:
+            this.household.power_supply_other ||
+            this.household.powerSupplyOther ||
+            "",
+          wasteBiodegradable:
+            this.household.waste_biodegradable ||
+            this.household.wasteBiodegradable ||
+            false,
+          wastePlastics:
+            this.household.waste_plastics ||
+            this.household.wastePlastics ||
+            false,
+          wasteOthers:
+            this.household.waste_others || this.household.wasteOthers || "",
+          internetProvider:
+            this.household.internet_provider ||
+            this.household.internetProvider ||
+            "",
+          internetProviderOther:
+            this.household.internet_provider_other ||
+            this.household.internetProviderOther ||
+            "",
+          garbageDisposal:
+            this.household.garbage_disposal ||
+            this.household.garbageDisposal ||
+            "",
+          garbageDisposalOther:
+            this.household.garbage_disposal_other ||
+            this.household.garbageDisposalOther ||
+            "",
+          fishingVessel:
+            this.household.fishing_vessel || this.household.fishingVessel || "",
+          avgFishCatch:
+            this.household.avg_fish_catch || this.household.avgFishCatch || "",
+          fishingFrequency:
+            this.household.fishing_frequency ||
+            this.household.fishingFrequency ||
+            "",
+          longitude: this.household.longitude || "",
+          latitude: this.household.latitude || "",
+          notes: "",
+        };
+
+        // Initialize crops data if available
+        const crops = this.household.crops || [];
+        if (crops.length > 0) {
+          this.selectedCrops = crops
+            .map((c) => {
+              const cropType = this.cropsOptions.find(
+                (opt) =>
+                  opt.label.toLowerCase() ===
+                  (c.name || c.type || "").toLowerCase()
+              );
+              return cropType ? cropType.value : null;
+            })
+            .filter(Boolean);
+
+          crops.forEach((c) => {
+            const cropType = this.cropsOptions.find(
+              (opt) =>
+                opt.label.toLowerCase() ===
+                (c.name || c.type || "").toLowerCase()
+            );
+            if (cropType) {
+              this.cropQuantities[cropType.value] = c.quantity || 0;
+            } else if (
+              c.name &&
+              !this.cropsOptions.some((opt) => opt.label === c.name)
+            ) {
+              // Add to other crops
+              this.otherCrops.push({
+                name: c.name,
+                quantity: c.quantity || "",
+                unit: c.unit || "",
+              });
+            }
+          });
+        }
+
+        // Initialize livestock data if available
+        const livestock = this.household.livestock || [];
+        if (livestock.length > 0) {
+          livestock.forEach((l) => {
+            const livestockType = this.livestockOptions.find((opt) =>
+              opt.label.toLowerCase().includes((l.type || "").toLowerCase())
+            );
+
+            if (livestockType) {
+              if (!this.selectedLivestock.includes(livestockType.value)) {
+                this.selectedLivestock.push(livestockType.value);
+              }
+
+              if (livestockType.value === "Poultry" && l.details) {
+                // Handle poultry details
+                l.details.forEach((detail) => {
+                  if (detail.subType === "Chicken") {
+                    this.poultryType.push("Chicken");
+                    this.poultryQuantities.chicken = detail.quantity || "";
+                  } else if (detail.subType === "Duck") {
+                    this.poultryType.push("Duck");
+                    this.poultryQuantities.duck = detail.quantity || "";
+                  } else {
+                    this.poultryType.push("Other Poultry");
+                    this.poultryQuantities.otherType = detail.subType || "";
+                    this.poultryQuantities.otherQuantity =
+                      detail.quantity || "";
+                  }
+                });
+              } else {
+                this.livestockQuantities[livestockType.value] = l.quantity || 0;
+              }
+            } else {
+              // Add to other livestock
+              this.otherLivestock.push({
+                type: l.type || l.name || "",
+                quantity: l.quantity || "",
+                unit: l.unit || "head",
+              });
+            }
+          });
+        }
+
+        // Set reference ID
+        this.referenceId = this.household.reference_id || "";
+      }
+    },
     async getDataPurok() {
       try {
-        const response = await fetch("/bims/api/get/data/purok-per-household"); // Replace with your actual endpoint
+        const response = await fetch("/bims/api/get/data/purok-per-household");
         if (!response.ok) throw new Error("Network response was not ok");
-        this.puroks = await response.json(); // Assign fetched data to chairmanships
+        this.puroks = await response.json();
       } catch (error) {
         console.error("There was a problem fetching the puroks:", error);
       }
@@ -4123,7 +4339,6 @@ export default {
     formatNumber(num) {
       return new Intl.NumberFormat("en-PH").format(num);
     },
-
     nextStep() {
       if (this.validateCurrentStep()) {
         if (this.currentStep < this.steps.length) {
@@ -4151,7 +4366,6 @@ export default {
         this.cropQuantities = {};
       } else {
         this.selectedCrops = this.cropsOptions.map((crop) => crop.value);
-        // Initialize quantities for all crops
         this.cropsOptions.forEach((crop) => {
           if (!this.cropQuantities[crop.value]) {
             this.cropQuantities[crop.value] = "";
@@ -4182,7 +4396,6 @@ export default {
         unit: "",
       });
     },
-
     removeOtherCrop(index) {
       this.otherCrops.splice(index, 1);
     },
@@ -4201,7 +4414,6 @@ export default {
         this.selectedLivestock = this.livestockOptions.map(
           (animal) => animal.value
         );
-        // Initialize quantities for all livestock
         this.livestockOptions.forEach((animal) => {
           if (!this.livestockQuantities[animal.value]) {
             this.livestockQuantities[animal.value] = "";
@@ -4228,9 +4440,7 @@ export default {
     removeOtherLivestock(index) {
       this.otherLivestock.splice(index, 1);
     },
-
     validatePreparedData() {
-      // Check crops data
       if (this.formData.householdInfo.cropsPlanted) {
         for (const crop of this.formData.householdInfo.cropsPlanted) {
           if (!crop.unit) {
@@ -4240,7 +4450,6 @@ export default {
         }
       }
 
-      // Check livestock data
       if (this.formData.householdInfo.livestockRaised) {
         for (const livestock of this.formData.householdInfo.livestockRaised) {
           if (!livestock.unit) {
@@ -4252,7 +4461,6 @@ export default {
 
       return true;
     },
-
     prepareHouseholdData() {
       // Prepare crops data
       const cropsData = [];
@@ -4379,12 +4587,7 @@ export default {
       // Update formData
       this.formData.householdInfo.cropsPlanted = cropsData;
       this.formData.householdInfo.livestockRaised = livestockData;
-      this.formData.householdInfo.poultryDetails = {
-        types: this.poultryType,
-        quantities: this.poultryQuantities,
-      };
     },
-
     hasStepError(stepId) {
       switch (stepId) {
         case 1:
@@ -4436,10 +4639,12 @@ export default {
         case 4:
           return (
             !this.formData.householdInfo.type ||
-            !this.formData.householdInfo.housingStatus ||
-            !this.formData.householdInfo.numberOfRooms ||
+            !this.formData.householdInfo.housingType ||
+            !this.formData.householdInfo.houseMaterials ||
             !this.formData.householdInfo.waterSource ||
-            !this.formData.householdInfo.toiletFacility
+            !this.formData.householdInfo.powerSupply ||
+            !this.formData.householdInfo.internetProvider ||
+            !this.formData.householdInfo.garbageDisposal
           );
         default:
           return false;
@@ -4482,7 +4687,6 @@ export default {
     validateStep2() {
       const head = this.formData.headOfFamily;
 
-      // Validate first name
       if (!head.firstName) {
         this.fieldErrors["headOfFamily.firstName"] = "First name is required";
         this.validationErrors.push("First name is required");
@@ -4492,7 +4696,6 @@ export default {
         this.validationErrors.push("First name must be at least 2 characters");
       }
 
-      // Validate last name
       if (!head.lastName) {
         this.fieldErrors["headOfFamily.lastName"] = "Last name is required";
         this.validationErrors.push("Last name is required");
@@ -4502,7 +4705,6 @@ export default {
         this.validationErrors.push("Last name must be at least 2 characters");
       }
 
-      // Validate middle initial if provided
       if (head.middleInitial) {
         if (!this.isValidMiddleInitial(head.middleInitial)) {
           this.fieldErrors["headOfFamily.middleInitial"] =
@@ -4511,7 +4713,6 @@ export default {
         }
       }
 
-      // Validate extension if provided
       if (head.extension) {
         if (!this.isValidExtension(head.extension)) {
           this.fieldErrors["headOfFamily.extension"] =
@@ -4520,13 +4721,11 @@ export default {
         }
       }
 
-      // Validate sex
       if (!head.sex) {
         this.fieldErrors["headOfFamily.sex"] = "Please select gender";
         this.validationErrors.push("Gender selection is required");
       }
 
-      // Validate birthdate
       if (!head.birthdate) {
         this.fieldErrors["headOfFamily.birthdate"] = "Birthdate is required";
         this.validationErrors.push("Birthdate is required");
@@ -4556,14 +4755,12 @@ export default {
         }
       }
 
-      // Validate civil status
       if (!head.civilStatus) {
         this.fieldErrors["headOfFamily.civilStatus"] =
           "Civil status is required";
         this.validationErrors.push("Civil status is required");
       }
 
-      // Validate contact number
       if (!head.contactNumber) {
         this.fieldErrors["headOfFamily.contactNumber"] =
           "Contact number is required";
@@ -4578,35 +4775,30 @@ export default {
         }
       }
 
-      // Validate employment status
       if (!head.employmentStatus) {
         this.fieldErrors["headOfFamily.employmentStatus"] =
           "Employment status is required";
         this.validationErrors.push("Employment status is required");
       }
 
-      // Validate Voter Status
       if (!head.voterStatus) {
         this.fieldErrors["headOfFamily.voterStatus"] =
           "Voter status is required";
         this.validationErrors.push("Voter status is required");
       }
 
-      // Validate 4Ps Member Status
       if (!head.is4psMember) {
         this.fieldErrors["headOfFamily.is4psMember"] =
           "4Ps member status is required";
         this.validationErrors.push("4Ps member status is required");
       }
 
-      // Validate Living Status
       if (!head.isDeceased) {
         this.fieldErrors["headOfFamily.isDeceased"] =
           "Living status is required";
         this.validationErrors.push("Living status is required");
       }
 
-      // Validate Highest Educational Attainment
       if (!head.highestEducation) {
         this.fieldErrors["headOfFamily.highestEducation"] =
           "Highest educational attainment is required";
@@ -4615,23 +4807,19 @@ export default {
         );
       }
 
-      // Validate Educational Status
       if (!head.educationalStatus) {
         this.fieldErrors["headOfFamily.educationalStatus"] =
           "Educational status is required";
         this.validationErrors.push("Educational status is required");
       }
 
-      // CONDITIONAL VALIDATIONS FOR EMPLOYED STATUS
       if (head.employmentStatus === "Employed") {
-        // Validate Occupation
         if (!head.occupation) {
           this.fieldErrors["headOfFamily.occupation"] =
             "Occupation is required when employed";
           this.validationErrors.push("Occupation is required when employed");
         }
 
-        // Validate Nature of Employment
         if (!head.natureOfEmployment) {
           this.fieldErrors["headOfFamily.natureOfEmployment"] =
             "Nature of employment is required when employed";
@@ -4640,7 +4828,6 @@ export default {
           );
         }
 
-        // Validate Monthly Income
         if (!head.monthlyIncome) {
           this.fieldErrors["headOfFamily.monthlyIncome"] =
             "Monthly income is required when employed";
@@ -4666,7 +4853,6 @@ export default {
       this.formData.members.forEach((member, index) => {
         const memberNum = index + 1;
 
-        // Validate first name
         if (!member.firstName) {
           this.fieldErrors[`members.${index}.firstName`] =
             "First name is required";
@@ -4681,7 +4867,6 @@ export default {
           );
         }
 
-        // Validate last name
         if (!member.lastName) {
           this.fieldErrors[`members.${index}.lastName`] =
             "Last name is required";
@@ -4696,7 +4881,6 @@ export default {
           );
         }
 
-        // Validate middle initial if provided
         if (member.middleInitial) {
           if (!this.isValidMiddleInitial(member.middleInitial)) {
             this.fieldErrors[`members.${index}.middleInitial`] =
@@ -4707,7 +4891,6 @@ export default {
           }
         }
 
-        // Validate extension if provided
         if (member.extension) {
           if (!this.isValidExtension(member.extension)) {
             this.fieldErrors[`members.${index}.extension`] =
@@ -4718,7 +4901,6 @@ export default {
           }
         }
 
-        // Validate sex
         if (!member.sex) {
           this.fieldErrors[`members.${index}.sex`] = "Gender is required";
           this.validationErrors.push(`Member ${memberNum}: Gender is required`);
@@ -4729,7 +4911,6 @@ export default {
           );
         }
 
-        // Validate birthdate
         if (!member.birthdate) {
           this.fieldErrors[`members.${index}.birthdate`] =
             "Birthdate is required";
@@ -4769,7 +4950,6 @@ export default {
           }
         }
 
-        // Validate civil status
         if (!member.civilStatus) {
           this.fieldErrors[`members.${index}.civilStatus`] =
             "Civil status is required";
@@ -4778,32 +4958,14 @@ export default {
           );
         }
 
-        // Validate relationship
         if (!member.relationship) {
           this.fieldErrors[`members.${index}.relationship`] =
             "Relationship is required";
           this.validationErrors.push(
             `Member ${memberNum}: Relationship is required`
           );
-        } else if (
-          ![
-            "Spouse",
-            "Child",
-            "Parent",
-            "Sibling",
-            "Grandchild",
-            "Relative",
-            "Non-relative",
-          ].includes(member.relationship)
-        ) {
-          this.fieldErrors[`members.${index}.relationship`] =
-            "Invalid relationship";
-          this.validationErrors.push(
-            `Member ${memberNum}: Invalid relationship selection`
-          );
         }
 
-        // Validate Voter Status
         if (!member.voterStatus) {
           this.fieldErrors[`members.${index}.voterStatus`] =
             "Voter status is required";
@@ -4812,7 +4974,6 @@ export default {
           );
         }
 
-        // Validate 4Ps Member Status
         if (!member.is4psMember) {
           this.fieldErrors[`members.${index}.is4psMember`] =
             "4Ps member status is required";
@@ -4821,7 +4982,6 @@ export default {
           );
         }
 
-        // Validate Living Status
         if (!member.isDeceased) {
           this.fieldErrors[`members.${index}.isDeceased`] =
             "Living status is required";
@@ -4830,7 +4990,6 @@ export default {
           );
         }
 
-        // Validate Highest Educational Attainment
         if (!member.highestEducation) {
           this.fieldErrors[`members.${index}.highestEducation`] =
             "Highest educational attainment is required";
@@ -4839,7 +4998,6 @@ export default {
           );
         }
 
-        // Validate Educational Status
         if (!member.educationalStatus) {
           this.fieldErrors[`members.${index}.educationalStatus`] =
             "Educational status is required";
@@ -4848,7 +5006,6 @@ export default {
           );
         }
 
-        // Validate Employment Status
         if (!member.employmentStatus) {
           this.fieldErrors[`members.${index}.employmentStatus`] =
             "Employment status is required";
@@ -4857,9 +5014,7 @@ export default {
           );
         }
 
-        // CONDITIONAL VALIDATIONS FOR EMPLOYED STATUS
         if (member.employmentStatus === "Employed") {
-          // Validate Occupation
           if (!member.occupation) {
             this.fieldErrors[`members.${index}.occupation`] =
               "Occupation is required when employed";
@@ -4868,7 +5023,6 @@ export default {
             );
           }
 
-          // Validate Nature of Employment
           if (!member.natureOfEmployment) {
             this.fieldErrors[`members.${index}.natureOfEmployment`] =
               "Nature of employment is required when employed";
@@ -4877,7 +5031,6 @@ export default {
             );
           }
 
-          // Validate Monthly Income
           if (!member.monthlyIncome) {
             this.fieldErrors[`members.${index}.monthlyIncome`] =
               "Monthly income is required when employed";
@@ -4892,17 +5045,10 @@ export default {
               this.validationErrors.push(
                 `Member ${memberNum}: Monthly income must be a positive number`
               );
-            } else if (income > 1000000) {
-              this.fieldErrors[`members.${index}.monthlyIncome`] =
-                "Monthly income cannot exceed ₱1,000,000";
-              this.validationErrors.push(
-                `Member ${memberNum}: Monthly income cannot exceed ₱1,000,000`
-              );
             }
           }
         }
 
-        // Validate contact number if provided
         if (member.contactNumber) {
           const cleanNumber = member.contactNumber.replace(/\D/g, "");
           if (!/^09\d{9}$/.test(cleanNumber)) {
@@ -4914,7 +5060,6 @@ export default {
           }
         }
 
-        // Validate email if provided
         if (member.email) {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailRegex.test(member.email)) {
@@ -4925,7 +5070,6 @@ export default {
           }
         }
 
-        // Validate National ID if provided
         if (member.nationalId) {
           const cleanedId = member.nationalId.replace(/\s|-/g, "");
           if (!/^\d{12,19}$/.test(cleanedId)) {
@@ -4938,7 +5082,6 @@ export default {
         }
       });
 
-      // Check for duplicate members
       this.checkForDuplicateMembers();
     },
     checkForDuplicateMembers() {
@@ -4963,48 +5106,41 @@ export default {
       }
     },
     validateStep4() {
-      // Validate household type
       if (!this.formData.householdInfo.type) {
         this.fieldErrors["householdInfo.type"] = "Household type is required";
         this.validationErrors.push("Household type is required");
       }
 
-      // Validate housing type
       if (!this.formData.householdInfo.housingType) {
         this.fieldErrors["householdInfo.housingType"] =
           "Housing type is required";
         this.validationErrors.push("Housing type is required");
       }
 
-      // Validate house materials
       if (!this.formData.householdInfo.houseMaterials) {
         this.fieldErrors["householdInfo.houseMaterials"] =
           "House materials is required";
         this.validationErrors.push("House materials is required");
       }
 
-      // Validate water source
       if (!this.formData.householdInfo.waterSource) {
         this.fieldErrors["householdInfo.waterSource"] =
           "Water source is required";
         this.validationErrors.push("Water source is required");
       }
 
-      // Validate power supply
       if (!this.formData.householdInfo.powerSupply) {
         this.fieldErrors["householdInfo.powerSupply"] =
           "Power supply is required";
         this.validationErrors.push("Power supply is required");
       }
 
-      // Validate internet provider
       if (!this.formData.householdInfo.internetProvider) {
         this.fieldErrors["householdInfo.internetProvider"] =
           "Internet provider is required";
         this.validationErrors.push("Internet provider is required");
       }
 
-      // Validate garbage disposal
       if (!this.formData.householdInfo.garbageDisposal) {
         this.fieldErrors["householdInfo.garbageDisposal"] =
           "Garbage disposal method is required";
@@ -5292,9 +5428,6 @@ export default {
             if (isNaN(income) || income < 0) {
               this.fieldErrors[fieldPath] =
                 "Monthly income must be a positive number";
-            } else if (income > 1000000) {
-              this.fieldErrors[fieldPath] =
-                "Monthly income cannot exceed ₱1,000,000";
             }
           }
           break;
@@ -5434,14 +5567,6 @@ export default {
         }
       }
     },
-    generateReferenceId() {
-      const timestamp = Date.now().toString().slice(-6);
-      const random = Math.floor(Math.random() * 1000)
-        .toString()
-        .padStart(3, "0");
-      return `HH-${timestamp}${random}`;
-    },
-
     detectErrorSteps(errors) {
       const errorSteps = new Set();
 
@@ -5459,10 +5584,9 @@ export default {
 
       return Array.from(errorSteps);
     },
-
-    async submitForm() {
+    async updateForm() {
       if (!this.acceptTerms) {
-        alert("Please accept the terms and conditions before submitting.");
+        alert("Please confirm the information before updating.");
         return;
       }
 
@@ -5470,7 +5594,6 @@ export default {
       for (let i = 1; i <= 5; i++) {
         this.currentStep = i;
         if (!this.validateCurrentStep()) {
-          // Go back to the first step with errors
           this.currentStep = i;
           this.validationErrors = [
             "Please fix all validation errors before submitting.",
@@ -5495,103 +5618,102 @@ export default {
       this.isSubmitting = true;
 
       try {
-        // Prepare the data for API - make sure all required fields are included
+        // Get household ID from props
+        const householdId = this.household.id;
+
+        // Prepare the data for API
         const formData = {
           address: {
             purok: this.formData.address.purok,
             street: this.formData.address.street,
-            householdNumber: this.formData.address.householdNumber || "",
-            // Make sure only one source for coordinates
-            longitude: this.formData.householdInfo.longitude || "",
-            latitude: this.formData.householdInfo.latitude || "",
+            household_number: this.formData.address.householdNumber || "",
           },
           headOfFamily: {
-            firstName: this.formData.headOfFamily.firstName,
-            middleInitial: this.formData.headOfFamily.middleInitial || "",
-            lastName: this.formData.headOfFamily.lastName,
+            first_name: this.formData.headOfFamily.firstName,
+            middle_initial: this.formData.headOfFamily.middleInitial || "",
+            last_name: this.formData.headOfFamily.lastName,
             extension: this.formData.headOfFamily.extension || "",
             sex: this.formData.headOfFamily.sex,
             birthdate: this.formData.headOfFamily.birthdate,
-            civilStatus: this.formData.headOfFamily.civilStatus,
-            contactNumber: this.formData.headOfFamily.contactNumber,
+            civil_status: this.formData.headOfFamily.civilStatus,
+            contact_number: this.formData.headOfFamily.contactNumber,
             email: this.formData.headOfFamily.email || "",
             occupation: this.formData.headOfFamily.occupation || "",
-            nationalId: this.formData.headOfFamily.nationalId || "",
-            highestEducation: this.formData.headOfFamily.highestEducation,
-            educationalStatus: this.formData.headOfFamily.educationalStatus,
-            employmentStatus: this.formData.headOfFamily.employmentStatus,
-            voterStatus: this.formData.headOfFamily.voterStatus,
-            is4psMember: this.formData.headOfFamily.is4psMember,
-            isDeceased: this.formData.headOfFamily.isDeceased,
-            natureOfEmployment:
+            national_id: this.formData.headOfFamily.nationalId || "",
+            highest_education: this.formData.headOfFamily.highestEducation,
+            educational_status: this.formData.headOfFamily.educationalStatus,
+            employment_status: this.formData.headOfFamily.employmentStatus,
+            voter_status: this.formData.headOfFamily.voterStatus,
+            is_4ps_member: this.formData.headOfFamily.is4psMember,
+            is_deceased: this.formData.headOfFamily.isDeceased,
+            nature_of_employment:
               this.formData.headOfFamily.natureOfEmployment || "",
-            monthlyIncome: this.formData.headOfFamily.monthlyIncome || 0,
+            monthly_income: this.formData.headOfFamily.monthlyIncome || 0,
           },
           householdInfo: {
             type: this.formData.householdInfo.type,
-            housingType: this.formData.householdInfo.housingType,
-            housingTypeOther:
+            housing_type: this.formData.householdInfo.housingType,
+            housing_type_other:
               this.formData.householdInfo.housingTypeOther || "",
-            houseMaterials: this.formData.householdInfo.houseMaterials,
-            houseMaterialsOther:
+            house_materials: this.formData.householdInfo.houseMaterials,
+            house_materials_other:
               this.formData.householdInfo.houseMaterialsOther || "",
-            waterSource: this.formData.householdInfo.waterSource,
-            waterSourceICWS: this.formData.householdInfo.waterSourceICWS || "",
-            waterSourceOther:
+            water_source: this.formData.householdInfo.waterSource,
+            water_source_icws:
+              this.formData.householdInfo.waterSourceICWS || "",
+            water_source_other:
               this.formData.householdInfo.waterSourceOther || "",
-            powerSupply: this.formData.householdInfo.powerSupply,
-            powerSupplyOther:
+            power_supply: this.formData.householdInfo.powerSupply,
+            power_supply_other:
               this.formData.householdInfo.powerSupplyOther || "",
-            wasteBiodegradable:
+            waste_biodegradable:
               this.formData.householdInfo.wasteBiodegradable || false,
-            wastePlastics: this.formData.householdInfo.wastePlastics || false,
-            wasteOthers: this.formData.householdInfo.wasteOthers || "",
-            internetProvider: this.formData.householdInfo.internetProvider,
-            internetProviderOther:
+            waste_plastics: this.formData.householdInfo.wastePlastics || false,
+            waste_others: this.formData.householdInfo.wasteOthers || "",
+            internet_provider: this.formData.householdInfo.internetProvider,
+            internet_provider_other:
               this.formData.householdInfo.internetProviderOther || "",
-            garbageDisposal: this.formData.householdInfo.garbageDisposal,
-            garbageDisposalOther:
+            garbage_disposal: this.formData.householdInfo.garbageDisposal,
+            garbage_disposal_other:
               this.formData.householdInfo.garbageDisposalOther || "",
-            fishingVessel: this.formData.householdInfo.fishingVessel || "",
-            avgFishCatch: this.formData.householdInfo.avgFishCatch || "",
-            fishingFrequency:
+            fishing_vessel: this.formData.householdInfo.fishingVessel || "",
+            avg_fish_catch: this.formData.householdInfo.avgFishCatch || "",
+            fishing_frequency:
               this.formData.householdInfo.fishingFrequency || "",
             longitude: this.formData.householdInfo.longitude || "",
             latitude: this.formData.householdInfo.latitude || "",
-            notes: this.formData.householdInfo.notes || "",
           },
           members: this.formData.members.map((member) => ({
-            firstName: member.firstName,
-            middleInitial: member.middleInitial || "",
-            lastName: member.lastName,
+            first_name: member.firstName,
+            middle_initial: member.middleInitial || "",
+            last_name: member.lastName,
             extension: member.extension || "",
             sex: member.sex,
             birthdate: member.birthdate,
-            civilStatus: member.civilStatus,
+            civil_status: member.civilStatus,
             relationship: member.relationship,
-            contactNumber: member.contactNumber || "",
+            contact_number: member.contactNumber || "",
             email: member.email || "",
             occupation: member.occupation || "",
-            nationalId: member.nationalId || "",
-            highestEducation: member.highestEducation,
-            educationalStatus: member.educationalStatus,
-            employmentStatus: member.employmentStatus,
-            voterStatus: member.voterStatus,
-            is4psMember: member.is4psMember,
-            isDeceased: member.isDeceased,
-            natureOfEmployment: member.natureOfEmployment || "",
-            monthlyIncome: member.monthlyIncome || 0,
+            national_id: member.nationalId || "",
+            highest_education: member.highestEducation,
+            educational_status: member.educationalStatus,
+            employment_status: member.employmentStatus,
+            voter_status: member.voterStatus,
+            is_4ps_member: member.is4psMember,
+            is_deceased: member.isDeceased,
+            nature_of_employment: member.natureOfEmployment || "",
+            monthly_income: member.monthlyIncome || 0,
           })),
-          cropsPlanted: this.formData.householdInfo.cropsPlanted || [],
-          livestockRaised: this.formData.householdInfo.livestockRaised || [],
+          crops_planted: this.formData.householdInfo.cropsPlanted || [],
+          livestock_raised: this.formData.householdInfo.livestockRaised || [],
         };
 
-        // Log the data for debugging (remove in production)
-        console.log("Submitting data:", JSON.stringify(formData, null, 2));
+        console.log("Updating data:", JSON.stringify(formData, null, 2));
 
-        // Make API call
-        const response = await fetch("/bims/api/households/store", {
-          method: "POST",
+        // Make API call to update
+        const response = await fetch(`/bims/api/update/households/${householdId}`, {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -5604,18 +5726,18 @@ export default {
 
         const data = await response.json();
 
-        console.log("API Response:", data); // Debug log
+        console.log("API Response:", data);
 
         if (!response.ok) {
           throw new Error(
-            data.message || "Failed to submit household registration"
+            data.message || "Failed to update household information"
           );
         }
 
         if (data.success) {
-          // Store reference ID for success modal
+          // Store reference ID
           this.referenceId =
-            data.data.reference_id || this.generateReferenceId();
+            data.data.reference_id || this.household.reference_id;
 
           // Show success modal
           this.showSuccessModal = true;
@@ -5644,103 +5766,22 @@ export default {
 
             window.scrollTo({ top: 0, behavior: "smooth" });
           } else {
-            alert(data.message || "Submission failed. Please try again.");
+            alert(data.message || "Update failed. Please try again.");
           }
         }
       } catch (error) {
-        console.error("Submission error:", error);
+        console.error("Update error:", error);
 
-        // Show error message
         this.validationErrors = [
-          error.message ||
-            "An error occurred during submission. Please try again.",
+          error.message || "An error occurred during update. Please try again.",
         ];
         window.scrollTo({ top: 0, behavior: "smooth" });
       } finally {
-        // Reset loading state
         this.isSubmitting = false;
       }
     },
-
-    resetForm() {
-      this.showSuccessModal = false;
-      this.currentStep = 1;
-      this.acceptTerms = false;
-      this.fieldErrors = {};
-      this.validationErrors = [];
-
-      this.formData = {
-        address: {
-          purok: "",
-          street: "",
-          householdNumber: "",
-        },
-        headOfFamily: {
-          firstName: "",
-          middleInitial: "",
-          lastName: "",
-          extension: "",
-          sex: "",
-          birthdate: "",
-          civilStatus: "",
-          contactNumber: "",
-          email: "",
-          occupation: "",
-          nationalId: "",
-          highestEducation: "",
-          educationalStatus: "",
-          employmentStatus: "",
-          is4psMember: "",
-          voterStatus: "",
-          isDeceased: "",
-          natureOfEmployment: "",
-          monthlyIncome: "",
-        },
-        members: [],
-        householdInfo: {
-          type: "",
-          housingType: "",
-          housingTypeOther: "",
-          houseMaterials: "",
-          houseMaterialsOther: "",
-          waterSource: "",
-          waterSourceICWS: "",
-          waterSourceOther: "",
-          powerSupply: "",
-          powerSupplyOther: "",
-          wasteBiodegradable: false,
-          wastePlastics: false,
-          wasteOthers: "",
-          internetProvider: "",
-          internetProviderOther: "",
-          garbageDisposal: "",
-          garbageDisposalOther: "",
-          cropsPlanted: [],
-          livestockRaised: [],
-          poultryDetails: {},
-          fishingVessel: "",
-          avgFishCatch: "",
-          fishingFrequency: "",
-          longitude: "",
-          latitude: "",
-          notes: "",
-        },
-      };
-
-      // Reset additional data
-      this.selectedCrops = [];
-      this.cropQuantities = {};
-      this.otherCrops = [{ name: "", quantity: "", unit: "" }];
-      this.selectedLivestock = [];
-      this.livestockQuantities = {};
-      this.poultryType = [];
-      this.poultryQuantities = {
-        chicken: "",
-        duck: "",
-        otherType: "",
-        otherQuantity: "",
-      };
-      this.otherLivestock = [{ type: "", quantity: "", unit: "head" }];
+    goToList() {
+      window.location.href = "/bims/household"; // Adjust this to your actual route
     },
     printConfirmation() {
       window.print();
@@ -5748,7 +5789,7 @@ export default {
   },
   mounted() {
     this.getDataPurok();
-    this.loadDraft();
+    this.initializeFormData();
   },
 };
 </script>
@@ -5959,20 +6000,6 @@ export default {
   }
 }
 
-/* Loading spinner animation */
-.spin {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 @media print {
   .modal {
     position: static !important;
@@ -6001,31 +6028,6 @@ export default {
     padding: 0.375rem 0.75rem;
     font-size: 0.875rem;
   }
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
-.card-footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
-  padding-top: 1.5rem;
-  margin-top: 1rem;
 }
 
 @media (max-width: 576px) {
