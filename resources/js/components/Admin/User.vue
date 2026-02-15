@@ -83,23 +83,23 @@
                                         <i class="ri-leaf-line me-1"></i>
                                         Email
                                     </th>
-                                     <th>
+                                    <th>
                                         <i class="ri-leaf-line me-1"></i>
                                         Sex
                                     </th>
-                                       <th>
+                                    <th>
                                         <i class="ri-leaf-line me-1"></i>
                                         Contact #
                                     </th>
-                                      <th>
+                                    <th>
                                         <i class="ri-leaf-line me-1"></i>
                                         Birthdate
                                     </th>
-                                     <th>
+                                    <th>
                                         <i class="ri-leaf-line me-1"></i>
                                         Barangay
                                     </th>
-                                     <th>
+                                    <th>
                                         <i class="ri-leaf-line me-1"></i>
                                         Role
                                     </th>
@@ -107,7 +107,7 @@
                                         <i class="ri-calendar-line me-1"></i>
                                         Date Created
                                     </th>
-                                      <th>
+                                    <th>
                                         <i class="ri-calendar-line me-1"></i>
                                         Status
                                     </th>
@@ -127,7 +127,7 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div>
-                                               {{ user.firstname }} {{ user.middle_initial }} {{ user.lastname }}
+                                                {{ user.firstname }} {{ user.middle_initial }} {{ user.lastname }}
                                             </div>
                                         </div>
                                     </td>
@@ -141,60 +141,60 @@
                                     </td>
 
                                     <td>
-                                         <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center">
                                             <div>
                                                 {{ user.sex }}
                                             </div>
                                         </div>
-                                        
+
                                     </td>
-                                      <td>
-                                         <div class="d-flex align-items-center">
+                                    <td>
+                                        <div class="d-flex align-items-center">
                                             <div>
                                                 {{ user.contact_number }}
                                             </div>
                                         </div>
-                                        
+
                                     </td>
-                                      <td>
-                                         <div class="d-flex align-items-center">
+                                    <td>
+                                        <div class="d-flex align-items-center">
                                             <div>
                                                 {{ formatDate(user.birthdate) }}
                                             </div>
                                         </div>
-                                        
+
                                     </td>
-                                      <td>
-                                         <div class="d-flex align-items-center">
+                                    <td>
+                                        <div class="d-flex align-items-center">
                                             <div>
                                                 {{ user.barangay.barangay_name }}
                                             </div>
                                         </div>
-                                        
+
                                     </td>
-                                     <td>
-                                         <div class="d-flex align-items-center">
+                                    <td>
+                                        <div class="d-flex align-items-center">
                                             <div>
                                                 {{ user.role }}
                                             </div>
                                         </div>
-                                        
+
                                     </td>
-                                     <td>
-                                         <div class="d-flex align-items-center">
+                                    <td>
+                                        <div class="d-flex align-items-center">
                                             <div>
                                                 {{ formatDate(user.created_at) }}
                                             </div>
                                         </div>
-                                        
+
                                     </td>
                                     <td>
-                                         <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center">
                                             <div>
                                                 {{ user.status }}
                                             </div>
                                         </div>
-                                        </td>
+                                    </td>
 
                                     <td class="text-center">
                                         <div class="btn-group" role="group">
@@ -206,8 +206,8 @@
                                                 title="View">
                                                 <i class="ri-eye-line"></i>
                                             </button>
-                                            <button class="btn btn-sm btn-outline-danger"
-                                                @click="confirmDelete(user)" title="Delete">
+                                            <button class="btn btn-sm btn-outline-danger" @click="confirmDelete(user)"
+                                                title="Delete">
                                                 <i class="ri-delete-bin-line"></i>
                                             </button>
                                         </div>
@@ -223,8 +223,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="modal fade zoomIn" id="modalUser" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade zoomIn" id="modalUser" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-xl">
                                 <div class="modal-content border-0 shadow-lg">
                                     <!-- HEADER -->
@@ -239,7 +239,7 @@
                                     <!-- BODY -->
                                     <div class="modal-body p-4">
                                         <!-- Validation Errors Summary -->
-                                       
+
 
                                         <div class="row">
                                             <!-- Personal Information Card -->
@@ -262,11 +262,9 @@
                                                                             <i class="ri-user-line text-primary"></i>
                                                                         </span>
                                                                         <input type="text" class="form-control"
-                                                                           
                                                                             placeholder="Enter first name"
-                                                                            v-model="formData.firstname"
-                                                                          >
-                                                                       
+                                                                            v-model="formData.firstname">
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -297,11 +295,9 @@
                                                                             <i class="ri-user-3-line text-primary"></i>
                                                                         </span>
                                                                         <input type="text" class="form-control"
-                                                                           
                                                                             placeholder="Enter last name"
-                                                                            v-model="formData.lastname"
-                                                                           >
-                                                                      
+                                                                            v-model="formData.lastname">
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -332,8 +328,7 @@
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                 v-model="formData.sex" value="Male"
-                                                                                id="genderMale"
-                                                                              >
+                                                                                id="genderMale">
                                                                             <label class="form-check-label"
                                                                                 for="genderMale">
                                                                                 <i
@@ -344,8 +339,7 @@
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                 v-model="formData.sex" value="Female"
-                                                                                id="genderFemale"
-                                                                               >
+                                                                                id="genderFemale">
                                                                             <label class="form-check-label"
                                                                                 for="genderFemale">
                                                                                 <i
@@ -354,7 +348,7 @@
                                                                             </label>
                                                                         </div>
                                                                     </div>
-                                                                   
+
                                                                 </div>
                                                             </div>
 
@@ -383,11 +377,9 @@
                                                                             <i class="ri-phone-line text-primary"></i>
                                                                         </span>
                                                                         <input type="text" class="form-control"
-                                                                           
                                                                             placeholder="09XXXXXXXXX"
-                                                                            v-model="formData.contact_number"
-                                                                          >
-                                                                        
+                                                                            v-model="formData.contact_number">
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -410,7 +402,7 @@
                                                                                 {{ barangay.barangay_name }}
                                                                             </option>
                                                                         </select>
-                                                                       
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -424,16 +416,13 @@
                                                                                 class="ri-shield-user-line text-primary"></i>
                                                                         </span>
                                                                         <select class="form-select"
-                                                                          
-                                                                            v-model="formData.role"
-                                                                          >
+                                                                            v-model="formData.role">
                                                                             <option value="">Select Role</option>
                                                                             <option value="Super Admin">Super Admin
                                                                             </option>
                                                                             <option value="Admin">Admin</option>
                                                                             <option value="Secretary">Secretary</option>
                                                                         </select>
-                                                                       
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -463,17 +452,16 @@
                                                                             <i class="ri-mail-line text-primary"></i>
                                                                         </span>
                                                                         <input type="email" class="form-control"
-                                                                         
                                                                             placeholder="example@email.com"
-                                                                            v-model="formData.email"
-                                                                          >
-                                                                        
+                                                                            v-model="formData.email">
+
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <!-- PASSWORD (Only show for add mode) -->
-                                                           <div v-if="modalMode === 'add' || modalMode === 'edit'" class="col-md-4">
+                                                            <div v-if="modalMode === 'add' || modalMode === 'edit'"
+                                                                class="col-md-4">
                                                                 <div class="mb-3">
                                                                     <label class="form-label fw-medium">Password <span
                                                                             class="text-danger">*</span></label>
@@ -482,16 +470,14 @@
                                                                             <i class="ri-lock-line text-primary"></i>
                                                                         </span>
                                                                         <input type="password" class="form-control"
-                                                                           
                                                                             placeholder="Enter password"
-                                                                            v-model="formData.password"
-                                                                          >
+                                                                            v-model="formData.password">
                                                                         <button class="btn btn-outline-secondary"
                                                                             type="button"
                                                                             @click="togglePasswordVisibility('password')">
                                                                             <i class="ri-eye-line"></i>
                                                                         </button>
-                                                                       
+
                                                                     </div>
                                                                     <small class="text-muted">At least 8 characters with
                                                                         uppercase, lowercase, and number</small>
@@ -499,7 +485,8 @@
                                                             </div>
 
                                                             <!-- CONFIRM PASSWORD (Only show for add mode) -->
-                                                          <div v-if="modalMode === 'add' || modalMode === 'edit'" class="col-md-4">
+                                                            <div v-if="modalMode === 'add' || modalMode === 'edit'"
+                                                                class="col-md-4">
 
                                                                 <div class="mb-3">
                                                                     <label class="form-label fw-medium">Confirm Password
@@ -510,16 +497,14 @@
                                                                                 class="ri-lock-password-line text-primary"></i>
                                                                         </span>
                                                                         <input type="password" class="form-control"
-                                                                          
                                                                             placeholder="Confirm password"
-                                                                            v-model="formData.password_confirmation"
-                                                                          >
+                                                                            v-model="formData.password_confirmation">
                                                                         <button class="btn btn-outline-secondary"
                                                                             type="button"
                                                                             @click="togglePasswordVisibility('password_confirmation')">
                                                                             <i class="ri-eye-line"></i>
                                                                         </button>
-                                                                       
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -629,8 +614,7 @@
                                     <li class="page-item" :class="{
                                         disabled: users.current_page === users.last_page,
                                     }">
-                                        <button class="page-link" @click="changePage(users.last_page)"
-                                            title="Last">
+                                        <button class="page-link" @click="changePage(users.last_page)" title="Last">
                                             <i class="ri-skip-forward-line"></i>
                                         </button>
                                     </li>
@@ -677,7 +661,7 @@ export default {
                 password_confirmation: '',
                 status: 'Active'
             },
-         
+
             modalMode: "add",
             modalTitle: "Add User",
             searchQuery: "",
@@ -708,7 +692,7 @@ export default {
 
             return pages;
         },
-     
+
     },
 
     methods: {
@@ -783,16 +767,17 @@ export default {
 
         openModal(mode = 'add', user = null) {
             this.modalMode = mode;
-           
+
 
             if (mode === 'add') {
                 this.modalTitle = 'Add User Member';
                 this.resetForm();
             } else if (mode === 'edit' && user) {
                 this.modalTitle = 'Edit User Member';
-                this.formData = { ...user,
-                     barangay: user.barangay ? user.barangay.id : ''
-                 };
+                this.formData = {
+                    ...user,
+                    barangay: user.barangay ? user.barangay.id : ''
+                };
             } else if (mode === 'view' && user) {
                 this.modalTitle = 'View User User Details';
                 this.formData = { ...user };
@@ -804,7 +789,7 @@ export default {
         closeModal() {
             $('#modalUser').modal('hide');
             this.resetForm();
-       
+
         },
         resetForm() {
             this.formData = {
@@ -823,25 +808,26 @@ export default {
                 status: 'Active'
             };
         },
-      
-         togglePasswordVisibility(field) {
+
+        togglePasswordVisibility(field) {
             const input = document.querySelector(`input[name="${field}"]`);
             if (input) {
                 input.type = input.type === 'password' ? 'text' : 'password';
             }
         },
 
-      
 
-        
+
+
 
 
         viewDetails(user) {
             this.modalMode = "view";
             this.modalTitle = "View Details";
-             this.formData = { ...user,
-                     barangay: user.barangay ? user.barangay.id : ''
-                 };
+            this.formData = {
+                ...user,
+                barangay: user.barangay ? user.barangay.id : ''
+            };
             $("#modalUser").modal("show");
         },
 
@@ -869,17 +855,17 @@ export default {
                     confirmButtonColor: "#198754",
                     confirmButtonText: "OK",
                 });
-                   if (this.modalMode === "add") {
-                  $("#modalUser").modal("show");
-                  this.resetForm();
+                if (this.modalMode === "add") {
+                    $("#modalUser").modal("show");
+                    this.resetForm();
                     this.getDataUser();
-                   } 
-                     if (this.modalMode === "edit") {
-                  $("#modalUser").modal("hide");
-                  this.resetForm();
+                }
+                if (this.modalMode === "edit") {
+                    $("#modalUser").modal("hide");
+                    this.resetForm();
                     this.getDataUser();
-                   } 
-                
+                }
+
 
             } catch (error) {
                 if (error.response?.status === 409) {

@@ -73,5 +73,11 @@ Route::get('/household/edit/{id}', [App\Http\Controllers\Barangay\BarangayContro
 Route::put('/api/update/households/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_household']);
 Route::get('/household/view/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'view_household']);
 Route::get('/blotter', [App\Http\Controllers\Barangay\BarangayController::class, 'blotter'])->name('blotter');
+Route::post('/api/blotter/store', [App\Http\Controllers\Barangay\BarangayController::class, 'store_blotter']);
+Route::get('/api/get/data/blotter', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataBlotter']);
+Route::put('/api/blotter/update/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_blotter']);
+Route::get('/certification', [App\Http\Controllers\Barangay\BarangayController::class, 'certification'])->name('certification');
+
+
 
 /*End Admin Routes */

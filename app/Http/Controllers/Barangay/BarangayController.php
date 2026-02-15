@@ -19,7 +19,9 @@ use App\Models\Household;
 use App\Models\HouseholdMember;
 use App\Models\HouseholdCrop;
 use App\Models\HouseholdLivestock;
+use App\Models\Blotter;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 
@@ -1362,6 +1364,171 @@ public function getDataBarangayOfficial(Request $request){
     public function blotter(){
         return view('barangay.blotter');
     }
+     public function store_blotter(Request $request)
+{
+    // Validate incoming request
+    $validator = Validator::make($request->all(), [
+        'case_number'    => 'required',
+        'case_type'           => 'required',
+        'complainant_name'         => 'required',
+        'complainant_contact'     => 'required',
+        'complainant_address'         => 'required',
+        'respondent_name'    => 'required',
+        'respondent_contact'         => 'required',
+        'respondent_address'   => 'required',
+     
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'errors' => $validator->errors()
+        ], 422);
+    }
+
+    // Check if barangay already exists
+    if (Blotter::where('case_number', $request->case_number)->exists()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'The Case Number exists under the selected.',
+        ], 409); // 409 Conflict
+    }
+
+    try {
+        $blotter = new Blotter();
+        $blotter->case_number     = $request->case_number;
+        $blotter->case_type       = $request->case_type;
+        $blotter->complainant_name         = $request->complainant_name;
+        $blotter->complainant_contact       = $request->complainant_contact;
+        $blotter->complainant_address   = $request->complainant_address;
+        $blotter->respondent_name     = $request->respondent_name;
+        $blotter->respondent_contact          = $request->respondent_contact;
+        $blotter->respondent_address    = $request->respondent_address;
+        $blotter->status    = $request->status;
+        $blotter->barangay_info_id    = Auth::user()->barangay_info_id;
+        $blotter->date_filed             = Carbon::now();
+       
+        $blotter->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Blotter created successfully',
+            'data'    => $blotter
+        ], 201);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'An error occurred while creating the Blotter Info',
+            'error'   => $e->getMessage()
+        ], 500);
+    }
+}
+
+public function getDataBlotter(Request $request){
+         // Get the search query and per_page from the request
+           // Get the search query and per_page from the request
+          $search = $request->query('search');
+          $perPage = $request->query('per_page', 10); // Default to 10 if per_page is not provided
+      
+          // Query certifications with optional search
+          $blotters = Blotter::when($search, function ($query, $search) {
+                  return $query
+                  ->where('case_number', 'like', '%' . $search . '%')
+                  ->OrWhere('respondent_name', 'like', '%' . $search . '%') 
+                  ->OrWhere('case_type', 'like', '%' . $search . '%')
+                  ->OrWhere('complainant_name', 'like', '%' . $search . '%')
+                  ->OrWhere('complainant_contact', 'like', '%' . $search . '%')
+                  ->OrWhere('complainant_address', 'like', '%' . $search . '%')
+                  ->OrWhere('respondent_contact', 'like', '%' . $search . '%')
+                  ->OrWhere('respondent_address', 'like', '%' . $search . '%')
+                  ->OrWhere('case_type', 'like', '%' . $search . '%')
+                  ->OrWhere('date_filed', 'like', '%' . $search . '%')
+                  ->OrWhere('status', 'like', '%' . $search . '%');
+                
+          })
+          ->where('barangay_info_id', Auth::user()->barangay_info_id)
+          ->paginate($perPage);
+      
+          return response()->json([
+              'success' => true,
+              'data' => $blotters
+          ]);
+    }
+
+     public function update_blotter(Request $request,$id)
+{
+    // Validate incoming request
+    $validator = Validator::make($request->all(), [
+        'case_number'    => 'required',
+        'case_type'           => 'required',
+        'complainant_name'         => 'required',
+        'complainant_contact'     => 'required',
+        'complainant_address'         => 'required',
+        'respondent_name'    => 'required',
+        'respondent_contact'         => 'required',
+        'respondent_address'   => 'required',
+         'actions_taken'   => 'required',
+        'hearing_date'   => 'required',
+        'hearing_location'   => 'required',
+     
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'errors' => $validator->errors()
+        ], 422);
+    }
+
+    // Check if barangay already exists
+    if (Blotter::where('case_number', $request->case_number)
+          ->where('id', '!=', $request->id)
+        ->exists()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'The Case Number exists under the selected.',
+        ], 409); // 409 Conflict
+    }
+
+    try {
+        $blotter = Blotter::find($id);
+        $blotter->case_number     = $request->case_number;
+        $blotter->case_type       = $request->case_type;
+        $blotter->complainant_name         = $request->complainant_name;
+        $blotter->complainant_contact       = $request->complainant_contact;
+        $blotter->complainant_address   = $request->complainant_address;
+        $blotter->respondent_name     = $request->respondent_name;
+        $blotter->respondent_contact          = $request->respondent_contact;
+        $blotter->respondent_address    = $request->respondent_address;
+        $blotter->barangay_info_id    = Auth::user()->barangay_info_id;
+        $blotter->actions_taken    = $request->actions_taken;
+        $blotter->actions_taken    = $request->actions_taken;
+        $blotter->hearing_date    = $request->hearing_date;
+        $blotter->hearing_time    = $request->hearing_time;
+        $blotter->hearing_location    = $request->hearing_location;
+        $blotter->status    = $request->status;
+        $blotter->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Blotter Updated successfully',
+            'data'    => $blotter
+        ], 201);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'An error occurred while creating the Blotter Info',
+            'error'   => $e->getMessage()
+        ], 500);
+    }
+}
+
+  public function certification (){
+    return view('barangay.certification');
+  }
+
       
 
 

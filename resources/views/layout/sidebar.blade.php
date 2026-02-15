@@ -151,7 +151,7 @@
                 <!-- SERVICES -->
                
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="widgets.html">
+                    <a class="nav-link menu-link" href="{{route('certification')}}">
                         <i class="ri-award-line"></i>
                         <span>Certification</span>
                     </a>
