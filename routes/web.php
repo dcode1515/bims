@@ -72,5 +72,6 @@ Route::get('/api/get/data/household', [App\Http\Controllers\Barangay\BarangayCon
 Route::get('/household/edit/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'edit_household']);
 Route::put('/api/update/households/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_household']);
 Route::get('/household/view/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'view_household']);
+Route::get('/blotter', [App\Http\Controllers\Barangay\BarangayController::class, 'blotter'])->name('blotter');
 
 /*End Admin Routes */

@@ -31,6 +31,7 @@ Vue.component('Household', require('./components/Barangay/Household.vue').defaul
 Vue.component('Createmember', require('./components/Barangay/Createmember.vue').default);
 Vue.component('Edithousehold', require('./components/Barangay/Edithousehold.vue').default);
 Vue.component('Viewhousehold', require('./components/Barangay/Viewhousehold.vue').default);
+Vue.component('Blotter', require('./components/Barangay/Blotter.vue').default);
 
 
 /**

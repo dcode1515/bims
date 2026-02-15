@@ -1323,9 +1323,10 @@ public function getDataBarangayOfficial(Request $request){
     $activeCount = Household::where('barangay_info_id', $barangayInfoId)
         ->where('status', 'Active') // Adjust field name if different (e.g., 'is_active', 'status')
         ->count();
-    
-  
-  
+
+    $InactiveCount = Household::where('barangay_info_id', $barangayInfoId)
+        ->where('status', 'Inactive') // Adjust field name if different (e.g., 'is_active', 'status')
+        ->count();
     
     // Get count of households created this month
     $createdThisMonthCount = Household::where('barangay_info_id', $barangayInfoId)
@@ -1344,7 +1345,7 @@ public function getDataBarangayOfficial(Request $request){
         'data' => $household,
         'total_count' => $totalCount,
         'active_count' => $activeCount,
-      
+        'inactive_count' => $InactiveCount,
         'created_this_month_count' => $createdThisMonthCount,
         'status_counts' => $statusCounts // Optional: counts by all statuses
     ]);
@@ -1357,6 +1358,9 @@ public function getDataBarangayOfficial(Request $request){
     public function view_household($id){
         $household = Household::with(['crops','livestock','headOfFamily','familyMembers','purok'])->findOrFail($id);
        return view('barangay.view_household', compact('household'));
+    }
+    public function blotter(){
+        return view('barangay.blotter');
     }
       
 

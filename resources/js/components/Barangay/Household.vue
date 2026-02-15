@@ -7,11 +7,7 @@
             <div>
               <h6 class="card-subtitle text-muted">Total Households</h6>
               <h2 class="card-title mt-2 mb-0">{{ totalHouseholds }}</h2>
-              <div class="mt-3">
-                <span class="badge bg-success-subtle text-success">
-                  <i class="ri-arrow-up-line me-1"></i> 5.2% increase
-                </span>
-              </div>
+              
             </div>
             <div class="stat-icon">
               <div class="bg-primary bg-opacity-10 rounded-circle p-3">
@@ -29,12 +25,8 @@
           <div class="d-flex align-items-center justify-content-between">
             <div>
               <h6 class="card-subtitle text-muted">Active Households</h6>
-              <h2 class="card-title mt-2 mb-0">1,189</h2>
-              <div class="mt-3">
-                <span class="badge bg-success-subtle text-success">
-                  <i class="ri-check-line me-1"></i> 95.3% active
-                </span>
-              </div>
+              <h2 class="card-title mt-2 mb-0">{{InactiveCount}}</h2>
+             
             </div>
             <div class="stat-icon">
               <div class="bg-success bg-opacity-10 rounded-circle p-3">
@@ -51,13 +43,8 @@
           <div class="d-flex align-items-center justify-content-between">
             <div>
               <h6 class="card-subtitle text-muted">Puroks Covered</h6>
-              <h2 class="card-title mt-2 mb-0">7</h2>
-              <div class="mt-3">
-                <span class="badge bg-info-subtle text-info">
-                  <i class="ri-map-pin-line me-1"></i> All covered
-                </span>
-              </div>
-            </div>
+              <h2 class="card-title mt-2 mb-0">{{ totalHouseholds }}</h2>
+             </div>
             <div class="stat-icon">
               <div class="bg-info bg-opacity-10 rounded-circle p-3">
                 <i class="ri-map-pin-line text-info fs-3"></i>
@@ -73,13 +60,8 @@
           <div class="d-flex align-items-center justify-content-between">
             <div>
               <h6 class="card-subtitle text-muted">This Month</h6>
-              <h2 class="card-title mt-2 mb-0">23</h2>
-              <div class="mt-3">
-                <span class="badge bg-warning-subtle text-warning">
-                  <i class="ri-add-line me-1"></i> New households
-                </span>
-              </div>
-            </div>
+              <h2 class="card-title mt-2 mb-0">{{createdThisMonthCount}}</h2>
+             </div>
             <div class="stat-icon">
               <div class="bg-warning bg-opacity-10 rounded-circle p-3">
                 <i class="ri-calendar-event-line text-warning fs-3"></i>
@@ -423,7 +405,9 @@ export default {
           },
         });
         this.totalHouseholds = response.data.total_count; // Store the total count
+         this.InactiveCount = response.data.inactive_count; // Store the inactive count
         this.households = response.data.data;
+        this.createdThisMonthCount = response.data.created_this_month_count; // Store the count of households created this month
        
       } catch (error) {
         this.showError("Failed to load data. Please try again.");
