@@ -3,9 +3,7 @@
     <div class="col-12">
       <div class="card border-0 shadow-sm">
         <!-- HEADER -->
-        <div
-          class="card-header bg-opacity-10 border-bottom border-primary border-opacity-25"
-        >
+        <div class="card-header bg-opacity-10 border-bottom border-primary border-opacity-25">
           <div class="d-flex align-items-center">
             <div class="step-header-icon">
               <i class="ri-user-line text-primary fs-4"></i>
@@ -14,9 +12,7 @@
               <h5 class="mb-0 fw-semibold text-primary">
                 Manage Barangay Clearance
               </h5>
-              <small class="text-muted"
-                >Manage and monitor Certification records</small
-              >
+              <small class="text-muted">Manage and monitor Certification records</small>
             </div>
           </div>
         </div>
@@ -29,11 +25,7 @@
                 <span class="input-group-text bg-light">
                   <i class="ri-list-settings-line"></i>
                 </span>
-                <select
-                  class="form-control"
-                  v-model="perPage"
-                  @change="getDataBarangayClearance"
-                >
+                <select class="form-control" v-model="perPage" @change="getDataBarangayClearance">
                   <option value="5">5 per page</option>
                   <option value="10">10 per page</option>
                   <option value="20">20 per page</option>
@@ -48,39 +40,29 @@
                 <span class="input-group-text bg-light">
                   <i class="ri-search-line"></i>
                 </span>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="searchQuery"
-                  @input="getDataBarangayClearance"
-                  placeholder="Search name..."
-                />
+                <input type="text" class="form-control" v-model="searchQuery" @input="getDataBarangayClearance"
+                  placeholder="Search name..." />
               </div>
             </div>
 
             <!-- ACTION BUTTONS -->
             <div class="col-md-5 text-end">
-              <button
-                class="btn btn-outline-primary btn-xl"
-                @click="refreshData"
-              >
+              <button class="btn btn-outline-primary btn-xl" @click="refreshData">
                 <i class="ri-restart-line"></i>
               </button>
 
               <button class="btn btn-primary btn-xl" @click="openModal('add')">
                 <i class="ri-add-line me-1"></i>
               </button>
-              <button class="btn btn-danger btn-xl">
+              <a href="/bims/certification" class="btn btn-danger btn-xl">
                 <i class="ri-arrow-left-line me-1"></i>
-              </button>
+              </a>
             </div>
           </div>
 
           <!-- DATA TABLE -->
           <div class="table-responsive">
-            <table
-              class="table table-hover align-middle mb-0 shadow-sm rounded"
-            >
+            <table class="table table-hover align-middle mb-0 shadow-sm rounded">
               <thead class="table-primary bg-opacity-10">
                 <tr>
                   <th class="ps-4" width="40">
@@ -100,10 +82,7 @@
               </thead>
 
               <tbody>
-                <tr
-                  v-for="(clearance, index) in clearances.data"
-                  :key="clearance.id"
-                >
+                <tr v-for="(clearance, index) in clearances.data" :key="clearance.id">
                   <td class="ps-4 fw-medium">
                     {{
                       (clearances.current_page - 1) * clearances.per_page +
@@ -113,7 +92,8 @@
                   </td>
                   <td>{{ clearance.application_no }}</td>
 
-                  <td>{{ clearance.requestor.first_name }} {{ clearance.requestor.middle_initial }}. {{ clearance.requestor.last_name }}</td>
+                  <td>{{ clearance.requestor.first_name }} {{ clearance.requestor.middle_initial }}. {{
+                    clearance.requestor.last_name }}</td>
                   <td>{{ clearance.purok.purok_name }}</td>
                   <td>{{ formatDate(clearance.date_issued) }}</td>
 
@@ -121,28 +101,16 @@
 
                   <td class="text-center">
                     <div class="btn-group">
-                      <button
-                        class="btn btn-sm btn-outline-primary"
-                        title="Edit"
-                        @click="openModal('edit', clearance)"
-                      >
+                      <button class="btn btn-sm btn-outline-primary" title="Edit" @click="openModal('edit', clearance)">
                         <i class="ri-edit-line"></i>
                       </button>
 
-                      <button
-                        class="btn btn-sm btn-outline-info"
-                        title="View Details"
-                        @click="viewDetails(clearance)"
-                      >
+                      <button class="btn btn-sm btn-outline-info" title="View Details" @click="viewDetails(clearance)">
                         <i class="ri-eye-line"></i>
                       </button>
-                      <button
-                        class="btn btn-sm btn-outline-success"
-                        title="Print"
-                        @click="printClearance(clearance)"
-                      >
+                      <a   :href="`/bims/print/barangay/clearance/${clearance.id}`" class="btn btn-sm btn-outline-success" title="Print"  target="_blank">
                         <i class="ri-printer-line"></i>
-                      </button>
+                      </a>
                     </div>
                   </td>
                 </tr>
@@ -168,67 +136,35 @@
                 <div class="col-md-6">
                   <nav class="float-end">
                     <ul class="pagination pagination-sm mb-0">
-                      <li
-                        class="page-item"
-                        :class="{ disabled: clearances.current_page === 1 }"
-                      >
-                        <button
-                          class="page-link"
-                          @click="changePage(1)"
-                          title="First"
-                        >
+                      <li class="page-item" :class="{ disabled: clearances.current_page === 1 }">
+                        <button class="page-link" @click="changePage(1)" title="First">
                           <i class="ri-skip-back-line"></i>
                         </button>
                       </li>
-                      <li
-                        class="page-item"
-                        :class="{ disabled: clearances.current_page === 1 }"
-                      >
-                        <button
-                          class="page-link"
-                          @click="changePage(clearances.current_page - 1)"
-                          title="Previous"
-                        >
+                      <li class="page-item" :class="{ disabled: clearances.current_page === 1 }">
+                        <button class="page-link" @click="changePage(clearances.current_page - 1)" title="Previous">
                           <i class="ri-arrow-left-s-line"></i>
                         </button>
                       </li>
 
-                      <li
-                        v-for="page in pages"
-                        :key="page"
-                        class="page-item"
-                        :class="{ active: page === clearances.current_page }"
-                      >
+                      <li v-for="page in pages" :key="page" class="page-item"
+                        :class="{ active: page === clearances.current_page }">
                         <button class="page-link" @click="changePage(page)">
                           {{ page }}
                         </button>
                       </li>
 
-                      <li
-                        class="page-item"
-                        :class="{
-                          disabled: puroks.current_page === puroks.last_page,
-                        }"
-                      >
-                        <button
-                          class="page-link"
-                          @click="changePage(puroks.current_page + 1)"
-                          title="Next"
-                        >
+                      <li class="page-item" :class="{
+                        disabled: puroks.current_page === puroks.last_page,
+                      }">
+                        <button class="page-link" @click="changePage(puroks.current_page + 1)" title="Next">
                           <i class="ri-arrow-right-s-line"></i>
                         </button>
                       </li>
-                      <li
-                        class="page-item"
-                        :class="{
-                          disabled: puroks.current_page === puroks.last_page,
-                        }"
-                      >
-                        <button
-                          class="page-link"
-                          @click="changePage(puroks.last_page)"
-                          title="Last"
-                        >
+                      <li class="page-item" :class="{
+                        disabled: puroks.current_page === puroks.last_page,
+                      }">
+                        <button class="page-link" @click="changePage(puroks.last_page)" title="Last">
                           <i class="ri-skip-forward-line"></i>
                         </button>
                       </li>
@@ -237,46 +173,25 @@
                 </div>
               </div>
             </div>
-            <div
-              class="modal fade zoomIn"
-              id="modalCertificate"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div
-                class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
-              >
+            <div class="modal fade zoomIn" id="modalCertificate" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                 <div class="modal-content border-0 shadow">
                   <!-- Modal Header with Icon -->
                   <div class="modal-header bg-primary p-3 border-0">
                     <div class="d-flex align-items-center">
-                      <i
-                        class="ri-file-copy-line me-2"
-                        style="color: white; font-size: 1.5rem"
-                      ></i>
-                      <h5
-                        class="modal-title fw-semibold"
-                        id="exampleModalLabel"
-                        style="color: white"
-                      >
+                      <i class="ri-file-copy-line me-2" style="color: white; font-size: 1.5rem"></i>
+                      <h5 class="modal-title fw-semibold" id="exampleModalLabel" style="color: white">
                         {{ modalTitle }}
                       </h5>
                     </div>
-                    <button
-                      type="button"
-                      class="btn-close btn-close-white"
-                      @click="closeModal"
-                    ></button>
+                    <button type="button" class="btn-close btn-close-white" @click="closeModal"></button>
                   </div>
 
                   <!-- Modal Body with Enhanced Form -->
                   <div class="modal-body p-4">
                     <!-- Info Alert -->
-                    <div
-                      class="alert alert-info d-flex align-items-center mb-4"
-                      role="alert"
-                    >
+                    <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
                       <i class="ri-information-line me-2 fs-5"></i>
                       <div class="small">
                         Please fill in all required information accurately.
@@ -300,29 +215,19 @@
                             Requestor <span class="text-danger">*</span>
                           </label>
                           <div class="input-group">
-                            <span
-                              class="input-group-text bg-light border-end-0"
-                            >
+                            <span class="input-group-text bg-light border-end-0">
                               <i class="ri-user-3-line text-primary"></i>
                             </span>
 
                             <!-- vue-select component -->
-                            <v-select
-                              class="form-select"
-                              v-model="formData.name_requestor"
-                              :options="formattedInhabitants || []"
-                              label="full_name"
-                              :reduce="(inhabitant) => inhabitant.id"
-                              :filterable="true"
-                              placeholder="Select an Inhabitant"
-                              no-options-text="Not a Member of this Barangay"
-                            ></v-select>
+                            <v-select class="form-select" v-model="formData.name_requestor" :options="formattedInhabitants"
+                              label="full_name" :reduce="inhabitant => inhabitant.id" :filterable="true"
+                              placeholder="Select an Inhabitant" no-options-text="Not a Member of this Barangay" />
+
                           </div>
 
-                          <small class="text-muted"
-                            ><i class="ri-information-line"></i> Please enter
-                            your complete name</small
-                          >
+                          <small class="text-muted"><i class="ri-information-line"></i> Please enter
+                            your complete name</small>
                         </div>
 
                         <!-- Age/Birthdate -->
@@ -330,21 +235,14 @@
                         <!-- Native -->
                         <div class="col-md-6">
                           <label class="form-label fw-medium">
-                            <i class="ri-map-pin-line me-1 text-muted"></i
-                            >Native
+                            <i class="ri-map-pin-line me-1 text-muted"></i>Native
                           </label>
                           <div class="input-group">
-                            <span
-                              class="input-group-text bg-light border-end-0"
-                            >
+                            <span class="input-group-text bg-light border-end-0">
                               <i class="ri-flag-line text-primary"></i>
                             </span>
-                            <input
-                              type="text"
-                              class="form-control border-start-0 ps-0"
-                              placeholder="e.g., Filipino"
-                              v-model="formData.native"
-                            />
+                            <input type="text" class="form-control border-start-0 ps-0" placeholder="e.g., Filipino"
+                              v-model="formData.native" />
                           </div>
                         </div>
 
@@ -355,23 +253,14 @@
                             <span class="text-danger">*</span>
                           </label>
                           <div class="input-group">
-                            <span
-                              class="input-group-text bg-light border-end-0"
-                            >
+                            <span class="input-group-text bg-light border-end-0">
                               <i class="ri-home-5-line text-primary"></i>
                             </span>
-                            <select
-                              v-model="formData.purok"
-                              class="form-select"
-                            >
+                            <select v-model="formData.purok" class="form-select">
                               <option value="" disabled selected>
                                 Select an Barangay
                               </option>
-                              <option
-                                v-for="purok in puroks"
-                                :key="purok.id"
-                                :value="purok.id"
-                              >
+                              <option v-for="purok in puroks" :key="purok.id" :value="purok.id">
                                 {{ purok.purok_name }}
                               </option>
                             </select>
@@ -391,13 +280,9 @@
                       </h6>
 
                       <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="statusGoodMoral"
+                        <input class="form-check-input" type="checkbox" id="statusGoodMoral"
                           value="No Derogatory Record and is known of Good Moral Character"
-                          v-model="formData.character_status"
-                        />
+                          v-model="formData.character_status" />
                         <label class="form-check-label" for="statusGoodMoral">
                           No Derogatory Record and is known of Good Moral
                           Character
@@ -405,39 +290,24 @@
                       </div>
 
                       <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="statusCaseSettled"
-                          value="Have Case Filed but Settled"
-                          v-model="formData.character_status"
-                        />
+                        <input class="form-check-input" type="checkbox" id="statusCaseSettled"
+                          value="Have Case Filed but Settled" v-model="formData.character_status" />
                         <label class="form-check-label" for="statusCaseSettled">
                           Have Case Filed but Settled
                         </label>
                       </div>
 
                       <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="statusPending"
-                          value="Have Pending Case FILED"
-                          v-model="formData.character_status"
-                        />
+                        <input class="form-check-input" type="checkbox" id="statusPending"
+                          value="Have Pending Case FILED" v-model="formData.character_status" />
                         <label class="form-check-label" for="statusPending">
                           Have Pending Case FILED
                         </label>
                       </div>
 
                       <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="statusWithdrawn"
-                          value="Have Case Filed Withdrawn/Dismissed"
-                          v-model="formData.character_status"
-                        />
+                        <input class="form-check-input" type="checkbox" id="statusWithdrawn"
+                          value="Have Case Filed Withdrawn/Dismissed" v-model="formData.character_status" />
                         <label class="form-check-label" for="statusWithdrawn">
                           Have Case Filed Withdrawn/Dismissed
                         </label>
@@ -449,17 +319,14 @@
                       <!-- Purpose -->
                       <div class="col-md-8">
                         <label class="form-label fw-medium">
-                          <i class="ri-questionnaire-line me-1 text-muted"></i
-                          >Purpose <span class="text-danger">*</span>
+                          <i class="ri-questionnaire-line me-1 text-muted"></i>Purpose <span
+                            class="text-danger">*</span>
                         </label>
                         <div class="input-group">
                           <span class="input-group-text bg-light border-end-0">
                             <i class="ri-chat-quote-line text-primary"></i>
                           </span>
-                          <select
-                            class="form-select"
-                            v-model="formData.purpose"
-                          >
+                          <select class="form-select" v-model="formData.purpose">
                             <option value="">Select purpose</option>
                             <option value="Employment">
                               Employment Application
@@ -475,30 +342,22 @@
                         </div>
                         <!-- Show other purpose input if Others is selected -->
                         <div v-if="formData.purpose === 'Others'" class="mt-2">
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Please specify purpose"
-                            v-model="formData.other_purpose"
-                          />
+                          <input type="text" class="form-control" placeholder="Please specify purpose"
+                            v-model="formData.other_purpose" />
                         </div>
                       </div>
 
                       <!-- Date Issued -->
                       <div class="col-md-4">
                         <label class="form-label fw-medium">
-                          <i class="ri-calendar-event-line me-1 text-muted"></i
-                          >Date Issued <span class="text-danger">*</span>
+                          <i class="ri-calendar-event-line me-1 text-muted"></i>Date Issued <span
+                            class="text-danger">*</span>
                         </label>
                         <div class="input-group">
                           <span class="input-group-text bg-light border-end-0">
                             <i class="ri-calendar-2-line text-primary"></i>
                           </span>
-                          <input
-                            type="date"
-                            class="form-control border-start-0 ps-0"
-                            v-model="formData.date_issued"
-                          />
+                          <input type="date" class="form-control border-start-0 ps-0" v-model="formData.date_issued" />
                         </div>
                       </div>
                       <!-- Payment Section -->
@@ -511,18 +370,14 @@
                           <!-- Mode of Payment -->
                           <div class="col-md-3">
                             <label class="form-label fw-medium">
-                              <i class="ri-bank-card-line me-1 text-muted"></i
-                              >Mode of Payment
+                              <i class="ri-bank-card-line me-1 text-muted"></i>Mode of Payment
                             </label>
-                            <select
-                              v-model="formData.payment_mode"
-                              class="form-select"
-                            >
+                            <select v-model="formData.payment_mode" class="form-select">
                               <option value="" disabled selected>
                                 Select mode
                               </option>
                               <option value="Cash">Cash</option>
-                               <option value="G-Cash">G-Cash</option>
+                              <option value="G-Cash">G-Cash</option>
                               <option value="Credit/Debit Card">
                                 Credit/Debit Card
                               </option>
@@ -536,42 +391,26 @@
                           <!-- Date Paid -->
                           <div class="col-md-3">
                             <label class="form-label fw-medium">
-                              <i class="ri-calendar-line me-1 text-muted"></i
-                              >Date Paid
+                              <i class="ri-calendar-line me-1 text-muted"></i>Date Paid
                             </label>
-                            <input
-                              type="date"
-                              class="form-control"
-                              v-model="formData.date_paid"
-                            />
+                            <input type="date" class="form-control" v-model="formData.date_paid" />
                           </div>
 
                           <!-- Amount -->
                           <div class="col-md-3">
                             <label class="form-label fw-medium">
-                              <i
-                                class="ri-money-dollar-circle-line me-1 text-muted"
-                              ></i
-                              >Amount
+                              <i class="ri-money-dollar-circle-line me-1 text-muted"></i>Amount
                             </label>
-                            <input
-                              type="number"
-                              class="form-control"
-                              placeholder="Enter amount"
-                              v-model="formData.amount"
-                            />
+                            <input type="number" class="form-control" placeholder="Enter amount"
+                              v-model="formData.amount" />
                           </div>
 
                           <!-- Payment Status -->
                           <div class="col-md-3">
                             <label class="form-label fw-medium">
-                              <i class="ri-check-line me-1 text-muted"></i
-                              >Status
+                              <i class="ri-check-line me-1 text-muted"></i>Status
                             </label>
-                            <select
-                              v-model="formData.payment_status"
-                              class="form-select"
-                            >
+                            <select v-model="formData.payment_status" class="form-select">
                               <option value="" disabled selected>
                                 Select status
                               </option>
@@ -587,13 +426,9 @@
                     <!-- Additional Notes -->
                     <div class="mt-4 p-3 bg-light rounded">
                       <div class="d-flex">
-                        <i
-                          class="ri-sticky-note-line text-primary fs-4 me-2"
-                        ></i>
+                        <i class="ri-sticky-note-line text-primary fs-4 me-2"></i>
                         <div>
-                          <small class="text-dark fw-medium"
-                            >Important Notes:</small
-                          >
+                          <small class="text-dark fw-medium">Important Notes:</small>
                           <ul class="text-muted small mb-0 mt-1 ps-3">
                             <li>
                               This barangay clearance is valid for 30 days from
@@ -612,26 +447,14 @@
 
                   <!-- Modal Footer with Enhanced Buttons -->
                   <div class="modal-footer bg-light border-top-0 p-3">
-                    <button
-                      type="button"
-                      class="btn btn-light px-4"
-                      @click="closeModal"
-                    >
+                    <button type="button" class="btn btn-light px-4" @click="closeModal">
                       <i class="ri-close-line me-1"></i>
                       Cancel
                     </button>
-                    <button
-                      v-if="modalMode !== 'view'"
-                      type="button"
-                      class="btn btn-primary px-4"
-                      @click="submitForm"
-                      :disabled="loading"
-                    >
+                    <button v-if="modalMode !== 'view'" type="button" class="btn btn-primary px-4" @click="submitForm"
+                      :disabled="loading">
                       <i class="ri-save-line me-1"></i>
-                      <span
-                        v-if="loading"
-                        class="spinner-border spinner-border-sm me-1"
-                      ></span>
+                      <span v-if="loading" class="spinner-border spinner-border-sm me-1"></span>
                       <span v-else>
                         <i class="ri-check-line me-1"></i>
                         {{
@@ -659,6 +482,8 @@ export default {
   components: { vSelect },
 
   methods: {
+   
+
     formatDate(date) {
       if (!date) return "";
       const options = { year: "numeric", month: "long", day: "numeric" };
@@ -804,6 +629,7 @@ export default {
         this.modalTitle = "Edit Barangay Certificate";
         this.formData = {
           ...certificate,
+          name_requestor: certificate.requestor?.id || certificate.name_requestor,
           purok:
             certificate.purok && certificate.purok.id
               ? certificate.purok.id
@@ -820,7 +646,9 @@ export default {
       this.modalMode = "view";
       this.modalTitle = "View Details";
       this.formData = {
+      
         ...certificate,
+          name_requestor: certificate.requestor?.id || certificate.name_requestor,
         purok:
           certificate.purok && certificate.purok.id
             ? certificate.purok.id
@@ -872,9 +700,9 @@ export default {
     formattedInhabitants() {
       return this.inhabitants.length
         ? this.inhabitants.map((i) => ({
-            ...i,
-            full_name: `${i.first_name} ${i.middle_initial}. ${i.last_name}`,
-          }))
+          ...i,
+          full_name: `${i.first_name} ${i.middle_initial}. ${i.last_name}`,
+        }))
         : []; // must return empty array, not undefined
     },
     // pages computation stays the same
@@ -991,6 +819,7 @@ export default {
 .text-primary {
   color: #198754 !important;
 }
+
 .bg-gradient-primary {
   background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
 }

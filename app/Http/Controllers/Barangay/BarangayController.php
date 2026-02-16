@@ -23,6 +23,9 @@ use App\Models\Blotter;
 use App\Models\BarangayClearance;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
 
 
 
@@ -1604,7 +1607,7 @@ public function update_barangay_clearance(Request $request, $id)
 {
     // ✅ Validation (matches Vue form)
     $request->validate([
-        'name_requestor' => 'required|string|max:255',
+        'name_requestor' => 'required',
         'native' => 'nullable|string|max:255',
         'purok' => 'required',
         'character_status' => 'nullable|array',
@@ -1692,6 +1695,15 @@ public function update_barangay_clearance(Request $request, $id)
     {
         $inhabitants = HouseholdMember::where('barangay_info_id', Auth::user()->barangay_info_id)->orderBy('first_name')->get();
         return response()->json($inhabitants);
+    }
+    public function print_barangay_clearance($id){
+
+       $barangay_clearance = BarangayClearance::with(['requestor','purok'])->findOrFail($id);
+       $pdf = Pdf::loadView('pdf.barangay_clearance', compact('barangay_clearance'))
+              ->setPaper('a4', 'portrait');
+
+       return $pdf->stream('barangay_clearance.pdf');
+
     }
 
 

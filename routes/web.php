@@ -82,6 +82,7 @@ Route::post('/api/store/barangay/clearance', [App\Http\Controllers\Barangay\Bara
 Route::get('/api/get/data/barangay/clearance', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataBarangayClearance']);
 Route::put('/api/update/barangay/clearance/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_barangay_clearance']);
 Route::get('/api/get/data/inhabitans/clearance', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataInhabitansCertification']);
+Route::get('/print/barangay/clearance/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'print_barangay_clearance']);
 
 
 
