@@ -98,8 +98,8 @@
 
     <p style="font-size:12pt;">
         This is to certify that Mr./Ms./Mrs. {{$barangay_clearance->requestor->first_name}} {{$barangay_clearance->requestor->middle_initial}}. {{$barangay_clearance->requestor->last_name}},
-        {{ \Carbon\Carbon::parse($barangay_clearance->requestor->birthdate)->age }} years old, {{$barangay_clearance->native}}, a native of __________________________, 
-        and a resident of Zone/Purok ______________________________, Ubaldo D. Laya, Iligan City.
+        {{ \Carbon\Carbon::parse($barangay_clearance->requestor->birthdate)->age }} years old, {{$barangay_clearance->requestor->civil_status}}, a native of {{$barangay_clearance->native}}, 
+        and a resident of Zone/Purok {{$barangay_clearance->purok}},  @if(Auth::user()->barangay )@endif {{ Auth::user()->barangay->barangay_name }}, {{ Auth::user()->barangay->municipality->municipality_name }}.
     </p>
 
     <p style="font-size:12pt;">
@@ -107,15 +107,45 @@
     </p>
 
     <p style="font-size:12pt;">Remarks:</p>
-    <ul style="font-size:12pt;">
-        <li style="font-size:12pt;">( ) No Derogatory Record and is of Good Moral Character</li>
-        <li style="font-size:12pt;">( ) Have Case Filed but Settled</li>
-        <li style="font-size:12pt;">( ) Have Pending Case FILED</li>
-        <li style="font-size:12pt;">( ) Have Case Filed Withdrawn/Dismissed</li>
-    </ul>
+  <ul style="font-size:12pt; list-style:none; padding-left:0;">
 
-    <p style="font-size:12pt;">Purpose: _______________________________</p>
-    <p style="font-size:12pt;">Date Issued: ___________________________</p>
+    <li>
+        [{{ in_array('No Derogatory Record and is known of Good Moral Character', $barangay_clearance->character_status ?? []) ? '●' : ' ' }}] 
+        No Derogatory Record and is of Good Moral Character
+    </li>
+
+    <li>
+        [{{ in_array('Have Case Filed but Settled', $barangay_clearance->character_status ?? []) ? '●' : ' ' }}] 
+        Have Case Filed but Settled
+    </li>
+
+    <li>
+        [{{ in_array('Have Pending Case FILED', $barangay_clearance->character_status ?? []) ? '●' : ' ' }}] 
+        Have Pending Case FILED
+    </li>
+
+    <li>
+        [{{ in_array('Have Case Filed Withdrawn/Dismissed', $barangay_clearance->character_status ?? []) ? '●' : ' ' }}] 
+        Have Case Filed Withdrawn/Dismissed
+    </li>
+
+</ul>
+
+
+
+  <p style="font-size:12pt;">
+    Purpose: 
+    @if($barangay_clearance->purpose === 'Others')
+        {{ $barangay_clearance->other_purpose }}
+    @else
+        {{ $barangay_clearance->purpose }}
+    @endif
+</p>
+
+
+    <p style="font-size:12pt;">Date Issued: {{ \Carbon\Carbon::parse($barangay_clearance->date_issued)->format('M, d, Y') }}
+
+</p>
 
     <div class="signature" style="font-size:12pt;">
         <p>__________________________</p>
