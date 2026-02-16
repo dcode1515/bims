@@ -77,6 +77,11 @@ Route::post('/api/blotter/store', [App\Http\Controllers\Barangay\BarangayControl
 Route::get('/api/get/data/blotter', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataBlotter']);
 Route::put('/api/blotter/update/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_blotter']);
 Route::get('/certification', [App\Http\Controllers\Barangay\BarangayController::class, 'certification'])->name('certification');
+Route::get('/manage/barangay/clearance', [App\Http\Controllers\Barangay\BarangayController::class, 'manage_barangay_clearance']);
+Route::post('/api/store/barangay/clearance', [App\Http\Controllers\Barangay\BarangayController::class, 'store_barangay_clearance']);
+Route::get('/api/get/data/barangay/clearance', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataBarangayClearance']);
+Route::put('/api/update/barangay/clearance/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_barangay_clearance']);
+Route::get('/api/get/data/inhabitans/clearance', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataInhabitansCertification']);
 
 
 

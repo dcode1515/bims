@@ -80,7 +80,14 @@
     <script src="{{ asset('public/Dashboard-Template-Velzon-main/assets/libs/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('public/Dashboard-Template-Velzon-main/assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
     <script src="{{ asset('public/Dashboard-Template-Velzon-main/assets/js/app.js') }}"></script>
-
+   <script src="<?php echo asset('public/js/tinymce/tinymce.min.js')?>"></script>
+    <script>
+     tinymce.init({
+     selector: '#tinymce-editor', // Replace this CSS selector to match the placeholder element for TinyMCE
+     plugins: 'code table lists',
+     toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+   });
+ </script>
 </body>
 
 

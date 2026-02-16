@@ -27,7 +27,7 @@
                                     <i class="ri-file-shield-line fs-2 text-primary"></i>
                                     <h6 class="mt-3 fw-semibold">Barangay Clearance</h6>
                                     <p class="text-muted small">Issue and manage Barangay Clearance records</p>
-                                    <button class="btn btn-primary btn-sm rounded-pill px-3">Manage</button>
+                                    <a href = "/bims/manage/barangay/clearance" class="btn btn-primary btn-sm rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
                         </div>

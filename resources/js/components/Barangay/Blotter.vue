@@ -46,11 +46,11 @@
 
             <!-- ACTION BUTTONS -->
             <div class="col-md-5 text-end">
-              <button @click="refreshData" class="btn btn-outline-primary btn-lg me-2">
+              <button @click="refreshData" class="btn btn-outline-primary btn-xl me-2">
                 <i class="ri-refresh-line"></i>
               </button>
 
-              <button @click="openModal('add')" class="btn btn-primary btn-lg">
+              <button @click="openModal('add')" class="btn btn-primary btn-xl">
                 <i class="ri-add-line me-1"></i>
                 Create Blotter
               </button>
@@ -449,6 +449,9 @@ export default {
         this.showError("Failed to load data. Please try again.");
       }
     },
+     closeModal() {
+            $("#modalBlotter").modal("hide");
+        },
     changePage(page) {
       if (page >= 1 && page <= this.blotters.last_page) {
         this.blotters.current_page = page;

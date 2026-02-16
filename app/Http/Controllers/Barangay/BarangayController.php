@@ -20,6 +20,7 @@ use App\Models\HouseholdMember;
 use App\Models\HouseholdCrop;
 use App\Models\HouseholdLivestock;
 use App\Models\Blotter;
+use App\Models\BarangayClearance;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -1529,7 +1530,169 @@ public function getDataBlotter(Request $request){
     return view('barangay.certification');
   }
 
+  public function manage_barangay_clearance (){
+    return view('barangay.manage_barangay_clearance');
+
+  }
+  
+   public function store_barangay_clearance(Request $request)
+{
+    // ✅ Validation (matches Vue form)
+    $request->validate([
+            'name_requestor' => 'required',
+            'native' => 'nullable|string|max:255',
+            'purok' => 'required',
+            'character_status' => 'nullable|array',
+            'character_status.*' => 'string',
+            'purpose' => 'required|string|max:255',
+            'other_purpose' => 'required_if:purpose,Others|nullable|string|max:255',
+            'date_issued' => 'required|date',
+    ]);
+
+    DB::beginTransaction();
+
+    try {
+        // ✅ Generate Application Number (BC-2026-00001)
+       $latest = BarangayClearance::latest()->lockForUpdate()->first();
+            $nextId = $latest ? $latest->id + 1 : 1;
+            $applicationNo = 'BC-' . Carbon::now()->year . '-' . str_pad($nextId, 5, '0', STR_PAD_LEFT);
+
+
+        // ✅ Save Record
+        BarangayClearance::create([
+            'application_no' => $applicationNo,
+             'barangay_info_id' => Auth::user()->barangay_info_id,
+            'name_requestor' => $request->name_requestor,
+          
+            'native' => $request->native,
+            'purok' => $request->purok,
+            'payment_mode' => $request->payment_mode,
+            'date_paid' => $request->date_paid,
+            'amount' => $request->amount,
+            'payment_status' => $request->payment_status,
+
+            // Store checkbox array directly as JSON (Laravel casts automatically)
+            'character_status' => $request->input('character_status', []),
+
+            'purpose' => $request->purpose,
+            'purpose' => $request->purpose, 
+                'other_purpose' => $request->purpose === 'Others' ? $request->other_purpose : null,
+
+            'date_issued' => $request->date_issued,
+            'status' => 'Approved Certificate',
+        ]);
+
+        DB::commit();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Barangay Clearance successfully created.'
+        ]);
+
+    } catch (\Exception $e) {
+
+        DB::rollBack();
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Something went wrong.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+public function update_barangay_clearance(Request $request, $id)
+{
+    // ✅ Validation (matches Vue form)
+    $request->validate([
+        'name_requestor' => 'required|string|max:255',
+        'native' => 'nullable|string|max:255',
+        'purok' => 'required',
+        'character_status' => 'nullable|array',
+        'character_status.*' => 'string',
+        'purpose' => 'required|string|max:255',
+        'other_purpose' => 'required_if:purpose,Others|nullable|string|max:255',
+        'date_issued' => 'required|date',
+    ]);
+
+    DB::beginTransaction();
+
+    try {
+        // ✅ Find the record to update
+        $clearance = BarangayClearance::findOrFail($id);
+
+        // ✅ Update fields
+        $clearance->update([
+            'name_requestor' => $request->name_requestor,
+            'native' => $request->native,
+            'purok' => $request->purok,
+            'payment_mode' => $request->payment_mode,
+            'date_paid' => $request->date_paid,
+            'amount' => $request->amount,
+            'payment_status' => $request->payment_status,
+            'character_status' => $request->input('character_status', []),
+            'purpose' => $request->purpose,
+            'other_purpose' => $request->purpose === 'Others' ? $request->other_purpose : null,
+            'date_issued' => $request->date_issued,
+            'status' => 'Approved Certificate',
+        ]);
+
+        DB::commit();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Barangay Clearance successfully updated.'
+        ]);
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Something went wrong.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+ public function getDataBarangayClearance(Request $request){
+         // Get the search query and per_page from the request
+           // Get the search query and per_page from the request
+          $search = $request->query('search');
+          $perPage = $request->query('per_page', 10); // Default to 10 if per_page is not provided
       
+          // Query certifications with optional search
+          $clearances = BarangayClearance::with('purok')->with('requestor')->when($search, function ($query, $search) {
+                  return $query->where('purpose', 'like', '%' . $search . '%')
+                   ->orWhere('name_requestor', 'like', '%' . $search . '%')
+                    ->orWhere('application_no', 'like', '%' . $search . '%')
+                  
+                    ->orWhere('native', 'like', '%' . $search . '%')
+
+                    ->orWhereHas('purok', function ($q) use ($search) {
+                    $q->where('purok_name', 'like', '%' . $search . '%');
+                    
+                })
+                 ->orWhereHas('requestor', function ($q) use ($search) {
+                    $q->where('first_name', 'like', '%' . $search . '%')
+                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                      ->orWhere('last_name', 'like', '%' . $search . '%');
+                });
+                
+          })
+          ->where('barangay_info_id', Auth::user()->barangay_info_id)
+          ->paginate($perPage);
+      
+          return response()->json([
+              'success' => true,
+              'data' => $clearances
+          ]);
+    }
+
+     public function getDataInhabitansCertification()
+    {
+        $inhabitants = HouseholdMember::where('barangay_info_id', Auth::user()->barangay_info_id)->orderBy('first_name')->get();
+        return response()->json($inhabitants);
+    }
 
 
 }

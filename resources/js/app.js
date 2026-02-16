@@ -33,6 +33,7 @@ Vue.component('Edithousehold', require('./components/Barangay/Edithousehold.vue'
 Vue.component('Viewhousehold', require('./components/Barangay/Viewhousehold.vue').default);
 Vue.component('Blotter', require('./components/Barangay/Blotter.vue').default);
 Vue.component('Certification', require('./components/Barangay/Certification.vue').default);
+Vue.component('Barangayclearance', require('./components/Barangay/Barangayclearance.vue').default);
 
 
 
