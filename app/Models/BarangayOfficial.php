@@ -42,6 +42,7 @@ class BarangayOfficial extends Model
 
         return $this->belongsTo(BarangayPosition::class, 'position_id');
     }
+    
      public function commitee()
     {
 

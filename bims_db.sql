@@ -16,8 +16,39 @@
 
 
 -- Dumping database structure for bims_db
-CREATE DATABASE IF NOT EXISTS `bims_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `bims_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `bims_db`;
+
+-- Dumping structure for table bims_db.barangay_clearance_tbl
+CREATE TABLE IF NOT EXISTS `barangay_clearance_tbl` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `application_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `barangay_info_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `name_requestor` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `native` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `purok` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `character_status` json DEFAULT NULL,
+  `purpose` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `other_purpose` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_issued` date NOT NULL,
+  `payment_mode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_paid` date DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `payment_status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `barangay_clearance_tbl_application_no_unique` (`application_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table bims_db.barangay_clearance_tbl: ~4 rows (approximately)
+REPLACE INTO `barangay_clearance_tbl` (`id`, `application_no`, `barangay_info_id`, `created_at`, `updated_at`, `deleted_at`, `name_requestor`, `native`, `purok`, `character_status`, `purpose`, `other_purpose`, `date_issued`, `payment_mode`, `date_paid`, `amount`, `payment_status`, `status`) VALUES
+	(1, 'BC-2026-00001', 1, '2026-02-16 10:28:42', '2026-02-16 10:35:41', NULL, '1', 'Filipino', '1', '["Have Case Filed but Settled", "No Derogatory Record and is of Good Moral Character"]', 'Employment', NULL, '2026-02-15', 'G-Cash', '2026-02-16', 50.00, 'Paid', 'Approved Certificate'),
+	(2, 'BC-2026-00002', 1, '2026-02-16 10:41:00', '2026-02-16 10:41:00', NULL, '2', 'Filipino', '1', '["No Derogatory Record and is known of Good Moral Character"]', 'School', NULL, '2026-02-16', 'Cash', '2026-02-16', 50.00, 'Paid', 'Approved Certificate'),
+	(3, 'BC-2026-00003', 1, '2026-02-16 15:00:13', '2026-02-17 04:41:31', NULL, '3', NULL, '2', '[]', 'BUILDING PERMIT for a Residential Building', NULL, '2026-02-17', NULL, '2026-02-17', 200.00, 'Paid', 'Approved Certificate'),
+	(4, 'BC-2026-00004', 1, '2026-02-16 15:09:18', '2026-02-16 15:09:18', NULL, '2', 'ddasdas', '1', '["No Derogatory Record and is known of Good Moral Character", "Have Case Filed but Settled", "Have Pending Case FILED", "Have Case Filed Withdrawn/Dismissed"]', 'Employment', NULL, '2026-02-16', 'Cash', '2026-02-16', 150.00, 'Paid', 'Approved Certificate');
 
 -- Dumping structure for table bims_db.barangay_commitee_tbl
 CREATE TABLE IF NOT EXISTS `barangay_commitee_tbl` (
@@ -29,14 +60,20 @@ CREATE TABLE IF NOT EXISTS `barangay_commitee_tbl` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.barangay_commitee_tbl: ~0 rows (approximately)
+-- Dumping data for table bims_db.barangay_commitee_tbl: ~10 rows (approximately)
 REPLACE INTO `barangay_commitee_tbl` (`id`, `barangay_info_id`, `commitee`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 1, 'Commitee on PWD and Livelihood', 'Active', '2026-02-09 01:05:41', '2026-02-09 01:05:41', NULL),
-	(2, 1, 'Commitee on Senior Citizen and Agriculture', 'Active', '2026-02-09 01:06:08', '2026-02-09 01:06:08', NULL),
-	(3, 1, 'Commitee on Finance, Infrastructure and BDRR', 'Active', '2026-02-09 01:13:59', '2026-02-09 01:14:09', NULL),
-	(4, 1, 'Commitee on Peace and Order Transportation and Communication', 'Active', '2026-02-09 01:15:11', '2026-02-09 01:15:11', NULL);
+	(1, 1, 'Commitee on PWD & Livelihood', 'Active', '2026-02-17 01:07:34', '2026-02-17 01:07:34', NULL),
+	(2, 1, 'Commitee on Senior Citizen & Agriculture', 'Active', '2026-02-17 01:07:59', '2026-02-17 01:07:59', NULL),
+	(3, 1, 'Commitee on Finance, Infrastructure & BDRR', 'Active', '2026-02-17 01:08:18', '2026-02-17 01:08:18', NULL),
+	(4, 1, 'Commitee on Peace & Order Transportation & Communication', 'Active', '2026-02-17 01:08:44', '2026-02-17 01:08:44', NULL),
+	(5, 1, 'Commitee on Health & social Services', 'Active', '2026-02-17 01:09:02', '2026-02-17 01:09:02', NULL),
+	(6, 1, 'Commitee on Environment, Women\'s & Education', 'Active', '2026-02-17 01:09:23', '2026-02-17 01:09:23', NULL),
+	(7, 1, 'Commitee on Sports', 'Active', '2026-02-17 01:09:33', '2026-02-17 01:09:33', NULL),
+	(8, 1, 'Commitee on Food', 'Active', '2026-02-17 13:47:30', '2026-02-17 13:47:30', NULL),
+	(9, 1, 'Commitee on Energy', 'Active', '2026-02-17 13:47:49', '2026-02-17 13:47:49', NULL),
+	(10, 1, 'Committe on Education', 'Active', '2026-02-17 13:49:19', '2026-02-17 13:49:19', NULL);
 
 -- Dumping structure for table bims_db.barangay_info_tbl
 CREATE TABLE IF NOT EXISTS `barangay_info_tbl` (
@@ -59,17 +96,17 @@ CREATE TABLE IF NOT EXISTS `barangay_info_tbl` (
   UNIQUE KEY `barangay_info_tbl_barangay_code_unique` (`barangay_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.barangay_info_tbl: ~2 rows (approximately)
+-- Dumping data for table bims_db.barangay_info_tbl: ~1 rows (approximately)
 REPLACE INTO `barangay_info_tbl` (`id`, `barangay_name`, `province_id`, `municipality_id`, `barangay_id`, `region_id`, `barangay_code`, `zip_code`, `contact_number`, `email`, `status`, `photo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'Ubaldo Laya', 55, 1188, 31602, 13, '31231', '8000', '09199533529', 'dcode0516@gmail.com', 'Active', '2026-UBALDO_LAYA-09199533529.png', '2026-02-04 19:14:38', '2026-02-09 00:39:49', NULL),
-	(2, 'Santiago', 55, 1188, 31591, 13, '312312', '4855', '09199533529', 'dcode0516@gmail.com', 'Active', '2026-SANTIAGO-09199533529.png', '2026-02-04 19:16:03', '2026-02-04 19:16:03', NULL);
+	(1, 'Barangay Ubaldo', 55, 1188, 31602, 13, '313123', '8989', '09199533529', 'dcode0516@gmail.com', 'Active', '2026-BARANGAY_UBALDO-09199533529.png', '2026-02-15 10:35:02', '2026-02-15 10:35:02', NULL),
+	(2, 'Santiago', 55, 1188, 31591, 13, '312321321', '8000', '09199533529', 'santiago@gmail.com', 'Active', '2026-SANTIAGO-09199533529.png', '2026-02-17 13:43:25', '2026-02-17 13:43:25', NULL);
 
 -- Dumping structure for table bims_db.barangay_official_tbl
 CREATE TABLE IF NOT EXISTS `barangay_official_tbl` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `barangay_info_id` bigint unsigned NOT NULL,
   `position_id` bigint unsigned NOT NULL,
-  `committee_id` bigint unsigned NOT NULL,
+  `committee_id` bigint unsigned DEFAULT NULL,
   `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `middle_initial` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -85,16 +122,23 @@ CREATE TABLE IF NOT EXISTS `barangay_official_tbl` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.barangay_official_tbl: ~4 rows (approximately)
+-- Dumping data for table bims_db.barangay_official_tbl: ~12 rows (approximately)
 REPLACE INTO `barangay_official_tbl` (`id`, `barangay_info_id`, `position_id`, `committee_id`, `photo`, `first_name`, `middle_initial`, `last_name`, `extension`, `term_start`, `term_end`, `term_status`, `contact_number`, `email`, `address`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 1, 2, 3, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Chairman/ANTONIO_FLORES_091995335296.png', 'Antonio', 'P', 'Flores', NULL, '2026-02-09', '2026-02-13', 'Incumbent', '091995335296', 'dcode0516@gmail.com', 'dasdasdasdsa', 'Inactive', '2026-02-09 07:11:29', '2026-02-09 08:20:16'),
-	(2, 1, 1, 4, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/MARGARET_CASAS_09199533529.png', 'Margaret', 'D', 'Casas', NULL, '2026-02-09', '2026-02-09', 'Incumbent', '09199533529', 'dsada@gmail.com', 'dsadsa', 'Active', '2026-02-09 07:45:29', '2026-02-09 08:22:48'),
-	(3, 1, 1, 1, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/ALAN_BADELLES_09199533529.png', 'Alan', 'M', 'Badelles', NULL, '2026-02-09', '2026-02-13', 'Incumbent', '09199533529', 'alan@gmail.com', 'dadas', 'Active', '2026-02-09 07:46:55', '2026-02-09 07:46:55'),
-	(4, 1, 1, 1, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/JEROMEL_AREOLA_09199533529.png', 'Jeromel', 'R', 'Areola', NULL, '2026-02-09', '2026-02-13', 'Incumbent', '09199533529', 'dsadaq@gmail.com', 'dsadsa', 'Active', '2026-02-09 07:51:09', '2026-02-09 07:51:09'),
-	(5, 1, 1, 4, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/ROBERT_CAPAMPANGAN_09199533529.png', 'Robert', 'V', 'Capampangan', NULL, '2026-02-09', '2026-02-13', 'Incumbent', '09199533529', 'capampangan@gmail.com', 'fsdfsd', 'Active', '2026-02-09 08:31:38', '2026-02-09 08:31:38'),
-	(6, 1, 1, 1, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/WILMA_ALSONADO_09199533528.png', 'Wilma', 'P', 'Alsonado', NULL, '2026-02-09', '2026-02-13', 'Incumbent', '09199533528', 'alsonado@gmail.com', 'ddasdas', 'Active', '2026-02-09 08:32:29', '2026-02-09 08:32:29');
+	(1, 1, 1, NULL, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Chairman/ANTONIO_FLORES_09199533529.png', 'Antonio', 'P', 'Flores', NULL, '2026-02-17', '2026-02-20', 'Incumbent', '09199533529', 'antonio@gmail.com', 'tibungco davao city', 'Active', '2026-02-17 01:19:27', '2026-02-17 01:19:27'),
+	(2, 1, 2, 1, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/MARGARET_CASAS_09199533529.png', 'Margaret', 'D', 'Casas', NULL, '2026-02-17', '2026-02-18', 'Incumbent', '09199533529', 'margaret@gmail.com', 'Iligan City', 'Active', '2026-02-17 01:21:16', '2026-02-17 01:21:16'),
+	(3, 1, 2, 2, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/ALAN_BADELLES_091995333529.png', 'Alan', 'M', 'Badelles', NULL, '2026-02-17', '2026-02-19', 'Incumbent', '091995333529', 'alan@gmail.com', 'Iligan City', 'Active', '2026-02-17 01:22:12', '2026-02-17 01:22:12'),
+	(4, 1, 2, 3, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/JEROMEL_AREOLA_091999533595.png', 'Jeromel', 'R', 'Areola', NULL, '2026-02-17', '2026-02-19', 'Incumbent', '091999533595', 'jeromel@gmail.com', 'ILIGAN City', 'Active', '2026-02-17 01:22:58', '2026-02-17 01:22:58'),
+	(5, 1, 2, 4, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/ROBERT_CAPANGPANGAN_09199533529.png', 'Robert', 'V', 'Capangpangan', NULL, '2026-02-17', '2026-02-19', 'Incumbent', '09199533529', 'dasdas@gmail.com', 'ILIGAN CITY', 'Active', '2026-02-17 01:24:37', '2026-02-17 01:24:37'),
+	(6, 1, 2, 5, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/WILMA_ALSONADO_09199533529.png', 'Wilma', 'P', 'Alsonado', NULL, '2026-02-17', '2026-02-19', 'Incumbent', '09199533529', 'wilma@gmail.com', 'ILIGAN CITY', 'Active', '2026-02-17 01:25:26', '2026-02-17 01:25:26'),
+	(7, 1, 2, 6, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/FERLINA_OTASA_09199533529.png', 'Ferlina', 'C', 'Otasa', NULL, '2026-02-17', '2026-02-20', 'Incumbent', '09199533529', 'ferlina@gmail.com', 'ILIGAN CITY', 'Active', '2026-02-17 01:26:14', '2026-02-17 01:26:14'),
+	(8, 1, 2, 1, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/SANTOS_BINERBA_09199533529.png', 'Santos', 'M', 'Binerba', NULL, '2026-02-17', '2026-02-20', 'Incumbent', '09199533529', 'binerba@gmail.com', 'ILIGAN CITY', 'Active', '2026-02-17 01:27:02', '2026-02-17 01:27:02'),
+	(9, 1, 3, 7, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/SK Chairman/JHON_DELL_TABANIA_09199533529.png', 'Jhon Dell', 'D', 'Tabania', NULL, '2026-02-17', '2026-02-20', 'Incumbent', '09199533529', 'tabania@gmail.com', 'ILIGAN CITY', 'Active', '2026-02-17 01:28:09', '2026-02-17 01:28:09'),
+	(10, 1, 4, NULL, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Treasurer/RACHEL_GRACE_VILLAVER_09199533529.png', 'Rachel Grace', 'S', 'Villaver', NULL, '2026-02-17', '2026-02-20', 'Incumbent', '09199533529', 'dada@gmail.com', 'ILIGAN CITY', 'Active', '2026-02-17 01:28:55', '2026-02-17 01:28:55'),
+	(11, 1, 5, NULL, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Secretary/RHIENNA_STEPHANIE_CATIG_09199533529.png', 'Rhienna Stephanie', 'A', 'Catig', NULL, '2026-02-17', '2026-02-27', 'Incumbent', '09199533529', 'dads@gmail.com', 'ILIGAN CITY', 'Active', '2026-02-17 01:29:47', '2026-02-17 01:29:47'),
+	(12, 1, 6, NULL, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Administrator/ERNESTO_LAYOS_09199533529.png', 'Ernesto', 'C', 'Layos', NULL, '2026-02-17', '2026-02-27', 'Incumbent', '09199533529', 'dasdas@gmail.com', 'ILIGAN CITY', 'Active', '2026-02-17 01:30:28', '2026-02-17 01:30:28'),
+	(13, 1, 2, 10, 'barangay/official/photo/Region X/Lanao del Norte/City of Iligan/Ubaldo Laya/Barangay Councilor/DANRICK_TEKIKO_09199533529.jpg', 'Danrick', 'C', 'Tekiko', NULL, '2025-02-17', '2018-02-17', 'Incumbent', '09199533529', 'dcode0516@gmail.com', 'ILIGAN UBALDO CITY', 'Active', '2026-02-17 13:50:20', '2026-02-17 13:50:20');
 
 -- Dumping structure for table bims_db.barangay_position_tbl
 CREATE TABLE IF NOT EXISTS `barangay_position_tbl` (
@@ -108,16 +152,101 @@ CREATE TABLE IF NOT EXISTS `barangay_position_tbl` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.barangay_position_tbl: ~6 rows (approximately)
+-- Dumping data for table bims_db.barangay_position_tbl: ~7 rows (approximately)
 REPLACE INTO `barangay_position_tbl` (`id`, `barangay_info_id`, `position`, `term_start`, `term_end`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'Barangay Councilor', NULL, NULL, 'Active', NULL, '2026-02-09 02:03:03', '2026-02-09 02:03:03'),
-	(2, 1, 'Barangay Chairman', NULL, NULL, 'Active', NULL, '2026-02-09 02:03:32', '2026-02-09 02:03:32'),
-	(3, 1, 'SK Chairman', NULL, NULL, 'Active', NULL, '2026-02-09 02:03:55', '2026-02-09 02:03:55'),
-	(4, 1, 'Barangay Treasurer', NULL, NULL, 'Active', NULL, '2026-02-09 02:04:05', '2026-02-09 02:04:05'),
-	(5, 1, 'Barangay Secretary', NULL, NULL, 'Active', NULL, '2026-02-09 02:04:16', '2026-02-09 02:04:16'),
-	(6, 1, 'Barangay Administrator', NULL, NULL, 'Active', NULL, '2026-02-09 02:04:26', '2026-02-09 02:04:26');
+	(1, 1, 'Barangay Chairman', NULL, NULL, 'Active', NULL, '2026-02-17 01:10:32', '2026-02-17 01:10:32'),
+	(2, 1, 'Barangay Councilor', NULL, NULL, 'Active', NULL, '2026-02-17 01:10:41', '2026-02-17 01:10:41'),
+	(3, 1, 'SK Chairman', NULL, NULL, 'Active', NULL, '2026-02-17 01:11:01', '2026-02-17 01:11:01'),
+	(4, 1, 'Barangay Treasurer', NULL, NULL, 'Active', NULL, '2026-02-17 01:11:13', '2026-02-17 01:11:13'),
+	(5, 1, 'Barangay Secretary', NULL, NULL, 'Active', NULL, '2026-02-17 01:11:21', '2026-02-17 01:11:21'),
+	(6, 1, 'Barangay Administrator', NULL, NULL, 'Active', NULL, '2026-02-17 01:11:32', '2026-02-17 01:11:32'),
+	(7, 1, 'Barangay Health Worker', NULL, NULL, 'Active', NULL, '2026-02-17 13:48:17', '2026-02-17 13:48:17');
+
+-- Dumping structure for table bims_db.blotter_case_records
+CREATE TABLE IF NOT EXISTS `blotter_case_records` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `barangay_info_id` bigint unsigned NOT NULL,
+  `case_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `case_type` enum('CICL','CAR','Dispute','Criminal','Civil','Other') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `complainant_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `complainant_contact` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `complainant_address` text COLLATE utf8mb4_unicode_ci,
+  `respondent_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `respondent_contact` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `respondent_address` text COLLATE utf8mb4_unicode_ci,
+  `date_filed` date NOT NULL,
+  `status` enum('Pending','Ongoing','Settled','Dismissed','Archived') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
+  `actions_taken` text COLLATE utf8mb4_unicode_ci,
+  `hearing_date` date DEFAULT NULL,
+  `hearing_time` time DEFAULT NULL,
+  `hearing_location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `blotter_case_records_case_number_unique` (`case_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table bims_db.blotter_case_records: ~3 rows (approximately)
+REPLACE INTO `blotter_case_records` (`id`, `barangay_info_id`, `case_number`, `case_type`, `complainant_name`, `complainant_contact`, `complainant_address`, `respondent_name`, `respondent_contact`, `respondent_address`, `date_filed`, `status`, `actions_taken`, `hearing_date`, `hearing_time`, `hearing_location`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 1, '3123Case', 'CICL', 'Danrick C Tekiko', '09199533529', 'Tibungco Relocation Davao City', 'Christine Mae Calunsod', '09304554545', 'Mati Davao Oriental', '2026-02-15', 'Pending', NULL, NULL, NULL, NULL, '2026-02-15 11:13:36', '2026-02-15 11:13:36', NULL),
+	(2, 1, 'CASE2321', 'Criminal', 'Debra Dawn Tekiko', '09199533529', 'DAvao City', 'Helen Culiao', '09199533529', 'dasdasdasdas', '2026-02-15', 'Pending', NULL, NULL, NULL, NULL, '2026-02-15 11:25:31', '2026-02-15 11:25:31', NULL),
+	(3, 1, 'CASE1312321', 'Dispute', 'John Mark Culiao', '0919533529', 'Kabayan Relocatio Davao City', 'Lalo Bangot', '09199533529', 'Kabayan Davao City', '2026-02-15', 'Pending', NULL, NULL, NULL, NULL, '2026-02-15 11:37:37', '2026-02-15 11:37:37', NULL),
+	(4, 1, 'CASE3123123', 'Criminal', 'Lucita Tekiko', '09199533529', 'Kabayan Relocation Davao City', 'Antonio Tekiko', '09199533529', 'Kabayan Relocation Davao City', '2026-02-15', 'Ongoing', 'nag husay ra kay amigo rani sila', '2026-02-17', '19:44:00', 'Barangay Tibungco', '2026-02-15 11:44:03', '2026-02-15 12:02:32', NULL);
+
+-- Dumping structure for table bims_db.building_permit_tbl
+CREATE TABLE IF NOT EXISTS `building_permit_tbl` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `barangay_info_id` bigint unsigned NOT NULL,
+  `purok_id` bigint unsigned NOT NULL,
+  `name_requestor` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `building_permit_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_issued` date NOT NULL,
+  `purpose` text COLLATE utf8mb4_unicode_ci,
+  `case` text COLLATE utf8mb4_unicode_ci,
+  `requirements_building` text COLLATE utf8mb4_unicode_ci,
+  `mode_of_payment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_paid` date DEFAULT NULL,
+  `amount` decimal(12,2) DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `business_permit_tbl_building_permit_no_unique` (`building_permit_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table bims_db.building_permit_tbl: ~0 rows (approximately)
+REPLACE INTO `building_permit_tbl` (`id`, `barangay_info_id`, `purok_id`, `name_requestor`, `building_permit_no`, `date_issued`, `purpose`, `case`, `requirements_building`, `mode_of_payment`, `date_paid`, `amount`, `status`, `payment_status`, `created_at`, `updated_at`) VALUES
+	(1, 1, 2, '2', 'BPBAR202602170001', '2026-08-21', 'BUILDING PERMIT for a Residential Building', 'has no pending obligations, complaints, or cases', 'Building Permit and Licensing Office (BPLO)', 'Cash', '2026-02-18', 200.00, 'Approved Certificate', 'Paid', '2026-02-17 04:13:18', '2026-02-17 08:24:53'),
+	(2, 1, 2, '1', 'BPUBA202602170002', '2026-02-17', 'ewrew', 'rew', 'rewrew', 'G-Cash', '2026-02-17', 50.00, 'Approved Certificate', 'Paid', '2026-02-17 04:15:07', '2026-02-17 04:15:07'),
+	(3, 1, 2, '3', 'BPUBA202602170003', '2026-02-17', 'BUILDING PERMIT for a Residential Building', 'has no pending obligations, complaints, or cases', 'Building Permit and Licensing Office (BPLO).', 'G-Cash', '2026-02-17', 200.00, 'Approved Certificate', 'Paid', '2026-02-17 04:41:18', '2026-02-17 04:41:18');
+
+-- Dumping structure for table bims_db.certificate_indigency_tbl
+CREATE TABLE IF NOT EXISTS `certificate_indigency_tbl` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `application_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_requestor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `purok_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `barangay_info_id` bigint unsigned DEFAULT NULL,
+  `date_issued` date DEFAULT NULL,
+  `purpose` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_mode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_paid` date DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `payment_status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table bims_db.certificate_indigency_tbl: ~0 rows (approximately)
+REPLACE INTO `certificate_indigency_tbl` (`id`, `application_no`, `name_requestor`, `purok_id`, `barangay_info_id`, `date_issued`, `purpose`, `payment_mode`, `date_paid`, `amount`, `payment_status`, `status`, `created_at`, `updated_at`) VALUES
+	(1, 'APLUBA202602170001', '3', '1', 1, '2026-02-19', 'medical assistance,ssss', 'Cash', '2026-02-27', 250.00, 'Paid', 'Approved Certificate', '2026-02-17 09:44:23', '2026-02-17 10:08:43'),
+	(2, 'APLUBA202602170002', '1', '2', 1, '2026-02-17', 'dasdas', 'G-Cash', '2026-02-17', 200.00, 'Paid', 'Approved Certificate', '2026-02-17 09:46:02', '2026-02-17 09:46:02');
 
 -- Dumping structure for table bims_db.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -134,15 +263,142 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 
 -- Dumping data for table bims_db.failed_jobs: ~0 rows (approximately)
 
+-- Dumping structure for table bims_db.households_tbl
+CREATE TABLE IF NOT EXISTS `households_tbl` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `barangay_info_id` bigint unsigned NOT NULL,
+  `reference_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `purok` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `household_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitude` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitude` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `household_type` enum('Single Family','Nuclear Family','Extended Family','Multi-generational') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `housing_type` enum('Own','Rent','Rent free (w/ consent)','Others') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `housing_type_other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `house_materials` enum('Concrete','Wood','Mixed','Others') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `house_materials_other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `water_source` enum('None','ICWS','Well','Spring','Others') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `water_source_icws` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `water_source_other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `power_supply` enum('None','ILPI','Solar','Others') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `power_supply_other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `waste_biodegradable` tinyint(1) NOT NULL DEFAULT '0',
+  `waste_plastics` tinyint(1) NOT NULL DEFAULT '0',
+  `waste_others` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `internet_provider` enum('None','PLDT','Globe','Smart','Others') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `internet_provider_other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `garbage_disposal` enum('Garbage Collector','Burning','Composting','Others') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `garbage_disposal_other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fishing_vessel` enum('None','Motorized','Non-Motorized') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avg_fish_catch` decimal(10,2) DEFAULT NULL,
+  `fishing_frequency` enum('Daily','Weekly','Monthly','Occasional') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `households_tbl_reference_id_unique` (`reference_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table bims_db.households_tbl: ~1 rows (approximately)
+REPLACE INTO `households_tbl` (`id`, `barangay_info_id`, `reference_id`, `status`, `purok`, `street`, `household_number`, `longitude`, `latitude`, `household_type`, `housing_type`, `housing_type_other`, `house_materials`, `house_materials_other`, `water_source`, `water_source_icws`, `water_source_other`, `power_supply`, `power_supply_other`, `waste_biodegradable`, `waste_plastics`, `waste_others`, `internet_provider`, `internet_provider_other`, `garbage_disposal`, `garbage_disposal_other`, `fishing_vessel`, `avg_fish_catch`, `fishing_frequency`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 1, 'HH-20260216-D02E93', 'Active', '1', 'dasdsadas', '3123dasdas', '11122', '22333', 'Single Family', 'Own', NULL, 'Concrete', NULL, 'None', NULL, NULL, 'None', NULL, 1, 0, NULL, 'PLDT', NULL, 'Garbage Collector', NULL, 'Motorized', 100.00, 'Daily', '2026-02-16 10:27:57', '2026-02-16 10:27:57', NULL),
+	(2, 1, 'HH-20260217-7296D1', 'Active', '2', 'STREET LIANGAN', 'STREET1341312312', '3123', '1231231', 'Single Family', 'Rent', NULL, 'Wood', NULL, 'None', NULL, NULL, 'ILPI', NULL, 1, 0, NULL, 'Globe', NULL, 'Garbage Collector', NULL, 'Motorized', 100.00, 'Daily', '2026-02-17 04:40:23', '2026-02-17 04:40:23', NULL),
+	(3, 1, 'HH-20260217-C93C08', 'Active', '3', 'third street', 'Householdstreet1312321', '1112233', '312321312321', 'Single Family', 'Own', NULL, 'Concrete', NULL, 'None', NULL, NULL, 'ILPI', NULL, 1, 0, NULL, 'PLDT', NULL, 'Garbage Collector', NULL, 'Motorized', 100.00, 'Daily', '2026-02-17 13:59:24', '2026-02-17 13:59:24', NULL);
+
+-- Dumping structure for table bims_db.household_crops_tbl
+CREATE TABLE IF NOT EXISTS `household_crops_tbl` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `household_id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` decimal(10,2) NOT NULL,
+  `unit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table bims_db.household_crops_tbl: ~2 rows (approximately)
+REPLACE INTO `household_crops_tbl` (`id`, `household_id`, `name`, `type`, `quantity`, `unit`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'Eggplant', 'Eggplant', 2.00, 'hectares', '2026-02-16 10:27:57', '2026-02-16 10:27:57'),
+	(3, 3, 'Banana', 'Banana', 10.00, 'clumps', '2026-02-17 14:00:24', '2026-02-17 14:00:24');
+
+-- Dumping structure for table bims_db.household_livestocks_tbl
+CREATE TABLE IF NOT EXISTS `household_livestocks_tbl` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `household_id` int NOT NULL,
+  `barangay_info_id` bigint unsigned NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` int NOT NULL DEFAULT '0',
+  `unit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` json DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table bims_db.household_livestocks_tbl: ~2 rows (approximately)
+REPLACE INTO `household_livestocks_tbl` (`id`, `household_id`, `barangay_info_id`, `type`, `category`, `quantity`, `unit`, `details`, `created_at`, `updated_at`) VALUES
+	(1, 1, 1, 'Cattle (Cow)', 'Cattle', 3, 'head', NULL, '2026-02-16 10:27:57', '2026-02-16 10:27:57'),
+	(3, 3, 1, 'Goat', 'Goat', 3, 'head', NULL, '2026-02-17 14:00:24', '2026-02-17 14:00:24');
+
+-- Dumping structure for table bims_db.household_members_tbl
+CREATE TABLE IF NOT EXISTS `household_members_tbl` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `barangay_info_id` bigint unsigned NOT NULL,
+  `household_id` bigint unsigned NOT NULL,
+  `is_head` tinyint(1) NOT NULL DEFAULT '0',
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `middle_initial` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extension` enum('Jr','Sr','II','III','IV') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sex` enum('Male','Female') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `birthdate` date NOT NULL,
+  `civil_status` enum('Single','Married','Widowed','Separated','Divorced') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `relationship` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `national_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `voter_status` enum('Voter','Non-Voter') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_4ps_member` enum('Yes','No') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_deceased` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `highest_education` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `educational_status` enum('Not Attending School','Currently Enrolled','Graduated','Dropout','ALS Graduate','ALS Student') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `employment_status` enum('Employed','Unemployed') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `occupation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nature_of_employment` enum('Government Employee','Private Employee','Self-Employed','OFW','Casual','Seasonal','Contractual') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `monthly_income` decimal(12,2) DEFAULT NULL,
+  `contact_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `household_members_tbl_last_name_first_name_index` (`last_name`,`first_name`),
+  KEY `household_members_tbl_voter_status_index` (`voter_status`),
+  KEY `household_members_tbl_is_4ps_member_index` (`is_4ps_member`),
+  KEY `household_members_tbl_employment_status_index` (`employment_status`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table bims_db.household_members_tbl: ~7 rows (approximately)
+REPLACE INTO `household_members_tbl` (`id`, `barangay_info_id`, `household_id`, `is_head`, `first_name`, `middle_initial`, `last_name`, `extension`, `sex`, `birthdate`, `civil_status`, `relationship`, `national_id`, `voter_status`, `is_4ps_member`, `is_deceased`, `highest_education`, `educational_status`, `employment_status`, `occupation`, `nature_of_employment`, `monthly_income`, `contact_number`, `email`, `created_at`, `updated_at`) VALUES
+	(1, 1, 1, 1, 'Danrick', 'C', 'Tekiko', NULL, 'Male', '1992-11-15', 'Single', 'Head', '321321312312321', 'Voter', 'Yes', 'Alive', 'Elementary Level', 'Not Attending School', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-16 10:27:57', '2026-02-16 10:27:57'),
+	(2, 1, 1, 0, 'Christine Mae', 'C', 'Calunsod', 'Jr', 'Female', '1996-11-15', 'Single', 'Spouse', '312321321321', 'Voter', 'Yes', 'No', 'College Graduate', 'Graduated', 'Employed', 'Computer Programmer II', 'Government Employee', 299999.98, '0919-9533-529', NULL, '2026-02-16 10:27:57', '2026-02-16 10:27:57'),
+	(3, 1, 2, 1, 'HELEN', 'C', 'CULIAO', NULL, 'Male', '1992-02-17', 'Single', 'Head', '32132131312312', 'Voter', 'Yes', 'Alive', 'Elementary Level', 'Not Attending School', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-17 04:40:23', '2026-02-17 04:40:23'),
+	(4, 1, 3, 1, 'Rosalita', 'B', 'Bacote', NULL, 'Female', '1953-01-10', 'Widowed', 'Head', '3123213213213213', 'Voter', 'No', 'Alive', 'College Level', 'Not Attending School', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-17 13:59:24', '2026-02-17 14:00:24'),
+	(7, 1, 3, 0, 'Geri', 'b', 'Mainit', NULL, 'Female', '1992-02-11', 'Married', 'Child', '312312312321321312', 'Voter', 'No', 'No', 'College Graduate', 'Graduated', 'Employed', 'Manager', 'Private Employee', 99999.99, '0919-9533-529', NULL, '2026-02-17 14:00:24', '2026-02-17 14:00:24'),
+	(8, 1, 3, 0, 'Danrick', 'C', 'Mainit', NULL, 'Female', '1996-02-11', 'Single', 'Child', '312321321321321', 'Voter', 'No', 'No', 'College Graduate', 'Graduated', 'Employed', 'Programmer', 'Government Employee', 30000.00, '0919-9533-529', 'dcode0516@gmail.com', '2026-02-17 14:00:24', '2026-02-17 14:00:24'),
+	(9, 1, 3, 0, 'Sample', 'C', 'Mainit', 'Jr', 'Male', '1992-11-15', 'Single', 'Child', '312321321312', 'Voter', 'Yes', 'No', 'College Graduate', 'Graduated', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-17 14:00:24', '2026-02-17 14:00:24');
+
 -- Dumping structure for table bims_db.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.migrations: ~12 rows (approximately)
+-- Dumping data for table bims_db.migrations: ~60 rows (approximately)
 REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_resets_table', 1),
@@ -155,34 +411,58 @@ REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(9, '2026_02_01_095733_create_table_province_table', 1),
 	(10, '2026_02_01_100138_create_table_municipality', 1),
 	(11, '2026_02_01_100454_create_table_barangay', 1),
-	(12, '2026_02_05_062206_create_barangay_position_tbl', 2),
-	(13, '2026_02_05_235607_create_barangay_commitee_tb_table', 3),
-	(14, '2026_02_06_000818_rename_barangay_commitee_tb_to_tbl', 3),
-	(15, '2026_02_06_000949_make_barangay_info_id_nullable_in_barangay_commitee_tbl', 4),
-	(16, '2026_02_06_082026_add_deleted_at_to_barangay_commitee_tbl', 4),
-	(17, '2026_02_06_091334_add_term_and_status_to_barangay_position_tbl', 4),
-	(18, '2026_02_06_093822_make_barangay_info_id_nullable_in_barangay_position_tbl', 4),
-	(19, '2026_02_06_105728_add_deleted_at_to_barangay_position_tbl', 4),
-	(20, '2026_02_06_124747_add_name_fields_to_users_table', 4),
-	(21, '2026_02_06_124848_add_barangay_info_id_to_users_table', 4),
-	(22, '2026_02_06_125955_add_sex_to_users_table', 4),
-	(23, '2026_02_06_130021_add_contact_number_to_users_table', 4),
-	(24, '2026_02_06_130537_add_birthdate_to_users_table', 4),
-	(25, '2026_02_06_155624_add_extension_to_users_table', 4),
-	(26, '2026_02_06_155715_drop_name_from_users_table', 4),
-	(27, '2026_02_06_161034_add_status_to_users_table', 4),
-	(28, '2026_02_07_140821_update_barangay_info_table_columns_ids', 4),
-	(29, '2026_02_07_143734_create_purok_tbl', 4),
-	(30, '2026_02_07_150313_add_purok_incharge_and_contact_number_to_purok_tbl', 4),
-	(31, '2026_02_07_151534_add_term_fields_to_purok_tbl', 4),
-	(32, '2026_02_08_205821_create_barangay_official_tbl', 4),
-	(33, '2026_02_09_102105_add_position_and_committee_to_barangay_official_tbl', 5),
-	(34, '2026_02_09_102458_add_position_id_committee_id_and_photo_to_barangay_official_tbl', 6),
-	(35, '2026_02_09_122246_rename_active_to_barangay_official_tbl', 7),
-	(36, '2026_02_09_131223_remove_position_from_barangay_official_tbl', 8),
-	(37, '2026_02_09_132312_add_location_ids_to_barangay_official_tbl', 9),
-	(38, '2026_02_09_132700_remove_location_ids_from_barangay_official_tbl', 10),
-	(39, '2026_02_09_132741_add_barangay_info_id_to_barangay_official_tbl', 11);
+	(12, '2026_02_05_062206_create_barangay_position_tbl', 1),
+	(13, '2026_02_05_235607_create_barangay_commitee_tb_table', 1),
+	(14, '2026_02_06_000818_rename_barangay_commitee_tb_to_tbl', 1),
+	(15, '2026_02_06_000949_make_barangay_info_id_nullable_in_barangay_commitee_tbl', 1),
+	(16, '2026_02_06_082026_add_deleted_at_to_barangay_commitee_tbl', 1),
+	(17, '2026_02_06_091334_add_term_and_status_to_barangay_position_tbl', 1),
+	(18, '2026_02_06_093822_make_barangay_info_id_nullable_in_barangay_position_tbl', 1),
+	(19, '2026_02_06_105728_add_deleted_at_to_barangay_position_tbl', 1),
+	(20, '2026_02_06_124747_add_name_fields_to_users_table', 1),
+	(21, '2026_02_06_124848_add_barangay_info_id_to_users_table', 1),
+	(22, '2026_02_06_125955_add_sex_to_users_table', 1),
+	(23, '2026_02_06_130021_add_contact_number_to_users_table', 1),
+	(24, '2026_02_06_130537_add_birthdate_to_users_table', 1),
+	(25, '2026_02_06_155624_add_extension_to_users_table', 1),
+	(26, '2026_02_06_155715_drop_name_from_users_table', 1),
+	(27, '2026_02_06_161034_add_status_to_users_table', 1),
+	(28, '2026_02_07_140821_update_barangay_info_table_columns_ids', 1),
+	(29, '2026_02_07_143734_create_purok_tbl', 1),
+	(30, '2026_02_07_150313_add_purok_incharge_and_contact_number_to_purok_tbl', 1),
+	(31, '2026_02_07_151534_add_term_fields_to_purok_tbl', 1),
+	(32, '2026_02_08_205821_create_barangay_official_tbl', 1),
+	(33, '2026_02_09_102105_add_position_and_committee_to_barangay_official_tbl', 1),
+	(34, '2026_02_09_102458_add_position_id_committee_id_and_photo_to_barangay_official_tbl', 1),
+	(35, '2026_02_09_122246_rename_active_to_barangay_official_tbl', 1),
+	(36, '2026_02_09_131223_remove_position_from_barangay_official_tbl', 1),
+	(37, '2026_02_09_132312_add_location_ids_to_barangay_official_tbl', 1),
+	(38, '2026_02_09_132700_remove_location_ids_from_barangay_official_tbl', 1),
+	(39, '2026_02_09_132741_add_barangay_info_id_to_barangay_official_tbl', 1),
+	(40, '2026_02_10_205729_create_blotter_case_records_table', 1),
+	(41, '2026_02_11_132902_create_households_tbl', 1),
+	(42, '2026_02_11_133342_create_household_livestocks_tbl_table', 1),
+	(43, '2026_02_11_133620_create_household_household_crops_tbl_table', 1),
+	(44, '2026_02_11_143703_rename_household_household_crops_tbl', 1),
+	(45, '2026_02_11_150921_create_household_members_tbl_table', 1),
+	(46, '2026_02_11_151940_change_is_deceased_to_household_members_tbl_table', 1),
+	(47, '2026_02_12_212721_modify_highest_education_in_household_members_tbl', 1),
+	(48, '2026_02_15_192040_add_barangay_info_id_to_blotter_case_records_table', 2),
+	(49, '2026_02_16_101759_create_barangay_clearance_tbl', 3),
+	(50, '2026_02_16_130853_add_fields_to_barangay_clearance_tbl', 3),
+	(51, '2026_02_16_131006_add_application_no_to_barangay_clearance_tbl', 3),
+	(52, '2026_02_16_131426_add_other_purpose_to_barangay_clearance_tbl', 3),
+	(53, '2026_02_16_132847_remove_file_name_from_barangay_clearance_tbl', 3),
+	(54, '2026_02_16_154637_add_payment_fields_to_barangay_clearance_tbl', 3),
+	(55, '2026_02_16_161312_drop_birthdate_from_barangay_clearance_tbl', 3),
+	(56, '2026_02_17_091433_modify_committee_id_nullable_on_barangay_official_tbl', 4),
+	(57, '2026_02_17_113851_create_business_permit_tbl', 5),
+	(58, '2026_02_17_114221_add_payment_status_to_business_permit_tbl', 6),
+	(59, '2026_02_17_121220_rename_business_permit_tbl_to_building_permit_tbl', 7),
+	(60, '2026_02_17_172418_create_certificate_indigency_tbl', 8),
+	(61, '2026_02_17_172637_add_barangay_info_id_to_certificate_indigency_tbl', 9),
+	(62, '2026_02_17_172929_add_barangay_application_no_to_certificate_indigency_tbl', 10),
+	(63, '2026_02_17_200632_add_photo_to_users_table', 11);
 
 -- Dumping structure for table bims_db.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
@@ -229,11 +509,11 @@ CREATE TABLE IF NOT EXISTS `purok_tbl` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.purok_tbl: ~0 rows (approximately)
+-- Dumping data for table bims_db.purok_tbl: ~1 rows (approximately)
 REPLACE INTO `purok_tbl` (`id`, `purok_incharge`, `contact_number`, `term_start_date`, `term_end_date`, `status_term`, `barangay_info_id`, `purok_name`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'Danrick C. Tekiko', '09199533529', '2026-02-09', '2026-02-13', 'Incumbent', 1, 'Purok Masiga', 'Active', '2026-02-09 00:40:56', '2026-02-09 00:40:56', NULL),
-	(2, 'Bryan E. Loreto', '094545646', '2026-02-09', '2026-02-13', 'Incumbent', 1, 'Purok Maigo', 'Active', '2026-02-09 00:41:26', '2026-02-09 00:41:26', NULL),
-	(3, 'Christine Mae C. Calunsod', '09199533529', '2026-02-09', '2026-02-20', 'Incumbent', 1, 'Purok Liangan', 'Active', '2026-02-09 02:04:51', '2026-02-09 02:04:51', NULL);
+	(1, 'Danrick C. Tekiko', '09199533529', '2026-02-15', '2026-02-28', 'Incumbent', 1, 'Purok Maigo', 'Active', '2026-02-15 12:39:26', '2026-02-15 12:39:26', NULL),
+	(2, 'Christine Mae Calunsod', '09199533529', '2026-02-17', '2026-02-20', 'Incumbent', 1, 'Purok Liangan', 'Active', '2026-02-17 01:10:10', '2026-02-17 01:10:10', NULL),
+	(3, 'Adelfa Incharge', '09565333', '2026-02-17', '2026-02-28', 'Incumbent', 1, 'Purok Adelfa', 'Active', '2026-02-17 13:46:52', '2026-02-17 13:46:52', NULL);
 
 -- Dumping structure for table bims_db.table_barangay
 CREATE TABLE IF NOT EXISTS `table_barangay` (
@@ -245,7 +525,7 @@ CREATE TABLE IF NOT EXISTS `table_barangay` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42047 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.table_barangay: ~43,894 rows (approximately)
+-- Dumping data for table bims_db.table_barangay: ~42,060 rows (approximately)
 REPLACE INTO `table_barangay` (`id`, `municipality_id`, `barangay_name`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Adams (Pob.)', NULL, NULL),
 	(2, 2, 'Bani', NULL, NULL),
@@ -44079,6 +44359,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `extension` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `barangay_info_id` bigint unsigned DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('Active','Inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Active',
   `sex` enum('Male','Female') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `contact_number` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -44094,10 +44375,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table bims_db.users: ~3 rows (approximately)
-REPLACE INTO `users` (`id`, `firstname`, `middle_initial`, `lastname`, `extension`, `barangay_info_id`, `email`, `status`, `sex`, `contact_number`, `birthdate`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'Danrick', 'C', 'Tekiko', NULL, 1, 'admin@gmail.com', 'Active', NULL, NULL, NULL, 'Super Admin', NULL, '$2y$10$PLNooSl760B7fNy81Nhifu4dOg2rG/2FEC3l0H4lJGy4pxpkjpL8W', NULL, NULL, NULL),
-	(2, 'Ubaldo', 'C', 'Ubaldo', NULL, 1, 'ubaldo_laya@gmail.com', 'Active', 'Male', '09199533529', '1992-11-12', 'Admin', NULL, '$2y$10$CSYyZBm582gNfOQam3M5BuL2bZKsKy/PUPxJ3p1G.Vs7ARevQJjGm', NULL, '2026-02-09 00:35:57', '2026-02-09 00:35:57'),
-	(3, 'Santiago', 'S', 'Santiago', NULL, 2, 'santiago@gmail.com', 'Active', 'Male', '09199533529', '1992-11-10', 'Admin', NULL, '$2y$10$G9Zx7kEnb.oV3.LhwIxMT.KkQwp.MvffooDXqenf/MpDATbx1I0Wa', NULL, '2026-02-09 00:37:48', '2026-02-09 00:37:48');
+REPLACE INTO `users` (`id`, `firstname`, `middle_initial`, `lastname`, `extension`, `barangay_info_id`, `email`, `photo`, `status`, `sex`, `contact_number`, `birthdate`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(1, 'Danrick', 'C', 'Tekiko', NULL, 1, 'admin@gmail.com', NULL, 'Active', 'Male', '09199533529', NULL, 'Super Admin', NULL, '$2y$10$PLNooSl760B7fNy81Nhifu4dOg2rG/2FEC3l0H4lJGy4pxpkjpL8W', NULL, NULL, NULL),
+	(2, 'Rhienna Stephanie', 'A', 'Catig', NULL, 1, 'ubaldo_laya@gmail.com', '2026-RHIENNA_STEPHANIE_A_CATIG-09109876543.png', 'Active', 'Male', '09109876543', '1992-11-12', 'Admin', NULL, '$2y$10$PhLBgMuVu8uHJYHq9hXBQu40bAWv7J7FdJwhqfOpMfZkyoCAa5Rri', NULL, '2026-02-15 10:35:33', '2026-02-17 12:15:48'),
+	(3, 'Geri', 'B', 'Mainit', NULL, 1, 'geri_mainit@gmail.com', '2026-GERI_B_MAINIT-09199533529.png', 'Active', 'Female', '09199533529', '1992-02-10', 'Admin', NULL, '$2y$10$XhPc6l1ECsnc5egOYCwC/ODL0rtOfOa5.z7aCTN0ivkYcNxyUtfSm', NULL, '2026-02-17 13:45:03', '2026-02-17 13:45:42');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

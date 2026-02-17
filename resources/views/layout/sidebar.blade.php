@@ -121,7 +121,7 @@
                  
                 <li class="menu-title"><span>Main</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
+                    <a class="nav-link menu-link" href="{{route('dashboard.admin')}}">
                         <i class="ri-dashboard-line"></i>
                         <span>Dashboard</span>
                     </a>

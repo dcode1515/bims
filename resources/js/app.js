@@ -34,6 +34,9 @@ Vue.component('Viewhousehold', require('./components/Barangay/Viewhousehold.vue'
 Vue.component('Blotter', require('./components/Barangay/Blotter.vue').default);
 Vue.component('Certification', require('./components/Barangay/Certification.vue').default);
 Vue.component('Barangayclearance', require('./components/Barangay/Barangayclearance.vue').default);
+Vue.component('Buildingpermit', require('./components/Barangay/Buildingpermit.vue').default);
+Vue.component('Indigency', require('./components/Barangay/Indigency.vue').default);
+Vue.component('Profile', require('./components/Auth/Profile.vue').default);
 
 
 

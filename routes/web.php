@@ -20,6 +20,8 @@ Route::get('/', function () {
 /* Login Routes */
 Route::get('/', [App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');
 Route::post('/api/login', [App\Http\Controllers\Auth\AuthController::class, 'post_login']);
+Route::post('/logout', [App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
+Route::get('/profile/{id}', [App\Http\Controllers\Auth\AuthController::class, 'showProfile'])->name('profile.show');
 /* End Login Routes */
 
 /* Super Admin Routes */
@@ -83,7 +85,17 @@ Route::get('/api/get/data/barangay/clearance', [App\Http\Controllers\Barangay\Ba
 Route::put('/api/update/barangay/clearance/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_barangay_clearance']);
 Route::get('/api/get/data/inhabitans/clearance', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataInhabitansCertification']);
 Route::get('/print/barangay/clearance/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'print_barangay_clearance']);
-
-
+Route::get('/manage/building/permit', [App\Http\Controllers\Barangay\BarangayController::class, 'manage_building_permit']);
+Route::post('/api/store/building/permit', [App\Http\Controllers\Barangay\BarangayController::class, 'store_building_permit']);
+Route::get('/api/get/data/building/permit', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataBuildingPermit']);
+Route::put('/api/update/building/permit/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_buildingy_permit']);
+Route::get('/print/building/permit/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'print_building_permit']);
+Route::get('/manage/certificate/indigency', [App\Http\Controllers\Barangay\BarangayController::class, 'manage_certificate_indigency']);
+Route::post('/api/store/certificate/indigency', [App\Http\Controllers\Barangay\BarangayController::class, 'store_certificate_indigency']);
+Route::get('/api/get/data/certificate/indigency', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataIndigency']);
+Route::put('/api/update/certificate/indigency/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_certificate_indigency']);
+Route::get('/print/certificate/indigency/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'print_certificate_indigency']);
+Route::post('/api/update/profile/{id}', [App\Http\Controllers\Auth\AuthController::class, 'update_profile']);
+Route::post('/api/update/user/credential/{id}', [App\Http\Controllers\Auth\AuthController::class, 'update_user_credentials']);
 
 /*End Admin Routes */

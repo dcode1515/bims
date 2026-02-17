@@ -39,7 +39,7 @@
                                     <i class="ri-building-2-line fs-2 text-success"></i>
                                     <h6 class="mt-3 fw-semibold">Building Permit Clearance</h6>
                                     <p class="text-muted small">Handle building permit clearance applications</p>
-                                    <button class="btn btn-success btn-sm rounded-pill px-3">Manage</button>
+                                    <a href = "/bims/manage/building/permit" class="btn btn-success btn-sm rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                     <i class="ri-hand-heart-line fs-2 text-warning"></i>
                                     <h6 class="mt-3 fw-semibold">Certificate of Indigency</h6>
                                     <p class="text-muted small">Issue certificates for qualified indigent residents</p>
-                                    <button class="btn btn-warning btn-sm text-white rounded-pill px-3">Manage</button>
+                                    <a href = "/bims/manage/certificate/indigency" class="btn btn-warning btn-sm text-white rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
                         </div>

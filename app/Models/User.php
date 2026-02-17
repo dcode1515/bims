@@ -45,5 +45,20 @@ class User extends Authenticatable
     {
         return $this->belongsTo(BarangayInfo::class, 'barangay_info_id');
     }
+     public function region()
+    {
+        return $this->belongsTo(BarangayInfo::class, 'barangay_info_id');
+    }
+     public function municipality()
+    {
+        return $this->belongsTo(BarangayInfo::class, 'barangay_info_id');
+    }
+     public function province()
+    {
+        return $this->belongsTo(BarangayInfo::class, 'barangay_info_id');
+    }
+    
+    
+    
     
 }

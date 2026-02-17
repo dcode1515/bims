@@ -20,7 +20,9 @@ use App\Models\HouseholdMember;
 use App\Models\HouseholdCrop;
 use App\Models\HouseholdLivestock;
 use App\Models\Blotter;
+use App\Models\BuildingPermit;
 use App\Models\BarangayClearance;
+use App\Models\CertificateIndigency;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -33,10 +35,152 @@ class BarangayController extends Controller
 {
     //
 
-    public function dashboard_barangay()
-    {
-        return view('barangay.dashboard');
-    }
+   public function dashboard_barangay()
+{
+    $members = HouseholdMember::all();
+    
+    // Basic counts
+    $totalMembers = $members->count();
+    $totalHeads = $members->where('is_head', true)->count();
+    $total4ps = $members->where('is_4ps_member', true)->count();
+    $totalVoters = $members->where('voter_status', true)->count();
+    
+    // Demographics
+    $maleCount = $members->where('sex', 'Male')->count();
+    $femaleCount = $members->where('sex', 'Female')->count();
+    
+    // Basic Age groups
+    $minors = $members->filter(function($member) {
+        return $member->age < 18;
+    })->count();
+    
+    $adults = $members->filter(function($member) {
+        return $member->age >= 18 && $member->age < 60;
+    })->count();
+    
+    $seniors = $members->filter(function($member) {
+        return $member->age >= 60;
+    })->count();
+    
+    // DETAILED AGE GROUPS
+    // Infants (0-2 years)
+    $infants = $members->filter(function($member) {
+        return $member->age >= 0 && $member->age <= 2;
+    })->count();
+    
+    // Preschool (3-5 years)
+    $preschool = $members->filter(function($member) {
+        return $member->age >= 3 && $member->age <= 5;
+    })->count();
+    
+    // School Age (6-12 years)
+    $schoolAge = $members->filter(function($member) {
+        return $member->age >= 6 && $member->age <= 12;
+    })->count();
+    
+    // Adolescents (13-17 years)
+    $adolescents = $members->filter(function($member) {
+        return $member->age >= 13 && $member->age <= 17;
+    })->count();
+    
+    // Young Adults (18-25 years)
+    $youngAdults = $members->filter(function($member) {
+        return $member->age >= 18 && $member->age <= 25;
+    })->count();
+    
+    // Adults (26-39 years)
+    $adultsMid = $members->filter(function($member) {
+        return $member->age >= 26 && $member->age <= 39;
+    })->count();
+    
+    // Middle Age (40-59 years)
+    $middleAge = $members->filter(function($member) {
+        return $member->age >= 40 && $member->age <= 59;
+    })->count();
+    
+    // Senior Citizens - Early (60-74 years)
+    $seniorEarly = $members->filter(function($member) {
+        return $member->age >= 60 && $member->age <= 74;
+    })->count();
+    
+    // Elderly (75+ years)
+    $elderly = $members->filter(function($member) {
+        return $member->age >= 75;
+    })->count();
+    
+    // Civil status
+    $civilStatus = [
+        'Single' => $members->where('civil_status', 'Single')->count(),
+        'Married' => $members->where('civil_status', 'Married')->count(),
+        'Widowed' => $members->where('civil_status', 'Widowed')->count(),
+        'Divorced' => $members->where('civil_status', 'Divorced')->count(),
+        'Separated' => $members->where('civil_status', 'Separated')->count(),
+    ];
+    
+    // Employment status
+    $employed = $members->where('employment_status', 'Employed')->count();
+    $unemployed = $members->where('employment_status', 'Unemployed')->count();
+    $selfEmployed = $members->where('employment_status', 'Self-Employed')->count();
+    $student = $members->where('employment_status', 'Student')->count();
+    
+    // Education levels
+    $education = [
+        'Elementary' => $members->where('highest_education', 'Elementary')->count(),
+        'High School' => $members->where('highest_education', 'High School')->count(),
+        'College' => $members->where('highest_education', 'College')->count(),
+        'Vocational' => $members->where('highest_education', 'Vocational')->count(),
+        'Post Graduate' => $members->where('highest_education', 'Post Graduate')->count(),
+    ];
+    
+    // Monthly income brackets
+    $incomeBrackets = [
+        'Below 5,000' => $members->filter(function($member) {
+            return $member->monthly_income < 5000;
+        })->count(),
+        '5,000 - 10,000' => $members->filter(function($member) {
+            return $member->monthly_income >= 5000 && $member->monthly_income <= 10000;
+        })->count(),
+        '10,001 - 20,000' => $members->filter(function($member) {
+            return $member->monthly_income > 10000 && $member->monthly_income <= 20000;
+        })->count(),
+        '20,001 - 30,000' => $members->filter(function($member) {
+            return $member->monthly_income > 20000 && $member->monthly_income <= 30000;
+        })->count(),
+        'Above 30,000' => $members->filter(function($member) {
+            return $member->monthly_income > 30000;
+        })->count(),
+    ];
+    
+    return view('barangay.dashboard', compact(
+        'totalMembers',
+        'totalHeads',
+        'total4ps',
+        'totalVoters',
+        'maleCount',
+        'femaleCount',
+        'minors',
+        'adults',
+        'seniors',
+        // New detailed age groups
+        'infants',
+        'preschool',
+        'schoolAge',
+        'adolescents',
+        'youngAdults',
+        'adultsMid',
+        'middleAge',
+        'seniorEarly',
+        'elderly',
+        // Other data
+        'civilStatus',
+        'employed',
+        'unemployed',
+        'selfEmployed',
+        'student',
+        'education',
+        'incomeBrackets'
+    ));
+}
       public function purok()
     {
         return view('barangay.purok');
@@ -493,7 +637,7 @@ public function delete_commitee($id){
     // Validate incoming request
     $validator = Validator::make($request->all(), [
         'position'    => 'required',
-        'commitee'           => 'required',
+        'commitee'           => 'nullable',
         'first_name'         => 'required',
         'middle_initial'     => 'nullable',
         'last_name'         => 'required',
@@ -1534,6 +1678,7 @@ public function getDataBlotter(Request $request){
   }
 
   public function manage_barangay_clearance (){
+   
     return view('barangay.manage_barangay_clearance');
 
   }
@@ -1696,15 +1841,572 @@ public function update_barangay_clearance(Request $request, $id)
         $inhabitants = HouseholdMember::where('barangay_info_id', Auth::user()->barangay_info_id)->orderBy('first_name')->get();
         return response()->json($inhabitants);
     }
-    public function print_barangay_clearance($id){
+    public function print_barangay_clearance($id)
+{
+    $barangay_clearance = BarangayClearance::with(['requestor','purok'])
+        ->findOrFail($id);
 
-       $barangay_clearance = BarangayClearance::with(['requestor','purok'])->findOrFail($id);
-       $pdf = Pdf::loadView('pdf.barangay_clearance', compact('barangay_clearance'))
-              ->setPaper('a4', 'portrait');
+    $barangayId = Auth::user()->barangay_info_id;
 
-       return $pdf->stream('barangay_clearance.pdf');
+    // Barangay Chairman
+    $chairman = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Chairman');
+        })
+       
+        ->where('term_status', 'Incumbent')
+        ->first();
 
+    // All Barangay Councilors
+  $councilors = BarangayOfficial::with('position','commitee')
+    ->where('barangay_info_id', $barangayId)
+    ->whereHas('position', function($q) {
+        $q->where('position', 'Barangay Councilor');
+    })
+    ->whereHas('commitee', function($q) {
+        $q->where('status', 'Active');
+    })
+    ->where('term_status', 'Incumbent')
+    ->get();
+
+
+    // Secretary
+    $secretary = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Secretary');
+        })
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // Treasurer
+    $treasurer = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Treasurer');
+        })
+      
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // SK Chairman
+         $sk_chairman = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'SK Chairman');
+        })
+        ->whereHas('commitee', function($q) {
+        $q->where('status', 'Active');
+    })
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+         $barangay_administrator = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Administrator');
+        })
+       
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    $pdf = Pdf::loadView('pdf.barangay_clearance', compact(
+        'barangay_clearance',
+        'chairman',
+        'councilors',
+        'secretary',
+        'treasurer',
+        'sk_chairman',
+        'barangay_administrator'
+    ))->setPaper('a4', 'portrait');
+
+    return $pdf->stream('barangay_clearance.pdf');
+}
+
+public function print_building_permit($id)
+{
+    $building_permit = BuildingPermit::with(['requestor','purok'])
+        ->findOrFail($id);
+
+    $barangayId = Auth::user()->barangay_info_id;
+
+    // Barangay Chairman
+    $chairman = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Chairman');
+        })
+       
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // All Barangay Councilors
+  $councilors = BarangayOfficial::with('position','commitee')
+    ->where('barangay_info_id', $barangayId)
+    ->whereHas('position', function($q) {
+        $q->where('position', 'Barangay Councilor');
+    })
+    ->whereHas('commitee', function($q) {
+        $q->where('status', 'Active');
+    })
+    ->where('term_status', 'Incumbent')
+    ->get();
+
+
+    // Secretary
+    $secretary = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Secretary');
+        })
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // Treasurer
+    $treasurer = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Treasurer');
+        })
+      
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // SK Chairman
+         $sk_chairman = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'SK Chairman');
+        })
+        ->whereHas('commitee', function($q) {
+        $q->where('status', 'Active');
+    })
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+         $barangay_administrator = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Administrator');
+        })
+       
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    $pdf = Pdf::loadView('pdf.building_permit', compact(
+        'building_permit',
+        'chairman',
+        'councilors',
+        'secretary',
+        'treasurer',
+        'sk_chairman',
+        'barangay_administrator'
+    ))->setPaper('a4', 'portrait');
+
+    return $pdf->stream('building_permit.pdf');
+}
+public function print_certificate_indigency($id)
+{
+    $indigency_permit = CertificateIndigency::with(['requestor','purok'])
+        ->findOrFail($id);
+
+    $barangayId = Auth::user()->barangay_info_id;
+
+    // Barangay Chairman
+    $chairman = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Chairman');
+        })
+       
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // All Barangay Councilors
+  $councilors = BarangayOfficial::with('position','commitee')
+    ->where('barangay_info_id', $barangayId)
+    ->whereHas('position', function($q) {
+        $q->where('position', 'Barangay Councilor');
+    })
+    ->whereHas('commitee', function($q) {
+        $q->where('status', 'Active');
+    })
+    ->where('term_status', 'Incumbent')
+    ->get();
+
+
+    // Secretary
+    $secretary = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Secretary');
+        })
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // Treasurer
+    $treasurer = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Treasurer');
+        })
+      
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // SK Chairman
+         $sk_chairman = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'SK Chairman');
+        })
+        ->whereHas('commitee', function($q) {
+        $q->where('status', 'Active');
+    })
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+         $barangay_administrator = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Administrator');
+        })
+       
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    $pdf = Pdf::loadView('pdf.certificate_indigency', compact(
+        'indigency_permit',
+        'chairman',
+        'councilors',
+        'secretary',
+        'treasurer',
+        'sk_chairman',
+        'barangay_administrator'
+    ))->setPaper('a4', 'portrait');
+
+    return $pdf->stream('certificate_indigency.pdf');
+}
+  public function manage_building_permit (){
+    return view('barangay.manage_building_permit');
+  }
+
+   public function store_building_permit(Request $request)
+{
+    // ✅ Validation (matches Vue form)
+    $request->validate([
+            'name_requestor' => 'required',
+            'purok' => 'required',
+            'date_issued' => 'required',
+            'purpose' => 'required',
+            'case' => 'required',
+            'requirements_building' => 'required',
+            'payment_mode' => 'required',
+            'amount' => 'required',
+            'payment_status' => 'required',
+           
+            
+    ]);
+
+  
+
+    try {
+
+        $barangay = Auth::user()->barangay;
+        $prefix = 'BP';
+        $barangayCode = strtoupper(substr($barangay->barangay->barangay_name, 0, 3));
+        $dateCode = now()->format('Ymd'); // e.g., 20260217
+
+        // Get last permit for this Barangay and today
+        $lastPermit = BuildingPermit::where('barangay_info_id', $barangay->id)
+                        ->whereDate('created_at', now()->toDateString())
+                        ->orderBy('id', 'desc')
+                        ->first();
+
+        $runningNumber = $lastPermit 
+            ? str_pad((int)substr($lastPermit->building_permit_no, -4) + 1, 4, '0', STR_PAD_LEFT)
+            : '0001';
+
+        $buildingPermitNo = $prefix . $barangayCode . $dateCode . $runningNumber;
+
+        
+        BuildingPermit::create([
+            'building_permit_no' => $buildingPermitNo,
+            'barangay_info_id' => Auth::user()->barangay_info_id,
+            'name_requestor' => $request->name_requestor,
+            'purok_id' => $request->purok,
+            'date_issued' => $request->date_issued,
+            'purpose' => $request->purpose,
+            'case' => $request->case,
+            'requirements_building' => $request->requirements_building,
+            'mode_of_payment' => $request->payment_mode,
+            'payment_status' => $request->payment_status,
+            'amount' => $request->amount,
+            'date_paid' => $request->date_paid,
+            'status' => 'Approved Certificate',
+        ]);
+
+       
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Building Permit successfully created.'
+        ]);
+
+    } catch (\Exception $e) {
+
+  
+        return response()->json([
+            'success' => false,
+            'message' => 'Something went wrong.',
+            'error' => $e->getMessage()
+        ], 500);
     }
+}
+public function update_buildingy_permit(Request $request, $id)
+{
+    // ✅ Validation (matches Vue form)
+    $request->validate([
+           'name_requestor' => 'required',
+            'purok' => 'required',
+            'date_issued' => 'required',
+            'purpose' => 'required',
+            'case' => 'required',
+            'requirements_building' => 'required',
+            'payment_mode' => 'required',
+            'amount' => 'required',
+            'payment_status' => 'required',
+    ]);
+
+   
+
+    try {
+        // ✅ Find the record to update
+        $building = BuildingPermit::findOrFail($id);
+
+        // ✅ Update fields
+        $building->update([
+            'name_requestor' => $request->name_requestor,
+            'purok_id' => $request->purok,
+            'date_issued' => $request->date_issued,
+            'purpose' => $request->purpose,
+            'case' => $request->case,
+            'requirements_building' => $request->requirements_building,
+            'mode_of_payment' => $request->payment_mode,
+            'payment_status' => $request->payment_status,
+            'amount' => $request->amount,
+            'date_paid' => $request->date_paid,
+        ]);
+
+      
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Building Permit successfully updated.'
+        ]);
+
+    } catch (\Exception $e) {
+     
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Something went wrong.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+    public function getDataBuildingPermit(Request $request){
+         // Get the search query and per_page from the request
+           // Get the search query and per_page from the request
+          $search = $request->query('search');
+          $perPage = $request->query('per_page', 10); // Default to 10 if per_page is not provided
+      
+          // Query certifications with optional search
+          $buildings = BuildingPermit::with('purok')->with('requestor')->when($search, function ($query, $search) {
+                  return $query->where('building_permit_no', 'like', '%' . $search . '%')
+                   ->orWhere('date_issued', 'like', '%' . $search . '%')
+                    ->orWhere('purpose', 'like', '%' . $search . '%')
+                  
+                    ->orWhere('case', 'like', '%' . $search . '%')
+                    ->orWhere('requirements_building', 'like', '%' . $search . '%')
+                    ->orWhere('mode_of_payment', 'like', '%' . $search . '%')
+                    ->orWhere('date_paid', 'like', '%' . $search . '%')
+                    ->orWhere('amount', 'like', '%' . $search . '%')
+                    ->orWhere('payment_status', 'like', '%' . $search . '%')
+                    ->orWhereHas('purok', function ($q) use ($search) {
+                    $q->where('purok_name', 'like', '%' . $search . '%');
+                    
+                })
+                 ->orWhereHas('requestor', function ($q) use ($search) {
+                    $q->where('first_name', 'like', '%' . $search . '%')
+                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                      ->orWhere('last_name', 'like', '%' . $search . '%');
+                });
+                
+          })
+          ->where('barangay_info_id', Auth::user()->barangay_info_id)
+          ->paginate($perPage);
+      
+          return response()->json([
+              'success' => true,
+              'data' => $buildings
+          ]);
+    }
+
+    public function manage_certificate_indigency(){
+        return view('barangay.manage_certificate_indigency');
+    }
+    public function store_certificate_indigency(Request $request)
+{
+    // ✅ Validation (matches Vue form)
+    $request->validate([
+            'name_requestor' => 'required',
+            'purok' => 'required',
+            'date_issued' => 'required',
+            'purpose' => 'required',
+            'payment_mode' => 'required',
+            'date_paid' => 'required',
+            'amount' => 'required',
+            'payment_status' => 'required',
+           
+            
+    ]);
+
+    try {
+
+        $barangay = Auth::user()->barangay;
+        $prefix = 'APL';
+        $barangayCode = strtoupper(substr($barangay->barangay->barangay_name, 0, 3));
+        $dateCode = now()->format('Ymd'); // e.g., 20260217
+
+        // Get last permit for this Barangay and today
+        $lastPermit = CertificateIndigency::where('barangay_info_id', $barangay->id)
+                        ->whereDate('created_at', now()->toDateString())
+                        ->orderBy('id', 'desc')
+                        ->first();
+
+        $runningNumber = $lastPermit 
+            ? str_pad((int)substr($lastPermit->application_no, -4) + 1, 4, '0', STR_PAD_LEFT)
+            : '0001';
+
+        $buildingPermitNo = $prefix . $barangayCode . $dateCode . $runningNumber;
+
+        
+        CertificateIndigency::create([
+            'application_no' => $buildingPermitNo,
+            'barangay_info_id' => Auth::user()->barangay_info_id,
+            'name_requestor' => $request->name_requestor,
+            'purok_id' => $request->purok,
+            'date_issued' => $request->date_issued,
+            'purpose' => $request->purpose,
+            'payment_mode' => $request->payment_mode,
+            'payment_status' => $request->payment_status,
+            'amount' => $request->amount,
+            'date_paid' => $request->date_paid,
+            'status' => 'Approved Certificate',
+        ]);
+
+       
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Ceritifate of Indigency Permit successfully created.'
+        ]);
+
+    } catch (\Exception $e) {
+
+  
+        return response()->json([
+            'success' => false,
+            'message' => 'Something went wrong.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+public function update_certificate_indigency(Request $request, $id)
+{
+    // ✅ Validation (matches Vue form)
+    $request->validate([
+           'name_requestor' => 'required',
+            'purok' => 'required',
+            'date_issued' => 'required',
+            'purpose' => 'required',
+            'payment_mode' => 'required',
+            'amount' => 'required',
+            'payment_status' => 'required',
+    ]);
+
+   
+
+    try {
+        // ✅ Find the record to update
+        $indigency = CertificateIndigency::findOrFail($id);
+
+        // ✅ Update fields
+        $indigency->update([
+            'name_requestor' => $request->name_requestor,
+            'purok_id' => $request->purok,
+            'date_issued' => $request->date_issued,
+            'purpose' => $request->purpose,
+            'payment_mode' => $request->payment_mode,
+            'payment_status' => $request->payment_status,
+            'amount' => $request->amount,
+            'date_paid' => $request->date_paid,
+        ]);
+
+      
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Certificate Indigency successfully updated.'
+        ]);
+
+    } catch (\Exception $e) {
+     
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Something went wrong.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+public function getDataIndigency(Request $request){
+         // Get the search query and per_page from the request
+           // Get the search query and per_page from the request
+          $search = $request->query('search');
+          $perPage = $request->query('per_page', 10); // Default to 10 if per_page is not provided
+      
+          // Query certifications with optional search
+          $indigency = CertificateIndigency::with('purok')->with('requestor')->when($search, function ($query, $search) {
+                  return $query->where('application_no', 'like', '%' . $search . '%')
+                   ->orWhere('date_issued', 'like', '%' . $search . '%')
+                    ->orWhere('purpose', 'like', '%' . $search . '%')
+                    ->orWhere('payment_mode', 'like', '%' . $search . '%')
+                    ->orWhere('date_paid', 'like', '%' . $search . '%')
+                    ->orWhere('amount', 'like', '%' . $search . '%')
+                    ->orWhere('payment_status', 'like', '%' . $search . '%')
+                    ->orWhereHas('purok', function ($q) use ($search) {
+                    $q->where('purok_name', 'like', '%' . $search . '%');
+                    
+                })
+                 ->orWhereHas('requestor', function ($q) use ($search) {
+                    $q->where('first_name', 'like', '%' . $search . '%')
+                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                      ->orWhere('last_name', 'like', '%' . $search . '%');
+                });
+                
+          })
+          ->where('barangay_info_id', Auth::user()->barangay_info_id)
+          ->paginate($perPage);
+      
+          return response()->json([
+              'success' => true,
+              'data' => $indigency
+          ]);
+    }
+
 
 
 }

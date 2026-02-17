@@ -13,7 +13,7 @@
                 <div>
                   <h5 class="card-title mb-0 text-white">
                     <i class="ri-building-3-line me-2"></i>
-                    Barangay Official Lists
+                    Barangay Official List
                   </h5>
                   <p class="text-white-50 mb-0 small">
                     <i class="ri-list-check me-1"></i>
@@ -198,7 +198,7 @@
                   <td>
                     <div class="d-flex align-items-center">
                       <div>
-                        {{ official.commitee.commitee }}
+                          {{ official.commitee ? official.commitee.commitee : '' }}
                       </div>
                     </div>
                   </td>
@@ -353,7 +353,7 @@
                           :disabled="modalMode === 'view'"
                         >
                           <option value="" disabled selected>
-                            Select an Barangay Position
+                            Select an Barangay Commitee
                           </option>
                           <option
                             v-for="commitee in commitees"
@@ -645,7 +645,7 @@ export default {
       modalMode: "add",
       modalTitle: "Add Barangay Official",
       searchQuery: "",
-      perPage: 10,
+      perPage: 20,
       loading: false,
     };
   },
@@ -920,7 +920,7 @@ export default {
           last_name: official.last_name,
           extension: official.extension,
           position: official.position.id,
-          commitee: official.commitee.id,
+          commitee: official.commitee ? official.commitee.id : null,
           contact_number: official.contact_number,
           term_status: official.term_status,
           term_start: official.term_start,
@@ -950,7 +950,7 @@ export default {
         last_name: official.last_name,
         extension: official.extension,
         position: official.position.id,
-        commitee: official.commitee.id,
+       commitee: official.commitee ? official.commitee.id : null,
         contact_number: official.contact_number,
         term_status: official.term_status,
         address: official.address,
