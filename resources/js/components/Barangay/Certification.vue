@@ -57,7 +57,7 @@
                         </div>
 
                         <!-- Death Certificate -->
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <div class="card border shadow-sm h-100 hover-card">
                                 <div class="card-body text-center">
                                     <i class="ri-file-list-3-line fs-2 text-danger"></i>
@@ -66,7 +66,7 @@
                                     <a href="/bims/manage/death/certificate" class="btn btn-danger btn-sm rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Residency Certificate -->
                         <div class="col-md-4">
@@ -75,7 +75,7 @@
                                     <i class="ri-home-4-line fs-2 text-info"></i>
                                     <h6 class="mt-3 fw-semibold">Residency Certificate</h6>
                                     <p class="text-muted small">Issue and manage residency certificates</p>
-                                    <button class="btn btn-info btn-sm text-white rounded-pill px-3">Manage</button>
+                                    <a href= "/bims/manage/residency/certificate" class="btn btn-info btn-sm text-white rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
                         </div>

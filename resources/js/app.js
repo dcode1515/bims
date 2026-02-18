@@ -38,6 +38,7 @@ Vue.component('Buildingpermit', require('./components/Barangay/Buildingpermit.vu
 Vue.component('Indigency', require('./components/Barangay/Indigency.vue').default);
 Vue.component('Profile', require('./components/Auth/Profile.vue').default);
 Vue.component('Deathcertificate', require('./components/Barangay/Deathcertificate.vue').default);
+Vue.component('Residencycertificate', require('./components/Barangay/Residencycertificate.vue').default);
 
 
 /**

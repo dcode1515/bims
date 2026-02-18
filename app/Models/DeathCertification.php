@@ -15,6 +15,7 @@ class DeathCertification extends Model
         'barangay_info_id',
         'purok_id',
         'name_requestor',
+        'name_deceased',
         'date_issued',
         'date_of_death',
         'place_of_death',
@@ -38,5 +39,9 @@ class DeathCertification extends Model
      public function requestor()
     {
         return $this->belongsTo(HouseholdMember::class, 'name_requestor');
+    }
+     public function deceased()
+    {
+        return $this->belongsTo(HouseholdMember::class, 'name_deceased');
     }
 }

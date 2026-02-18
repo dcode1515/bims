@@ -28,4 +28,9 @@ class Purok extends Model
       
 
       ];
+      public function households()
+    {
+        return $this->hasMany(Household::class, 'purok');
+    }
+
 }

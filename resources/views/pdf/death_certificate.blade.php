@@ -188,19 +188,21 @@ This is to certify that the following are the details/information of the decease
     </p>
 
     <p style="font-size:12pt; margin-left:3px; text-align:justify; font-family:'Bookman Old Style', serif;">
-           FIRST NAME 
+           FIRST NAME : {{$death_certificate->deceased->first_name}}
     </p>
      <p style="font-size:12pt; margin-left:3px; text-align:justify; font-family:'Bookman Old Style', serif;">
-           FIRST INITIAL 
+           MIDDLE INITIAL: {{$death_certificate->deceased->middle_initial}}
     </p>
      <p style="font-size:12pt; margin-left:3px; text-align:justify; font-family:'Bookman Old Style', serif;">
-           LAST NAME 
+           LAST NAME : {{$death_certificate->deceased->last_name}}
     </p>
     <p style="font-size:12pt; margin-left:3px; text-align:justify; font-family:'Bookman Old Style', serif;">
-           AGE 
+           AGE: {{ \Carbon\Carbon::parse($death_certificate->deceased->birthdate)->age }} Years Old
+
     </p>
     <p style="font-size:12pt; margin-left:3px; text-align:justify; font-family:'Bookman Old Style', serif;">
-           HOME ADDRESS 
+           HOME ADDRESS: {{$death_certificate->purok->purok_name}}, {{ $death_certificate->purok->households->first()->street ?? 'N/A' }}
+
     </p>
     <p style="font-size:12pt; margin-left:3px; text-align:justify; font-family:'Bookman Old Style', serif;">
            CIVIL STATUS 

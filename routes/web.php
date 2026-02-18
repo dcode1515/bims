@@ -100,8 +100,15 @@ Route::post('/api/update/user/credential/{id}', [App\Http\Controllers\Auth\AuthC
 Route::get('/manage/death/certificate', [App\Http\Controllers\Barangay\BarangayController::class, 'manage_death_certificate']);
 Route::post('/api/store/death/certificate', [App\Http\Controllers\Barangay\BarangayController::class, 'store_death_cert']);
 Route::get('/api/get/data/death/certificate', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataDeathCertificate']);
+Route::put('/api/update/death/cert/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_death_certificate']);
 Route::put('/api/update/death/indigency/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_death_certificate']);
 Route::get('/print/death/certificate/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'print_death_certification']);
+Route::get('/api/get/data/deceased', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataDeceased']);
+Route::get('/manage/residency/certificate', [App\Http\Controllers\Barangay\BarangayController::class, 'manage_residency_certificate']);
+Route::post('/api/store/residency', [App\Http\Controllers\Barangay\BarangayController::class, 'store_residency_certificate']);
+Route::get('/api/get/data/residency/certificate', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataResidency']);
+Route::put('/api/updated/residency/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_residency_certificate']);
+
 
 
 /*End Admin Routes */

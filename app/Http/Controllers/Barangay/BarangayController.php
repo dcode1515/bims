@@ -27,6 +27,7 @@ use App\Models\DeathCertification;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\ResidencyCertificate;
 
 
 
@@ -1842,6 +1843,11 @@ public function update_barangay_clearance(Request $request, $id)
         $inhabitants = HouseholdMember::where('barangay_info_id', Auth::user()->barangay_info_id)->orderBy('first_name')->get();
         return response()->json($inhabitants);
     }
+       public function getDataDeceased()
+    {
+        $deceased = HouseholdMember::where('is_deceased','=',"No")->where('barangay_info_id', Auth::user()->barangay_info_id)->orderBy('first_name')->get();
+        return response()->json($deceased);
+    }
     public function print_barangay_clearance($id)
 {
     $barangay_clearance = BarangayClearance::with(['requestor','purok'])
@@ -2091,7 +2097,7 @@ public function print_certificate_indigency($id)
 }
 public function print_death_certification($id)
 {
-    $death_certificate = DeathCertification::with(['requestor','purok'])
+    $death_certificate = DeathCertification::with(['requestor','purok.households','deceased'])
         ->findOrFail($id);
 
     $barangayId = Auth::user()->barangay_info_id;
@@ -2252,6 +2258,7 @@ public function store_death_cert(Request $request)
     // ✅ Validation (matches Vue form)
     $request->validate([
             'name_requestor' => 'required',
+             'name_deceased' => 'required',
             'purok' => 'required',
             'date_issued' => 'required',
             'date_of_death' => 'required',
@@ -2296,6 +2303,7 @@ public function store_death_cert(Request $request)
             'application_no' => $applicationNo,
             'barangay_info_id' => Auth::user()->barangay_info_id,
             'name_requestor' => $request->name_requestor,
+             'name_deceased' => $request->name_deceased,
             'purok_id' => $request->purok,
             'date_issued' => $request->date_issued,
             'date_of_death' => $request->date_of_death,
@@ -2332,7 +2340,8 @@ public function update_death_certificate(Request $request, $id)
 {
     // ✅ Validation (matches Vue form)
     $request->validate([
-           'name_requestor' => 'required',
+            'name_requestor' => 'required',
+            'name_deceased' => 'required',
             'purok' => 'required',
             'date_issued' => 'required',
             'date_of_death' => 'required',
@@ -2355,6 +2364,7 @@ public function update_death_certificate(Request $request, $id)
         // ✅ Update fields
         $deathCert->update([
             'name_requestor' => $request->name_requestor,
+            'name_deceased' => $request->name_deceased,
             'purok_id' => $request->purok,
             'date_issued' => $request->date_issued,
             'date_of_death' => $request->date_of_death,
@@ -2637,7 +2647,7 @@ public function getDataIndigency(Request $request){
           $perPage = $request->query('per_page', 10); // Default to 10 if per_page is not provided
       
           // Query certifications with optional search
-          $deathCert = DeathCertification::with('purok')->with('requestor')->when($search, function ($query, $search) {
+          $deathCert = DeathCertification::with('purok')->with('requestor')->with('deceased')->when($search, function ($query, $search) {
                   return $query->where('application_no', 'like', '%' . $search . '%')
                    ->orWhere('date_issued', 'like', '%' . $search . '%')
                     ->orWhere('reason', 'like', '%' . $search . '%')
@@ -2657,6 +2667,11 @@ public function getDataIndigency(Request $request){
                     $q->where('first_name', 'like', '%' . $search . '%')
                      ->orWhere('middle_initial', 'like', '%' . $search . '%')
                       ->orWhere('last_name', 'like', '%' . $search . '%');
+                })
+                 ->orWhereHas('deceased', function ($q) use ($search) {
+                    $q->where('first_name', 'like', '%' . $search . '%')
+                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                      ->orWhere('last_name', 'like', '%' . $search . '%');
                 });
                
                 
@@ -2673,6 +2688,167 @@ public function getDataIndigency(Request $request){
     public function manage_death_certificate(){
         return view('barangay.manage_death_certificate');
     }
+    public function manage_residency_certificate(){
+          return view('barangay.manage_residency_certificate');
+    }
+
+     public function store_residency_certificate(Request $request)
+{
+    // ✅ Validation (matches Vue form)
+    $request->validate([
+            'name_requestor' => 'required',
+            'purok' => 'required',
+            'date_issued' => 'required',
+            'purpose' => 'required',
+            'payment_mode' => 'required',
+            'date_paid' => 'required',
+            'amount' => 'required',
+            'payment_status' => 'required',
+           
+            
+    ]);
+
+    try {
+
+        $barangay = Auth::user()->barangay;
+        $prefix = 'RC';
+        $barangayCode = strtoupper(substr($barangay->barangay->barangay_name, 0, 3));
+        $dateCode = now()->format('Ymd'); // e.g., 20260217
+
+        // Get last permit for this Barangay and today
+        $lastPermit = ResidencyCertificate::where('barangay_info_id', $barangay->id)
+                        ->whereDate('created_at', now()->toDateString())
+                        ->orderBy('id', 'desc')
+                        ->first();
+
+        $runningNumber = $lastPermit 
+            ? str_pad((int)substr($lastPermit->application_no, -4) + 1, 4, '0', STR_PAD_LEFT)
+            : '0001';
+
+        $buildingPermitNo = $prefix . $barangayCode . $dateCode . $runningNumber;
+
+        
+        ResidencyCertificate::create([
+            'application_no' => $buildingPermitNo,
+            'barangay_info_id' => Auth::user()->barangay_info_id,
+            'name_requestor' => $request->name_requestor,
+            'purok_id' => $request->purok,
+            
+            'date_issued' => $request->date_issued,
+            'resident_type' => $request->resident_type,
+            'purpose' => $request->purpose,
+            'payment_mode' => $request->payment_mode,
+            'payment_status' => $request->payment_status,
+            'amount' => $request->amount,
+            'date_paid' => $request->date_paid,
+            'status' => 'Approved Certificate',
+        ]);
+
+       
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Residency Certificate  successfully created.'
+        ]);
+
+    } catch (\Exception $e) {
+
+  
+        return response()->json([
+            'success' => false,
+            'message' => 'Something went wrong.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+public function getDataResidency(Request $request){
+     // Get the search query and per_page from the request
+           // Get the search query and per_page from the request
+          $search = $request->query('search');
+          $perPage = $request->query('per_page', 10); // Default to 10 if per_page is not provided
+      
+          // Query certifications with optional search
+          $residency = ResidencyCertificate::with('purok')->with('requestor')->when($search, function ($query, $search) {
+                  return $query->where('application_no', 'like', '%' . $search . '%')
+                   ->orWhere('date_issued', 'like', '%' . $search . '%')
+                    ->orWhere('resident_type', 'like', '%' . $search . '%')
+                    ->orWhere('payment_mode', 'like', '%' . $search . '%')
+                    ->orWhere('date_paid', 'like', '%' . $search . '%')
+                    ->orWhere('amount', 'like', '%' . $search . '%')
+                    ->orWhere('payment_status', 'like', '%' . $search . '%')
+                    ->orWhereHas('purok', function ($q) use ($search) {
+                    $q->where('purok_name', 'like', '%' . $search . '%');
+                    
+                })
+                 ->orWhereHas('requestor', function ($q) use ($search) {
+                    $q->where('first_name', 'like', '%' . $search . '%')
+                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                      ->orWhere('last_name', 'like', '%' . $search . '%');
+                });
+                
+               
+                
+          })
+          ->where('barangay_info_id', Auth::user()->barangay_info_id)
+          ->paginate($perPage);
+      
+          return response()->json([
+              'success' => true,
+              'data' => $residency
+          ]);
+}
+
+public function update_residency_certificate(Request $request, $id)
+{
+    // ✅ Validation (matches Vue form)
+    $request->validate([
+           'name_requestor' => 'required',
+            'purok' => 'required',
+            'date_issued' => 'required',
+            'purpose' => 'required',
+            'payment_mode' => 'required',
+            'date_paid' => 'required',
+            'amount' => 'required',
+            'payment_status' => 'required',
+    ]);
+
+   
+
+    try {
+        // ✅ Find the record to update
+        $indigency = ResidencyCertificate::findOrFail($id);
+
+        // ✅ Update fields
+        $indigency->update([
+           'name_requestor' => $request->name_requestor,
+            'purok_id' => $request->purok,
+            'date_issued' => $request->date_issued,
+            'resident_type' => $request->resident_type,
+            'purpose' => $request->purpose,
+            'payment_mode' => $request->payment_mode,
+            'payment_status' => $request->payment_status,
+            'amount' => $request->amount,
+            'date_paid' => $request->date_paid,
+        ]);
+
+      
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Resident Certificate  successfully updated.'
+        ]);
+
+    } catch (\Exception $e) {
+     
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Something went wrong.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
 
 
 

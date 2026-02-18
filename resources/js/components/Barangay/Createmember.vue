@@ -565,7 +565,7 @@
                           v-model="formData.headOfFamily.isDeceased"
                           type="radio"
                           class="btn-check"
-                          value="Alive "
+                          value="Yes "
                           id="alive"
                         />
                         <label class="btn btn-outline-success" for="alive">
@@ -575,7 +575,7 @@
                           v-model="formData.headOfFamily.isDeceased"
                           type="radio"
                           class="btn-check"
-                          value="Deceased"
+                          value="No"
                           id="deceased"
                         />
                         <label class="btn btn-outline-dark" for="deceased">

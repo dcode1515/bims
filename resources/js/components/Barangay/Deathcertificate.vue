@@ -88,9 +88,10 @@
                   </th>
                   <th><i class="ri-file-list-line me-1"></i> Application #</th>
                   <th><i class="ri-user-3-line me-1"></i> Name of Requester</th>
+                     <th><i class="ri-user-3-line me-1"></i>Name of Deceased</th>
                   <th><i class="ri-user-3-line me-1"></i> Date of Death</th>
                   <th><i class="ri-user-3-line me-1"></i> Place of Death</th>
-                  <th><i class="ri-user-3-line me-1"></i> Reason</th>
+                
                   <th><i class="ri-home-5-line me-1"></i> Purok</th>
                   <th>
                     <i class="ri-calendar-event-line me-1"></i> Date Issued
@@ -121,9 +122,14 @@
                     {{ deathcert.requestor.middle_initial }}.
                     {{ deathcert.requestor.last_name }}
                   </td>
+                   <td>
+                    {{ deathcert.deceased.first_name }}
+                    {{ deathcert.deceased.middle_initial }}.
+                    {{ deathcert.deceased.last_name }}
+                  </td>
                   <td>{{ formatDate(deathcert.date_of_death) }}</td>
                   <td>{{ deathcert.place_of_death }}</td>
-                  <td>{{ deathcert.reason }}</td>
+                
 
                   <td>{{ deathcert.purok.purok_name }}</td>
                   <td>{{ formatDate(deathcert.date_issued) }}</td>
@@ -339,6 +345,38 @@
                           </small>
                         </div>
 
+                        <div class="col-md-12">
+                          <label class="form-label fw-medium">
+                            <i class="ri-user-line me-1 text-muted"></i>Name
+                            Deceased
+                            <span class="text-danger">*</span>
+                          </label>
+                          <div class="input-group">
+                            <span
+                              class="input-group-text bg-light border-end-0"
+                            >
+                              <i class="ri-user-3-line text-primary"></i>
+                            </span>
+
+                            <!-- vue-select component -->
+                            <v-select
+                              class="form-select"
+                              v-model="formData.name_deceased"
+                              :options="formattedDeceased"
+                              label="full_name"
+                              :reduce="(deceased) => deceased.id"
+                              :filterable="true"
+                              placeholder="Select an Inhabitant"
+                              no-options-text="Not a Member of this Barangay"
+                            />
+                          </div>
+
+                          <small class="text-muted">
+                            <i class="ri-information-line"></i> Please search
+                            the inhabitant. Only barangay residents are allowed.
+                          </small>
+                        </div>
+
                         <div class="col-md-6">
                           <label class="form-label fw-medium">
                             <i class="ri-home-4-line me-1 text-muted"></i>Purok
@@ -355,7 +393,7 @@
                               class="form-select"
                             >
                               <option value="" disabled selected>
-                                Select an Barangay
+                                Select an Purok
                               </option>
                               <option
                                 v-for="purok in puroks"
@@ -704,6 +742,15 @@ export default {
         console.error("Problem fetching inhabitants:", error);
       }
     },
+    async getDataDeceased() {
+      try {
+        const response = await fetch("/bims/api/get/data/deceased");
+        if (!response.ok) throw new Error("Network response was not ok");
+        this.deceases = await response.json();
+      } catch (error) {
+        console.error("Problem fetching inhabitants:", error);
+      }
+    },
     async submitForm() {
       this.loading = true;
       try {
@@ -762,6 +809,7 @@ export default {
         this.modalTitle = "Add Death Certificate";
         this.formData = {
           name_requestor: "",
+          name_deceased: "",
           purok: "",
           purpose: "",
           payment_mode: "",
@@ -812,12 +860,14 @@ export default {
   data() {
     return {
       inhabitants: [],
+      deceases: [],
       puroks: [],
       loading: false,
       modalMode: "add",
       modalTitle: "Add Death Certification",
       formData: {
-        id:"",
+        id: "",
+        name_deceased: null,
         name_requestor: null,
         purok: "",
         date_of_death: "",
@@ -853,6 +903,14 @@ export default {
           }))
         : []; // must return empty array, not undefined
     },
+    formattedDeceased() {
+      return this.deceases.length
+        ? this.deceases.map((i) => ({
+            ...i,
+            full_name: `${i.first_name} ${i.middle_initial}. ${i.last_name}`,
+          }))
+        : []; // must return empty array, not undefined
+    },
     // pages computation stays the same
 
     pages() {
@@ -881,6 +939,8 @@ export default {
     this.getDataDeathCert();
     this.getDataPurok();
     this.getDataInhabitansClearance();
+    this.getDataDeceased();
+
     console.log("Component Mounted!");
   },
 };
