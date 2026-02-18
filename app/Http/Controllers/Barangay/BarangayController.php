@@ -23,6 +23,7 @@ use App\Models\Blotter;
 use App\Models\BuildingPermit;
 use App\Models\BarangayClearance;
 use App\Models\CertificateIndigency;
+use App\Models\DeathCertification;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -2164,6 +2165,146 @@ public function print_certificate_indigency($id)
         ], 500);
     }
 }
+public function store_death_cert(Request $request)
+{
+    // ✅ Validation (matches Vue form)
+    $request->validate([
+            'name_requestor' => 'required',
+            'purok' => 'required',
+            'date_issued' => 'required',
+            'date_of_death' => 'required',
+            'place_of_death' => 'required',
+            'fathers_name' => 'required',
+            'mothers_name' => 'required',
+            'reason' => 'required',
+            'date_paid' => 'required',
+            'payment_mode' => 'required',
+            'amount' => 'required',
+            'payment_status' => 'required',
+           
+            
+    ]);
+
+  
+
+    try {
+
+       $barangay = Auth::user()->barangay;
+
+        // Prefix: DC + first 3 letters of barangay + YYYYMMDD
+        $prefix = 'DC';
+        $barangayCode = strtoupper(substr($barangay->barangay_name, 0, 3));
+        $dateCode = now()->format('Ymd'); // e.g., 20260218
+
+        // Get last application number for this barangay and today
+        $lastPermit = DeathCertification::where('barangay_info_id', $barangay->id)
+            ->whereDate('created_at', now()->toDateString())
+            ->orderBy('id', 'desc')
+            ->lockForUpdate() // prevents race conditions
+            ->first();
+
+        // Generate running number
+        $runningNumber = $lastPermit
+            ? str_pad((int)substr($lastPermit->application_no, -4) + 1, 4, '0', STR_PAD_LEFT)
+            : '0001';
+
+        $applicationNo = $prefix . $barangayCode . $dateCode . $runningNumber;
+                
+        DeathCertification::create([
+            'application_no' => $applicationNo,
+            'barangay_info_id' => Auth::user()->barangay_info_id,
+            'name_requestor' => $request->name_requestor,
+            'purok_id' => $request->purok,
+            'date_issued' => $request->date_issued,
+            'date_of_death' => $request->date_of_death,
+            'place_of_death' => $request->place_of_death,
+            'fathers_name' => $request->fathers_name,
+            'mothers_name' => $request->mothers_name,
+            'reason' => $request->reason,
+           
+            'payment_mode' => $request->payment_mode,
+            'payment_status' => $request->payment_status,
+            'amount' => $request->amount,
+            'date_paid' => $request->date_paid,
+            'status' => 'Approved Certificate',
+        ]);
+
+       
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Death Certificate successfully created.'
+        ]);
+
+    } catch (\Exception $e) {
+
+  
+        return response()->json([
+            'success' => false,
+            'message' => 'Something went wrong.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+public function update_death_certificate(Request $request, $id)
+{
+    // ✅ Validation (matches Vue form)
+    $request->validate([
+           'name_requestor' => 'required',
+            'purok' => 'required',
+            'date_issued' => 'required',
+            'date_of_death' => 'required',
+            'place_of_death' => 'required',
+            'fathers_name' => 'required',
+            'mothers_name' => 'required',
+            'reason' => 'required',
+            'date_paid' => 'required',
+            'payment_mode' => 'required',
+            'amount' => 'required',
+            'payment_status' => 'required',
+    ]);
+
+   
+
+    try {
+        // ✅ Find the record to update
+        $deathCert = DeathCertification::findOrFail($id);
+
+        // ✅ Update fields
+        $deathCert->update([
+            'name_requestor' => $request->name_requestor,
+            'purok_id' => $request->purok,
+            'date_issued' => $request->date_issued,
+            'date_of_death' => $request->date_of_death,
+            'place_of_death' => $request->place_of_death,
+            'fathers_name' => $request->fathers_name,
+            'mothers_name' => $request->mothers_name,
+            'reason' => $request->reason,
+          
+            'payment_mode' => $request->payment_mode,
+            'payment_status' => $request->payment_status,
+            'amount' => $request->amount,
+            'date_paid' => $request->date_paid,
+        ]);
+
+      
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Building Permit successfully updated.'
+        ]);
+
+    } catch (\Exception $e) {
+     
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Something went wrong.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
 public function update_buildingy_permit(Request $request, $id)
 {
     // ✅ Validation (matches Vue form)
@@ -2405,6 +2546,50 @@ public function getDataIndigency(Request $request){
               'success' => true,
               'data' => $indigency
           ]);
+    }
+
+    public function getDataDeathCertificate(Request $request){
+         // Get the search query and per_page from the request
+           // Get the search query and per_page from the request
+          $search = $request->query('search');
+          $perPage = $request->query('per_page', 10); // Default to 10 if per_page is not provided
+      
+          // Query certifications with optional search
+          $deathCert = DeathCertification::with('purok')->with('requestor')->when($search, function ($query, $search) {
+                  return $query->where('application_no', 'like', '%' . $search . '%')
+                   ->orWhere('date_issued', 'like', '%' . $search . '%')
+                    ->orWhere('reason', 'like', '%' . $search . '%')
+                    ->orWhere('date_of_death', 'like', '%' . $search . '%')
+                    ->orWhere('place_of_death', 'like', '%' . $search . '%')
+                    ->orWhere('mothers_name', 'like', '%' . $search . '%')
+                     ->orWhere('fathers_name', 'like', '%' . $search . '%')
+                    ->orWhere('payment_mode', 'like', '%' . $search . '%')
+                    ->orWhere('date_paid', 'like', '%' . $search . '%')
+                    ->orWhere('amount', 'like', '%' . $search . '%')
+                    ->orWhere('payment_status', 'like', '%' . $search . '%')
+                    ->orWhereHas('purok', function ($q) use ($search) {
+                    $q->where('purok_name', 'like', '%' . $search . '%');
+                    
+                })
+                 ->orWhereHas('requestor', function ($q) use ($search) {
+                    $q->where('first_name', 'like', '%' . $search . '%')
+                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                      ->orWhere('last_name', 'like', '%' . $search . '%');
+                });
+               
+                
+          })
+          ->where('barangay_info_id', Auth::user()->barangay_info_id)
+          ->paginate($perPage);
+      
+          return response()->json([
+              'success' => true,
+              'data' => $deathCert
+          ]);
+    }
+
+    public function manage_death_certificate(){
+        return view('barangay.manage_death_certificate');
     }
 
 

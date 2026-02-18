@@ -63,7 +63,7 @@
                                     <i class="ri-file-list-3-line fs-2 text-danger"></i>
                                     <h6 class="mt-3 fw-semibold">Death Certificate</h6>
                                     <p class="text-muted small">Manage and verify death certificate records</p>
-                                    <button class="btn btn-danger btn-sm rounded-pill px-3">Manage</button>
+                                    <a href="/bims/manage/death/certificate" class="btn btn-danger btn-sm rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
                         </div>
