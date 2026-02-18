@@ -101,7 +101,7 @@ Route::get('/manage/death/certificate', [App\Http\Controllers\Barangay\BarangayC
 Route::post('/api/store/death/certificate', [App\Http\Controllers\Barangay\BarangayController::class, 'store_death_cert']);
 Route::get('/api/get/data/death/certificate', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataDeathCertificate']);
 Route::put('/api/update/death/indigency/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_death_certificate']);
-
+Route::get('/print/death/certificate/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'print_death_certification']);
 
 
 /*End Admin Routes */

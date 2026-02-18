@@ -148,7 +148,7 @@
                         <i class="ri-eye-line"></i>
                       </button>
                       <a
-                        :href="`/bims/print/certificate/indigency/${deathcert.id}`"
+                        :href="`/bims/print/death/certificate/${deathcert.id}`"
                         class="btn btn-sm btn-outline-success"
                         title="Print"
                         target="_blank"
