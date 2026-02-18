@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Building Permit</title>
+<title>Residency Certificate</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -184,24 +184,40 @@
     <p style="font-size:12pt;">TO WHOM IT MAY CONCERN:</p>
 
    <p style="font-size:12pt; margin-left:12px; text-align:justify; font-family:'Bookman Old Style', serif;">
+This is to certify that Mr, Ms & Mrs {{ $residency_certificate->requestor->first_name }}
+{{ $residency_certificate->requestor->middle_initial }}.
+{{ $residency_certificate->requestor->last_name }},
+{{ \Carbon\Carbon::parse($residency_certificate->requestor->birthdate)->age }} years old, single/married/widow/widower, Filipino citizen, whose specimen signature appears below, is a <b>{{ strtoupper($residency_certificate->resident_type) }}</b>
+ of this Barangay.
 
-                This is to certify that {{ $indigency_permit->requestor->first_name }}
-{{ $indigency_permit->requestor->middle_initial }}.
-{{ $indigency_permit->requestor->last_name }}, legal age, Filipino citizen, with residence at {{ $indigency_permit->purok->purok_name }}, {{ Auth::user()->barangay->barangay_name }}, {{ Auth::user()->barangay->municipality->municipality_name }}, whose specimen signature appears below, is an INDIGENT and that she/he has visibly no money, property or means of livelihood sufficient and available for daily food, shelter and basic necessities for himself and his family.
     </p>
 
     <p style="font-size:12pt; margin-left:12px; text-align:justify; font-family:'Bookman Old Style', serif;">
-             This certification is being issued upon the request of {{ $indigency_permit->requestor->first_name }} {{ $indigency_permit->requestor->middle_initial }}.
-{{ $indigency_permit->requestor->last_name }} for {{ $indigency_permit->purpose }}.
+           Based on the records of this office, he/she has been residing at Purok {{ $residency_certificate->purok->purok_name }}, Ubaldo D. Laya, Iligan City since July 2, 2025.
     </p>
 
+      <p style="font-size:12pt; margin-left:12px; text-align:justify; font-family:'Bookman Old Style', serif;">
+         This certification is being issued upon the of {{ $residency_certificate->requestor->first_name }}
+{{ $residency_certificate->requestor->middle_initial }}.
+{{ $residency_certificate->requestor->last_name }} for  {{ $residency_certificate->purpose }} purposes.
+    </p>
 
 @php
-    $issuedDate = \Carbon\Carbon::parse($indigency_permit->date_issued);
+    $issuedDate = \Carbon\Carbon::parse($residency_certificate->date_issued);
 @endphp
+
     <p style="font-size:12pt; margin-left:12px; text-align:justify; font-family:'Bookman Old Style', serif;">
-      This certificate is issued on {{ $issuedDate->format('jS') }} Day of {{ strtoupper($issuedDate->format('F')) }} {{ $issuedDate->format('Y') }}.
+     Issued this {{ $issuedDate->format('jS') }} day of {{ strtoupper($issuedDate->format('F')) }} , {{ $issuedDate->format('Y') }} at
+{{ Auth::user()->barangay->barangay_name }}, {{ Auth::user()->barangay->municipality->municipality_name }}.
+
     </p>
+
+     <div class="signature" style="font-size:12pt;">
+        <p>__________________________</p>
+        <p>Signature above Printed Name</p>
+        <br><br>
+       
+    </div>
 
     <!-- Signature -->
     <div style="margin-left:140px; margin-top:100px; font-size:14pt;">

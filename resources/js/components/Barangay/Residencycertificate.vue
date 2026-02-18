@@ -146,7 +146,7 @@
                         <i class="ri-eye-line"></i>
                       </button>
                       <a
-                        :href="`/bims/print/certificate/indigency/${resident.id}`"
+                        :href="`/bims/print/residency/certificate/${resident.id}`"
                         class="btn btn-sm btn-outline-success"
                         title="Print"
                         target="_blank"
@@ -157,7 +157,7 @@
                   </td>
                 </tr>
                 <tr v-if="residents.data.length === 0">
-                  <td colspan="6" class="text-center py-5">
+                  <td colspan="9" class="text-center py-5">
                     <div class="text-muted">
                       <i class="ri-search-line display-5"></i>
                       <p class="mt-3 mb-0">No records found</p>

@@ -2851,5 +2851,88 @@ public function update_residency_certificate(Request $request, $id)
 }
 
 
+public function print_residency_certificate($id){
+  $residency_certificate = ResidencyCertificate::with(['requestor','purok'])
+        ->findOrFail($id);
+
+    $barangayId = Auth::user()->barangay_info_id;
+
+    // Barangay Chairman
+    $chairman = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Chairman');
+        })
+       
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // All Barangay Councilors
+  $councilors = BarangayOfficial::with('position','commitee')
+    ->where('barangay_info_id', $barangayId)
+    ->whereHas('position', function($q) {
+        $q->where('position', 'Barangay Councilor');
+    })
+    ->whereHas('commitee', function($q) {
+        $q->where('status', 'Active');
+    })
+    ->where('term_status', 'Incumbent')
+    ->get();
+
+
+    // Secretary
+    $secretary = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Secretary');
+        })
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // Treasurer
+    $treasurer = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Treasurer');
+        })
+      
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    // SK Chairman
+         $sk_chairman = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'SK Chairman');
+        })
+        ->whereHas('commitee', function($q) {
+        $q->where('status', 'Active');
+    })
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+         $barangay_administrator = BarangayOfficial::with('position','commitee')
+        ->where('barangay_info_id', $barangayId)
+        ->whereHas('position', function($q) {
+            $q->where('position', 'Barangay Administrator');
+        })
+       
+        ->where('term_status', 'Incumbent')
+        ->first();
+
+    $pdf = Pdf::loadView('pdf.residency_certificate', compact(
+        'residency_certificate',
+        'chairman',
+        'councilors',
+        'secretary',
+        'treasurer',
+        'sk_chairman',
+        'barangay_administrator'
+    ))->setPaper('a4', 'portrait');
+
+    return $pdf->stream('residency_certificate.pdf');
+}
+
+
 
 }
