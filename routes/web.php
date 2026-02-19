@@ -23,7 +23,8 @@ Route::post('/api/login', [App\Http\Controllers\Auth\AuthController::class, 'pos
 Route::post('/logout', [App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
 Route::get('/profile/{id}', [App\Http\Controllers\Auth\AuthController::class, 'showProfile'])->name('profile.show');
 /* End Login Routes */
-
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'sysadmin'], function () {
 /* Super Admin Routes */
 Route::get('/admin/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'admin'])->name('admin.dashboard');
 Route::get('/barangay/info', [App\Http\Controllers\Admin\AdminController::class, 'barangay_info'])->name('brgy.info');
@@ -40,8 +41,9 @@ Route::post('/api/store/barangay/user', [App\Http\Controllers\Admin\AdminControl
 Route::get('/api/get/data/active/user', [App\Http\Controllers\Admin\AdminController::class, 'getDataUserActive']);
 Route::post('/api/update/barangay/user/{id}', [App\Http\Controllers\Admin\AdminController::class, 'update_barangay_user']);
 /* End Super Admin Routes */
+});
 
-
+  Route::group(['middleware' => 'admin'], function () {
 /*Admin Routes */
 Route::get('/barangay/dashboard', [App\Http\Controllers\Barangay\BarangayController::class, 'dashboard_barangay'])->name('dashboard.admin');
 Route::get('/purok', [App\Http\Controllers\Barangay\BarangayController::class, 'purok'])->name('purok');
@@ -112,7 +114,7 @@ Route::get('/print/residency/certificate/{id}', [App\Http\Controllers\Barangay\B
 Route::get('/inhabitants', [App\Http\Controllers\Barangay\BarangayController::class, 'inhabitants'])->name('inhabitants');
 Route::get('/api/get/data/inhabitants', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataInhabitants']);
 Route::get('/barangay/history', [App\Http\Controllers\Barangay\BarangayController::class, 'barangay_history'])->name('barangay.history');
-
-
+});
+});
 
 /*End Admin Routes */

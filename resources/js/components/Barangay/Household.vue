@@ -96,7 +96,7 @@
             </div>
             <div class="col-md-4 text-end">
               <a
-                href="/bims/create/member"
+                href="/create/member"
                 type="button"
                 class="btn btn-light btn-sm"
               >
@@ -251,14 +251,14 @@
 
                   <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a :href="`/bims/household/view/${household.id}`"
+                        <a :href="`/household/view/${household.id}`"
                         class="btn btn-sm btn-outline-info d-flex align-items-center gap-1"
                         title="View Profile"
                       >
                         <i class="ri-eye-line"></i>
                         View Profile
                       </a>
-                      <a :href="`/bims/household/edit/${household.id}`"
+                      <a :href="`/household/edit/${household.id}`"
                         class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"
                         title="Edit Profile"
                       >
@@ -397,7 +397,7 @@ export default {
   methods: {
     async getDataHousehold() {
       try {
-        const response = await axios.get("/bims/api/get/data/household", {
+        const response = await axios.get("/api/get/data/household", {
           params: {
             page: this.households.current_page,
             per_page: this.perPage,

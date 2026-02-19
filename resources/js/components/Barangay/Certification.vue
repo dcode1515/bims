@@ -27,7 +27,7 @@
                                     <i class="ri-file-shield-line fs-2 text-primary"></i>
                                     <h6 class="mt-3 fw-semibold">Barangay Clearance</h6>
                                     <p class="text-muted small">Issue and manage Barangay Clearance records</p>
-                                    <a href = "/bims/manage/barangay/clearance" class="btn btn-primary btn-sm rounded-pill px-3">Manage</a>
+                                    <a href = "/manage/barangay/clearance" class="btn btn-primary btn-sm rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                                     <i class="ri-building-2-line fs-2 text-success"></i>
                                     <h6 class="mt-3 fw-semibold">Building Permit Clearance</h6>
                                     <p class="text-muted small">Handle building permit clearance applications</p>
-                                    <a href = "/bims/manage/building/permit" class="btn btn-success btn-sm rounded-pill px-3">Manage</a>
+                                    <a href = "/manage/building/permit" class="btn btn-success btn-sm rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                     <i class="ri-hand-heart-line fs-2 text-warning"></i>
                                     <h6 class="mt-3 fw-semibold">Certificate of Indigency</h6>
                                     <p class="text-muted small">Issue certificates for qualified indigent residents</p>
-                                    <a href = "/bims/manage/certificate/indigency" class="btn btn-warning btn-sm text-white rounded-pill px-3">Manage</a>
+                                    <a href = "/manage/certificate/indigency" class="btn btn-warning btn-sm text-white rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                                     <i class="ri-file-list-3-line fs-2 text-danger"></i>
                                     <h6 class="mt-3 fw-semibold">Death Certificate</h6>
                                     <p class="text-muted small">Manage and verify death certificate records</p>
-                                    <a href="/bims/manage/death/certificate" class="btn btn-danger btn-sm rounded-pill px-3">Manage</a>
+                                    <a href="/manage/death/certificate" class="btn btn-danger btn-sm rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
                         </div> -->
@@ -75,7 +75,7 @@
                                     <i class="ri-home-4-line fs-2 text-info"></i>
                                     <h6 class="mt-3 fw-semibold">Residency Certificate</h6>
                                     <p class="text-muted small">Issue and manage residency certificates</p>
-                                    <a href= "/bims/manage/residency/certificate" class="btn btn-info btn-sm text-white rounded-pill px-3">Manage</a>
+                                    <a href= "/manage/residency/certificate" class="btn btn-info btn-sm text-white rounded-pill px-3">Manage</a>
                                 </div>
                             </div>
                         </div>

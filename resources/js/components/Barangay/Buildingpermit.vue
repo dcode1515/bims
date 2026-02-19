@@ -54,7 +54,7 @@
                             <button class="btn btn-primary btn-xl" @click="openModal('add')">
                                 <i class="ri-add-line me-1"></i>
                             </button>
-                            <a href="/bims/certification" class="btn btn-danger btn-xl">
+                            <a href="/certification" class="btn btn-danger btn-xl">
                                 <i class="ri-arrow-left-line me-1"></i>
                             </a>
                         </div>
@@ -114,7 +114,7 @@
                                                 @click="viewDetails(building)">
                                                 <i class="ri-eye-line"></i>
                                             </button>
-                                            <a :href="`/bims/print/building/permit/${building.id}`"
+                                            <a :href="`/print/building/permit/${building.id}`"
                                                 class="btn btn-sm btn-outline-success" title="Print" target="_blank">
                                                 <i class="ri-printer-line"></i>
                                             </a>
@@ -465,7 +465,7 @@ export default {
         async getDataBuildingPermit() {
             try {
                 const response = await axios.get(
-                    "/bims/api/get/data/building/permit",
+                    "/api/get/data/building/permit",
                     {
                         params: {
                             page: this.buildings.current_page,
@@ -503,7 +503,7 @@ export default {
 
         async getDataPurok() {
             try {
-                const response = await fetch("/bims/api/get/data/purok-per-household"); // Replace with your actual endpoint
+                const response = await fetch("/api/get/data/purok-per-household"); // Replace with your actual endpoint
                 if (!response.ok) throw new Error("Network response was not ok");
                 this.puroks = await response.json(); // Assign fetched data to chairmanships
             } catch (error) {
@@ -512,7 +512,7 @@ export default {
         },
         async getDataInhabitansClearance() {
             try {
-                const response = await fetch("/bims/api/get/data/inhabitans/clearance");
+                const response = await fetch("/api/get/data/inhabitans/clearance");
                 if (!response.ok) throw new Error("Network response was not ok");
                 this.inhabitants = await response.json();
             } catch (error) {
@@ -527,12 +527,12 @@ export default {
 
                 if (this.modalMode === "add") {
                     response = await axios.post(
-                        "/bims/api/store/building/permit",
+                        "/api/store/building/permit",
                         this.formData
                     );
                 } else {
                     response = await axios.put(
-                        `/bims/api/update/building/permit/${this.formData.id}`,
+                        `/api/update/building/permit/${this.formData.id}`,
                         this.formData
                     );
                 }

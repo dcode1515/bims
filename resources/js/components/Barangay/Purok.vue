@@ -466,7 +466,7 @@ export default {
 
         async getDataPurok() {
             try {
-                const response = await axios.get("/bims/api/get/data/purok", {
+                const response = await axios.get("/api/get/data/purok", {
                     params: {
                         page: this.puroks.current_page,
                         per_page: this.perPage,
@@ -572,12 +572,12 @@ export default {
 
                 if (this.modalMode === "add") {
                     response = await axios.post(
-                        "/bims/api/store/purok",
+                        "/api/store/purok",
                         this.formData
                     );
                 } else {
                     response = await axios.post(
-                        `/bims/api/update/purok/${this.formData.id}`,
+                        `/api/update/purok/${this.formData.id}`,
                         this.formData
                     );
                 }
@@ -649,7 +649,7 @@ export default {
 
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`/bims/api/delete/commitee/${commitee.id}`);
+                    await axios.delete(`/api/delete/commitee/${commitee.id}`);
 
                     await Swal.fire({
                         icon: "success",

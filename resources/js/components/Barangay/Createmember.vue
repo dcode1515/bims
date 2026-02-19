@@ -4007,7 +4007,7 @@ export default {
   methods: {
     async getDataPurok() {
       try {
-        const response = await fetch("/bims/api/get/data/purok-per-household"); // Replace with your actual endpoint
+        const response = await fetch("/api/get/data/purok-per-household"); // Replace with your actual endpoint
         if (!response.ok) throw new Error("Network response was not ok");
         this.puroks = await response.json(); // Assign fetched data to chairmanships
       } catch (error) {
@@ -5590,7 +5590,7 @@ export default {
         console.log("Submitting data:", JSON.stringify(formData, null, 2));
 
         // Make API call
-        const response = await fetch("/bims/api/households/store", {
+        const response = await fetch("/api/households/store", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

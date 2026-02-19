@@ -4223,7 +4223,7 @@ export default {
     },
     async getDataPurok() {
       try {
-        const response = await fetch("/bims/api/get/data/purok-per-household");
+        const response = await fetch("/api/get/data/purok-per-household");
         if (!response.ok) throw new Error("Network response was not ok");
         this.puroks = await response.json();
       } catch (error) {
@@ -5712,7 +5712,7 @@ export default {
         console.log("Updating data:", JSON.stringify(formData, null, 2));
 
         // Make API call to update
-        const response = await fetch(`/bims/api/update/households/${householdId}`, {
+        const response = await fetch(`/api/update/households/${householdId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -5781,7 +5781,7 @@ export default {
       }
     },
     goToList() {
-      window.location.href = "/bims/household"; // Adjust this to your actual route
+      window.location.href = "/household"; // Adjust this to your actual route
     },
     printConfirmation() {
       window.print();

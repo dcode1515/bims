@@ -496,7 +496,7 @@ export default {
 
             if (!this.user || !this.user.photo) {
                 console.log("No photo found, using default");
-                return "/bims/public/images/logo/6342684.jfif";
+                return "/public/images/logo/6342684.jfif";
             }
 
             // Debug: log photo info
@@ -513,7 +513,7 @@ export default {
             const photoName = this.user.photo;
 
             // Construct URL (without /public)
-            const photoUrl = `/bims/public/user/profile/${firstName}_${lastName}/${photoName}`;
+            const photoUrl = `/public/user/profile/${firstName}_${lastName}/${photoName}`;
 
             console.log("Generated photo URL:", photoUrl);
 
@@ -557,7 +557,7 @@ export default {
                 });
 
                 const response = await axios.post(
-                    `/bims/api/update/profile/${this.user.id}`,
+                    `/api/update/profile/${this.user.id}`,
                     formData
                 );
 
@@ -585,7 +585,7 @@ export default {
                     }).then((result) => {
                         // Redirect to profile page when user clicks "Okay, Got It!"
                         if (result.isConfirmed) {
-                            window.location.href = `/bims/profile/${this.user.id}`;
+                            window.location.href = `/profile/${this.user.id}`;
                         }
                     });
 
@@ -776,7 +776,7 @@ export default {
                 });
 
                 const response = await axios.post(
-                    `/bims/api/update/user/credential/${this.user.id}`,
+                    `/api/update/user/credential/${this.user.id}`,
                     formData
                 );
 

@@ -571,7 +571,7 @@ export default {
   methods: {
     async getDataBarangayInfo() {
       try {
-        const response = await axios.get("/bims/api/get/data/barangay/info", {
+        const response = await axios.get("/api/get/data/barangay/info", {
           params: {
             page: this.barangay_info.current_page,
             per_page: this.perPage,
@@ -612,8 +612,8 @@ export default {
 
         let url =
           this.modalMode === "add"
-            ? "/bims/api/store/barangay/info"
-            : `/bims/api/update/barangay/info/${this.formData.id}`;
+            ? "/api/store/barangay/info"
+            : `/api/update/barangay/info/${this.formData.id}`;
 
         const response = await axios.post(url, fd, {
           headers: { "Content-Type": "multipart/form-data" },
@@ -654,7 +654,7 @@ export default {
 
     fetchRegions() {
       axios
-        .get("/bims/get-regions") // Make sure you create this route in Laravel
+        .get("/get-regions") // Make sure you create this route in Laravel
         .then((res) => {
           this.regions = res.data;
 
@@ -677,7 +677,7 @@ export default {
   if (!this.formData.region) return Promise.resolve();
 
   return axios
-    .get(`/bims/get-provinces/${this.formData.region}`)
+    .get(`/get-provinces/${this.formData.region}`)
     .then(res => {
       this.provinces = res.data;
     });
@@ -692,7 +692,7 @@ fetchMunicipalities() {
   if (!this.formData.province) return Promise.resolve();
 
   return axios
-    .get(`/bims/get-municipalities/${this.formData.province}`)
+    .get(`/get-municipalities/${this.formData.province}`)
     .then(res => {
       this.municipalities = res.data;
     });
@@ -705,7 +705,7 @@ fetchBarangays() {
   if (!this.formData.municipality) return Promise.resolve();
 
   return axios
-    .get(`/bims/get-barangays/${this.formData.municipality}`)
+    .get(`/get-barangays/${this.formData.municipality}`)
     .then(res => {
       this.barangays = res.data;
     });

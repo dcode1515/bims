@@ -691,14 +691,14 @@ export default {
         let response;
 
         if (this.modalMode === "add") {
-          response = await axios.post("/bims/api/store/official", formData, {
+          response = await axios.post("/api/store/official", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
           });
         } else {
           response = await axios.post(
-            `/bims/api/update/official/${this.formData.id}`,
+            `/api/update/official/${this.formData.id}`,
             formData,
             {
               headers: {
@@ -722,7 +722,7 @@ export default {
           this.removePhoto();
         }
         if (this.modalMode === "edit") {
-          window.location.href = "/bims/barangay/official";
+          window.location.href = "/barangay/official";
         }
       } catch (error) {
         if (error.response?.status === 409) {
@@ -742,12 +742,12 @@ export default {
     displayImageOfficial(official) {
       // 1️⃣ If official object or photo is missing, return default image
       if (!official || !official.photo) {
-        return "/bims/public/images/default-avatar.png";
+        return "/public/images/default-avatar.png";
       }
 
       // 2️⃣ If backend already provides full relative path, just use it
       if (official.photo.includes("barangay/official/photo")) {
-        return `/bims/public/${official.photo}`;
+        return `/public/${official.photo}`;
       }
 
       // 3️⃣ Fallback: build path safely (if needed)
@@ -779,7 +779,7 @@ export default {
       const photoName = official.photo.trim();
 
       // Construct safe path
-      const photoUrl = `/bims/public/barangay/official/photo/${region}/${province}/${municipality}/${barangayName}/${position}/${photoName}`;
+      const photoUrl = `/public/barangay/official/photo/${region}/${province}/${municipality}/${barangayName}/${position}/${photoName}`;
 
       return photoUrl;
     },
@@ -820,7 +820,7 @@ export default {
 
     async getDataPositionDropdown() {
       try {
-        const response = await fetch("/bims/api/get/data/barangay/official"); // Replace with your actual endpoint
+        const response = await fetch("/api/get/data/barangay/official"); // Replace with your actual endpoint
         if (!response.ok) throw new Error("Network response was not ok");
         this.positions = await response.json(); // Assign fetched data to chairmanships
       } catch (error) {
@@ -829,7 +829,7 @@ export default {
     },
     async getDataCommiteesDropdown() {
       try {
-        const response = await fetch("/bims/api/get/data/commitees"); // Replace with your actual endpoint
+        const response = await fetch("/api/get/data/commitees"); // Replace with your actual endpoint
         if (!response.ok) throw new Error("Network response was not ok");
         this.commitees = await response.json(); // Assign fetched data to chairmanships
       } catch (error) {
@@ -839,7 +839,7 @@ export default {
     async getDataBarangayOfficials() {
       try {
         const response = await axios.get(
-          "/bims/api/get/data/all/barangay/official",
+          "/api/get/data/all/barangay/official",
           {
             params: {
               page: this.officials.current_page,
@@ -978,7 +978,7 @@ export default {
 
       if (result.isConfirmed) {
         try {
-          await axios.delete(`/bims/api/delete/commitee/${commitee.id}`);
+          await axios.delete(`/api/delete/commitee/${commitee.id}`);
 
           await Swal.fire({
             icon: "success",

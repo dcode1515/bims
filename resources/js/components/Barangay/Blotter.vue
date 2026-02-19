@@ -436,7 +436,7 @@ export default {
   methods: {
     async getDataBlotter() {
       try {
-        const response = await axios.get("/bims/api/get/data/blotter", {
+        const response = await axios.get("/api/get/data/blotter", {
           params: {
             page: this.blotters.current_page,
             per_page: this.perPage,
@@ -480,12 +480,12 @@ export default {
 
         if (this.modalMode === "add") {
           response = await axios.post(
-            "/bims/api/blotter/store",
+            "/api/blotter/store",
             this.formData
           );
         } else {
           response = await axios.put(
-            `/bims/api/blotter/update/${this.formData.id}`,
+            `/api/blotter/update/${this.formData.id}`,
             this.formData
           );
         }

@@ -339,7 +339,7 @@ export default {
 
         async getDataPosition() {
             try {
-                const response = await axios.get("/bims/api/get/data/position", {
+                const response = await axios.get("/api/get/data/position", {
                     params: {
                         page: this.positions.current_page,
                         per_page: this.perPage,
@@ -436,12 +436,12 @@ export default {
 
                 if (this.modalMode === "add") {
                     response = await axios.post(
-                        "/bims/api/store/position",
+                        "/api/store/position",
                         this.formData
                     );
                 } else {
                     response = await axios.post(
-                        `/bims/api/update/position/${this.formData.id}`,
+                        `/api/update/position/${this.formData.id}`,
                         this.formData
                     );
                 }
@@ -490,7 +490,7 @@ export default {
 
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`/bims/api/delete/position/${position.id}`);
+                    await axios.delete(`/api/delete/position/${position.id}`);
 
                     await Swal.fire({
                         icon: "success",

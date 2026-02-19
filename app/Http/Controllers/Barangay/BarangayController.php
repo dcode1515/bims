@@ -947,8 +947,7 @@ public function getDataBarangayOfficial(Request $request){
 
     
       public function store_household(Request $request){
-             DB::beginTransaction();
-        
+           
         try {
             // Validate the request
             // $validator = Validator::make($request->all(), [
@@ -1028,6 +1027,7 @@ public function getDataBarangayOfficial(Request $request){
 
             // Create household
             $household = Household::create([
+                'encoded_id'  => Auth::user()->id,
                 'barangay_info_id' => Auth::user()->barangay_info_id,
                 'purok' => $request->input('address.purok'),
                 'street' => $request->input('address.street'),
@@ -1063,6 +1063,7 @@ public function getDataBarangayOfficial(Request $request){
             // Create head of family
             $headData = $request->input('headOfFamily');
             $household->members()->create([
+                'encoded_id'  => Auth::user()->id,
                 'is_head' => true,
                 'barangay_info_id' => Auth::user()->barangay_info_id,
                 'first_name' => $headData['firstName'],
@@ -1143,7 +1144,7 @@ public function getDataBarangayOfficial(Request $request){
                 }
             }
 
-            DB::commit();
+          
 
             return response()->json([
                 'success' => true,
@@ -1169,7 +1170,7 @@ public function getDataBarangayOfficial(Request $request){
    public function update_household(Request $request, $id)
 {
     try {
-        DB::beginTransaction();
+       
         
         // Find the existing household
         $household = Household::findOrFail($id);
@@ -1379,7 +1380,7 @@ public function getDataBarangayOfficial(Request $request){
             $household->livestock()->delete();
         }
 
-        DB::commit();
+        
 
         // Load relationships for response
         $household->load(['crops', 'livestock', 'headOfFamily', 'familyMembers', 'purok']);

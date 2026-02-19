@@ -76,7 +76,7 @@ export default {
 
             try {
               
-                const response = await axios.post('/bims/api/login', {
+                const response = await axios.post('/api/login', {
                     email_address: this.email_address,
                     password: this.password
                 });

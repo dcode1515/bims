@@ -5464,7 +5464,7 @@ export default {
         };
 
         // Make API call
-        const response = await fetch('/bims/api/households/store', {
+        const response = await fetch('/api/households/store', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

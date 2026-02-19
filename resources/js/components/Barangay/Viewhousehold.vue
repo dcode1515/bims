@@ -854,7 +854,7 @@ export default {
   methods: {
     async getDataPurok() {
       try {
-        const response = await fetch("/bims/api/get/data/purok-per-household");
+        const response = await fetch("/api/get/data/purok-per-household");
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         this.puroks = Array.isArray(data) ? data : [];
@@ -1041,7 +1041,7 @@ export default {
       }
     },
     goToEdit() {
-      window.location.href = `/bims/household/edit/${this.household.id}`;
+      window.location.href = `/household/edit/${this.household.id}`;
     },
     goBack() {
       window.history.back();

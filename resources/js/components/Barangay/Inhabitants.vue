@@ -387,7 +387,7 @@ export default {
 
     async getDataInhabitants() {
       try {
-        const response = await axios.get("/bims/api/get/data/inhabitants", {
+        const response = await axios.get("/api/get/data/inhabitants", {
           params: {
             page: this.members.current_page,
             per_page: this.perPage,
@@ -424,7 +424,7 @@ export default {
 
     async getDataPurok() {
       try {
-        const response = await fetch("/bims/api/get/data/purok-per-household"); // Replace with your actual endpoint
+        const response = await fetch("/api/get/data/purok-per-household"); // Replace with your actual endpoint
         if (!response.ok) throw new Error("Network response was not ok");
         this.puroks = await response.json(); // Assign fetched data to chairmanships
       } catch (error) {
@@ -433,7 +433,7 @@ export default {
     },
     async getDataInhabitansClearance() {
       try {
-        const response = await fetch("/bims/api/get/data/inhabitans/clearance");
+        const response = await fetch("/api/get/data/inhabitans/clearance");
         if (!response.ok) throw new Error("Network response was not ok");
         this.inhabitants = await response.json();
       } catch (error) {
@@ -456,12 +456,12 @@ export default {
 
         if (this.modalMode === "add") {
           response = await axios.post(
-            "/bims/api/store/barangay/clearance",
+            "/api/store/barangay/clearance",
             submitData
           );
         } else {
           response = await axios.put(
-            `/bims/api/update/barangay/clearance/${this.formData.id}`,
+            `/api/update/barangay/clearance/${this.formData.id}`,
             submitData
           );
         }
