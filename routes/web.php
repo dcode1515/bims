@@ -109,6 +109,9 @@ Route::post('/api/store/residency', [App\Http\Controllers\Barangay\BarangayContr
 Route::get('/api/get/data/residency/certificate', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataResidency']);
 Route::put('/api/updated/residency/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_residency_certificate']);
 Route::get('/print/residency/certificate/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'print_residency_certificate']);
+Route::get('/inhabitants', [App\Http\Controllers\Barangay\BarangayController::class, 'inhabitants'])->name('inhabitants');
+Route::get('/api/get/data/inhabitants', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataInhabitants']);
+Route::get('/barangay/history', [App\Http\Controllers\Barangay\BarangayController::class, 'barangay_history'])->name('barangay.history');
 
 
 

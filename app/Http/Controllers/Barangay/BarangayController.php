@@ -2933,6 +2933,83 @@ public function print_residency_certificate($id){
     return $pdf->stream('residency_certificate.pdf');
 }
 
+public function inhabitants(){
+    return view('barangay.inhabitants');
+}
+public function getDataInhabitants(Request $request)
+{
+    $search = $request->query('search');
+    $perPage = $request->query('per_page', 10);
+
+    $inhabitants = HouseholdMember::with('household.purok')
+        // General search
+        ->when($search, function ($query, $search) {
+            return $query->where(function ($q) use ($search) {
+                $q->where('first_name', 'like', "%$search%")
+                  ->orWhere('middle_initial', 'like', "%$search%")
+                  ->orWhere('last_name', 'like', "%$search%")
+                  ->orWhere('extension', 'like', "%$search%")
+                  ->orWhere('birthdate', 'like', "%$search%")
+                  ->orWhere('contact_number', 'like', "%$search%")
+                
+                  ->orWhereHas('household', function ($q2) use ($search) {
+                      $q2->where('street', 'like', "%$search%")
+                         ->orWhere('household_number', 'like', "%$search%");
+                  })
+                  ->orWhereHas('household.purok', function ($q3) use ($search) {
+                      $q3->where('purok_name', 'like', "%$search%");
+                  });
+            });
+        })
+        // Filter: Purok
+        ->when($request->purok, function ($query, $purok) {
+            $query->whereHas('household.purok', function ($q) use ($purok) {
+                $q->where('id', $purok);
+            });
+        })
+        // Filter: Role (Head/Member)
+        ->when($request->role, function ($query, $role) {
+            if ($role === 'head') {
+                $query->where('is_head', 1);
+            } elseif ($role === 'member') {
+                $query->where('is_head', 0);
+            }
+        })
+        // Filter: Sex
+        ->when($request->sex, function ($query, $sex) {
+            $query->where('sex', $sex);
+        })
+        // Filter: Civil Status
+        ->when($request->civil_status, function ($query, $status) {
+            $query->where('civil_status', $status);
+        })
+        // Filter: Voter Status
+        ->when($request->voter_status, function ($query, $voter) {
+            $query->where('voter_status', $voter);
+        })
+        // Filter: Living Status (Deceased / Alive)
+        ->when($request->living_status, function ($query, $living) {
+            if ($living === 'alive') {
+                $query->where('is_deceased', 0);
+            } elseif ($living === 'deceased') {
+                $query->where('is_deceased', 1);
+            }
+        })
+        ->where('barangay_info_id', Auth::user()->barangay_info_id)
+        ->orderBy('first_name', 'asc')
+        ->paginate($perPage);
+
+    return response()->json([
+        'success' => true,
+        'data' => $inhabitants
+    ]);
+}
+
+public function barangay_history(){
+    return view('barangay.barangay_history');
+}
+
+
 
 
 }

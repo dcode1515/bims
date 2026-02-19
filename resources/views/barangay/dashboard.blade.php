@@ -1,10 +1,12 @@
 @extends('layout.template')
 
 @section('content')
-<div class="page-content">
-    <div class="container-fluid">
 
+<div class="page-content">
+       
+    <div class="container-fluid">
         <div class="row">
+            
             <div class="col-12">
                 <div class="card border-0 shadow-sm">
                     <!-- HEADER -->

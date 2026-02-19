@@ -59,6 +59,7 @@
                             <a class="nav-link menu-link" href="">
                                  <i class="ri-dashboard-line"></i> <span data-key="t-widgets">Dashboard</span>
                             </a>
+
                         </li>
                          
                         <li class="nav-item">
@@ -125,6 +126,11 @@
                         <i class="ri-dashboard-line"></i>
                         <span>Dashboard</span>
                     </a>
+                    <a class="nav-link menu-link" href="{{ route('barangay.history') }}">
+                        <i class="ri-folder-history-line"></i>
+                        <span>Barangay History</span>
+                    </a>
+
                 </li>
 
                 <!-- PROFILING -->
@@ -139,7 +145,7 @@
                     <div class="collapse menu-dropdown" id="profiling">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="apps-chat.html" class="nav-link">Inhabitants</a>
+                                <a href="{{route('inhabitants')}}" class="nav-link">Inhabitants</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('household')}}" class="nav-link">Household</a>
