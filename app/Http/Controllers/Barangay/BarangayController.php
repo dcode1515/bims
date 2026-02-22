@@ -41,73 +41,83 @@ class BarangayController extends Controller
 {
     $members = HouseholdMember::all();
     
+    // Calculate age for each member based on birthdate
+    foreach ($members as $member) {
+        if ($member->birthdate) {
+            $member->calculated_age = Carbon::parse($member->birthdate)->age;
+        } else {
+            $member->calculated_age = 0; // Default if no birthdate
+        }
+    }
+    
     // Basic counts
     $totalMembers = $members->count();
     $totalHeads = $members->where('is_head', true)->count();
     $total4ps = $members->where('is_4ps_member', true)->count();
     $totalVoters = $members->where('voter_status', true)->count();
+    $totalisPWD = $members->where('isPWD', '=','Yes')->count();
     
     // Demographics
     $maleCount = $members->where('sex', 'Male')->count();
     $femaleCount = $members->where('sex', 'Female')->count();
     
-    // Basic Age groups
+    // Basic Age groups (using calculated_age)
     $minors = $members->filter(function($member) {
-        return $member->age < 18;
+        return $member->calculated_age < 18;
     })->count();
     
     $adults = $members->filter(function($member) {
-        return $member->age >= 18 && $member->age < 60;
+        return $member->calculated_age >= 18 && $member->calculated_age < 60;
     })->count();
     
     $seniors = $members->filter(function($member) {
-        return $member->age >= 60;
+        return $member->calculated_age >= 60;
     })->count();
     
-    // DETAILED AGE GROUPS
+    // DETAILED AGE GROUPS (using calculated_age)
     // Infants (0-2 years)
     $infants = $members->filter(function($member) {
-        return $member->age >= 0 && $member->age <= 2;
+        return $member->calculated_age >= 0 && $member->calculated_age <= 2;
     })->count();
     
     // Preschool (3-5 years)
     $preschool = $members->filter(function($member) {
-        return $member->age >= 3 && $member->age <= 5;
+        return $member->calculated_age >= 3 && $member->calculated_age <= 5;
     })->count();
     
     // School Age (6-12 years)
     $schoolAge = $members->filter(function($member) {
-        return $member->age >= 6 && $member->age <= 12;
+        return $member->calculated_age >= 6 && $member->calculated_age <= 12;
     })->count();
     
     // Adolescents (13-17 years)
     $adolescents = $members->filter(function($member) {
-        return $member->age >= 13 && $member->age <= 17;
+        return $member->calculated_age >= 13 && $member->calculated_age <= 17;
     })->count();
     
     // Young Adults (18-25 years)
     $youngAdults = $members->filter(function($member) {
-        return $member->age >= 18 && $member->age <= 25;
+        return $member->calculated_age >= 18 && $member->calculated_age <= 25;
     })->count();
     
     // Adults (26-39 years)
     $adultsMid = $members->filter(function($member) {
-        return $member->age >= 26 && $member->age <= 39;
+        return $member->calculated_age >= 26 && $member->calculated_age <= 39;
     })->count();
     
     // Middle Age (40-59 years)
     $middleAge = $members->filter(function($member) {
-        return $member->age >= 40 && $member->age <= 59;
+        return $member->calculated_age >= 40 && $member->calculated_age <= 59;
     })->count();
     
     // Senior Citizens - Early (60-74 years)
     $seniorEarly = $members->filter(function($member) {
-        return $member->age >= 60 && $member->age <= 74;
+        return $member->calculated_age >= 60 && $member->calculated_age <= 74;
     })->count();
     
     // Elderly (75+ years)
     $elderly = $members->filter(function($member) {
-        return $member->age >= 75;
+        return $member->calculated_age >= 75;
     })->count();
     
     // Civil status
@@ -126,13 +136,19 @@ class BarangayController extends Controller
     $student = $members->where('employment_status', 'Student')->count();
     
     // Education levels
-    $education = [
-        'Elementary' => $members->where('highest_education', 'Elementary')->count(),
-        'High School' => $members->where('highest_education', 'High School')->count(),
-        'College' => $members->where('highest_education', 'College')->count(),
-        'Vocational' => $members->where('highest_education', 'Vocational')->count(),
-        'Post Graduate' => $members->where('highest_education', 'Post Graduate')->count(),
-    ];
+   $education = [
+    'No Formal Education'   => $members->where('highest_education', 'No Formal Education')->count(),
+    'Elementary Level'      => $members->where('highest_education', 'Elementary Level')->count(),
+    'Elementary Graduate'   => $members->where('highest_education', 'Elementary Graduate')->count(),
+    'High School Level'     => $members->where('highest_education', 'High School Level')->count(),
+    'High School Graduate'  => $members->where('highest_education', 'High School Graduate')->count(),
+    'College Level'         => $members->where('highest_education', 'College Level')->count(),
+    'College Graduate'      => $members->where('highest_education', 'College')->count(),
+    'Vocational/Tech Course'=> $members->where('highest_education', 'Vocational/Tech Course')->count(),
+    'Post Graduate'         => $members->where('highest_education', 'Post Graduate')->count(),
+    'Masters Degree'        => $members->where('highest_education', 'Masters Degree')->count(),
+    'Doctorate Degree'      => $members->where('highest_education', 'Doctorate Degree')->count(),
+];
     
     // Monthly income brackets
     $incomeBrackets = [
@@ -158,6 +174,7 @@ class BarangayController extends Controller
         'totalHeads',
         'total4ps',
         'totalVoters',
+        'totalisPWD',
         'maleCount',
         'femaleCount',
         'minors',
@@ -615,8 +632,8 @@ public function delete_commitee($id){
           ]);
     }
 
-    public function barangay_official(){
-        return view('barangay.official');
+    public function barangay_officials(){
+        return view('barangay.barangay_officials');
     }
 
     
@@ -942,90 +959,48 @@ public function getDataBarangayOfficial(Request $request){
      }
 
      public function create_member(){
-        return view('barangay.create_member');
+        
+        $region_name = Auth::user()->barangay->region->region_name;
+        $province_name  = Auth::user()->barangay->province->province_name;
+        $municipality_name  = Auth::user()->barangay->municipality->municipality_name;
+        $barangay_name  = Auth::user()->barangay->barangay_name;
+        return view('barangay.create_member',compact('region_name','province_name','municipality_name','barangay_name',));
+        
      }
+     public function delete_household(Request $request, $id)
+    {
+        try {
+            $household = Household::find($id);
+            
+            if (!$household) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Household not found'
+                ], 404);
+            }
+            
+            $household->delete();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Household deleted successfully'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while deleting the Household',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+     
 
     
       public function store_household(Request $request){
            
         try {
-            // Validate the request
-            // $validator = Validator::make($request->all(), [
-            //     'address.purok' => 'required|string|max:50',
-            //     'address.street' => 'required|string|max:255',
-            //     'address.household_number' => 'nullable|string|max:50',
-            //     'address.longitude' => 'nullable|string|max:20',
-            //     'address.latitude' => 'nullable|string|max:20',
-                
-            //     'headOfFamily.firstName' => 'required|string|max:100',
-            //     'headOfFamily.middleInitial' => 'nullable|string|max:3',
-            //     'headOfFamily.lastName' => 'required|string|max:100',
-            //     'headOfFamily.extension' => 'nullable|in:Jr,Sr,II,III,IV',
-            //     'headOfFamily.sex' => 'required|in:Male,Female',
-            //     'headOfFamily.birthdate' => 'required|date|before:today',
-            //     'headOfFamily.civilStatus' => 'required|in:Single,Married,Widowed,Separated,Divorced',
-            //     'headOfFamily.contactNumber' => 'required|string|max:20',
-            //     'headOfFamily.email' => 'nullable|email|max:100',
-            //     'headOfFamily.nationalId' => 'nullable|string|max:50',
-            //     'headOfFamily.highestEducation' => 'required|string|max:100',
-            //     'headOfFamily.educationalStatus' => 'required|string|max:50',
-            //     'headOfFamily.employmentStatus' => 'required|in:Employed,Unemployed',
-            //     'headOfFamily.voterStatus' => 'required|in:Voter,Non-Voter',
-            //     'headOfFamily.is4psMember' => 'required|in:Yes,No',
-            //     'headOfFamily.isDeceased' => 'required|in:Yes,No',
-                
-            //     'householdInfo.type' => 'nullable|string|max:50',
-            //     'householdInfo.housingType' => 'nullable|string|max:50',
-            //     'householdInfo.housingTypeOther' => 'nullable|string|max:100',
-            //     'householdInfo.houseMaterials' => 'nullable|string|max:50',
-            //     'householdInfo.houseMaterialsOther' => 'nullable|string|max:100',
-            //     'householdInfo.waterSource' => 'nullable|string|max:50',
-            //     'householdInfo.waterSourceICWS' => 'nullable|string|max:50',
-            //     'householdInfo.waterSourceOther' => 'nullable|string|max:100',
-            //     'householdInfo.powerSupply' => 'nullable|string|max:50',
-            //     'householdInfo.powerSupplyOther' => 'nullable|string|max:100',
-            //     'householdInfo.internetProvider' => 'nullable|string|max:50',
-            //     'householdInfo.internetProviderOther' => 'nullable|string|max:100',
-            //     'householdInfo.garbageDisposal' => 'nullable|string|max:50',
-            //     'householdInfo.garbageDisposalOther' => 'nullable|string|max:100',
-            //     'householdInfo.fishingVessel' => 'nullable|string|max:50',
-            //     'householdInfo.avgFishCatch' => 'nullable|numeric|min:0',
-            //     'householdInfo.fishingFrequency' => 'nullable|string|max:50',
-            //     'householdInfo.longitude' => 'nullable|string|max:20',
-            //     'householdInfo.latitude' => 'nullable|string|max:20',
-            //     'householdInfo.notes' => 'nullable|string',
-                
-            //     'members' => 'nullable|array',
-            //     'members.*.firstName' => 'required|string|max:100',
-            //     'members.*.lastName' => 'required|string|max:100',
-            //     'members.*.middleInitial' => 'nullable|string|max:3',
-            //     'members.*.extension' => 'nullable|in:Jr,Sr,II,III,IV',
-            //     'members.*.sex' => 'required|in:Male,Female',
-            //     'members.*.birthdate' => 'required|date|before:today',
-            //     'members.*.civilStatus' => 'required|in:Single,Married,Widowed,Separated,Divorced',
-            //     'members.*.relationship' => 'required|string|max:50',
-            //     'members.*.voterStatus' => 'required|in:Voter,Non-Voter',
-            //     'members.*.is4psMember' => 'required|in:Yes,No',
-            //     'members.*.isDeceased' => 'required|in:Yes,No',
-            //     'members.*.highestEducation' => 'required|string|max:100',
-            //     'members.*.educationalStatus' => 'required|string|max:50',
-            //     'members.*.employmentStatus' => 'required|in:Employed,Unemployed',
-            //     'members.*.contactNumber' => 'nullable|string|max:20',
-            //     'members.*.email' => 'nullable|email|max:100',
-                
-            //     'cropsPlanted' => 'nullable|array',
-            //     'livestockRaised' => 'nullable|array',
-            // ]);
-
-            // if ($validator->fails()) {
-            //     return response()->json([
-            //         'success' => false,
-            //         'message' => 'Validation errors',
-            //         'errors' => $validator->errors()
-            //     ], 422);
-            // }
-
-            // Create household
+         
             $household = Household::create([
                 'encoded_id'  => Auth::user()->id,
                 'barangay_info_id' => Auth::user()->barangay_info_id,
@@ -1062,15 +1037,27 @@ public function getDataBarangayOfficial(Request $request){
 
             // Create head of family
             $headData = $request->input('headOfFamily');
+                $pwdType = $headData['pwdType'] ?? null;
+                        if ($pwdType === 'Other' && !empty($headData['pwdOtherSpecify'])) {
+                            $pwdType = 'Other: ' . $headData['pwdOtherSpecify'];
+                        }
+                        
+                        // Handle PWD Cause - if "Other", combine with specification
+                        $pwdCause = $headData['pwdCause'] ?? null;
+                        if ($pwdCause === 'Other' && !empty($headData['pwdCauseOther'])) {
+                            $pwdCause = 'Other: ' . $headData['pwdCauseOther'];
+                        }
+
             $household->members()->create([
                 'encoded_id'  => Auth::user()->id,
                 'is_head' => true,
                 'barangay_info_id' => Auth::user()->barangay_info_id,
                 'first_name' => $headData['firstName'],
-                'middle_initial' => $headData['middleInitial'] ?? null,
+                'middle_name' => $headData['middle_name'] ?? null,
                 'last_name' => $headData['lastName'],
                 'extension' => $headData['extension'] ?? null,
                 'sex' => $headData['sex'],
+                'date_of_residency' => $headData['date_of_residency'],
                 'birthdate' => $headData['birthdate'],
                 'civil_status' => $headData['civilStatus'],
                 'relationship' => 'Head',
@@ -1078,6 +1065,17 @@ public function getDataBarangayOfficial(Request $request){
                 'voter_status' => $headData['voterStatus'],
                 'is_4ps_member' => $headData['is4psMember'],
                 'is_deceased' => $headData['isDeceased'],
+                    'isPWD' => $headData['isPWD'],
+                     'pwd_type' => $pwdType,
+            'pwd_other_specify' => $headData['pwdOtherSpecify'] ?? null,
+            'pwd_id_number' => $headData['pwdIdNumber'] ?? null,
+            'pwd_cause' => $pwdCause,
+            'pwd_cause_other' => $headData['pwdCauseOther'] ?? null,
+            'pwd_degree' => $headData['pwdDegree'] ?? null,
+            'pwd_assistance' => isset($headData['pwdAssistance']) ? json_encode($headData['pwdAssistance']) : null,
+            'pwd_assistance_other' => $headData['pwdAssistanceOther'] ?? null,
+            'pwd_notes' => $headData['pwdNotes'] ?? null,
+            
                 'highest_education' => $headData['highestEducation'],
                 'educational_status' => $headData['educationalStatus'],
                 'employment_status' => $headData['employmentStatus'],
@@ -1091,14 +1089,34 @@ public function getDataBarangayOfficial(Request $request){
             // Create family members
             if ($request->has('members')) {
                 foreach ($request->input('members') as $memberData) {
+                      // Handle PWD Type for member - if "Other", combine with specification
+                     $memberPwdType = $memberData['pwdType'] ?? null;
+                if ($memberPwdType === 'Other' && !empty($memberData['pwdOtherSpecify'])) {
+                    $memberPwdType = 'Other: ' . $memberData['pwdOtherSpecify'];
+                }
+                
+                // Handle PWD Cause for member - if "Other", combine with specification
+                $memberPwdCause = $memberData['pwdCause'] ?? null;
+                if ($memberPwdCause === 'Other' && !empty($memberData['pwdCauseOther'])) {
+                    $memberPwdCause = 'Other: ' . $memberData['pwdCauseOther'];
+                }
+                
+                // Handle PWD Cause for member - if "Other", combine with specification
+                $memberPwdCause = $memberData['pwdCause'] ?? null;
+                if ($memberPwdCause === 'Other' && !empty($memberData['pwdCauseOther'])) {
+                    $memberPwdCause = 'Other: ' . $memberData['pwdCauseOther'];
+                }
+
                     $household->members()->create([
                         'is_head' => false,
+                          'encoded_id'  => Auth::user()->id,
                           'barangay_info_id' => Auth::user()->barangay_info_id,
                         'first_name' => $memberData['firstName'],
-                        'middle_initial' => $memberData['middleInitial'] ?? null,
+                        'middle_name' => $memberData['middle_name'] ?? null,
                         'last_name' => $memberData['lastName'],
                         'extension' => $memberData['extension'] ?? null,
                         'sex' => $memberData['sex'],
+                         'date_of_residency' => $memberData['date_of_residency'],
                         'birthdate' => $memberData['birthdate'],
                         'civil_status' => $memberData['civilStatus'],
                         'relationship' => $memberData['relationship'],
@@ -1106,6 +1124,17 @@ public function getDataBarangayOfficial(Request $request){
                         'voter_status' => $memberData['voterStatus'],
                         'is_4ps_member' => $memberData['is4psMember'],
                         'is_deceased' => $memberData['isDeceased'],
+                         'isPWD' => $memberData['isPWD'],
+                         
+                           'pwd_type' => $memberPwdType,
+                    'pwd_other_specify' => $memberData['pwdOtherSpecify'] ?? null,
+                    'pwd_id_number' => $memberData['pwdIdNumber'] ?? null,
+                    'pwd_cause' => $memberPwdCause,
+                    'pwd_cause_other' => $memberData['pwdCauseOther'] ?? null,
+                    'pwd_degree' => $memberData['pwdDegree'] ?? null,
+                     'pwd_assistance' => isset($memberData['pwdAssistance']) ? json_encode($memberData['pwdAssistance']) : null,
+                    'pwd_notes' => $memberData['pwdNotes'] ?? null,
+
                         'highest_education' => $memberData['highestEducation'],
                         'educational_status' => $memberData['educationalStatus'],
                         'employment_status' => $memberData['employmentStatus'],
@@ -1210,6 +1239,17 @@ public function getDataBarangayOfficial(Request $request){
 
         // Update or create head of family
         $headData = $request->input('headOfFamily');
+
+         $pwdType = $headData['pwd_type'] ?? null;
+        if ($pwdType === 'Other' && !empty($headData['pwd_other_specify'])) {
+            $pwdType = 'Other: ' . $headData['pwd_other_specify'];
+        }
+        
+        // Handle PWD Cause - if "Other", combine with specification
+        $pwdCause = $headData['pwd_cause'] ?? null;
+        if ($pwdCause === 'Other' && !empty($headData['pwd_cause_other'])) {
+            $pwdCause = 'Other: ' . $headData['pwd_cause_other'];
+        }
         
         // Check if head of family exists
         $existingHead = $household->headOfFamily;
@@ -1218,7 +1258,7 @@ public function getDataBarangayOfficial(Request $request){
             // Update existing head
             $existingHead->update([
                 'first_name' => $headData['first_name'],
-                'middle_initial' => $headData['middle_initial'] ?? null,
+                'middle_name' => $headData['middle_name'] ?? null,
                 'last_name' => $headData['last_name'],
                 'extension' => $headData['extension'] ?? null,
                 'sex' => $headData['sex'],
@@ -1229,6 +1269,19 @@ public function getDataBarangayOfficial(Request $request){
                 'voter_status' => $headData['voter_status'],
                 'is_4ps_member' => $headData['is_4ps_member'],
                 'is_deceased' => $headData['is_deceased'],
+                  'isPWD' => $headData['isPWD'],
+
+                    'pwd_type' => $pwdType,
+                'pwd_other_specify' => $headData['pwd_other_specify'] ?? null,
+                'pwd_id_number' => $headData['pwd_id_number'] ?? null,
+                'pwd_cause' => $pwdCause,
+                'pwd_cause_other' => $headData['pwd_cause_other'] ?? null,
+                'pwd_degree' => $headData['pwd_degree'] ?? null,
+                'pwd_assistance' => isset($headData['pwd_assistance']) ? json_encode($headData['pwd_assistance']) : null,
+                'pwd_assistance_other' => $headData['pwd_assistance_other'] ?? null,
+                'pwd_notes' => $headData['pwd_notes'] ?? null,
+
+
                 'highest_education' => $headData['highest_education'],
                 'educational_status' => $headData['educational_status'],
                 'employment_status' => $headData['employment_status'],
@@ -1255,6 +1308,19 @@ public function getDataBarangayOfficial(Request $request){
                 'voter_status' => $headData['voter_status'],
                 'is_4ps_member' => $headData['is_4ps_member'],
                 'is_deceased' => $headData['is_deceased'],
+                  'isPWD' => $headData['isPWD'],
+
+                   'pwd_type' => $pwdType,
+                'pwd_other_specify' => $headData['pwd_other_specify'] ?? null,
+                'pwd_id_number' => $headData['pwd_id_number'] ?? null,
+                'pwd_cause' => $pwdCause,
+                'pwd_cause_other' => $headData['pwd_cause_other'] ?? null,
+                'pwd_degree' => $headData['pwd_degree'] ?? null,
+                'pwd_assistance' => isset($headData['pwd_assistance']) ? json_encode($headData['pwd_assistance']) : null,
+                'pwd_assistance_other' => $headData['pwd_assistance_other'] ?? null,
+                'pwd_notes' => $headData['pwd_notes'] ?? null,
+
+
                 'highest_education' => $headData['highest_education'],
                 'educational_status' => $headData['educational_status'],
                 'employment_status' => $headData['employment_status'],
@@ -1273,6 +1339,16 @@ public function getDataBarangayOfficial(Request $request){
             $updatedMemberIds = [];
             
             foreach ($request->input('members') as $memberData) {
+                  $memberPwdType = $memberData['pwd_type'] ?? null;
+                if ($memberPwdType === 'Other' && !empty($memberData['pwd_other_specify'])) {
+                    $memberPwdType = 'Other: ' . $memberData['pwd_other_specify'];
+                }
+                
+                // Handle PWD Cause for member - if "Other", combine with specification
+                $memberPwdCause = $memberData['pwd_cause'] ?? null;
+                if ($memberPwdCause === 'Other' && !empty($memberData['pwd_cause_other'])) {
+                    $memberPwdCause = 'Other: ' . $memberData['pwd_cause_other'];
+                }
                 // Check if member has ID (existing)
                 if (isset($memberData['id'])) {
                     // Update existing member
@@ -1280,7 +1356,7 @@ public function getDataBarangayOfficial(Request $request){
                     if ($member) {
                         $member->update([
                             'first_name' => $memberData['first_name'],
-                            'middle_initial' => $memberData['middle_initial'] ?? null,
+                            'middle_name' => $memberData['middle_name'] ?? null,
                             'last_name' => $memberData['last_name'],
                             'extension' => $memberData['extension'] ?? null,
                             'sex' => $memberData['sex'],
@@ -1290,6 +1366,29 @@ public function getDataBarangayOfficial(Request $request){
                             'national_id' => $memberData['national_id'] ?? null,
                             'voter_status' => $memberData['voter_status'],
                             'is_4ps_member' => $memberData['is_4ps_member'],
+                              'isPWD' => $memberData['isPWD'],
+                              
+                               'pwd_type' => $memberPwdType,
+                            'pwd_other_specify' => $memberData['pwd_other_specify'] ?? null,
+                            'pwd_id_number' => $memberData['pwd_id_number'] ?? null,
+                            'pwd_cause' => $memberPwdCause,
+                            'pwd_cause_other' => $memberData['pwd_cause_other'] ?? null,
+                             'pwd_assistance' => isset($memberData['pwd_assistance']) ? json_encode($memberData['pwd_assistance']) : null,
+                        'pwd_assistance_other' => $memberData['pwd_assistance_other'] ?? null,
+                            'pwd_degree' => $memberData['pwd_degree'] ?? null,
+                            'pwd_notes' => $memberData['pwd_notes'] ?? null,
+
+
+                               'pwd_type' => $memberPwdType,
+                    'pwd_other_specify' => $memberData['pwdOtherSpecify'] ?? null,
+                    'pwd_id_number' => $memberData['pwdIdNumber'] ?? null,
+                    'pwd_cause' => $memberPwdCause,
+                    'pwd_cause_other' => $memberData['pwdCauseOther'] ?? null,
+                    'pwd_degree' => $memberData['pwdDegree'] ?? null,
+                     'pwd_assistance' => isset($memberData['pwd_assistance']) ? json_encode($memberData['pwd_assistance']) : null,
+                        'pwd_assistance_other' => $memberData['pwd_assistance_other'] ?? null,
+                    'pwd_notes' => $memberData['pwdNotes'] ?? null,
+
                             'is_deceased' => $memberData['is_deceased'],
                             'highest_education' => $memberData['highest_education'],
                             'educational_status' => $memberData['educational_status'],
@@ -1308,7 +1407,7 @@ public function getDataBarangayOfficial(Request $request){
                         'is_head' => false,
                         'barangay_info_id' => Auth::user()->barangay_info_id,
                         'first_name' => $memberData['first_name'],
-                        'middle_initial' => $memberData['middle_initial'] ?? null,
+                        'middle_name' => $memberData['middle_name'] ?? null,
                         'last_name' => $memberData['last_name'],
                         'extension' => $memberData['extension'] ?? null,
                         'sex' => $memberData['sex'],
@@ -1319,6 +1418,17 @@ public function getDataBarangayOfficial(Request $request){
                         'voter_status' => $memberData['voter_status'],
                         'is_4ps_member' => $memberData['is_4ps_member'],
                         'is_deceased' => $memberData['is_deceased'],
+                         'isPWD' => $memberData['isPWD'],
+                            'pwd_type' => $memberPwdType,
+                        'pwd_other_specify' => $memberData['pwd_other_specify'] ?? null,
+                        'pwd_id_number' => $memberData['pwd_id_number'] ?? null,
+                        'pwd_cause' => $memberPwdCause,
+                        'pwd_cause_other' => $memberData['pwd_cause_other'] ?? null,
+                        'pwd_degree' => $memberData['pwd_degree'] ?? null,
+                           'pwd_assistance' => isset($memberData['pwd_assistance']) ? json_encode($memberData['pwd_assistance']) : null,
+                        'pwd_assistance_other' => $memberData['pwd_assistance_other'] ?? null,
+                        'pwd_notes' => $memberData['pwd_notes'] ?? null,
+                        
                         'highest_education' => $memberData['highest_education'],
                         'educational_status' => $memberData['educational_status'],
                         'employment_status' => $memberData['employment_status'],
@@ -1445,12 +1555,12 @@ public function getDataBarangayOfficial(Request $request){
                 })
                 ->orWhereHas('headOfFamily', function ($q) use ($search) {
                     $q->where('first_name', 'like', '%' . $search . '%')
-                      ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                      ->orWhere('middle_name', 'like', '%' . $search . '%')
                       ->orWhere('last_name', 'like', '%' . $search . '%');
                 })
                  ->orWhereHas('familyMembers', function ($q) use ($search) {
                     $q->where('first_name', 'like', '%' . $search . '%')
-                      ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                      ->orWhere('middle_name', 'like', '%' . $search . '%')
                       ->orWhere('last_name', 'like', '%' . $search . '%');
                 })
                   ->orWhereHas('crops', function ($q) use ($search) {
@@ -1505,8 +1615,12 @@ public function getDataBarangayOfficial(Request $request){
     }
 
     public function edit_household($id){
+          $region_name = Auth::user()->barangay->region->region_name;
+        $province_name  = Auth::user()->barangay->province->province_name;
+        $municipality_name  = Auth::user()->barangay->municipality->municipality_name;
+        $barangay_name  = Auth::user()->barangay->barangay_name;
         $household = Household::with(['crops','livestock','headOfFamily','familyMembers','purok'])->findOrFail($id);
-       return view('barangay.edit_household', compact('household'));
+       return view('barangay.edit_household', compact('household','region_name','province_name','municipality_name','barangay_name','household'));
     }
     public function view_household($id){
         $household = Household::with(['crops','livestock','headOfFamily','familyMembers','purok'])->findOrFail($id);
@@ -1583,19 +1697,26 @@ public function getDataBlotter(Request $request){
           $perPage = $request->query('per_page', 10); // Default to 10 if per_page is not provided
       
           // Query certifications with optional search
-          $blotters = Blotter::when($search, function ($query, $search) {
+          $blotters = Blotter::with(['complainant','respondent'])->when($search, function ($query, $search) {
                   return $query
                   ->where('case_number', 'like', '%' . $search . '%')
                   ->OrWhere('respondent_name', 'like', '%' . $search . '%') 
                   ->OrWhere('case_type', 'like', '%' . $search . '%')
-                  ->OrWhere('complainant_name', 'like', '%' . $search . '%')
-                  ->OrWhere('complainant_contact', 'like', '%' . $search . '%')
-                  ->OrWhere('complainant_address', 'like', '%' . $search . '%')
-                  ->OrWhere('respondent_contact', 'like', '%' . $search . '%')
-                  ->OrWhere('respondent_address', 'like', '%' . $search . '%')
                   ->OrWhere('case_type', 'like', '%' . $search . '%')
                   ->OrWhere('date_filed', 'like', '%' . $search . '%')
-                  ->OrWhere('status', 'like', '%' . $search . '%');
+                  ->OrWhere('status', 'like', '%' . $search . '%')
+                   ->orWhereHas('complainant', function ($q) use ($search) {
+                    $q->where('first_name', 'like', '%' . $search . '%')
+                       ->OrWhere('middle_name', 'like', '%' . $search . '%')
+                      ->OrWhere('last_name', 'like', '%' . $search . '%');
+                    
+                })
+                ->orWhereHas('respondent', function ($q) use ($search) {
+                    $q->where('first_name', 'like', '%' . $search . '%')
+                       ->OrWhere('middle_name', 'like', '%' . $search . '%')
+                      ->OrWhere('last_name', 'like', '%' . $search . '%');
+                    
+                });
                 
           })
           ->where('barangay_info_id', Auth::user()->barangay_info_id)
@@ -3009,6 +3130,10 @@ public function getDataInhabitants(Request $request)
 public function barangay_history(){
     return view('barangay.barangay_history');
 }
+public function reports(){
+    return view('barangay.reports');
+}
+
 
 
 

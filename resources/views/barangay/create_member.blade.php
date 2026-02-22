@@ -22,7 +22,13 @@
                     </div>
                     <!-- end page title -->
                         <div id = "app">
-                            <Createmember><Createmember>
+                            <Createmember
+                                        region="{{ $region_name }}"
+                                        province="{{ $province_name }}"
+                                        municipality="{{ $municipality_name }}"
+                                        barangay="{{ $barangay_name }}"
+
+                            ><Createmember>
                         </div>
                     <!--end row-->
 

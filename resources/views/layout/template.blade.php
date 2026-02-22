@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+   
     <link rel="stylesheet" href="{{ URL::asset('public/Dashboard-Template-Velzon-main/assets/libs/jsvectormap/css/jsvectormap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('public/Dashboard-Template-Velzon-main/assets/libs/swiper/swiper-bundle.min.css') }}">
     <script src="{{ asset('public/Dashboard-Template-Velzon-main/assets/js/layout.js') }}"></script>
@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ URL::asset('public/Dashboard-Template-Velzon-main/assets/css/icons.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('public/Dashboard-Template-Velzon-main/assets/css/app.min.css') }}">   
     <link rel="stylesheet" href="{{ URL::asset('public/Dashboard-Template-Velzon-main/assets/css/custom.min.css') }}">
+    
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <style>
@@ -320,14 +321,7 @@
     <script src="{{ asset('public/Dashboard-Template-Velzon-main/assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
     <script src="{{ asset('public/Dashboard-Template-Velzon-main/assets/js/app.js') }}"></script>
    <script src="<?php echo asset('public/js/tinymce/tinymce.min.js')?>"></script>
-    <script>
-     tinymce.init({
-     selector: '#tinymce-editor', // Replace this CSS selector to match the placeholder element for TinyMCE
-     plugins: 'code table lists',
-     toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
-   });
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- 
+  
  </script>
  
 </body>

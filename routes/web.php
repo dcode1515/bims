@@ -51,7 +51,7 @@ Route::post('/api/store/purok', [App\Http\Controllers\Barangay\BarangayControlle
 Route::get('/api/get/data/purok', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataPurok']);
 Route::post('/api/update/purok/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_purok']);
 Route::delete('/api/delete/purok/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'delete_purok']);
-Route::get('/barangay/official', [App\Http\Controllers\Barangay\BarangayController::class, 'barangay_official'])->name('barangay.official');
+Route::get('/barangay/officials', [App\Http\Controllers\Barangay\BarangayController::class, 'barangay_officials'])->name('barangay.officials');
 
 Route::get('/barangay/position', [App\Http\Controllers\Barangay\BarangayController::class, 'barangay_position'])->name('position');
 Route::post('/api/store/position', [App\Http\Controllers\Barangay\BarangayController::class, 'store_position']);
@@ -114,6 +114,11 @@ Route::get('/print/residency/certificate/{id}', [App\Http\Controllers\Barangay\B
 Route::get('/inhabitants', [App\Http\Controllers\Barangay\BarangayController::class, 'inhabitants'])->name('inhabitants');
 Route::get('/api/get/data/inhabitants', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataInhabitants']);
 Route::get('/barangay/history', [App\Http\Controllers\Barangay\BarangayController::class, 'barangay_history'])->name('barangay.history');
+Route::get('/reports', [App\Http\Controllers\ReportController::class, 'reports'])->name('reports');
+Route::get('/barangay/reports/pdf', [App\Http\Controllers\ReportController::class, 'exportPdf'])->name('reports.pdf');
+Route::delete('/api/delete/household/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'delete_household']);
+
+
 });
 });
 

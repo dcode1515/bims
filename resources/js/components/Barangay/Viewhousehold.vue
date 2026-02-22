@@ -229,9 +229,13 @@
                     </div>
                     <h5 class="fw-bold mb-1">{{ formatName(headOfFamily) }}</h5>
                     <p class="text-muted mb-3">Head of Family</p>
-                    <div class="d-flex justify-content-center gap-2">
+                    <div class="d-flex justify-content-center gap-2 flex-wrap">
                       <span class="badge bg-info">{{ headOfFamily.sex || 'Not specified' }}</span>
                       <span class="badge bg-success">{{ calculateAge(headOfFamily.birthdate) }} years old</span>
+                      <!-- PWD Badge for Head -->
+                      <span v-if="headOfFamily.is_pwd === 'Yes' || headOfFamily.isPWD === 'Yes'" class="badge bg-warning">
+                        <i class="ri-wheelchair-line me-1"></i>PWD
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -326,6 +330,51 @@
                                 {{ getLivingStatusText(headOfFamily.is_deceased || headOfFamily.isDeceased) }}
                               </span>
                             </div>
+                            <div class="col-6">
+                              <small class="text-muted d-block">PWD Status</small>
+                              <span class="badge" :class="getPWDBadgeClass(headOfFamily.is_pwd || headOfFamily.isPWD)">
+                                {{ getPWDText(headOfFamily.is_pwd || headOfFamily.isPWD) }}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- PWD Details Section - Only show if PWD -->
+                    <div class="col-12" v-if="(headOfFamily.is_pwd || headOfFamily.isPWD) === 'Yes'">
+                      <div class="card border-warning">
+                        <div class="card-header bg-warning bg-opacity-10 text-warning">
+                          <h6 class="mb-0 fw-semibold">
+                            <i class="ri-heart-pulse-line me-2"></i>Person With Disability Details
+                          </h6>
+                        </div>
+                        <div class="card-body">
+                          <div class="row g-3">
+                            <div class="col-md-4">
+                              <small class="text-muted d-block">Type of Disability</small>
+                              <span class="fw-medium">{{ formatPWDType(headOfFamily) }}</span>
+                            </div>
+                            <div class="col-md-4">
+                              <small class="text-muted d-block">Cause of Disability</small>
+                              <span class="fw-medium">{{ formatPWDCause(headOfFamily) }}</span>
+                            </div>
+                            <div class="col-md-4">
+                              <small class="text-muted d-block">Degree of Disability</small>
+                              <span class="fw-medium">{{ headOfFamily.pwd_degree || headOfFamily.pwdDegree || 'Not specified' }}</span>
+                            </div>
+                            <div class="col-md-4">
+                              <small class="text-muted d-block">PWD ID Number</small>
+                              <span class="fw-medium">{{ headOfFamily.pwd_id_number || headOfFamily.pwdIdNumber || 'Not provided' }}</span>
+                            </div>
+                            <div class="col-md-8">
+                              <small class="text-muted d-block">Assistance Needed</small>
+                              <span class="fw-medium">{{ formatPWDAssistance(headOfFamily) }}</span>
+                            </div>
+                            <div class="col-12" v-if="headOfFamily.pwd_notes || headOfFamily.pwdNotes">
+                              <small class="text-muted d-block">Additional Notes</small>
+                              <p class="mb-0">{{ headOfFamily.pwd_notes || headOfFamily.pwdNotes }}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -396,6 +445,7 @@
                       <th>Employment</th>
                       <th>Voter</th>
                       <th>4Ps</th>
+                      <th>PWD</th>
                       <th>Contact</th>
                       <th>Actions</th>
                     </tr>
@@ -425,6 +475,12 @@
                         <span class="badge" :class="get4PsBadgeClass(member.is_4ps_member || member.is4psMember)">
                           {{ (member.is_4ps_member || member.is4psMember) || 'No' }}
                         </span>
+                      </td>
+                      <td>
+                        <span v-if="(member.is_pwd || member.isPWD) === 'Yes'" class="badge bg-warning">
+                          <i class="ri-wheelchair-line me-1"></i> Yes
+                        </span>
+                        <span v-else class="badge bg-secondary">No</span>
                       </td>
                       <td>
                         <div>{{ member.contact_number || member.contactNumber || '-' }}</div>
@@ -629,6 +685,12 @@
                 </div>
                 <h6 class="mt-2 mb-0 fw-bold">{{ formatName(selectedMember) }}</h6>
                 <small class="text-muted">{{ selectedMember.relationship }}</small>
+                <!-- PWD Badge in Modal -->
+                <div v-if="(selectedMember.is_pwd || selectedMember.isPWD) === 'Yes'" class="mt-2">
+                  <span class="badge bg-warning">
+                    <i class="ri-wheelchair-line me-1"></i> Person With Disability
+                  </span>
+                </div>
               </div>
               <div class="col-md-8">
                 <div class="row g-3">
@@ -660,6 +722,37 @@
                     <small class="text-muted d-block">National ID</small>
                     <span>{{ selectedMember.national_id || selectedMember.nationalId || 'N/A' }}</span>
                   </div>
+
+                  <!-- PWD Details Section in Modal -->
+                  <div class="col-12" v-if="(selectedMember.is_pwd || selectedMember.isPWD) === 'Yes'">
+                    <hr>
+                    <h6 class="fw-semibold text-warning">
+                      <i class="ri-heart-pulse-line me-2"></i>PWD Details
+                    </h6>
+                    <div class="row g-2 mt-2">
+                      <div class="col-6">
+                        <small class="text-muted d-block">Type of Disability</small>
+                        <span class="fw-medium">{{ formatPWDType(selectedMember) }}</span>
+                      </div>
+                      <div class="col-6">
+                        <small class="text-muted d-block">Cause of Disability</small>
+                        <span class="fw-medium">{{ formatPWDCause(selectedMember) }}</span>
+                      </div>
+                      <div class="col-6">
+                        <small class="text-muted d-block">Degree</small>
+                        <span class="fw-medium">{{ selectedMember.pwd_degree || selectedMember.pwdDegree || 'Not specified' }}</span>
+                      </div>
+                      <div class="col-6">
+                        <small class="text-muted d-block">PWD ID</small>
+                        <span class="fw-medium">{{ selectedMember.pwd_id_number || selectedMember.pwdIdNumber || 'Not provided' }}</span>
+                      </div>
+                      <div class="col-12" v-if="selectedMember.pwd_notes || selectedMember.pwdNotes">
+                        <small class="text-muted d-block">Notes</small>
+                        <p class="mb-0">{{ selectedMember.pwd_notes || selectedMember.pwdNotes }}</p>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="col-12">
                     <hr>
                     <h6 class="fw-semibold">Education & Employment</h6>
@@ -895,6 +988,77 @@ export default {
     getLivingStatusText(status) {
       return status === 'Yes' ? 'Deceased' : 'Alive';
     },
+    // New PWD methods
+    getPWDBadgeClass(status) {
+      return status === 'Yes' ? 'bg-warning' : 'bg-secondary';
+    },
+    getPWDText(status) {
+      return status === 'Yes' ? 'PWD' : 'Non-PWD';
+    },
+    formatPWDType(person) {
+      const pwdType = person.pwd_type || person.pwdType;
+      if (!pwdType) return 'Not specified';
+      
+      // If it contains "Other:", extract the specification
+      if (pwdType.startsWith('Other:')) {
+        return pwdType;
+      }
+      return pwdType;
+    },
+    formatPWDCause(person) {
+      const pwdCause = person.pwd_cause || person.pwdCause;
+      if (!pwdCause) return 'Not specified';
+      
+      // If it contains "Other:", extract the specification
+      if (pwdCause.startsWith('Other:')) {
+        return pwdCause;
+      }
+      return pwdCause;
+    },
+   formatPWDAssistance(person) {
+  const assistance = person.pwd_assistance || person.pwdAssistance;
+  const assistanceOther = person.pwd_assistance_other || person.pwdAssistanceOther;
+  
+  if (!assistance || assistance.length === 0) {
+    return assistanceOther || 'None specified';
+  }
+  
+  // If it's already an array
+  if (Array.isArray(assistance)) {
+    let assistanceText = assistance.join(', ');
+    
+    if (assistance.includes('Other') && assistanceOther) {
+      assistanceText = assistance
+        .map(item => item === 'Other' ? `Other (${assistanceOther})` : item)
+        .join(', ');
+    }
+    
+    return assistanceText;
+  }
+  
+  // If it's a string (maybe from JSON)
+  if (typeof assistance === 'string') {
+    try {
+      const parsed = JSON.parse(assistance);
+      if (Array.isArray(parsed)) {
+        let assistanceText = parsed.join(', ');
+        
+        if (parsed.includes('Other') && assistanceOther) {
+          assistanceText = parsed
+            .map(item => item === 'Other' ? `Other (${assistanceOther})` : item)
+            .join(', ');
+        }
+        
+        return assistanceText;
+      }
+    } catch (e) {
+      // If parsing fails, return as is
+      return assistance;
+    }
+  }
+  
+  return assistanceOther || 'None specified';
+},
     formatHousingType() {
       const type = this.household.housing_type || this.household.housingType;
       if (!type) return "Not specified";
@@ -993,14 +1157,14 @@ export default {
       if (!person) return "Not specified";
       
       const firstName = person.first_name || person.firstName || "";
-      const middleInitial = person.middle_initial || person.middleInitial || "";
+      const middle_name = person.middle_name || person.middle_name || "";
       const lastName = person.last_name || person.lastName || "";
       const extension = person.extension || "";
       
       if (!firstName && !lastName) return "Not specified";
       
       let name = firstName;
-      if (middleInitial) name += ` ${middleInitial}`;
+      if (middle_name) name += ` ${middle_name}`;
       name += ` ${lastName}`;
       if (extension) name += ` ${extension}`;
       return name.trim();

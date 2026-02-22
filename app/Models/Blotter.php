@@ -35,4 +35,12 @@ class Blotter extends Model
         'deleted_at',
 
       ];
+       public function complainant()
+    {
+        return $this->belongsTo(HouseholdMember::class, 'complainant_name');
+    }
+     public function respondent()
+    {
+        return $this->belongsTo(HouseholdMember::class, 'respondent_name');
+    }
 }

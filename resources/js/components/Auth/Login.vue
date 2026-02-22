@@ -103,7 +103,7 @@ export default {
         },
 
         getImageUrlLogo() {
-            return "/brgy_ubaldo/public/images/ubaldo-removebg-preview.png";
+            return "/public/images/ubaldo-removebg-preview.png";
         }
     },
 

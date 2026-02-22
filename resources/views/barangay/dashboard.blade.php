@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-2 text-success small">
-                                        <i class="ri-arrow-up-line"></i> +12% from last month
+                                        <i class="ri-arrow-up-line"></i>   {{ $totalMembers > 0 ? 100 : 0 }}% of total population
                                     </div>
                                 </div>
                             </div>
@@ -46,15 +46,15 @@
                                 <div class="summary-card">
                                     <div class="d-flex align-items-center">
                                         <div class="icon-wrapper bg-success bg-opacity-10">
-                                            <i class="ri-user-star-line text-success fs-24"></i>
+                                            <i class="ri-wheelchair-line text-warning fs-24"></i>
                                         </div>
                                         <div class="ms-3">
-                                            <h3 class="mb-0 fw-bold">{{ $totalHeads ?? 0 }}</h3>
-                                            <span class="text-muted">Household Heads</span>
+                                            <h3 class="mb-0 fw-bold">{{ $totalisPWD ?? 0 }}</h3>
+                                            <span class="text-muted">Total Person With Disability</span>
                                         </div>
                                     </div>
-                                    <div class="mt-2 text-muted small">
-                                        {{ $totalHeads ? round(($totalHeads/$totalMembers)*100, 1) : 0 }}% of total
+                                   <div class="mt-2 text-muted small">
+                                        {{ $totalMembers > 0 ? round(($totalisPWD / $totalMembers) * 100, 1) : 0 }}% of total
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                 <div class="summary-card">
                                     <div class="d-flex align-items-center">
                                         <div class="icon-wrapper bg-info bg-opacity-10">
-                                            <i class="ri-vote-line text-info fs-24"></i>
+                                          <i class="ri-user-3-line text-warning fs-24"></i>
                                         </div>
                                         <div class="ms-3">
                                             <h3 class="mb-0 fw-bold">{{ $totalVoters ?? 0 }}</h3>
@@ -135,11 +135,12 @@
                                 </div>
                             </div>
                             
-                         <div class="card mb-4 shadow-sm border-0">
+              <!-- Detailed Age Groups Card -->
+<div class="card mb-4 shadow-sm border-0">
     <div class="card-body">
         <div class="d-flex justify-content-between mb-3">
             <h6 class="fw-bold mb-0">Detailed Age Groups</h6>
-            <span class="badge bg-info">Detailed</span>
+            <span class="badge bg-info">Based on Birthdate</span>
         </div>
 
         @php
@@ -173,6 +174,7 @@
         @endforeach
     </div>
 </div>
+<!-- End Detailed Age Groups Card -->
 
                         <div class="progress" style="height: 8px;">
                             <div class="progress-bar bg-success" style="width: {{ $totalMembers ? ($elderly/$totalMembers)*100 : 0 }}%"></div>

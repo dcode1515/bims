@@ -272,19 +272,19 @@
                     <div class="col-md-2">
                       <label class="form-label fw-medium">M.I.</label>
                       <input
-                        v-model="formData.headOfFamily.middleInitial"
+                        v-model="formData.headOfFamily.middle_name"
                         type="text"
                         class="form-control"
                         :class="{
                           'is-invalid':
-                            fieldErrors['headOfFamily.middleInitial'],
+                            fieldErrors['headOfFamily.middle_name'],
                         }"
                         placeholder="M"
-                        @blur="validateField('headOfFamily.middleInitial')"
+                        @blur="validateField('headOfFamily.middle_name')"
                       />
                       <div class="invalid-feedback d-flex align-items-center">
                         <i class="ri-error-warning-line me-1"></i>
-                        {{ fieldErrors["headOfFamily.middleInitial"] }}
+                        {{ fieldErrors["headOfFamily.middle_name"] }}
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -1063,18 +1063,18 @@
                       <div class="col-md-2">
                         <label class="form-label fw-medium">M.I.</label>
                         <input
-                          v-model="member.middleInitial"
+                          v-model="member.middle_name"
                           type="text"
                           class="form-control"
                           :class="{
                             'is-invalid':
-                              fieldErrors[`members.${index}.middleInitial`],
+                              fieldErrors[`members.${index}.middle_name`],
                           }"
                           placeholder="M"
-                          @blur="validateMemberField(index, 'middleInitial')"
+                          @blur="validateMemberField(index, 'middle_name')"
                         />
                         <div class="invalid-feedback">
-                          {{ fieldErrors[`members.${index}.middleInitial`] }}
+                          {{ fieldErrors[`members.${index}.middle_name`] }}
                         </div>
                       </div>
                       <div class="col-md-3">
@@ -3895,7 +3895,7 @@ export default {
         },
         headOfFamily: {
           firstName: "",
-          middleInitial: "",
+          middle_name: "",
           lastName: "",
           extension: "",
           sex: "",
@@ -4419,15 +4419,7 @@ export default {
         this.validationErrors.push("Last name must be at least 2 characters");
       }
 
-      // Validate middle initial if provided
-      if (head.middleInitial) {
-        if (!this.isValidMiddleInitial(head.middleInitial)) {
-          this.fieldErrors["headOfFamily.middleInitial"] =
-            "Middle initial must be 1-3 letters";
-          this.validationErrors.push("Middle initial must be 1-3 letters");
-        }
-      }
-
+      
       // Validate extension if provided
       if (head.extension) {
         if (!this.isValidExtension(head.extension)) {
@@ -4613,16 +4605,7 @@ export default {
           );
         }
 
-        // Validate middle initial if provided
-        if (member.middleInitial) {
-          if (!this.isValidMiddleInitial(member.middleInitial)) {
-            this.fieldErrors[`members.${index}.middleInitial`] =
-              "Middle initial must be 1-3 letters";
-            this.validationErrors.push(
-              `Member ${memberNum}: Middle initial must be 1-3 letters`
-            );
-          }
-        }
+     
 
         // Validate extension if provided
         if (member.extension) {
@@ -4945,11 +4928,7 @@ export default {
               this.fieldErrors[fieldPath] = "Must be at least 2 characters";
             }
             break;
-          case "middleInitial":
-            if (value && !this.isValidMiddleInitial(value)) {
-              this.fieldErrors[fieldPath] = "Must be 1-3 letters";
-            }
-            break;
+      
           case "extension":
             if (value && !this.isValidExtension(value)) {
               this.fieldErrors[fieldPath] = "Invalid extension";
@@ -5151,11 +5130,7 @@ export default {
             this.fieldErrors[fieldPath] = "Must be at least 2 characters";
           }
           break;
-        case "middleInitial":
-          if (member[field] && !this.isValidMiddleInitial(member[field])) {
-            this.fieldErrors[fieldPath] = "Must be 1-3 letters";
-          }
-          break;
+    
         case "extension":
           if (member[field] && !this.isValidExtension(member[field])) {
             this.fieldErrors[fieldPath] = "Invalid extension";
@@ -5237,9 +5212,7 @@ export default {
           break;
       }
     },
-    isValidMiddleInitial(mi) {
-      return /^[A-Za-z]{1,3}$/.test(mi);
-    },
+ 
     isValidExtension(ext) {
       const validExtensions = ["Jr", "Sr", "II", "III", "IV"];
       return validExtensions.includes(ext);
@@ -5247,7 +5220,7 @@ export default {
     addMember() {
       this.formData.members.push({
         firstName: "",
-        middleInitial: "",
+        middle_name: "",
         lastName: "",
         extension: "",
         sex: "",
@@ -5324,7 +5297,7 @@ export default {
     formatName(person) {
       if (!person.firstName && !person.lastName) return "Not specified";
       let name = `${person.firstName || ""}`;
-      if (person.middleInitial) name += ` ${person.middleInitial}`;
+      if (person.middle_name) name += ` ${person.middle_name}`;
       name += ` ${person.lastName || ""}`;
       if (person.extension) name += ` ${person.extension}`;
       return name.trim();
@@ -5393,7 +5366,7 @@ export default {
           },
           headOfFamily: {
             firstName: this.formData.headOfFamily.firstName,
-            middleInitial: this.formData.headOfFamily.middleInitial,
+            middle_name: this.formData.headOfFamily.middle_name,
             lastName: this.formData.headOfFamily.lastName,
             extension: this.formData.headOfFamily.extension,
             sex: this.formData.headOfFamily.sex,
@@ -5439,7 +5412,7 @@ export default {
           },
           members: this.formData.members.map(member => ({
             firstName: member.firstName,
-            middleInitial: member.middleInitial,
+            middle_name: member.middle_name,
             lastName: member.lastName,
             extension: member.extension,
             sex: member.sex,
@@ -5560,7 +5533,7 @@ export default {
         },
         headOfFamily: {
           firstName: "",
-          middleInitial: "",
+          middle_name: "",
           lastName: "",
           extension: "",
           sex: "",

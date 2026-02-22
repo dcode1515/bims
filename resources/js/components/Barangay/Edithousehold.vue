@@ -5,25 +5,15 @@
       <div class="col-12">
         <div class="d-flex justify-content-between position-relative">
           <div class="step-line position-absolute top-50 start-0 end-0"></div>
-          <div
-            class="step-line-progress position-absolute top-50 start-0"
-            :style="{ width: progressWidth }"
-          ></div>
+          <div class="step-line-progress position-absolute top-50 start-0" :style="{ width: progressWidth }"></div>
 
           <div v-for="step in steps" :key="step.id" class="step-container">
-            <div
-              class="step-circle d-flex align-items-center justify-content-center"
-              :class="{
-                'step-active': currentStep === step.id,
-                'step-completed': currentStep > step.id,
-                'step-error': hasStepError(step.id),
-              }"
-              @click="goToStep(step.id)"
-            >
-              <i
-                v-if="currentStep > step.id"
-                class="ri-check-line step-icon"
-              ></i>
+            <div class="step-circle d-flex align-items-center justify-content-center" :class="{
+              'step-active': currentStep === step.id,
+              'step-completed': currentStep > step.id,
+              'step-error': hasStepError(step.id),
+            }" @click="goToStep(step.id)">
+              <i v-if="currentStep > step.id" class="ri-check-line step-icon"></i>
               <i v-else class="ri-check-line step-icon" :class="step.icon"></i>
               <span v-if="currentStep <= step.id" class="step-number">{{
                 step.id
@@ -61,9 +51,7 @@
       <div class="row">
         <div class="col-12">
           <div class="card border-0 shadow-sm">
-            <div
-              class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25"
-            >
+            <div class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25">
               <div class="d-flex align-items-center">
                 <div class="step-header-icon">
                   <i class="ri-map-pin-line text-primary fs-5"></i>
@@ -72,9 +60,7 @@
                   <h6 class="mb-0 fw-semibold text-primary">
                     Address Information
                   </h6>
-                  <small class="text-muted"
-                    >Edit household address details</small
-                  >
+                  <small class="text-muted">Edit household address details</small>
                 </div>
               </div>
             </div>
@@ -90,18 +76,10 @@
                     <span class="input-group-text bg-light-subtle border-end-0">
                       <i class="ri-community-line text-primary"></i>
                     </span>
-                    <select
-                      v-model="formData.address.purok"
-                      class="form-select"
-                      :class="{ 'is-invalid': fieldErrors['address.purok'] }"
-                      @blur="validateField('address.purok')"
-                    >
+                    <select v-model="formData.address.purok" class="form-select"
+                      :class="{ 'is-invalid': fieldErrors['address.purok'] }" @blur="validateField('address.purok')">
                       <option value="" disabled selected>Select Purok</option>
-                      <option
-                        v-for="purok in puroks"
-                        :key="purok.id"
-                        :value="purok.id"
-                      >
+                      <option v-for="purok in puroks" :key="purok.id" :value="purok.id">
                         {{ purok.purok_name }}
                       </option>
                     </select>
@@ -126,14 +104,9 @@
                     <span class="input-group-text bg-light-subtle border-end-0">
                       <i class="ri-roadster-line text-primary"></i>
                     </span>
-                    <textarea
-                      v-model="formData.address.street"
-                      class="form-control"
-                      :class="{ 'is-invalid': fieldErrors['address.street'] }"
-                      rows="2"
-                      placeholder="Enter street name"
-                      @blur="validateField('address.street')"
-                    ></textarea>
+                    <textarea v-model="formData.address.street" class="form-control"
+                      :class="{ 'is-invalid': fieldErrors['address.street'] }" rows="2" placeholder="Enter street name"
+                      @blur="validateField('address.street')"></textarea>
                     <div class="invalid-feedback d-flex align-items-center">
                       <i class="ri-error-warning-line me-1"></i>
                       {{ fieldErrors["address.street"] }}
@@ -149,18 +122,29 @@
                   <div class="card bg-light-subtle border-0">
                     <div class="card-body">
                       <div class="d-flex align-items-center">
-                        <i
-                          class="ri-building-2-line text-primary me-3 fs-4"
-                        ></i>
+                        <i class="ri-building-2-line text-primary me-3 fs-4"></i>
                         <div>
+
+                          <p class="mb-0 fw-medium">
+                            Region:
+                            <span class="text-primary">{{ region }}</span>
+                          </p>
+
+                          <p class="mb-0 fw-medium">
+                            Province:
+                            <span class="text-primary">{{ province }}</span>
+                          </p>
+
+                          <p class="mb-0 fw-medium">
+                            Municipality:
+                            <span class="text-primary">{{ municipality }}</span>
+                          </p>
+
                           <p class="mb-0 fw-medium">
                             Barangay:
-                            <span class="text-primary">Ubaldo Laya</span>
+                            <span class="text-primary">{{ barangay }}</span>
                           </p>
-                          <p class="mb-0">
-                            Municipality:
-                            <span class="fw-medium">City of Iligan</span>
-                          </p>
+
                         </div>
                       </div>
                     </div>
@@ -170,24 +154,16 @@
                 <!-- HOUSEHOLD NUMBER -->
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label
-                      class="form-label fw-medium d-flex align-items-center"
-                    >
+                    <label class="form-label fw-medium d-flex align-items-center">
                       <i class="ri-hashtag text-primary me-2"></i>
                       Household #
                     </label>
                     <div class="input-group">
-                      <span
-                        class="input-group-text bg-light-subtle border-end-0"
-                      >
+                      <span class="input-group-text bg-light-subtle border-end-0">
                         <i class="ri-map-2-line text-primary"></i>
                       </span>
-                      <input
-                        v-model="formData.address.householdNumber"
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter household number"
-                      />
+                      <input v-model="formData.address.householdNumber" type="text" class="form-control"
+                        placeholder="Enter household number" />
                     </div>
                     <div class="form-text">Enter Household Number</div>
                   </div>
@@ -201,18 +177,10 @@
                     <!-- Previous button disabled on first step -->
                   </div>
                   <div class="d-flex gap-2">
-                    <button
-                      type="button"
-                      class="btn btn-outline-primary px-4"
-                      @click="saveAsDraft"
-                    >
+                    <button type="button" class="btn btn-outline-primary px-4" @click="saveAsDraft">
                       <i class="ri-save-line me-2"></i> Save Draft
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-primary px-4"
-                      @click="nextStep"
-                    >
+                    <button type="button" class="btn btn-primary px-4" @click="nextStep">
                       Next <i class="ri-arrow-right-line ms-2"></i>
                     </button>
                   </div>
@@ -229,18 +197,14 @@
       <div class="row">
         <div class="col-12">
           <div class="card border-0 shadow-sm">
-            <div
-              class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25"
-            >
+            <div class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25">
               <div class="d-flex align-items-center">
                 <div class="step-header-icon">
                   <i class="ri-user-line text-primary fs-5"></i>
                 </div>
                 <div class="ms-3">
                   <h6 class="mb-0 fw-semibold text-primary">Head of Family</h6>
-                  <small class="text-muted"
-                    >Edit information about the household head</small
-                  >
+                  <small class="text-muted">Edit information about the household head</small>
                 </div>
               </div>
             </div>
@@ -257,16 +221,9 @@
                       <label class="form-label fw-medium">
                         First Name <span class="text-danger">*</span>
                       </label>
-                      <input
-                        v-model="formData.headOfFamily.firstName"
-                        type="text"
-                        class="form-control"
-                        :class="{
-                          'is-invalid': fieldErrors['headOfFamily.firstName'],
-                        }"
-                        placeholder="Enter first name"
-                        @blur="validateField('headOfFamily.firstName')"
-                      />
+                      <input v-model="formData.headOfFamily.firstName" type="text" class="form-control" :class="{
+                        'is-invalid': fieldErrors['headOfFamily.firstName'],
+                      }" placeholder="Enter first name" @blur="validateField('headOfFamily.firstName')" />
                       <div class="invalid-feedback d-flex align-items-center">
                         <i class="ri-error-warning-line me-1"></i>
                         {{ fieldErrors["headOfFamily.firstName"] }}
@@ -274,36 +231,22 @@
                     </div>
                     <div class="col-md-2">
                       <label class="form-label fw-medium">M.I.</label>
-                      <input
-                        v-model="formData.headOfFamily.middleInitial"
-                        type="text"
-                        class="form-control"
-                        :class="{
-                          'is-invalid':
-                            fieldErrors['headOfFamily.middleInitial'],
-                        }"
-                        placeholder="M"
-                        @blur="validateField('headOfFamily.middleInitial')"
-                      />
+                      <input v-model="formData.headOfFamily.middle_name" type="text" class="form-control" :class="{
+                        'is-invalid':
+                          fieldErrors['headOfFamily.middle_name'],
+                      }" placeholder="M" @blur="validateField('headOfFamily.middle_name')" />
                       <div class="invalid-feedback d-flex align-items-center">
                         <i class="ri-error-warning-line me-1"></i>
-                        {{ fieldErrors["headOfFamily.middleInitial"] }}
+                        {{ fieldErrors["headOfFamily.middle_name"] }}
                       </div>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label fw-medium">
                         Last Name <span class="text-danger">*</span>
                       </label>
-                      <input
-                        v-model="formData.headOfFamily.lastName"
-                        type="text"
-                        class="form-control"
-                        :class="{
-                          'is-invalid': fieldErrors['headOfFamily.lastName'],
-                        }"
-                        placeholder="Enter last name"
-                        @blur="validateField('headOfFamily.lastName')"
-                      />
+                      <input v-model="formData.headOfFamily.lastName" type="text" class="form-control" :class="{
+                        'is-invalid': fieldErrors['headOfFamily.lastName'],
+                      }" placeholder="Enter last name" @blur="validateField('headOfFamily.lastName')" />
                       <div class="invalid-feedback d-flex align-items-center">
                         <i class="ri-error-warning-line me-1"></i>
                         {{ fieldErrors["headOfFamily.lastName"] }}
@@ -311,14 +254,9 @@
                     </div>
                     <div class="col-md-2">
                       <label class="form-label fw-medium">Extension</label>
-                      <select
-                        v-model="formData.headOfFamily.extension"
-                        class="form-select"
-                        :class="{
-                          'is-invalid': fieldErrors['headOfFamily.extension'],
-                        }"
-                        @blur="validateField('headOfFamily.extension')"
-                      >
+                      <select v-model="formData.headOfFamily.extension" class="form-select" :class="{
+                        'is-invalid': fieldErrors['headOfFamily.extension'],
+                      }" @blur="validateField('headOfFamily.extension')">
                         <option value="">None</option>
                         <option value="Jr">Jr</option>
                         <option value="Sr">Sr</option>
@@ -337,8 +275,7 @@
                 <!-- DEMOGRAPHICS -->
                 <div class="col-12 mb-4">
                   <h6 class="border-bottom pb-2 mb-3 fw-semibold">
-                    <i class="ri-user-heart-line text-primary me-2"></i
-                    >Demographics
+                    <i class="ri-user-heart-line text-primary me-2"></i>Demographics
                   </h6>
                   <div class="row g-3">
                     <div class="col-md-4">
@@ -346,34 +283,19 @@
                         Sex <span class="text-danger">*</span>
                       </label>
                       <div class="btn-group w-100" role="group">
-                        <input
-                          v-model="formData.headOfFamily.sex"
-                          type="radio"
-                          class="btn-check"
-                          value="Male"
-                          id="genderMale"
-                        />
+                        <input v-model="formData.headOfFamily.sex" type="radio" class="btn-check" value="Male"
+                          id="genderMale" />
                         <label class="btn btn-outline-primary" for="genderMale">
                           <i class="ri-men-line me-2"></i>Male
                         </label>
-                        <input
-                          v-model="formData.headOfFamily.sex"
-                          type="radio"
-                          class="btn-check"
-                          value="Female"
-                          id="genderFemale"
-                        />
-                        <label
-                          class="btn btn-outline-primary"
-                          for="genderFemale"
-                        >
+                        <input v-model="formData.headOfFamily.sex" type="radio" class="btn-check" value="Female"
+                          id="genderFemale" />
+                        <label class="btn btn-outline-primary" for="genderFemale">
                           <i class="ri-women-line me-2"></i>Female
                         </label>
                       </div>
-                      <div
-                        v-if="fieldErrors['headOfFamily.sex']"
-                        class="text-danger small d-flex align-items-center mt-1"
-                      >
+                      <div v-if="fieldErrors['headOfFamily.sex']"
+                        class="text-danger small d-flex align-items-center mt-1">
                         <i class="ri-error-warning-line me-1"></i>
                         {{ fieldErrors["headOfFamily.sex"] }}
                       </div>
@@ -387,24 +309,15 @@
                         <span class="input-group-text bg-light-subtle">
                           <i class="ri-calendar-line text-primary"></i>
                         </span>
-                        <input
-                          v-model="formData.headOfFamily.birthdate"
-                          type="date"
-                          class="form-control"
-                          :class="{
-                            'is-invalid': fieldErrors['headOfFamily.birthdate'],
-                          }"
-                          @blur="validateField('headOfFamily.birthdate')"
-                        />
+                        <input v-model="formData.headOfFamily.birthdate" type="date" class="form-control" :class="{
+                          'is-invalid': fieldErrors['headOfFamily.birthdate'],
+                        }" @blur="validateField('headOfFamily.birthdate')" />
                         <div class="invalid-feedback d-flex align-items-center">
                           <i class="ri-error-warning-line me-1"></i>
                           {{ fieldErrors["headOfFamily.birthdate"] }}
                         </div>
                       </div>
-                      <div
-                        v-if="formData.headOfFamily.birthdate"
-                        class="form-text"
-                      >
+                      <div v-if="formData.headOfFamily.birthdate" class="form-text">
                         Age:
                         {{ calculateAge(formData.headOfFamily.birthdate) }}
                         years old
@@ -415,14 +328,9 @@
                       <label class="form-label fw-medium">
                         Civil Status <span class="text-danger">*</span>
                       </label>
-                      <select
-                        v-model="formData.headOfFamily.civilStatus"
-                        class="form-select"
-                        :class="{
-                          'is-invalid': fieldErrors['headOfFamily.civilStatus'],
-                        }"
-                        @blur="validateField('headOfFamily.civilStatus')"
-                      >
+                      <select v-model="formData.headOfFamily.civilStatus" class="form-select" :class="{
+                        'is-invalid': fieldErrors['headOfFamily.civilStatus'],
+                      }" @blur="validateField('headOfFamily.civilStatus')">
                         <option value="" disabled>Select Status</option>
                         <option value="Single">Single</option>
                         <option value="Married">Married</option>
@@ -441,15 +349,12 @@
                 <!-- IDENTIFICATION AND STATUS SECTION -->
                 <div class="col-12 mb-4">
                   <h6 class="border-bottom pb-2 mb-3 fw-semibold">
-                    <i class="ri-fingerprint-line text-primary me-2"></i
-                    >Identification & Status
+                    <i class="ri-fingerprint-line text-primary me-2"></i>Identification & Status
                   </h6>
                   <div class="row g-3">
                     <!-- National ID -->
-                    <div class="col-md-6">
-                      <label
-                        class="form-label fw-medium d-flex align-items-center"
-                      >
+                    <div class="col-md-12">
+                      <label class="form-label fw-medium d-flex align-items-center">
                         <i class="ri-id-card-line text-primary me-2"></i>
                         National ID / PhilSys Number
                       </label>
@@ -457,12 +362,8 @@
                         <span class="input-group-text bg-light-subtle">
                           <i class="ri-fingerprint-line text-primary"></i>
                         </span>
-                        <input
-                          v-model="formData.headOfFamily.nationalId"
-                          type="text"
-                          class="form-control"
-                          placeholder="1234-5678-9012-3456"
-                        />
+                        <input v-model="formData.headOfFamily.nationalId" type="text" class="form-control"
+                          placeholder="1234-5678-9012-3456" />
                       </div>
                       <div class="form-text">
                         Optional: Philippine Identification System Number
@@ -470,79 +371,51 @@
                     </div>
 
                     <!-- Voter Status -->
-                    <div class="col-md-6">
-                      <label
-                        class="form-label fw-medium d-flex align-items-center"
-                      >
+                    <div class="col-md-3">
+                      <label class="form-label fw-medium d-flex align-items-center">
                         <i class="ri-vote-line text-primary me-2"></i>
                         Voter Status <span class="text-danger ms-1">*</span>
                       </label>
                       <div class="btn-group w-100" role="group">
-                        <input
-                          v-model="formData.headOfFamily.voterStatus"
-                          type="radio"
-                          class="btn-check"
-                          value="Voter"
-                          id="voterYes"
-                        />
+                        <input v-model="formData.headOfFamily.voterStatus" type="radio" class="btn-check" value="Voter"
+                          id="voterYes" />
                         <label class="btn btn-outline-success" for="voterYes">
                           <i class="ri-check-line me-1"></i>Voter
                         </label>
-                        <input
-                          v-model="formData.headOfFamily.voterStatus"
-                          type="radio"
-                          class="btn-check"
-                          value="Non-Voter"
-                          id="voterNo"
-                        />
+                        <input v-model="formData.headOfFamily.voterStatus" type="radio" class="btn-check"
+                          value="Non-Voter" id="voterNo" />
                         <label class="btn btn-outline-secondary" for="voterNo">
                           <i class="ri-close-line me-1"></i>Non-Voter
                         </label>
                       </div>
-                      <div
-                        v-if="fieldErrors['headOfFamily.voterStatus']"
-                        class="text-danger small d-flex align-items-center mt-1"
-                      >
+                      <div v-if="fieldErrors['headOfFamily.voterStatus']"
+                        class="text-danger small d-flex align-items-center mt-1">
                         <i class="ri-error-warning-line me-1"></i>
                         {{ fieldErrors["headOfFamily.voterStatus"] }}
                       </div>
                     </div>
 
                     <!-- 4Ps Member Status -->
-                    <div class="col-md-6">
-                      <label
-                        class="form-label fw-medium d-flex align-items-center"
-                      >
+                    <div class="col-md-3">
+                      <label class="form-label fw-medium d-flex align-items-center">
                         <i class="ri-group-line text-primary me-2"></i>
                         4Ps Member Status
                         <span class="text-danger ms-1">*</span>
                       </label>
                       <div class="btn-group w-100" role="group">
-                        <input
-                          v-model="formData.headOfFamily.is4psMember"
-                          type="radio"
-                          class="btn-check"
-                          value="Yes"
-                          id="4psYes"
-                        />
+                        <input v-model="formData.headOfFamily.is4psMember" type="radio" class="btn-check" value="Yes"
+                          id="4psYes" />
                         <label class="btn btn-outline-info" for="4psYes">
                           <i class="ri-check-double-line me-1"></i>Yes
                         </label>
-                        <input
-                          v-model="formData.headOfFamily.is4psMember"
-                          type="radio"
-                          class="btn-check"
-                          value="No"
-                          id="4psNo"
-                        />
+                        <input v-model="formData.headOfFamily.is4psMember" type="radio" class="btn-check" value="No"
+                          id="4psNo" />
                         <label class="btn btn-outline-secondary" for="4psNo">
                           <i class="ri-close-line me-1"></i>No
                         </label>
                       </div>
-                      <div
-                        v-if="fieldErrors['headOfFamily.is4psMember']"
-                        class="text-danger small d-flex align-items-center mt-1"
-                      >
+                      <div v-if="fieldErrors['headOfFamily.is4psMember']"
+                        class="text-danger small d-flex align-items-center mt-1">
                         <i class="ri-error-warning-line me-1"></i>
                         {{ fieldErrors["headOfFamily.is4psMember"] }}
                       </div>
@@ -552,71 +425,297 @@
                     </div>
 
                     <!-- Deceased Status -->
-                    <div class="col-md-6">
-                      <label
-                        class="form-label fw-medium d-flex align-items-center"
-                      >
+                    <div class="col-md-3">
+                      <label class="form-label fw-medium d-flex align-items-center">
                         <i class="ri-heart-line text-primary me-2"></i>
                         Living Status <span class="text-danger ms-1">*</span>
                       </label>
                       <div class="btn-group w-100" role="group">
-                        <input
-                          v-model="formData.headOfFamily.isDeceased"
-                          type="radio"
-                          class="btn-check"
-                          value="No"
-                          id="alive"
-                        />
+                        <input v-model="formData.headOfFamily.isDeceased" type="radio" class="btn-check" value="No"
+                          id="alive" />
                         <label class="btn btn-outline-success" for="alive">
                           <i class="ri-heart-line me-1"></i>Alive
                         </label>
-                        <input
-                          v-model="formData.headOfFamily.isDeceased"
-                          type="radio"
-                          class="btn-check"
-                          value="Yes"
-                          id="deceased"
-                        />
+                        <input v-model="formData.headOfFamily.isDeceased" type="radio" class="btn-check" value="Yes"
+                          id="deceased" />
                         <label class="btn btn-outline-dark" for="deceased">
                           <i class="ri-rest-time-line me-1"></i>Deceased
                         </label>
                       </div>
-                      <div
-                        v-if="fieldErrors['headOfFamily.isDeceased']"
-                        class="text-danger small d-flex align-items-center mt-1"
-                      >
+                      <div v-if="fieldErrors['headOfFamily.isDeceased']"
+                        class="text-danger small d-flex align-items-center mt-1">
                         <i class="ri-error-warning-line me-1"></i>
                         {{ fieldErrors["headOfFamily.isDeceased"] }}
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                      <label class="form-label fw-medium d-flex align-items-center">
+                        <i class="ri-wheelchair-line text-primary me-2"></i>
+                        Person With Disability <span class="text-danger ms-1">*</span>
+                      </label>
+
+                      <div class="btn-group w-100" role="group">
+                        <input v-model="formData.headOfFamily.isPWD" type="radio" class="btn-check" value="Yes"
+                          id="pwdYes" />
+                        <label class="btn btn-outline-success" for="pwdYes">
+                          <i class="ri-wheelchair-line me-1"></i> Yes
+                        </label>
+
+                        <input v-model="formData.headOfFamily.isPWD" type="radio" class="btn-check" value="No"
+                          id="pwdNo" />
+                        <label class="btn btn-outline-dark" for="pwdNo">
+                          <i class="ri-user-line me-1"></i> No
+                        </label>
+                      </div>
+
+                      <div v-if="fieldErrors['headOfFamily.isPWD']"
+                        class="text-danger small d-flex align-items-center mt-1">
+                        <i class="ri-error-warning-line me-1"></i>
+                        {{ fieldErrors["headOfFamily.isPWD"] }}
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+                <!-- PERSON WITH DISABILITY DETAILS SECTION -->
+                <div class="col-12 mb-4" v-if="formData.headOfFamily.isPWD === 'Yes'">
+                  <div class="card border-warning border-opacity-25 bg-warning bg-opacity-10">
+                    <div class="card-header bg-warning bg-opacity-25 border-warning border-opacity-25">
+                      <h6 class="mb-0 fw-semibold text-warning">
+                        <i class="ri-heart-pulse-line me-2"></i>Person With Disability Details
+                      </h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="row g-3">
+                        <!-- Type of Disability -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-medium">
+                            Type of Disability <span class="text-danger">*</span>
+                          </label>
+                          <select v-model="formData.headOfFamily.pwdType" class="form-select"
+                            :class="{ 'is-invalid': fieldErrors['headOfFamily.pwdType'] }"
+                            @blur="validateField('headOfFamily.pwdType')">
+                            <option value="" disabled>Select Disability Type</option>
+                            <option value="Physical Disability">Physical Disability</option>
+                            <option value="Visual Impairment">Visual Impairment</option>
+                            <option value="Hearing Impairment">Hearing Impairment</option>
+                            <option value="Intellectual Disability">Intellectual Disability</option>
+                            <option value="Learning Disability">Learning Disability</option>
+                            <option value="Mental Health Condition">Mental Health Condition</option>
+                            <option value="Multiple Disabilities">Multiple Disabilities</option>
+                            <option value="Speech Impairment">Speech Impairment</option>
+                            <option value="Orthopedic Disability">Orthopedic Disability</option>
+                            <option value="Other">Other</option>
+                          </select>
+                          <div class="invalid-feedback d-flex align-items-center">
+                            <i class="ri-error-warning-line me-1"></i>
+                            {{ fieldErrors["headOfFamily.pwdType"] }}
+                          </div>
+                        </div>
+
+                        <!-- Specify Other Disability -->
+                        <div class="col-md-6" v-if="formData.headOfFamily.pwdType === 'Other'">
+                          <label class="form-label fw-medium">
+                            Please Specify <span class="text-danger">*</span>
+                          </label>
+                          <input v-model="formData.headOfFamily.pwdOtherSpecify" type="text" class="form-control"
+                            :class="{ 'is-invalid': fieldErrors['headOfFamily.pwdOtherSpecify'] }"
+                            placeholder="Specify disability type"
+                            @blur="validateField('headOfFamily.pwdOtherSpecify')" />
+                          <div class="invalid-feedback d-flex align-items-center">
+                            <i class="ri-error-warning-line me-1"></i>
+                            {{ fieldErrors["headOfFamily.pwdOtherSpecify"] }}
+                          </div>
+                        </div>
+
+                        <!-- PWD ID Number -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-medium">
+                            PWD ID Number (Optional)
+                          </label>
+                          <input v-model="formData.headOfFamily.pwdIdNumber" type="text" class="form-control"
+                            placeholder="e.g., PWD-2024-XXXXX" />
+                          <div class="form-text">If available, enter PWD ID number</div>
+                        </div>
+
+                        <!-- Cause of Disability -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-medium">
+                            Cause of Disability <span class="text-danger">*</span>
+                          </label>
+                          <select v-model="formData.headOfFamily.pwdCause" class="form-select"
+                            :class="{ 'is-invalid': fieldErrors['headOfFamily.pwdCause'] }"
+                            @blur="validateField('headOfFamily.pwdCause')">
+                            <option value="" disabled>Select Cause</option>
+                            <option value="Congenital">Congenital (Inborn)</option>
+                            <option value="Illness/Disease">Illness/Disease</option>
+                            <option value="Accident/Injury">Accident/Injury</option>
+                            <option value="Aging">Aging</option>
+                            <option value="Unknown">Unknown</option>
+                            <option value="Other">Other</option>
+                          </select>
+                          <div class="invalid-feedback d-flex align-items-center">
+                            <i class="ri-error-warning-line me-1"></i>
+                            {{ fieldErrors["headOfFamily.pwdCause"] }}
+                          </div>
+                        </div>
+
+                        <!-- Specify Other Cause -->
+                        <div class="col-12" v-if="formData.headOfFamily.pwdCause === 'Other'">
+                          <label class="form-label fw-medium">
+                            Please Specify Cause <span class="text-danger">*</span>
+                          </label>
+                          <input v-model="formData.headOfFamily.pwdCauseOther" type="text" class="form-control"
+                            :class="{ 'is-invalid': fieldErrors['headOfFamily.pwdCauseOther'] }"
+                            placeholder="Specify cause of disability"
+                            @blur="validateField('headOfFamily.pwdCauseOther')" />
+                          <div class="invalid-feedback d-flex align-items-center">
+                            <i class="ri-error-warning-line me-1"></i>
+                            {{ fieldErrors["headOfFamily.pwdCauseOther"] }}
+                          </div>
+                        </div>
+
+                        <!-- Degree of Disability -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-medium">
+                            Degree of Disability <span class="text-danger">*</span>
+                          </label>
+                          <select v-model="formData.headOfFamily.pwdDegree" class="form-select"
+                            :class="{ 'is-invalid': fieldErrors['headOfFamily.pwdDegree'] }"
+                            @blur="validateField('headOfFamily.pwdDegree')">
+                            <option value="" disabled>Select Degree</option>
+                            <option value="Mild">Mild</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="Severe">Severe</option>
+                            <option value="Profound">Profound</option>
+                          </select>
+                          <div class="invalid-feedback d-flex align-items-center">
+                            <i class="ri-error-warning-line me-1"></i>
+                            {{ fieldErrors["headOfFamily.pwdDegree"] }}
+                          </div>
+                        </div>
+
+                        <!-- Assistance Needed -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-medium">
+                            <i class="ri-hand-heart-line text-warning me-2"></i>
+                            Type of Assistance Needed
+                          </label>
+                          <div class="border rounded p-3 bg-white">
+                            <div class="row g-2">
+                              <div class="col-md-6">
+                                <div class="form-check">
+                                  <input v-model="formData.headOfFamily.pwdAssistance" class="form-check-input"
+                                    type="checkbox" value="Medical" id="assistMedical" />
+                                  <label class="form-check-label" for="assistMedical">
+                                    Medical Assistance
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-check">
+                                  <input v-model="formData.headOfFamily.pwdAssistance" class="form-check-input"
+                                    type="checkbox" value="Financial" id="assistFinancial" />
+                                  <label class="form-check-label" for="assistFinancial">
+                                    Financial Assistance
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-check">
+                                  <input v-model="formData.headOfFamily.pwdAssistance" class="form-check-input"
+                                    type="checkbox" value="Educational" id="assistEducational" />
+                                  <label class="form-check-label" for="assistEducational">
+                                    Educational Assistance
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-check">
+                                  <input v-model="formData.headOfFamily.pwdAssistance" class="form-check-input"
+                                    type="checkbox" value="Livelihood" id="assistLivelihood" />
+                                  <label class="form-check-label" for="assistLivelihood">
+                                    Livelihood Assistance
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-check">
+                                  <input v-model="formData.headOfFamily.pwdAssistance" class="form-check-input"
+                                    type="checkbox" value="Mobility Aid" id="assistMobility" />
+                                  <label class="form-check-label" for="assistMobility">
+                                    Mobility Aid
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-check">
+                                  <input v-model="formData.headOfFamily.pwdAssistance" class="form-check-input"
+                                    type="checkbox" value="Psychosocial Support" id="assistPsychosocial" />
+                                  <label class="form-check-label" for="assistPsychosocial">
+                                    Psychosocial Support
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-check">
+                                  <input v-model="formData.headOfFamily.pwdAssistance" class="form-check-input"
+                                    type="checkbox" value="Other" id="assistOther" />
+                                  <label class="form-check-label" for="assistOther">
+                                    Other
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Specify Other Assistance -->
+                        <div class="col-12"
+                          v-if="formData.headOfFamily.pwdAssistance && formData.headOfFamily.pwdAssistance.includes('Other')">
+                          <label class="form-label fw-medium">
+                            Please Specify Other Assistance
+                          </label>
+                          <input v-model="formData.headOfFamily.pwdAssistanceOther" type="text" class="form-control"
+                            placeholder="Specify other assistance needed" />
+                        </div>
+
+                        <!-- Additional Notes -->
+                        <div class="col-12">
+                          <label class="form-label fw-medium">
+                            Additional Notes / Specific Needs
+                          </label>
+                          <textarea v-model="formData.headOfFamily.pwdNotes" class="form-control" rows="2"
+                            placeholder="Any additional information about the person's disability or specific needs..."></textarea>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
+
+
                 <!-- EDUCATION AND EMPLOYMENT SECTION -->
                 <div class="col-12 mb-4">
                   <h6 class="border-bottom pb-2 mb-3 fw-semibold">
-                    <i class="ri-graduation-cap-line text-primary me-2"></i
-                    >Education & Employment
+                    <i class="ri-graduation-cap-line text-primary me-2"></i>Education & Employment
                   </h6>
                   <div class="row g-3">
                     <!-- Highest Educational Attainment -->
                     <div class="col-md-6">
-                      <label
-                        class="form-label fw-medium d-flex align-items-center"
-                      >
+                      <label class="form-label fw-medium d-flex align-items-center">
                         <i class="ri-award-line text-primary me-2"></i>
                         Highest Educational Attainment
                         <span class="text-danger ms-1">*</span>
                       </label>
-                      <select
-                        v-model="formData.headOfFamily.highestEducation"
-                        class="form-select"
-                        :class="{
-                          'is-invalid':
-                            fieldErrors['headOfFamily.highestEducation'],
-                        }"
-                        @blur="validateField('headOfFamily.highestEducation')"
-                      >
+                      <select v-model="formData.headOfFamily.highestEducation" class="form-select" :class="{
+                        'is-invalid':
+                          fieldErrors['headOfFamily.highestEducation'],
+                      }" @blur="validateField('headOfFamily.highestEducation')">
                         <option value="" disabled>
                           Select Education Level
                         </option>
@@ -656,22 +755,15 @@
 
                     <!-- Educational Status -->
                     <div class="col-md-6">
-                      <label
-                        class="form-label fw-medium d-flex align-items-center"
-                      >
+                      <label class="form-label fw-medium d-flex align-items-center">
                         <i class="ri-book-line text-primary me-2"></i>
                         Educational Status
                         <span class="text-danger ms-1">*</span>
                       </label>
-                      <select
-                        v-model="formData.headOfFamily.educationalStatus"
-                        class="form-select"
-                        :class="{
-                          'is-invalid':
-                            fieldErrors['headOfFamily.educationalStatus'],
-                        }"
-                        @blur="validateField('headOfFamily.educationalStatus')"
-                      >
+                      <select v-model="formData.headOfFamily.educationalStatus" class="form-select" :class="{
+                        'is-invalid':
+                          fieldErrors['headOfFamily.educationalStatus'],
+                      }" @blur="validateField('headOfFamily.educationalStatus')">
                         <option value="" disabled>Select Status</option>
                         <option value="Not Attending School">
                           Not Attending School
@@ -692,78 +784,47 @@
 
                     <!-- Employment Status -->
                     <div class="col-md-6">
-                      <label
-                        class="form-label fw-medium d-flex align-items-center"
-                      >
+                      <label class="form-label fw-medium d-flex align-items-center">
                         <i class="ri-briefcase-line text-primary me-2"></i>
                         Employment Status
                         <span class="text-danger ms-1">*</span>
                       </label>
                       <div class="row g-2">
                         <div class="col-6">
-                          <input
-                            v-model="formData.headOfFamily.employmentStatus"
-                            type="radio"
-                            class="btn-check"
-                            value="Employed"
-                            id="employed"
-                          />
-                          <label
-                            class="btn btn-outline-success w-100"
-                            for="employed"
-                          >
+                          <input v-model="formData.headOfFamily.employmentStatus" type="radio" class="btn-check"
+                            value="Employed" id="employed" />
+                          <label class="btn btn-outline-success w-100" for="employed">
                             <i class="ri-briefcase-line me-1"></i>Employed
                           </label>
                         </div>
                         <div class="col-6">
-                          <input
-                            v-model="formData.headOfFamily.employmentStatus"
-                            type="radio"
-                            class="btn-check"
-                            value="Unemployed"
-                            id="unemployed"
-                          />
-                          <label
-                            class="btn btn-outline-warning w-100"
-                            for="unemployed"
-                          >
+                          <input v-model="formData.headOfFamily.employmentStatus" type="radio" class="btn-check"
+                            value="Unemployed" id="unemployed" />
+                          <label class="btn btn-outline-warning w-100" for="unemployed">
                             <i class="ri-user-unfollow-line me-1"></i>Unemployed
                           </label>
                         </div>
                       </div>
-                      <div
-                        v-if="fieldErrors['headOfFamily.employmentStatus']"
-                        class="text-danger small d-flex align-items-center mt-1"
-                      >
+                      <div v-if="fieldErrors['headOfFamily.employmentStatus']"
+                        class="text-danger small d-flex align-items-center mt-1">
                         <i class="ri-error-warning-line me-1"></i>
                         {{ fieldErrors["headOfFamily.employmentStatus"] }}
                       </div>
                     </div>
 
                     <!-- Occupation/Job Title (Shows when Employed is selected) -->
-                    <div
-                      class="col-md-6"
-                      v-if="
-                        formData.headOfFamily.employmentStatus === 'Employed'
-                      "
-                    >
-                      <label
-                        class="form-label fw-medium d-flex align-items-center"
-                      >
+                    <div class="col-md-6" v-if="
+                      formData.headOfFamily.employmentStatus === 'Employed'
+                    ">
+                      <label class="form-label fw-medium d-flex align-items-center">
                         <i class="ri-suitcase-line text-primary me-2"></i>
                         Occupation / Job Title
                         <span class="text-danger ms-1">*</span>
                       </label>
-                      <input
-                        v-model="formData.headOfFamily.occupation"
-                        type="text"
-                        class="form-control"
-                        :class="{
-                          'is-invalid': fieldErrors['headOfFamily.occupation'],
-                        }"
-                        placeholder="e.g., Teacher, Engineer, Farmer"
-                        @blur="validateField('headOfFamily.occupation')"
-                      />
+                      <input v-model="formData.headOfFamily.occupation" type="text" class="form-control" :class="{
+                        'is-invalid': fieldErrors['headOfFamily.occupation'],
+                      }" placeholder="e.g., Teacher, Engineer, Farmer"
+                        @blur="validateField('headOfFamily.occupation')" />
                       <div class="invalid-feedback d-flex align-items-center">
                         <i class="ri-error-warning-line me-1"></i>
                         {{ fieldErrors["headOfFamily.occupation"] }}
@@ -771,28 +832,18 @@
                     </div>
 
                     <!-- Nature of Employment (Shows when Employed is selected) -->
-                    <div
-                      class="col-md-6"
-                      v-if="
-                        formData.headOfFamily.employmentStatus === 'Employed'
-                      "
-                    >
-                      <label
-                        class="form-label fw-medium d-flex align-items-center"
-                      >
+                    <div class="col-md-6" v-if="
+                      formData.headOfFamily.employmentStatus === 'Employed'
+                    ">
+                      <label class="form-label fw-medium d-flex align-items-center">
                         <i class="ri-building-line text-primary me-2"></i>
                         Nature of Employment
                         <span class="text-danger ms-1">*</span>
                       </label>
-                      <select
-                        v-model="formData.headOfFamily.natureOfEmployment"
-                        class="form-select"
-                        :class="{
-                          'is-invalid':
-                            fieldErrors['headOfFamily.natureOfEmployment'],
-                        }"
-                        @blur="validateField('headOfFamily.natureOfEmployment')"
-                      >
+                      <select v-model="formData.headOfFamily.natureOfEmployment" class="form-select" :class="{
+                        'is-invalid':
+                          fieldErrors['headOfFamily.natureOfEmployment'],
+                      }" @blur="validateField('headOfFamily.natureOfEmployment')">
                         <option value="" disabled>Select Nature</option>
                         <option value="Government Employee">
                           Government Employee
@@ -815,18 +866,11 @@
                     </div>
 
                     <!-- Monthly Income (Shows when Employed is selected) -->
-                    <div
-                      class="col-md-6"
-                      v-if="
-                        formData.headOfFamily.employmentStatus === 'Employed'
-                      "
-                    >
-                      <label
-                        class="form-label fw-medium d-flex align-items-center"
-                      >
-                        <i
-                          class="ri-money-dollar-circle-line text-primary me-2"
-                        ></i>
+                    <div class="col-md-6" v-if="
+                      formData.headOfFamily.employmentStatus === 'Employed'
+                    ">
+                      <label class="form-label fw-medium d-flex align-items-center">
+                        <i class="ri-money-dollar-circle-line text-primary me-2"></i>
                         Monthly Income (PHP)
                         <span class="text-danger ms-1">*</span>
                       </label>
@@ -834,19 +878,11 @@
                         <span class="input-group-text bg-light-subtle">
                           <i class="ri-money-dollar-box-line text-primary"></i>
                         </span>
-                        <input
-                          v-model="formData.headOfFamily.monthlyIncome"
-                          type="number"
-                          class="form-control"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors['headOfFamily.monthlyIncome'],
-                          }"
-                          placeholder="0.00"
-                          min="0"
-                          step="0.01"
-                          @blur="validateField('headOfFamily.monthlyIncome')"
-                        />
+                        <input v-model="formData.headOfFamily.monthlyIncome" type="number" class="form-control" :class="{
+                          'is-invalid':
+                            fieldErrors['headOfFamily.monthlyIncome'],
+                        }" placeholder="0.00" min="0" step="0.01"
+                          @blur="validateField('headOfFamily.monthlyIncome')" />
                         <span class="input-group-text">PHP</span>
                       </div>
                       <div class="invalid-feedback d-flex align-items-center">
@@ -873,18 +909,11 @@
                         <span class="input-group-text bg-light-subtle">
                           <i class="ri-phone-line text-primary"></i>
                         </span>
-                        <input
-                          v-model="formData.headOfFamily.contactNumber"
-                          type="tel"
-                          class="form-control"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors['headOfFamily.contactNumber'],
-                          }"
-                          placeholder="09123456789"
-                          @input="formatPhoneNumber"
-                          @blur="validateField('headOfFamily.contactNumber')"
-                        />
+                        <input v-model="formData.headOfFamily.contactNumber" type="tel" class="form-control" :class="{
+                          'is-invalid':
+                            fieldErrors['headOfFamily.contactNumber'],
+                        }" placeholder="09123456789" @input="formatPhoneNumber"
+                          @blur="validateField('headOfFamily.contactNumber')" />
                         <div class="invalid-feedback d-flex align-items-center">
                           <i class="ri-error-warning-line me-1"></i>
                           {{ fieldErrors["headOfFamily.contactNumber"] }}
@@ -901,12 +930,8 @@
                         <span class="input-group-text bg-light-subtle">
                           <i class="ri-mail-line text-primary"></i>
                         </span>
-                        <input
-                          v-model="formData.headOfFamily.email"
-                          type="email"
-                          class="form-control"
-                          placeholder="name@example.com"
-                        />
+                        <input v-model="formData.headOfFamily.email" type="email" class="form-control"
+                          placeholder="name@example.com" />
                       </div>
                     </div>
                   </div>
@@ -916,26 +941,14 @@
               <!-- Navigation Buttons for Step 2 -->
               <div class="card-footer bg-transparent border-0 pt-4 pb-0">
                 <div class="d-flex justify-content-between align-items-center">
-                  <button
-                    type="button"
-                    class="btn btn-outline-secondary px-4"
-                    @click="prevStep"
-                  >
+                  <button type="button" class="btn btn-outline-secondary px-4" @click="prevStep">
                     <i class="ri-arrow-left-line me-2"></i> Previous
                   </button>
                   <div class="d-flex gap-2">
-                    <button
-                      type="button"
-                      class="btn btn-outline-primary px-4"
-                      @click="saveAsDraft"
-                    >
+                    <button type="button" class="btn btn-outline-primary px-4" @click="saveAsDraft">
                       <i class="ri-save-line me-2"></i> Save Draft
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-primary px-4"
-                      @click="nextStep"
-                    >
+                    <button type="button" class="btn btn-primary px-4" @click="nextStep">
                       Next <i class="ri-arrow-right-line ms-2"></i>
                     </button>
                   </div>
@@ -952,9 +965,7 @@
       <div class="row">
         <div class="col-12">
           <div class="card border-0 shadow-sm">
-            <div
-              class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25"
-            >
+            <div class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25">
               <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                   <div class="step-header-icon">
@@ -967,11 +978,7 @@
                     <small class="text-muted">Edit household members</small>
                   </div>
                 </div>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  @click="addMember"
-                >
+                <button type="button" class="btn btn-primary btn-sm" @click="addMember">
                   <i class="ri-user-add-line me-1"></i> Add Member
                 </button>
               </div>
@@ -986,53 +993,35 @@
                         <p class="mb-1 fw-medium">
                           Total Members: {{ totalMembers }}
                         </p>
-                        <small class="text-muted"
-                          >Head of family +
+                        <small class="text-muted">Head of family +
                           {{ formData.members.length }} additional
-                          member(s)</small
-                        >
+                          member(s)</small>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div
-                v-for="(member, index) in formData.members"
-                :key="index"
-                class="member-card mb-4"
-              >
+              <div v-for="(member, index) in formData.members" :key="index" class="member-card mb-4">
                 <div class="card border">
                   <div
-                    class="card-header bg-light-subtle border-bottom d-flex justify-content-between align-items-center"
-                  >
+                    class="card-header bg-light-subtle border-bottom d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                       <div class="member-avatar">
                         <i class="ri-user-line"></i>
                       </div>
                       <div class="ms-3">
                         <h6 class="mb-0">Member {{ index + 1 }}</h6>
-                        <small class="text-muted"
-                          >Complete all required fields</small
-                        >
+                        <small class="text-muted">Complete all required fields</small>
                       </div>
                     </div>
                     <div class="d-flex gap-2">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                        @click="duplicateMember(index)"
-                        title="Duplicate"
-                      >
+                      <button type="button" class="btn btn-sm btn-outline-secondary" @click="duplicateMember(index)"
+                        title="Duplicate">
                         <i class="ri-file-copy-line"></i>
                       </button>
-                      <button
-                        v-if="formData.members.length > 1"
-                        type="button"
-                        class="btn btn-sm btn-outline-danger"
-                        @click="removeMember(index)"
-                        title="Remove"
-                      >
+                      <button v-if="formData.members.length > 1" type="button" class="btn btn-sm btn-outline-danger"
+                        @click="removeMember(index)" title="Remove">
                         <i class="ri-delete-bin-line"></i>
                       </button>
                     </div>
@@ -1048,68 +1037,42 @@
                         <label class="form-label fw-medium">
                           First Name <span class="text-danger">*</span>
                         </label>
-                        <input
-                          v-model="member.firstName"
-                          type="text"
-                          class="form-control"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors[`members.${index}.firstName`],
-                          }"
-                          placeholder="Enter first name"
-                          @blur="validateMemberField(index, 'firstName')"
-                        />
+                        <input v-model="member.firstName" type="text" class="form-control" :class="{
+                          'is-invalid':
+                            fieldErrors[`members.${index}.firstName`],
+                        }" placeholder="Enter first name" @blur="validateMemberField(index, 'firstName')" />
                         <div class="invalid-feedback">
                           {{ fieldErrors[`members.${index}.firstName`] }}
                         </div>
                       </div>
                       <div class="col-md-2">
                         <label class="form-label fw-medium">M.I.</label>
-                        <input
-                          v-model="member.middleInitial"
-                          type="text"
-                          class="form-control"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors[`members.${index}.middleInitial`],
-                          }"
-                          placeholder="M"
-                          @blur="validateMemberField(index, 'middleInitial')"
-                        />
+                        <input v-model="member.middle_name" type="text" class="form-control" :class="{
+                          'is-invalid':
+                            fieldErrors[`members.${index}.middle_name`],
+                        }" placeholder="M" @blur="validateMemberField(index, 'middle_name')" />
                         <div class="invalid-feedback">
-                          {{ fieldErrors[`members.${index}.middleInitial`] }}
+                          {{ fieldErrors[`members.${index}.middle_name`] }}
                         </div>
                       </div>
                       <div class="col-md-3">
                         <label class="form-label fw-medium">
                           Last Name <span class="text-danger">*</span>
                         </label>
-                        <input
-                          v-model="member.lastName"
-                          type="text"
-                          class="form-control"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors[`members.${index}.lastName`],
-                          }"
-                          placeholder="Enter last name"
-                          @blur="validateMemberField(index, 'lastName')"
-                        />
+                        <input v-model="member.lastName" type="text" class="form-control" :class="{
+                          'is-invalid':
+                            fieldErrors[`members.${index}.lastName`],
+                        }" placeholder="Enter last name" @blur="validateMemberField(index, 'lastName')" />
                         <div class="invalid-feedback">
                           {{ fieldErrors[`members.${index}.lastName`] }}
                         </div>
                       </div>
                       <div class="col-md-2">
                         <label class="form-label fw-medium">Extension</label>
-                        <select
-                          v-model="member.extension"
-                          class="form-select"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors[`members.${index}.extension`],
-                          }"
-                          @blur="validateMemberField(index, 'extension')"
-                        >
+                        <select v-model="member.extension" class="form-select" :class="{
+                          'is-invalid':
+                            fieldErrors[`members.${index}.extension`],
+                        }" @blur="validateMemberField(index, 'extension')">
                           <option value="">None</option>
                           <option value="Jr">Jr</option>
                           <option value="Sr">Sr</option>
@@ -1125,15 +1088,10 @@
                         <label class="form-label fw-medium">
                           Relationship <span class="text-danger">*</span>
                         </label>
-                        <select
-                          v-model="member.relationship"
-                          class="form-select"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors[`members.${index}.relationship`],
-                          }"
-                          @blur="validateMemberField(index, 'relationship')"
-                        >
+                        <select v-model="member.relationship" class="form-select" :class="{
+                          'is-invalid':
+                            fieldErrors[`members.${index}.relationship`],
+                        }" @blur="validateMemberField(index, 'relationship')">
                           <option value="" disabled>Select</option>
                           <option value="Spouse">Spouse</option>
                           <option value="Child">Child</option>
@@ -1151,8 +1109,7 @@
 
                     <!-- DEMOGRAPHICS SECTION -->
                     <h6 class="border-bottom pb-2 mb-3 fw-semibold">
-                      <i class="ri-user-heart-line text-primary me-2"></i
-                      >Demographics
+                      <i class="ri-user-heart-line text-primary me-2"></i>Demographics
                     </h6>
                     <div class="row g-3 mb-4">
                       <div class="col-md-3">
@@ -1160,37 +1117,19 @@
                           Sex <span class="text-danger">*</span>
                         </label>
                         <div class="btn-group w-100" role="group">
-                          <input
-                            v-model="member.sex"
-                            type="radio"
-                            class="btn-check"
-                            value="Male"
-                            :id="`genderMale_${index}`"
-                          />
-                          <label
-                            class="btn btn-outline-primary"
-                            :for="`genderMale_${index}`"
-                          >
+                          <input v-model="member.sex" type="radio" class="btn-check" value="Male"
+                            :id="`genderMale_${index}`" />
+                          <label class="btn btn-outline-primary" :for="`genderMale_${index}`">
                             <i class="ri-men-line me-2"></i>Male
                           </label>
-                          <input
-                            v-model="member.sex"
-                            type="radio"
-                            class="btn-check"
-                            value="Female"
-                            :id="`genderFemale_${index}`"
-                          />
-                          <label
-                            class="btn btn-outline-primary"
-                            :for="`genderFemale_${index}`"
-                          >
+                          <input v-model="member.sex" type="radio" class="btn-check" value="Female"
+                            :id="`genderFemale_${index}`" />
+                          <label class="btn btn-outline-primary" :for="`genderFemale_${index}`">
                             <i class="ri-women-line me-2"></i>Female
                           </label>
                         </div>
-                        <div
-                          v-if="fieldErrors[`members.${index}.sex`]"
-                          class="text-danger small d-flex align-items-center mt-1"
-                        >
+                        <div v-if="fieldErrors[`members.${index}.sex`]"
+                          class="text-danger small d-flex align-items-center mt-1">
                           <i class="ri-error-warning-line me-1"></i>
                           {{ fieldErrors[`members.${index}.sex`] }}
                         </div>
@@ -1204,19 +1143,11 @@
                           <span class="input-group-text bg-light-subtle">
                             <i class="ri-calendar-line text-primary"></i>
                           </span>
-                          <input
-                            v-model="member.birthdate"
-                            type="date"
-                            class="form-control"
-                            :class="{
-                              'is-invalid':
-                                fieldErrors[`members.${index}.birthdate`],
-                            }"
-                            @blur="validateMemberField(index, 'birthdate')"
-                          />
-                          <div
-                            class="invalid-feedback d-flex align-items-center"
-                          >
+                          <input v-model="member.birthdate" type="date" class="form-control" :class="{
+                            'is-invalid':
+                              fieldErrors[`members.${index}.birthdate`],
+                          }" @blur="validateMemberField(index, 'birthdate')" />
+                          <div class="invalid-feedback d-flex align-items-center">
                             <i class="ri-error-warning-line me-1"></i>
                             {{ fieldErrors[`members.${index}.birthdate`] }}
                           </div>
@@ -1230,15 +1161,10 @@
                         <label class="form-label fw-medium">
                           Civil Status <span class="text-danger">*</span>
                         </label>
-                        <select
-                          v-model="member.civilStatus"
-                          class="form-select"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors[`members.${index}.civilStatus`],
-                          }"
-                          @blur="validateMemberField(index, 'civilStatus')"
-                        >
+                        <select v-model="member.civilStatus" class="form-select" :class="{
+                          'is-invalid':
+                            fieldErrors[`members.${index}.civilStatus`],
+                        }" @blur="validateMemberField(index, 'civilStatus')">
                           <option value="" disabled>Select Status</option>
                           <option value="Single">Single</option>
                           <option value="Married">Married</option>
@@ -1254,15 +1180,12 @@
 
                     <!-- IDENTIFICATION AND STATUS SECTION -->
                     <h6 class="border-bottom pb-2 mb-3 fw-semibold">
-                      <i class="ri-fingerprint-line text-primary me-2"></i
-                      >Identification & Status
+                      <i class="ri-fingerprint-line text-primary me-2"></i>Identification & Status
                     </h6>
                     <div class="row g-3 mb-4">
                       <!-- National ID -->
-                      <div class="col-md-4">
-                        <label
-                          class="form-label fw-medium d-flex align-items-center"
-                        >
+                      <div class="col-md-12">
+                        <label class="form-label fw-medium d-flex align-items-center">
                           <i class="ri-id-card-line text-primary me-2"></i>
                           National ID / PhilSys Number
                         </label>
@@ -1270,12 +1193,8 @@
                           <span class="input-group-text bg-light-subtle">
                             <i class="ri-fingerprint-line text-primary"></i>
                           </span>
-                          <input
-                            v-model="member.nationalId"
-                            type="text"
-                            class="form-control"
-                            placeholder="1234-5678-9012-3456"
-                          />
+                          <input v-model="member.nationalId" type="text" class="form-control"
+                            placeholder="1234-5678-9012-3456" />
                         </div>
                         <div class="form-text">
                           Optional: Philippine Identification System Number
@@ -1283,91 +1202,51 @@
                       </div>
 
                       <!-- Voter Status -->
-                      <div class="col-md-4">
-                        <label
-                          class="form-label fw-medium d-flex align-items-center"
-                        >
+                      <div class="col-md-3">
+                        <label class="form-label fw-medium d-flex align-items-center">
                           <i class="ri-vote-line text-primary me-2"></i>
                           Voter Status <span class="text-danger ms-1">*</span>
                         </label>
                         <div class="btn-group w-100" role="group">
-                          <input
-                            v-model="member.voterStatus"
-                            type="radio"
-                            class="btn-check"
-                            value="Voter"
-                            :id="`voterYes_${index}`"
-                          />
-                          <label
-                            class="btn btn-outline-success"
-                            :for="`voterYes_${index}`"
-                          >
+                          <input v-model="member.voterStatus" type="radio" class="btn-check" value="Voter"
+                            :id="`voterYes_${index}`" />
+                          <label class="btn btn-outline-success" :for="`voterYes_${index}`">
                             <i class="ri-check-line me-1"></i>Voter
                           </label>
-                          <input
-                            v-model="member.voterStatus"
-                            type="radio"
-                            class="btn-check"
-                            value="Non-Voter"
-                            :id="`voterNo_${index}`"
-                          />
-                          <label
-                            class="btn btn-outline-secondary"
-                            :for="`voterNo_${index}`"
-                          >
+                          <input v-model="member.voterStatus" type="radio" class="btn-check" value="Non-Voter"
+                            :id="`voterNo_${index}`" />
+                          <label class="btn btn-outline-secondary" :for="`voterNo_${index}`">
                             <i class="ri-close-line me-1"></i>Non-Voter
                           </label>
                         </div>
-                        <div
-                          v-if="fieldErrors[`members.${index}.voterStatus`]"
-                          class="text-danger small d-flex align-items-center mt-1"
-                        >
+                        <div v-if="fieldErrors[`members.${index}.voterStatus`]"
+                          class="text-danger small d-flex align-items-center mt-1">
                           <i class="ri-error-warning-line me-1"></i>
                           {{ fieldErrors[`members.${index}.voterStatus`] }}
                         </div>
                       </div>
 
                       <!-- 4Ps Member Status -->
-                      <div class="col-md-4">
-                        <label
-                          class="form-label fw-medium d-flex align-items-center"
-                        >
+                      <div class="col-md-3">
+                        <label class="form-label fw-medium d-flex align-items-center">
                           <i class="ri-group-line text-primary me-2"></i>
                           4Ps Member Status
                           <span class="text-danger ms-1">*</span>
                         </label>
                         <div class="btn-group w-100" role="group">
-                          <input
-                            v-model="member.is4psMember"
-                            type="radio"
-                            class="btn-check"
-                            value="Yes"
-                            :id="`4psYes_${index}`"
-                          />
-                          <label
-                            class="btn btn-outline-info"
-                            :for="`4psYes_${index}`"
-                          >
+                          <input v-model="member.is4psMember" type="radio" class="btn-check" value="Yes"
+                            :id="`4psYes_${index}`" />
+                          <label class="btn btn-outline-info" :for="`4psYes_${index}`">
                             <i class="ri-check-double-line me-1"></i>Yes
                           </label>
-                          <input
-                            v-model="member.is4psMember"
-                            type="radio"
-                            class="btn-check"
-                            value="No"
-                            :id="`4psNo_${index}`"
-                          />
-                          <label
-                            class="btn btn-outline-secondary"
-                            :for="`4psNo_${index}`"
-                          >
+                          <input v-model="member.is4psMember" type="radio" class="btn-check" value="No"
+                            :id="`4psNo_${index}`" />
+                          <label class="btn btn-outline-secondary" :for="`4psNo_${index}`">
                             <i class="ri-close-line me-1"></i>No
                           </label>
                         </div>
-                        <div
-                          v-if="fieldErrors[`members.${index}.is4psMember`]"
-                          class="text-danger small d-flex align-items-center mt-1"
-                        >
+                        <div v-if="fieldErrors[`members.${index}.is4psMember`]"
+                          class="text-danger small d-flex align-items-center mt-1">
                           <i class="ri-error-warning-line me-1"></i>
                           {{ fieldErrors[`members.${index}.is4psMember`] }}
                         </div>
@@ -1377,75 +1256,287 @@
                       </div>
 
                       <!-- Deceased Status -->
-                      <div class="col-md-4">
-                        <label
-                          class="form-label fw-medium d-flex align-items-center"
-                        >
+                      <div class="col-md-3">
+                        <label class="form-label fw-medium d-flex align-items-center">
                           <i class="ri-heart-line text-primary me-2"></i>
                           Living Status <span class="text-danger ms-1">*</span>
                         </label>
                         <div class="btn-group w-100" role="group">
-                          <input
-                            v-model="member.isDeceased"
-                            type="radio"
-                            class="btn-check"
-                            value="No"
-                            :id="`alive_${index}`"
-                          />
-                          <label
-                            class="btn btn-outline-success"
-                            :for="`alive_${index}`"
-                          >
+                          <input v-model="member.isDeceased" type="radio" class="btn-check" value="No"
+                            :id="`alive_${index}`" />
+                          <label class="btn btn-outline-success" :for="`alive_${index}`">
                             <i class="ri-heart-line me-1"></i>Alive
                           </label>
-                          <input
-                            v-model="member.isDeceased"
-                            type="radio"
-                            class="btn-check"
-                            value="Yes"
-                            :id="`deceased_${index}`"
-                          />
-                          <label
-                            class="btn btn-outline-dark"
-                            :for="`deceased_${index}`"
-                          >
+                          <input v-model="member.isDeceased" type="radio" class="btn-check" value="Yes"
+                            :id="`deceased_${index}`" />
+                          <label class="btn btn-outline-dark" :for="`deceased_${index}`">
                             <i class="ri-rest-time-line me-1"></i>Deceased
                           </label>
                         </div>
-                        <div
-                          v-if="fieldErrors[`members.${index}.isDeceased`]"
-                          class="text-danger small d-flex align-items-center mt-1"
-                        >
+                        <div v-if="fieldErrors[`members.${index}.isDeceased`]"
+                          class="text-danger small d-flex align-items-center mt-1">
                           <i class="ri-error-warning-line me-1"></i>
                           {{ fieldErrors[`members.${index}.isDeceased`] }}
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <label class="-form-label fw-medium d-flex align-items-center">
+                          <i class="ri-wheelchair-line text-primary me-2"></i>
+                          Person With Disability <span class="text-danger ms-1">*</span>
+                        </label>
+                        <div class="btn-group w-100" role="group">
+                          <input v-model="member.isPWD" type="radio" class="btn-check" value="Yes"
+                            :id="`Yes_${index}`" />
+                          <label class="btn btn-outline-warning" :for="`Yes_${index}`">
+                            <i class="ri-wheelchair-line me-1"></i>Yes
+                          </label>
+                          <input v-model="member.isPWD" type="radio" class="btn-check" value="No" :id="`No_${index}`" />
+                          <label class="btn btn-outline-secondary" :for="`No_${index}`">
+                            <i class="ri-user-line me-1"></i>No
+                          </label>
+                        </div>
+                        <div v-if="fieldErrors[`members.${index}.isPWD`]"
+                          class="text-danger small d-flex align-items-center mt-1">
+                          <i class="ri-error-warning-line me-1"></i>
+                          {{ fieldErrors[`members.${index}.isPWD`] }}
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                    <!-- PERSON WITH DISABILITY DETAILS FOR MEMBER - ADD THIS SECTION -->
+                    <div class="col-12 mb-4" v-if="member.isPWD === 'Yes'">
+                      <div class="card border-warning border-opacity-25 bg-warning bg-opacity-10">
+                        <div class="card-header bg-warning bg-opacity-25 border-warning border-opacity-25">
+                          <h6 class="mb-0 fw-semibold text-warning">
+                            <i class="ri-heart-pulse-line me-2"></i>Person With Disability Details
+                          </h6>
+                        </div>
+                        <div class="card-body">
+                          <div class="row g-3">
+                            <!-- Type of Disability -->
+                            <div class="col-md-6">
+                              <label class="form-label fw-medium">
+                                Type of Disability <span class="text-danger">*</span>
+                              </label>
+                              <select v-model="member.pwdType" class="form-select"
+                                :class="{ 'is-invalid': fieldErrors[`members.${index}.pwdType`] }"
+                                @blur="validateMemberField(index, 'pwdType')">
+                                <option value="" disabled>Select Disability Type</option>
+                                <option value="Physical Disability">Physical Disability</option>
+                                <option value="Visual Impairment">Visual Impairment</option>
+                                <option value="Hearing Impairment">Hearing Impairment</option>
+                                <option value="Intellectual Disability">Intellectual Disability</option>
+                                <option value="Learning Disability">Learning Disability</option>
+                                <option value="Mental Health Condition">Mental Health Condition</option>
+                                <option value="Multiple Disabilities">Multiple Disabilities</option>
+                                <option value="Speech Impairment">Speech Impairment</option>
+                                <option value="Orthopedic Disability">Orthopedic Disability</option>
+                                <option value="Other">Other</option>
+                              </select>
+                              <div class="invalid-feedback d-flex align-items-center">
+                                <i class="ri-error-warning-line me-1"></i>
+                                {{ fieldErrors[`members.${index}.pwdType`] }}
+                              </div>
+                            </div>
+
+                            <!-- Specify Other Disability -->
+                            <div class="col-md-6" v-if="member.pwdType === 'Other'">
+                              <label class="form-label fw-medium">
+                                Please Specify <span class="text-danger">*</span>
+                              </label>
+                              <input v-model="member.pwdOtherSpecify" type="text" class="form-control"
+                                :class="{ 'is-invalid': fieldErrors[`members.${index}.pwdOtherSpecify`] }"
+                                placeholder="Specify disability type"
+                                @blur="validateMemberField(index, 'pwdOtherSpecify')" />
+                              <div class="invalid-feedback d-flex align-items-center">
+                                <i class="ri-error-warning-line me-1"></i>
+                                {{ fieldErrors[`members.${index}.pwdOtherSpecify`] }}
+                              </div>
+                            </div>
+
+                            <!-- PWD ID Number -->
+                            <div class="col-md-6">
+                              <label class="form-label fw-medium">
+                                PWD ID Number (Optional)
+                              </label>
+                              <input v-model="member.pwdIdNumber" type="text" class="form-control"
+                                placeholder="e.g., PWD-2024-XXXXX" />
+                              <div class="form-text">If available, enter PWD ID number</div>
+                            </div>
+
+                            <!-- Cause of Disability -->
+                            <div class="col-md-6">
+                              <label class="form-label fw-medium">
+                                Cause of Disability <span class="text-danger">*</span>
+                              </label>
+                              <select v-model="member.pwdCause" class="form-select"
+                                :class="{ 'is-invalid': fieldErrors[`members.${index}.pwdCause`] }"
+                                @blur="validateMemberField(index, 'pwdCause')">
+                                <option value="" disabled>Select Cause</option>
+                                <option value="Congenital">Congenital (Inborn)</option>
+                                <option value="Illness/Disease">Illness/Disease</option>
+                                <option value="Accident/Injury">Accident/Injury</option>
+                                <option value="Aging">Aging</option>
+                                <option value="Unknown">Unknown</option>
+                                <option value="Other">Other</option>
+                              </select>
+                              <div class="invalid-feedback d-flex align-items-center">
+                                <i class="ri-error-warning-line me-1"></i>
+                                {{ fieldErrors[`members.${index}.pwdCause`] }}
+                              </div>
+                            </div>
+
+                            <!-- Specify Other Cause -->
+                            <div class="col-12" v-if="member.pwdCause === 'Other'">
+                              <label class="form-label fw-medium">
+                                Please Specify Cause <span class="text-danger">*</span>
+                              </label>
+                              <input v-model="member.pwdCauseOther" type="text" class="form-control"
+                                :class="{ 'is-invalid': fieldErrors[`members.${index}.pwdCauseOther`] }"
+                                placeholder="Specify cause of disability"
+                                @blur="validateMemberField(index, 'pwdCauseOther')" />
+                              <div class="invalid-feedback d-flex align-items-center">
+                                <i class="ri-error-warning-line me-1"></i>
+                                {{ fieldErrors[`members.${index}.pwdCauseOther`] }}
+                              </div>
+                            </div>
+
+                            <!-- Degree of Disability -->
+                            <div class="col-md-6">
+                              <label class="form-label fw-medium">
+                                Degree of Disability <span class="text-danger">*</span>
+                              </label>
+                              <select v-model="member.pwdDegree" class="form-select"
+                                :class="{ 'is-invalid': fieldErrors[`members.${index}.pwdDegree`] }"
+                                @blur="validateMemberField(index, 'pwdDegree')">
+                                <option value="" disabled>Select Degree</option>
+                                <option value="Mild">Mild</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Severe">Severe</option>
+                                <option value="Profound">Profound</option>
+                              </select>
+                              <div class="invalid-feedback d-flex align-items-center">
+                                <i class="ri-error-warning-line me-1"></i>
+                                {{ fieldErrors[`members.${index}.pwdDegree`] }}
+                              </div>
+                            </div>
+
+                            <!-- Type of Assistance Needed -->
+                            <div class="col-md-6">
+                              <label class="form-label fw-medium">
+                                <i class="ri-hand-heart-line text-warning me-2"></i>
+                                Type of Assistance Needed
+                              </label>
+                              <div class="border rounded p-3 bg-white">
+                                <div class="row g-2">
+                                  <div class="col-md-6">
+                                    <div class="form-check">
+                                      <input v-model="member.pwdAssistance" class="form-check-input" type="checkbox"
+                                        value="Medical" :id="`assistMedical_${index}`" />
+                                      <label class="form-check-label" :for="`assistMedical_${index}`">
+                                        Medical Assistance
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-check">
+                                      <input v-model="member.pwdAssistance" class="form-check-input" type="checkbox"
+                                        value="Financial" :id="`assistFinancial_${index}`" />
+                                      <label class="form-check-label" :for="`assistFinancial_${index}`">
+                                        Financial Assistance
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-check">
+                                      <input v-model="member.pwdAssistance" class="form-check-input" type="checkbox"
+                                        value="Educational" :id="`assistEducational_${index}`" />
+                                      <label class="form-check-label" :for="`assistEducational_${index}`">
+                                        Educational Assistance
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-check">
+                                      <input v-model="member.pwdAssistance" class="form-check-input" type="checkbox"
+                                        value="Livelihood" :id="`assistLivelihood_${index}`" />
+                                      <label class="form-check-label" :for="`assistLivelihood_${index}`">
+                                        Livelihood Assistance
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-check">
+                                      <input v-model="member.pwdAssistance" class="form-check-input" type="checkbox"
+                                        value="Mobility Aid" :id="`assistMobility_${index}`" />
+                                      <label class="form-check-label" :for="`assistMobility_${index}`">
+                                        Mobility Aid
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-check">
+                                      <input v-model="member.pwdAssistance" class="form-check-input" type="checkbox"
+                                        value="Psychosocial Support" :id="`assistPsychosocial_${index}`" />
+                                      <label class="form-check-label" :for="`assistPsychosocial_${index}`">
+                                        Psychosocial Support
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-check">
+                                      <input v-model="member.pwdAssistance" class="form-check-input" type="checkbox"
+                                        value="Other" :id="`assistOther_${index}`" />
+                                      <label class="form-check-label" :for="`assistOther_${index}`">
+                                        Other
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Specify Other Assistance - This appears when "Other" is checked -->
+                              <div class="mt-2" v-if="member.pwdAssistance && member.pwdAssistance.includes('Other')">
+                                <label class="form-label fw-medium">
+                                  Please Specify Other Assistance
+                                </label>
+                                <input v-model="member.pwdAssistanceOther" type="text" class="form-control"
+                                  placeholder="Specify other assistance needed" />
+                              </div>
+                            </div>
+
+                            <!-- Additional Notes -->
+                            <div class="col-12">
+                              <label class="form-label fw-medium">
+                                Additional Notes / Specific Needs
+                              </label>
+                              <textarea v-model="member.pwdNotes" class="form-control" rows="2"
+                                placeholder="Any additional information about the person's disability or specific needs..."></textarea>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     <!-- EDUCATION AND EMPLOYMENT SECTION -->
                     <h6 class="border-bottom pb-2 mb-3 fw-semibold">
-                      <i class="ri-graduation-cap-line text-primary me-2"></i
-                      >Education & Employment
+                      <i class="ri-graduation-cap-line text-primary me-2"></i>Education & Employment
                     </h6>
                     <div class="row g-3 mb-4">
                       <!-- Highest Educational Attainment -->
                       <div class="col-md-4">
-                        <label
-                          class="form-label fw-medium d-flex align-items-center"
-                        >
+                        <label class="form-label fw-medium d-flex align-items-center">
                           <i class="ri-award-line text-primary me-2"></i>
                           Highest Educational Attainment
                           <span class="text-danger ms-1">*</span>
                         </label>
-                        <select
-                          v-model="member.highestEducation"
-                          class="form-select"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors[`members.${index}.highestEducation`],
-                          }"
-                          @blur="validateMemberField(index, 'highestEducation')"
-                        >
+                        <select v-model="member.highestEducation" class="form-select" :class="{
+                          'is-invalid':
+                            fieldErrors[`members.${index}.highestEducation`],
+                        }" @blur="validateMemberField(index, 'highestEducation')">
                           <option value="" disabled>
                             Select Education Level
                           </option>
@@ -1486,24 +1577,17 @@
 
                       <!-- Educational Status -->
                       <div class="col-md-4">
-                        <label
-                          class="form-label fw-medium d-flex align-items-center"
-                        >
+                        <label class="form-label fw-medium d-flex align-items-center">
                           <i class="ri-book-line text-primary me-2"></i>
                           Educational Status
                           <span class="text-danger ms-1">*</span>
                         </label>
-                        <select
-                          v-model="member.educationalStatus"
-                          class="form-select"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors[`members.${index}.educationalStatus`],
-                          }"
-                          @blur="
-                            validateMemberField(index, 'educationalStatus')
-                          "
-                        >
+                        <select v-model="member.educationalStatus" class="form-select" :class="{
+                          'is-invalid':
+                            fieldErrors[`members.${index}.educationalStatus`],
+                        }" @blur="
+                          validateMemberField(index, 'educationalStatus')
+                          ">
                           <option value="" disabled>Select Status</option>
                           <option value="Not Attending School">
                             Not Attending School
@@ -1525,110 +1609,67 @@
 
                       <!-- Employment Status -->
                       <div class="col-md-4">
-                        <label
-                          class="form-label fw-medium d-flex align-items-center"
-                        >
+                        <label class="form-label fw-medium d-flex align-items-center">
                           <i class="ri-briefcase-line text-primary me-2"></i>
                           Employment Status
                           <span class="text-danger ms-1">*</span>
                         </label>
                         <div class="row g-2">
                           <div class="col-6">
-                            <input
-                              v-model="member.employmentStatus"
-                              type="radio"
-                              class="btn-check"
-                              value="Employed"
-                              :id="`employed_${index}`"
-                            />
-                            <label
-                              class="btn btn-outline-success w-100"
-                              :for="`employed_${index}`"
-                            >
+                            <input v-model="member.employmentStatus" type="radio" class="btn-check" value="Employed"
+                              :id="`employed_${index}`" />
+                            <label class="btn btn-outline-success w-100" :for="`employed_${index}`">
                               <i class="ri-briefcase-line me-1"></i>Employed
                             </label>
                           </div>
                           <div class="col-6">
-                            <input
-                              v-model="member.employmentStatus"
-                              type="radio"
-                              class="btn-check"
-                              value="Unemployed"
-                              :id="`unemployed_${index}`"
-                            />
-                            <label
-                              class="btn btn-outline-warning w-100"
-                              :for="`unemployed_${index}`"
-                            >
-                              <i class="ri-user-unfollow-line me-1"></i
-                              >Unemployed
+                            <input v-model="member.employmentStatus" type="radio" class="btn-check" value="Unemployed"
+                              :id="`unemployed_${index}`" />
+                            <label class="btn btn-outline-warning w-100" :for="`unemployed_${index}`">
+                              <i class="ri-user-unfollow-line me-1"></i>Unemployed
                             </label>
                           </div>
                         </div>
-                        <div
-                          v-if="
-                            fieldErrors[`members.${index}.employmentStatus`]
-                          "
-                          class="text-danger small d-flex align-items-center mt-1"
-                        >
+                        <div v-if="
+                          fieldErrors[`members.${index}.employmentStatus`]
+                        " class="text-danger small d-flex align-items-center mt-1">
                           <i class="ri-error-warning-line me-1"></i>
                           {{ fieldErrors[`members.${index}.employmentStatus`] }}
                         </div>
                       </div>
 
                       <!-- Occupation/Job Title (Shows when Employed is selected) -->
-                      <div
-                        class="col-md-4"
-                        v-if="member.employmentStatus === 'Employed'"
-                      >
-                        <label
-                          class="form-label fw-medium d-flex align-items-center"
-                        >
+                      <div class="col-md-4" v-if="member.employmentStatus === 'Employed'">
+                        <label class="form-label fw-medium d-flex align-items-center">
                           <i class="ri-suitcase-line text-primary me-2"></i>
                           Occupation / Job Title
                           <span class="text-danger ms-1">*</span>
                         </label>
-                        <input
-                          v-model="member.occupation"
-                          type="text"
-                          class="form-control"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors[`members.${index}.occupation`],
-                          }"
-                          placeholder="e.g., Teacher, Engineer, Farmer"
-                          @blur="validateMemberField(index, 'occupation')"
-                        />
+                        <input v-model="member.occupation" type="text" class="form-control" :class="{
+                          'is-invalid':
+                            fieldErrors[`members.${index}.occupation`],
+                        }" placeholder="e.g., Teacher, Engineer, Farmer"
+                          @blur="validateMemberField(index, 'occupation')" />
                         <div class="invalid-feedback">
                           {{ fieldErrors[`members.${index}.occupation`] }}
                         </div>
                       </div>
 
                       <!-- Nature of Employment (Shows when Employed is selected) -->
-                      <div
-                        class="col-md-4"
-                        v-if="member.employmentStatus === 'Employed'"
-                      >
-                        <label
-                          class="form-label fw-medium d-flex align-items-center"
-                        >
+                      <div class="col-md-4" v-if="member.employmentStatus === 'Employed'">
+                        <label class="form-label fw-medium d-flex align-items-center">
                           <i class="ri-building-line text-primary me-2"></i>
                           Nature of Employment
                           <span class="text-danger ms-1">*</span>
                         </label>
-                        <select
-                          v-model="member.natureOfEmployment"
-                          class="form-select"
-                          :class="{
-                            'is-invalid':
-                              fieldErrors[
-                                `members.${index}.natureOfEmployment`
-                              ],
-                          }"
-                          @blur="
-                            validateMemberField(index, 'natureOfEmployment')
-                          "
-                        >
+                        <select v-model="member.natureOfEmployment" class="form-select" :class="{
+                          'is-invalid':
+                            fieldErrors[
+                            `members.${index}.natureOfEmployment`
+                            ],
+                        }" @blur="
+                          validateMemberField(index, 'natureOfEmployment')
+                          ">
                           <option value="" disabled>Select Nature</option>
                           <option value="Government Employee">
                             Government Employee
@@ -1654,38 +1695,21 @@
                       </div>
 
                       <!-- Monthly Income (Shows when Employed is selected) -->
-                      <div
-                        class="col-md-4"
-                        v-if="member.employmentStatus === 'Employed'"
-                      >
-                        <label
-                          class="form-label fw-medium d-flex align-items-center"
-                        >
-                          <i
-                            class="ri-money-dollar-circle-line text-primary me-2"
-                          ></i>
+                      <div class="col-md-4" v-if="member.employmentStatus === 'Employed'">
+                        <label class="form-label fw-medium d-flex align-items-center">
+                          <i class="ri-money-dollar-circle-line text-primary me-2"></i>
                           Monthly Income (PHP)
                           <span class="text-danger ms-1">*</span>
                         </label>
                         <div class="input-group">
                           <span class="input-group-text bg-light-subtle">
-                            <i
-                              class="ri-money-dollar-box-line text-primary"
-                            ></i>
+                            <i class="ri-money-dollar-box-line text-primary"></i>
                           </span>
-                          <input
-                            v-model="member.monthlyIncome"
-                            type="number"
-                            class="form-control"
-                            :class="{
-                              'is-invalid':
-                                fieldErrors[`members.${index}.monthlyIncome`],
-                            }"
-                            placeholder="0.00"
-                            min="0"
-                            step="0.01"
-                            @blur="validateMemberField(index, 'monthlyIncome')"
-                          />
+                          <input v-model="member.monthlyIncome" type="number" class="form-control" :class="{
+                            'is-invalid':
+                              fieldErrors[`members.${index}.monthlyIncome`],
+                          }" placeholder="0.00" min="0" step="0.01"
+                            @blur="validateMemberField(index, 'monthlyIncome')" />
                           <span class="input-group-text">PHP</span>
                         </div>
                         <div class="invalid-feedback">
@@ -1710,13 +1734,8 @@
                           <span class="input-group-text bg-light-subtle">
                             <i class="ri-phone-line text-primary"></i>
                           </span>
-                          <input
-                            v-model="member.contactNumber"
-                            type="tel"
-                            class="form-control"
-                            placeholder="09123456789"
-                            @input="(e) => formatMemberPhoneNumber(e, index)"
-                          />
+                          <input v-model="member.contactNumber" type="tel" class="form-control"
+                            placeholder="09123456789" @input="(e) => formatMemberPhoneNumber(e, index)" />
                         </div>
                         <div class="form-text">Format: 09XX-XXX-XXXX</div>
                       </div>
@@ -1728,12 +1747,8 @@
                           <span class="input-group-text bg-light-subtle">
                             <i class="ri-mail-line text-primary"></i>
                           </span>
-                          <input
-                            v-model="member.email"
-                            type="email"
-                            class="form-control"
-                            placeholder="name@example.com"
-                          />
+                          <input v-model="member.email" type="email" class="form-control"
+                            placeholder="name@example.com" />
                         </div>
                       </div>
                     </div>
@@ -1741,10 +1756,7 @@
                 </div>
               </div>
 
-              <div
-                v-if="formData.members.length === 0"
-                class="text-center py-5 border rounded bg-light-subtle"
-              >
+              <div v-if="formData.members.length === 0" class="text-center py-5 border rounded bg-light-subtle">
                 <div class="mb-3">
                   <i class="ri-group-line display-5 text-muted"></i>
                 </div>
@@ -1754,11 +1766,7 @@
                 <p class="text-muted mb-4">
                   Click "Add Member" to start adding family members
                 </p>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  @click="addMember"
-                >
+                <button type="button" class="btn btn-primary" @click="addMember">
                   <i class="ri-user-add-line me-2"></i> Add First Member
                 </button>
               </div>
@@ -1766,26 +1774,14 @@
               <!-- Navigation Buttons for Step 3 -->
               <div class="card-footer bg-transparent border-0 pt-4 pb-0">
                 <div class="d-flex justify-content-between align-items-center">
-                  <button
-                    type="button"
-                    class="btn btn-outline-secondary px-4"
-                    @click="prevStep"
-                  >
+                  <button type="button" class="btn btn-outline-secondary px-4" @click="prevStep">
                     <i class="ri-arrow-left-line me-2"></i> Previous
                   </button>
                   <div class="d-flex gap-2">
-                    <button
-                      type="button"
-                      class="btn btn-outline-primary px-4"
-                      @click="saveAsDraft"
-                    >
+                    <button type="button" class="btn btn-outline-primary px-4" @click="saveAsDraft">
                       <i class="ri-save-line me-2"></i> Save Draft
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-primary px-4"
-                      @click="nextStep"
-                    >
+                    <button type="button" class="btn btn-primary px-4" @click="nextStep">
                       Next <i class="ri-arrow-right-line ms-2"></i>
                     </button>
                   </div>
@@ -1802,9 +1798,7 @@
       <div class="row">
         <div class="col-12">
           <div class="card border-0 shadow-sm">
-            <div
-              class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25"
-            >
+            <div class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25">
               <div class="d-flex align-items-center">
                 <div class="step-header-icon">
                   <i class="ri-home-line text-primary fs-5"></i>
@@ -1813,9 +1807,7 @@
                   <h6 class="mb-0 fw-semibold text-primary">
                     Additional Household Information
                   </h6>
-                  <small class="text-muted"
-                    >Edit household details and facilities</small
-                  >
+                  <small class="text-muted">Edit household details and facilities</small>
                 </div>
               </div>
             </div>
@@ -1827,12 +1819,9 @@
                     <i class="ri-home-4-line text-primary me-2"></i>
                     Household Type <span class="text-danger ms-1">*</span>
                   </label>
-                  <select
-                    v-model="formData.householdInfo.type"
-                    class="form-select"
+                  <select v-model="formData.householdInfo.type" class="form-select"
                     :class="{ 'is-invalid': fieldErrors['householdInfo.type'] }"
-                    @blur="validateField('householdInfo.type')"
-                  >
+                    @blur="validateField('householdInfo.type')">
                     <option value="" disabled>Select Type</option>
                     <option value="Single Family">Single Family</option>
                     <option value="Nuclear Family">Nuclear Family</option>
@@ -1854,63 +1843,34 @@
                     Housing Type <span class="text-danger ms-1">*</span>
                   </label>
                   <div class="btn-group w-100" role="group">
-                    <input
-                      v-model="formData.householdInfo.housingType"
-                      type="radio"
-                      class="btn-check"
-                      value="Own"
-                      id="housingOwn"
-                    />
+                    <input v-model="formData.householdInfo.housingType" type="radio" class="btn-check" value="Own"
+                      id="housingOwn" />
                     <label class="btn btn-outline-primary" for="housingOwn">
                       Own
                     </label>
-                    <input
-                      v-model="formData.householdInfo.housingType"
-                      type="radio"
-                      class="btn-check"
-                      value="Rent"
-                      id="housingRent"
-                    />
+                    <input v-model="formData.householdInfo.housingType" type="radio" class="btn-check" value="Rent"
+                      id="housingRent" />
                     <label class="btn btn-outline-primary" for="housingRent">
                       Rent
                     </label>
-                    <input
-                      v-model="formData.householdInfo.housingType"
-                      type="radio"
-                      class="btn-check"
-                      value="Rent free (w/ consent)"
-                      id="housingFree"
-                    />
+                    <input v-model="formData.householdInfo.housingType" type="radio" class="btn-check"
+                      value="Rent free (w/ consent)" id="housingFree" />
                     <label class="btn btn-outline-primary" for="housingFree">
                       Rent Free
                     </label>
-                    <input
-                      v-model="formData.householdInfo.housingType"
-                      type="radio"
-                      class="btn-check"
-                      value="Others"
-                      id="housingOthers"
-                    />
+                    <input v-model="formData.householdInfo.housingType" type="radio" class="btn-check" value="Others"
+                      id="housingOthers" />
                     <label class="btn btn-outline-primary" for="housingOthers">
                       Others
                     </label>
                   </div>
                   <!-- Other specification input -->
-                  <div
-                    v-if="formData.householdInfo.housingType === 'Others'"
-                    class="mt-2"
-                  >
-                    <input
-                      v-model="formData.householdInfo.housingTypeOther"
-                      type="text"
-                      class="form-control"
-                      placeholder="Please specify other housing type"
-                    />
+                  <div v-if="formData.householdInfo.housingType === 'Others'" class="mt-2">
+                    <input v-model="formData.householdInfo.housingTypeOther" type="text" class="form-control"
+                      placeholder="Please specify other housing type" />
                   </div>
-                  <div
-                    v-if="fieldErrors['householdInfo.housingType']"
-                    class="text-danger small d-flex align-items-center mt-1"
-                  >
+                  <div v-if="fieldErrors['householdInfo.housingType']"
+                    class="text-danger small d-flex align-items-center mt-1">
                     <i class="ri-error-warning-line me-1"></i>
                     {{ fieldErrors["householdInfo.housingType"] }}
                   </div>
@@ -1923,66 +1883,34 @@
                     House Materials <span class="text-danger ms-1">*</span>
                   </label>
                   <div class="btn-group w-100" role="group">
-                    <input
-                      v-model="formData.householdInfo.houseMaterials"
-                      type="radio"
-                      class="btn-check"
-                      value="Concrete"
-                      id="materialConcrete"
-                    />
-                    <label
-                      class="btn btn-outline-primary"
-                      for="materialConcrete"
-                    >
+                    <input v-model="formData.householdInfo.houseMaterials" type="radio" class="btn-check"
+                      value="Concrete" id="materialConcrete" />
+                    <label class="btn btn-outline-primary" for="materialConcrete">
                       Concrete
                     </label>
-                    <input
-                      v-model="formData.householdInfo.houseMaterials"
-                      type="radio"
-                      class="btn-check"
-                      value="Wood"
-                      id="materialWood"
-                    />
+                    <input v-model="formData.householdInfo.houseMaterials" type="radio" class="btn-check" value="Wood"
+                      id="materialWood" />
                     <label class="btn btn-outline-primary" for="materialWood">
                       Wood
                     </label>
-                    <input
-                      v-model="formData.householdInfo.houseMaterials"
-                      type="radio"
-                      class="btn-check"
-                      value="Mixed"
-                      id="materialMixed"
-                    />
+                    <input v-model="formData.householdInfo.houseMaterials" type="radio" class="btn-check" value="Mixed"
+                      id="materialMixed" />
                     <label class="btn btn-outline-primary" for="materialMixed">
                       Mixed
                     </label>
-                    <input
-                      v-model="formData.householdInfo.houseMaterials"
-                      type="radio"
-                      class="btn-check"
-                      value="Others"
-                      id="materialOthers"
-                    />
+                    <input v-model="formData.householdInfo.houseMaterials" type="radio" class="btn-check" value="Others"
+                      id="materialOthers" />
                     <label class="btn btn-outline-primary" for="materialOthers">
                       Others
                     </label>
                   </div>
                   <!-- Other specification input -->
-                  <div
-                    v-if="formData.householdInfo.houseMaterials === 'Others'"
-                    class="mt-2"
-                  >
-                    <input
-                      v-model="formData.householdInfo.houseMaterialsOther"
-                      type="text"
-                      class="form-control"
-                      placeholder="Please specify other materials"
-                    />
+                  <div v-if="formData.householdInfo.houseMaterials === 'Others'" class="mt-2">
+                    <input v-model="formData.householdInfo.houseMaterialsOther" type="text" class="form-control"
+                      placeholder="Please specify other materials" />
                   </div>
-                  <div
-                    v-if="fieldErrors['householdInfo.houseMaterials']"
-                    class="text-danger small d-flex align-items-center mt-1"
-                  >
+                  <div v-if="fieldErrors['householdInfo.houseMaterials']"
+                    class="text-danger small d-flex align-items-center mt-1">
                     <i class="ri-error-warning-line me-1"></i>
                     {{ fieldErrors["householdInfo.houseMaterials"] }}
                   </div>
@@ -1994,14 +1922,9 @@
                     <i class="ri-drop-line text-primary me-2"></i>
                     Water Source <span class="text-danger ms-1">*</span>
                   </label>
-                  <select
-                    v-model="formData.householdInfo.waterSource"
-                    class="form-select"
-                    :class="{
-                      'is-invalid': fieldErrors['householdInfo.waterSource'],
-                    }"
-                    @blur="validateField('householdInfo.waterSource')"
-                  >
+                  <select v-model="formData.householdInfo.waterSource" class="form-select" :class="{
+                    'is-invalid': fieldErrors['householdInfo.waterSource'],
+                  }" @blur="validateField('householdInfo.waterSource')">
                     <option value="" disabled>Select Source</option>
                     <option value="None">None</option>
                     <option value="ICWS">ICWS</option>
@@ -2010,47 +1933,24 @@
                     <option value="Others">Others</option>
                   </select>
                   <!-- ICWS options -->
-                  <div
-                    v-if="formData.householdInfo.waterSource === 'ICWS'"
-                    class="mt-2"
-                  >
+                  <div v-if="formData.householdInfo.waterSource === 'ICWS'" class="mt-2">
                     <div class="btn-group w-100" role="group">
-                      <input
-                        v-model="formData.householdInfo.waterSourceICWS"
-                        type="radio"
-                        class="btn-check"
-                        value="Own Faucet"
-                        id="icwsOwn"
-                      />
+                      <input v-model="formData.householdInfo.waterSourceICWS" type="radio" class="btn-check"
+                        value="Own Faucet" id="icwsOwn" />
                       <label class="btn btn-outline-info btn-sm" for="icwsOwn">
                         Own Faucet
                       </label>
-                      <input
-                        v-model="formData.householdInfo.waterSourceICWS"
-                        type="radio"
-                        class="btn-check"
-                        value="Shared Faucet"
-                        id="icwsShared"
-                      />
-                      <label
-                        class="btn btn-outline-info btn-sm"
-                        for="icwsShared"
-                      >
+                      <input v-model="formData.householdInfo.waterSourceICWS" type="radio" class="btn-check"
+                        value="Shared Faucet" id="icwsShared" />
+                      <label class="btn btn-outline-info btn-sm" for="icwsShared">
                         Shared Faucet
                       </label>
                     </div>
                   </div>
                   <!-- Other specification input -->
-                  <div
-                    v-if="formData.householdInfo.waterSource === 'Others'"
-                    class="mt-2"
-                  >
-                    <input
-                      v-model="formData.householdInfo.waterSourceOther"
-                      type="text"
-                      class="form-control"
-                      placeholder="Please specify other water source"
-                    />
+                  <div v-if="formData.householdInfo.waterSource === 'Others'" class="mt-2">
+                    <input v-model="formData.householdInfo.waterSourceOther" type="text" class="form-control"
+                      placeholder="Please specify other water source" />
                   </div>
                   <div class="invalid-feedback">
                     {{ fieldErrors["householdInfo.waterSource"] }}
@@ -2064,63 +1964,34 @@
                     Power Supply <span class="text-danger ms-1">*</span>
                   </label>
                   <div class="btn-group w-100" role="group">
-                    <input
-                      v-model="formData.householdInfo.powerSupply"
-                      type="radio"
-                      class="btn-check"
-                      value="None"
-                      id="powerNone"
-                    />
+                    <input v-model="formData.householdInfo.powerSupply" type="radio" class="btn-check" value="None"
+                      id="powerNone" />
                     <label class="btn btn-outline-primary" for="powerNone">
                       None
                     </label>
-                    <input
-                      v-model="formData.householdInfo.powerSupply"
-                      type="radio"
-                      class="btn-check"
-                      value="ILPI"
-                      id="powerILPI"
-                    />
+                    <input v-model="formData.householdInfo.powerSupply" type="radio" class="btn-check" value="ILPI"
+                      id="powerILPI" />
                     <label class="btn btn-outline-primary" for="powerILPI">
                       ILPI
                     </label>
-                    <input
-                      v-model="formData.householdInfo.powerSupply"
-                      type="radio"
-                      class="btn-check"
-                      value="Solar"
-                      id="powerSolar"
-                    />
+                    <input v-model="formData.householdInfo.powerSupply" type="radio" class="btn-check" value="Solar"
+                      id="powerSolar" />
                     <label class="btn btn-outline-primary" for="powerSolar">
                       Solar
                     </label>
-                    <input
-                      v-model="formData.householdInfo.powerSupply"
-                      type="radio"
-                      class="btn-check"
-                      value="Others"
-                      id="powerOthers"
-                    />
+                    <input v-model="formData.householdInfo.powerSupply" type="radio" class="btn-check" value="Others"
+                      id="powerOthers" />
                     <label class="btn btn-outline-primary" for="powerOthers">
                       Others
                     </label>
                   </div>
                   <!-- Other specification input -->
-                  <div
-                    v-if="formData.householdInfo.powerSupply === 'Others'"
-                    class="mt-2"
-                  >
-                    <input
-                      v-model="formData.householdInfo.powerSupplyOther"
-                      type="text"
-                      class="form-control"
-                      placeholder="Please specify other power supply"
-                    />
+                  <div v-if="formData.householdInfo.powerSupply === 'Others'" class="mt-2">
+                    <input v-model="formData.householdInfo.powerSupplyOther" type="text" class="form-control"
+                      placeholder="Please specify other power supply" />
                   </div>
-                  <div
-                    v-if="fieldErrors['householdInfo.powerSupply']"
-                    class="text-danger small d-flex align-items-center mt-1"
-                  >
+                  <div v-if="fieldErrors['householdInfo.powerSupply']"
+                    class="text-danger small d-flex align-items-center mt-1">
                     <i class="ri-error-warning-line me-1"></i>
                     {{ fieldErrors["householdInfo.powerSupply"] }}
                   </div>
@@ -2135,32 +2006,18 @@
                   <div class="row g-3">
                     <div class="col-md-4">
                       <div class="form-check">
-                        <input
-                          v-model="formData.householdInfo.wasteBiodegradable"
-                          class="form-check-input"
-                          type="checkbox"
-                          id="wasteBiodegradable"
-                        />
-                        <label
-                          class="form-check-label fw-medium"
-                          for="wasteBiodegradable"
-                        >
+                        <input v-model="formData.householdInfo.wasteBiodegradable" class="form-check-input"
+                          type="checkbox" id="wasteBiodegradable" />
+                        <label class="form-check-label fw-medium" for="wasteBiodegradable">
                           Biodegradable
                         </label>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-check">
-                        <input
-                          v-model="formData.householdInfo.wastePlastics"
-                          class="form-check-input"
-                          type="checkbox"
-                          id="wastePlastics"
-                        />
-                        <label
-                          class="form-check-label fw-medium"
-                          for="wastePlastics"
-                        >
+                        <input v-model="formData.householdInfo.wastePlastics" class="form-check-input" type="checkbox"
+                          id="wastePlastics" />
+                        <label class="form-check-label fw-medium" for="wastePlastics">
                           Plastics
                         </label>
                       </div>
@@ -2170,12 +2027,8 @@
                         <span class="input-group-text bg-light-subtle">
                           <i class="ri-add-circle-line text-primary"></i>
                         </span>
-                        <input
-                          v-model="formData.householdInfo.wasteOthers"
-                          type="text"
-                          class="form-control"
-                          placeholder="Other waste types"
-                        />
+                        <input v-model="formData.householdInfo.wasteOthers" type="text" class="form-control"
+                          placeholder="Other waste types" />
                       </div>
                     </div>
                   </div>
@@ -2189,73 +2042,39 @@
                     <span class="text-danger ms-1">*</span>
                   </label>
                   <div class="btn-group w-100" role="group">
-                    <input
-                      v-model="formData.householdInfo.internetProvider"
-                      type="radio"
-                      class="btn-check"
-                      value="None"
-                      id="internetNone"
-                    />
+                    <input v-model="formData.householdInfo.internetProvider" type="radio" class="btn-check" value="None"
+                      id="internetNone" />
                     <label class="btn btn-outline-primary" for="internetNone">
                       None
                     </label>
-                    <input
-                      v-model="formData.householdInfo.internetProvider"
-                      type="radio"
-                      class="btn-check"
-                      value="PLDT"
-                      id="internetPLDT"
-                    />
+                    <input v-model="formData.householdInfo.internetProvider" type="radio" class="btn-check" value="PLDT"
+                      id="internetPLDT" />
                     <label class="btn btn-outline-primary" for="internetPLDT">
                       PLDT
                     </label>
-                    <input
-                      v-model="formData.householdInfo.internetProvider"
-                      type="radio"
-                      class="btn-check"
-                      value="Globe"
-                      id="internetGlobe"
-                    />
+                    <input v-model="formData.householdInfo.internetProvider" type="radio" class="btn-check"
+                      value="Globe" id="internetGlobe" />
                     <label class="btn btn-outline-primary" for="internetGlobe">
                       Globe
                     </label>
-                    <input
-                      v-model="formData.householdInfo.internetProvider"
-                      type="radio"
-                      class="btn-check"
-                      value="Smart"
-                      id="internetSmart"
-                    />
+                    <input v-model="formData.householdInfo.internetProvider" type="radio" class="btn-check"
+                      value="Smart" id="internetSmart" />
                     <label class="btn btn-outline-primary" for="internetSmart">
                       Smart
                     </label>
-                    <input
-                      v-model="formData.householdInfo.internetProvider"
-                      type="radio"
-                      class="btn-check"
-                      value="Others"
-                      id="internetOthers"
-                    />
+                    <input v-model="formData.householdInfo.internetProvider" type="radio" class="btn-check"
+                      value="Others" id="internetOthers" />
                     <label class="btn btn-outline-primary" for="internetOthers">
                       Others
                     </label>
                   </div>
                   <!-- Other specification input -->
-                  <div
-                    v-if="formData.householdInfo.internetProvider === 'Others'"
-                    class="mt-2"
-                  >
-                    <input
-                      v-model="formData.householdInfo.internetProviderOther"
-                      type="text"
-                      class="form-control"
-                      placeholder="Specify other provider (e.g., DITO)"
-                    />
+                  <div v-if="formData.householdInfo.internetProvider === 'Others'" class="mt-2">
+                    <input v-model="formData.householdInfo.internetProviderOther" type="text" class="form-control"
+                      placeholder="Specify other provider (e.g., DITO)" />
                   </div>
-                  <div
-                    v-if="fieldErrors['householdInfo.internetProvider']"
-                    class="text-danger small d-flex align-items-center mt-1"
-                  >
+                  <div v-if="fieldErrors['householdInfo.internetProvider']"
+                    class="text-danger small d-flex align-items-center mt-1">
                     <i class="ri-error-warning-line me-1"></i>
                     {{ fieldErrors["householdInfo.internetProvider"] }}
                   </div>
@@ -2268,69 +2087,34 @@
                     Garbage Disposal <span class="text-danger ms-1">*</span>
                   </label>
                   <div class="btn-group w-100" role="group">
-                    <input
-                      v-model="formData.householdInfo.garbageDisposal"
-                      type="radio"
-                      class="btn-check"
-                      value="Garbage Collector"
-                      id="garbageCollector"
-                    />
-                    <label
-                      class="btn btn-outline-primary"
-                      for="garbageCollector"
-                    >
+                    <input v-model="formData.householdInfo.garbageDisposal" type="radio" class="btn-check"
+                      value="Garbage Collector" id="garbageCollector" />
+                    <label class="btn btn-outline-primary" for="garbageCollector">
                       Garbage Collector
                     </label>
-                    <input
-                      v-model="formData.householdInfo.garbageDisposal"
-                      type="radio"
-                      class="btn-check"
-                      value="Burning"
-                      id="garbageBurning"
-                    />
+                    <input v-model="formData.householdInfo.garbageDisposal" type="radio" class="btn-check"
+                      value="Burning" id="garbageBurning" />
                     <label class="btn btn-outline-primary" for="garbageBurning">
                       Burning
                     </label>
-                    <input
-                      v-model="formData.householdInfo.garbageDisposal"
-                      type="radio"
-                      class="btn-check"
-                      value="Composting"
-                      id="garbageComposting"
-                    />
-                    <label
-                      class="btn btn-outline-primary"
-                      for="garbageComposting"
-                    >
+                    <input v-model="formData.householdInfo.garbageDisposal" type="radio" class="btn-check"
+                      value="Composting" id="garbageComposting" />
+                    <label class="btn btn-outline-primary" for="garbageComposting">
                       Composting
                     </label>
-                    <input
-                      v-model="formData.householdInfo.garbageDisposal"
-                      type="radio"
-                      class="btn-check"
-                      value="Others"
-                      id="garbageOthers"
-                    />
+                    <input v-model="formData.householdInfo.garbageDisposal" type="radio" class="btn-check"
+                      value="Others" id="garbageOthers" />
                     <label class="btn btn-outline-primary" for="garbageOthers">
                       Others
                     </label>
                   </div>
                   <!-- Other specification input -->
-                  <div
-                    v-if="formData.householdInfo.garbageDisposal === 'Others'"
-                    class="mt-2"
-                  >
-                    <input
-                      v-model="formData.householdInfo.garbageDisposalOther"
-                      type="text"
-                      class="form-control"
-                      placeholder="Please specify other disposal method"
-                    />
+                  <div v-if="formData.householdInfo.garbageDisposal === 'Others'" class="mt-2">
+                    <input v-model="formData.householdInfo.garbageDisposalOther" type="text" class="form-control"
+                      placeholder="Please specify other disposal method" />
                   </div>
-                  <div
-                    v-if="fieldErrors['householdInfo.garbageDisposal']"
-                    class="text-danger small d-flex align-items-center mt-1"
-                  >
+                  <div v-if="fieldErrors['householdInfo.garbageDisposal']"
+                    class="text-danger small d-flex align-items-center mt-1">
                     <i class="ri-error-warning-line me-1"></i>
                     {{ fieldErrors["householdInfo.garbageDisposal"] }}
                   </div>
@@ -2341,9 +2125,7 @@
                   <h6 class="border-bottom pb-2 mb-3 fw-semibold">
                     <i class="ri-leaf-line text-primary me-2"></i>Crops Planted
                   </h6>
-                  <div
-                    class="alert alert-info border-0 bg-info bg-opacity-10 mb-3"
-                  >
+                  <div class="alert alert-info border-0 bg-info bg-opacity-10 mb-3">
                     <div class="d-flex">
                       <i class="ri-information-line text-info me-2"></i>
                       <small>Select crops and specify quantity per crop</small>
@@ -2357,17 +2139,9 @@
                             <tr>
                               <th width="50" class="text-center">
                                 <div class="form-check d-inline-block">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    @change="toggleAllCrops"
-                                    :checked="areAllCropsSelected"
-                                    id="selectAllCrops"
-                                  />
-                                  <label
-                                    class="form-check-label"
-                                    for="selectAllCrops"
-                                  ></label>
+                                  <input class="form-check-input" type="checkbox" @change="toggleAllCrops"
+                                    :checked="areAllCropsSelected" id="selectAllCrops" />
+                                  <label class="form-check-label" for="selectAllCrops"></label>
                                 </div>
                               </th>
                               <th>Crop Type</th>
@@ -2379,46 +2153,28 @@
                             <tr v-for="crop in cropsOptions" :key="crop.value">
                               <td class="text-center">
                                 <div class="form-check">
-                                  <input
-                                    v-model="selectedCrops"
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    :value="crop.value"
-                                    :id="'crop_' + crop.value"
-                                  />
+                                  <input v-model="selectedCrops" class="form-check-input" type="checkbox"
+                                    :value="crop.value" :id="'crop_' + crop.value" />
                                 </div>
                               </td>
                               <td>
-                                <label
-                                  class="form-check-label"
-                                  :for="'crop_' + crop.value"
-                                >
+                                <label class="form-check-label" :for="'crop_' + crop.value">
                                   {{ crop.label }}
                                 </label>
                               </td>
                               <td>
-                                <input
-                                  v-if="selectedCrops.includes(crop.value)"
-                                  v-model="cropQuantities[crop.value]"
-                                  type="number"
-                                  class="form-control form-control-sm"
-                                  placeholder="0"
-                                  min="0"
-                                  step="0.01"
+                                <input v-if="selectedCrops.includes(crop.value)" v-model="cropQuantities[crop.value]"
+                                  type="number" class="form-control form-control-sm" placeholder="0" min="0" step="0.01"
                                   @input="
                                     updateCropQuantity(
                                       crop.value,
                                       $event.target.value
                                     )
-                                  "
-                                />
+                                    " />
                                 <span v-else class="text-muted">-</span>
                               </td>
                               <td>
-                                <span
-                                  v-if="selectedCrops.includes(crop.value)"
-                                  class="fw-medium"
-                                >
+                                <span v-if="selectedCrops.includes(crop.value)" class="fw-medium">
                                   {{ getCropUnit(crop.value) }}
                                 </span>
                                 <span v-else class="text-muted">-</span>
@@ -2434,37 +2190,20 @@
                       <div class="card bg-light-subtle border-0">
                         <div class="card-body">
                           <h6 class="fw-medium mb-3">Other Crops</h6>
-                          <div
-                            v-for="(otherCrop, index) in otherCrops"
-                            :key="index"
-                            class="row g-3 mb-3"
-                          >
+                          <div v-for="(otherCrop, index) in otherCrops" :key="index" class="row g-3 mb-3">
                             <div class="col-md-4">
                               <label class="form-label small">Crop Name</label>
-                              <input
-                                v-model="otherCrops[index].name"
-                                type="text"
-                                class="form-control form-control-sm"
-                                placeholder="Enter crop name"
-                              />
+                              <input v-model="otherCrops[index].name" type="text" class="form-control form-control-sm"
+                                placeholder="Enter crop name" />
                             </div>
                             <div class="col-md-3">
                               <label class="form-label small">Quantity</label>
-                              <input
-                                v-model="otherCrops[index].quantity"
-                                type="number"
-                                class="form-control form-control-sm"
-                                placeholder="0"
-                                min="0"
-                                step="0.01"
-                              />
+                              <input v-model="otherCrops[index].quantity" type="number"
+                                class="form-control form-control-sm" placeholder="0" min="0" step="0.01" />
                             </div>
                             <div class="col-md-3">
                               <label class="form-label small">Unit</label>
-                              <select
-                                v-model="otherCrops[index].unit"
-                                class="form-select form-select-sm"
-                              >
+                              <select v-model="otherCrops[index].unit" class="form-select form-select-sm">
                                 <option value="">Select Unit</option>
                                 <option value="kg">Kilograms</option>
                                 <option value="g">Grams</option>
@@ -2476,21 +2215,13 @@
                               </select>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
-                              <button
-                                type="button"
-                                class="btn btn-sm btn-outline-danger"
-                                @click="removeOtherCrop(index)"
-                                v-if="otherCrops.length > 1"
-                              >
+                              <button type="button" class="btn btn-sm btn-outline-danger"
+                                @click="removeOtherCrop(index)" v-if="otherCrops.length > 1">
                                 <i class="ri-delete-bin-line"></i>
                               </button>
                             </div>
                           </div>
-                          <button
-                            type="button"
-                            class="btn btn-sm btn-outline-primary mt-2"
-                            @click="addOtherCrop"
-                          >
+                          <button type="button" class="btn btn-sm btn-outline-primary mt-2" @click="addOtherCrop">
                             <i class="ri-add-line me-1"></i> Add Other Crop
                           </button>
                         </div>
@@ -2502,12 +2233,9 @@
                 <!-- LIVESTOCK RAISED -->
                 <div class="col-12 mb-4">
                   <h6 class="border-bottom pb-2 mb-3 fw-semibold">
-                    <i class="ri-bear-smile-line text-primary me-2"></i
-                    >Livestock Raised
+                    <i class="ri-bear-smile-line text-primary me-2"></i>Livestock Raised
                   </h6>
-                  <div
-                    class="alert alert-info border-0 bg-info bg-opacity-10 mb-3"
-                  >
+                  <div class="alert alert-info border-0 bg-info bg-opacity-10 mb-3">
                     <div class="d-flex">
                       <i class="ri-information-line text-info me-2"></i>
                       <small>Select livestock and specify quantity</small>
@@ -2521,17 +2249,9 @@
                             <tr>
                               <th width="50" class="text-center">
                                 <div class="form-check d-inline-block">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    @change="toggleAllLivestock"
-                                    :checked="areAllLivestockSelected"
-                                    id="selectAllLivestock"
-                                  />
-                                  <label
-                                    class="form-check-label"
-                                    for="selectAllLivestock"
-                                  ></label>
+                                  <input class="form-check-input" type="checkbox" @change="toggleAllLivestock"
+                                    :checked="areAllLivestockSelected" id="selectAllLivestock" />
+                                  <label class="form-check-label" for="selectAllLivestock"></label>
                                 </div>
                               </th>
                               <th>Livestock Type</th>
@@ -2540,55 +2260,34 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr
-                              v-for="livestock in livestockOptions"
-                              :key="livestock.value"
-                            >
+                            <tr v-for="livestock in livestockOptions" :key="livestock.value">
                               <td class="text-center">
                                 <div class="form-check">
-                                  <input
-                                    v-model="selectedLivestock"
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    :value="livestock.value"
-                                    :id="'livestock_' + livestock.value"
-                                  />
+                                  <input v-model="selectedLivestock" class="form-check-input" type="checkbox"
+                                    :value="livestock.value" :id="'livestock_' + livestock.value" />
                                 </div>
                               </td>
                               <td>
-                                <label
-                                  class="form-check-label"
-                                  :for="'livestock_' + livestock.value"
-                                >
+                                <label class="form-check-label" :for="'livestock_' + livestock.value">
                                   {{ livestock.label }}
                                 </label>
                               </td>
                               <td>
-                                <input
-                                  v-if="
-                                    selectedLivestock.includes(livestock.value)
-                                  "
-                                  v-model="livestockQuantities[livestock.value]"
-                                  type="number"
-                                  class="form-control form-control-sm"
-                                  placeholder="0"
-                                  min="0"
-                                  @input="
+                                <input v-if="
+                                  selectedLivestock.includes(livestock.value)
+                                " v-model="livestockQuantities[livestock.value]" type="number"
+                                  class="form-control form-control-sm" placeholder="0" min="0" @input="
                                     updateLivestockQuantity(
                                       livestock.value,
                                       $event.target.value
                                     )
-                                  "
-                                />
+                                    " />
                                 <span v-else class="text-muted">-</span>
                               </td>
                               <td>
-                                <span
-                                  v-if="
-                                    selectedLivestock.includes(livestock.value)
-                                  "
-                                  class="fw-medium"
-                                >
+                                <span v-if="
+                                  selectedLivestock.includes(livestock.value)
+                                " class="fw-medium">
                                   {{ getLivestockUnit(livestock.value) }}
                                 </span>
                                 <span v-else class="text-muted">-</span>
@@ -2600,119 +2299,58 @@
                     </div>
 
                     <!-- Poultry sub-options with quantity -->
-                    <div
-                      v-if="selectedLivestock.includes('Poultry')"
-                      class="col-12 mt-3"
-                    >
+                    <div v-if="selectedLivestock.includes('Poultry')" class="col-12 mt-3">
                       <div class="card bg-light-subtle border-0">
                         <div class="card-body">
                           <h6 class="fw-medium mb-3">Poultry Details</h6>
                           <div class="row g-3">
                             <div class="col-md-4">
                               <div class="form-check">
-                                <input
-                                  v-model="poultryType"
-                                  class="form-check-input"
-                                  type="checkbox"
-                                  value="Chicken"
-                                  id="poultryChicken"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="poultryChicken"
-                                >
+                                <input v-model="poultryType" class="form-check-input" type="checkbox" value="Chicken"
+                                  id="poultryChicken" />
+                                <label class="form-check-label" for="poultryChicken">
                                   Chicken
                                 </label>
                               </div>
-                              <div
-                                v-if="poultryType.includes('Chicken')"
-                                class="mt-2"
-                              >
-                                <label class="form-label small"
-                                  >Number of Chickens</label
-                                >
-                                <input
-                                  v-model="poultryQuantities.chicken"
-                                  type="number"
-                                  class="form-control form-control-sm"
-                                  placeholder="0"
-                                  min="0"
-                                />
+                              <div v-if="poultryType.includes('Chicken')" class="mt-2">
+                                <label class="form-label small">Number of Chickens</label>
+                                <input v-model="poultryQuantities.chicken" type="number"
+                                  class="form-control form-control-sm" placeholder="0" min="0" />
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="form-check">
-                                <input
-                                  v-model="poultryType"
-                                  class="form-check-input"
-                                  type="checkbox"
-                                  value="Duck"
-                                  id="poultryDuck"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="poultryDuck"
-                                >
+                                <input v-model="poultryType" class="form-check-input" type="checkbox" value="Duck"
+                                  id="poultryDuck" />
+                                <label class="form-check-label" for="poultryDuck">
                                   Duck
                                 </label>
                               </div>
-                              <div
-                                v-if="poultryType.includes('Duck')"
-                                class="mt-2"
-                              >
-                                <label class="form-label small"
-                                  >Number of Ducks</label
-                                >
-                                <input
-                                  v-model="poultryQuantities.duck"
-                                  type="number"
-                                  class="form-control form-control-sm"
-                                  placeholder="0"
-                                  min="0"
-                                />
+                              <div v-if="poultryType.includes('Duck')" class="mt-2">
+                                <label class="form-label small">Number of Ducks</label>
+                                <input v-model="poultryQuantities.duck" type="number"
+                                  class="form-control form-control-sm" placeholder="0" min="0" />
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="form-check">
-                                <input
-                                  v-model="poultryType"
-                                  class="form-check-input"
-                                  type="checkbox"
-                                  value="Other Poultry"
-                                  id="poultryOther"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="poultryOther"
-                                >
+                                <input v-model="poultryType" class="form-check-input" type="checkbox"
+                                  value="Other Poultry" id="poultryOther" />
+                                <label class="form-check-label" for="poultryOther">
                                   Other
                                 </label>
                               </div>
-                              <div
-                                v-if="poultryType.includes('Other Poultry')"
-                                class="mt-2"
-                              >
+                              <div v-if="poultryType.includes('Other Poultry')" class="mt-2">
                                 <div class="row g-2">
                                   <div class="col-6">
                                     <label class="form-label small">Type</label>
-                                    <input
-                                      v-model="poultryQuantities.otherType"
-                                      type="text"
-                                      class="form-control form-control-sm"
-                                      placeholder="e.g., Turkey"
-                                    />
+                                    <input v-model="poultryQuantities.otherType" type="text"
+                                      class="form-control form-control-sm" placeholder="e.g., Turkey" />
                                   </div>
                                   <div class="col-6">
-                                    <label class="form-label small"
-                                      >Quantity</label
-                                    >
-                                    <input
-                                      v-model="poultryQuantities.otherQuantity"
-                                      type="number"
-                                      class="form-control form-control-sm"
-                                      placeholder="0"
-                                      min="0"
-                                    />
+                                    <label class="form-label small">Quantity</label>
+                                    <input v-model="poultryQuantities.otherQuantity" type="number"
+                                      class="form-control form-control-sm" placeholder="0" min="0" />
                                   </div>
                                 </div>
                               </div>
@@ -2727,38 +2365,20 @@
                       <div class="card bg-light-subtle border-0">
                         <div class="card-body">
                           <h6 class="fw-medium mb-3">Other Livestock</h6>
-                          <div
-                            v-for="(otherAnimal, index) in otherLivestock"
-                            :key="index"
-                            class="row g-3 mb-3"
-                          >
+                          <div v-for="(otherAnimal, index) in otherLivestock" :key="index" class="row g-3 mb-3">
                             <div class="col-md-4">
-                              <label class="form-label small"
-                                >Animal Type</label
-                              >
-                              <input
-                                v-model="otherLivestock[index].type"
-                                type="text"
-                                class="form-control form-control-sm"
-                                placeholder="Enter animal type"
-                              />
+                              <label class="form-label small">Animal Type</label>
+                              <input v-model="otherLivestock[index].type" type="text"
+                                class="form-control form-control-sm" placeholder="Enter animal type" />
                             </div>
                             <div class="col-md-3">
                               <label class="form-label small">Quantity</label>
-                              <input
-                                v-model="otherLivestock[index].quantity"
-                                type="number"
-                                class="form-control form-control-sm"
-                                placeholder="0"
-                                min="0"
-                              />
+                              <input v-model="otherLivestock[index].quantity" type="number"
+                                class="form-control form-control-sm" placeholder="0" min="0" />
                             </div>
                             <div class="col-md-3">
                               <label class="form-label small">Unit</label>
-                              <select
-                                v-model="otherLivestock[index].unit"
-                                class="form-select form-select-sm"
-                              >
+                              <select v-model="otherLivestock[index].unit" class="form-select form-select-sm">
                                 <option value="head">Head</option>
                                 <option value="pairs">Pairs</option>
                                 <option value="flock">Flock</option>
@@ -2766,21 +2386,13 @@
                               </select>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
-                              <button
-                                type="button"
-                                class="btn btn-sm btn-outline-danger"
-                                @click="removeOtherLivestock(index)"
-                                v-if="otherLivestock.length > 1"
-                              >
+                              <button type="button" class="btn btn-sm btn-outline-danger"
+                                @click="removeOtherLivestock(index)" v-if="otherLivestock.length > 1">
                                 <i class="ri-delete-bin-line"></i>
                               </button>
                             </div>
                           </div>
-                          <button
-                            type="button"
-                            class="btn btn-sm btn-outline-primary mt-2"
-                            @click="addOtherLivestock"
-                          >
+                          <button type="button" class="btn btn-sm btn-outline-primary mt-2" @click="addOtherLivestock">
                             <i class="ri-add-line me-1"></i> Add Other Livestock
                           </button>
                         </div>
@@ -2791,9 +2403,7 @@
                 <!-- FOR FISHERFOLKS SECTION -->
                 <div class="col-12 mb-4">
                   <div class="card border-primary border-opacity-25">
-                    <div
-                      class="card-header bg-primary bg-opacity-10 border-primary border-opacity-25"
-                    >
+                    <div class="card-header bg-primary bg-opacity-10 border-primary border-opacity-25">
                       <h6 class="mb-0 fw-semibold text-primary">
                         <i class="ri-sailboat-line me-2"></i>For Fisherfolks
                       </h6>
@@ -2802,50 +2412,24 @@
                       <div class="row g-3">
                         <!-- TYPE OF FISHING VESSEL OWNED -->
                         <div class="col-md-6">
-                          <label
-                            class="form-label fw-medium d-flex align-items-center"
-                          >
+                          <label class="form-label fw-medium d-flex align-items-center">
                             <i class="ri-ship-line text-primary me-2"></i>
                             Type of Fishing Vessel Owned
                           </label>
                           <div class="btn-group w-100" role="group">
-                            <input
-                              v-model="formData.householdInfo.fishingVessel"
-                              type="radio"
-                              class="btn-check"
-                              value="None"
-                              id="vesselNone"
-                            />
-                            <label
-                              class="btn btn-outline-primary"
-                              for="vesselNone"
-                            >
+                            <input v-model="formData.householdInfo.fishingVessel" type="radio" class="btn-check"
+                              value="None" id="vesselNone" />
+                            <label class="btn btn-outline-primary" for="vesselNone">
                               None
                             </label>
-                            <input
-                              v-model="formData.householdInfo.fishingVessel"
-                              type="radio"
-                              class="btn-check"
-                              value="Motorized"
-                              id="vesselMotorized"
-                            />
-                            <label
-                              class="btn btn-outline-primary"
-                              for="vesselMotorized"
-                            >
+                            <input v-model="formData.householdInfo.fishingVessel" type="radio" class="btn-check"
+                              value="Motorized" id="vesselMotorized" />
+                            <label class="btn btn-outline-primary" for="vesselMotorized">
                               Motorized
                             </label>
-                            <input
-                              v-model="formData.householdInfo.fishingVessel"
-                              type="radio"
-                              class="btn-check"
-                              value="Non-Motorized"
-                              id="vesselNonMotorized"
-                            />
-                            <label
-                              class="btn btn-outline-primary"
-                              for="vesselNonMotorized"
-                            >
+                            <input v-model="formData.householdInfo.fishingVessel" type="radio" class="btn-check"
+                              value="Non-Motorized" id="vesselNonMotorized" />
+                            <label class="btn btn-outline-primary" for="vesselNonMotorized">
                               Non-Motorized
                             </label>
                           </div>
@@ -2853,38 +2437,24 @@
 
                         <!-- AVERAGE CATCH OF FISH -->
                         <div class="col-md-3">
-                          <label
-                            class="form-label fw-medium d-flex align-items-center"
-                          >
+                          <label class="form-label fw-medium d-flex align-items-center">
                             <i class="ri-fish-line text-primary me-2"></i>
                             Average Catch of Fish
                           </label>
                           <div class="input-group">
-                            <input
-                              v-model="formData.householdInfo.avgFishCatch"
-                              type="number"
-                              class="form-control"
-                              placeholder="0"
-                              min="0"
-                            />
+                            <input v-model="formData.householdInfo.avgFishCatch" type="number" class="form-control"
+                              placeholder="0" min="0" />
                             <span class="input-group-text">kg/month</span>
                           </div>
                         </div>
 
                         <!-- FREQUENCY OF FISHING -->
                         <div class="col-md-3">
-                          <label
-                            class="form-label fw-medium d-flex align-items-center"
-                          >
-                            <i
-                              class="ri-calendar-schedule-line text-primary me-2"
-                            ></i>
+                          <label class="form-label fw-medium d-flex align-items-center">
+                            <i class="ri-calendar-schedule-line text-primary me-2"></i>
                             Frequency of Fishing
                           </label>
-                          <select
-                            v-model="formData.householdInfo.fishingFrequency"
-                            class="form-select"
-                          >
+                          <select v-model="formData.householdInfo.fishingFrequency" class="form-select">
                             <option value="" disabled>Select Frequency</option>
                             <option value="Daily">Daily</option>
                             <option value="Weekly">Weekly</option>
@@ -2902,27 +2472,20 @@
                   <div class="card bg-light-subtle border-0">
                     <div class="card-body">
                       <h6 class="border-bottom pb-2 mb-3 fw-semibold">
-                        <i class="ri-map-pin-line text-primary me-2"></i
-                        >Geo-Tagged Location
+                        <i class="ri-map-pin-line text-primary me-2"></i>Geo-Tagged Location
                       </h6>
                       <div class="row g-3">
                         <div class="col-md-6">
                           <label class="form-label fw-medium">
                             Longitude
-                            <small class="text-muted"
-                              >(e.g., 124.237230E)</small
-                            >
+                            <small class="text-muted">(e.g., 124.237230E)</small>
                           </label>
                           <div class="input-group">
                             <span class="input-group-text bg-light-subtle">
                               <i class="ri-globe-line text-primary"></i>
                             </span>
-                            <input
-                              v-model="formData.householdInfo.longitude"
-                              type="text"
-                              class="form-control"
-                              placeholder="124.237230E"
-                            />
+                            <input v-model="formData.householdInfo.longitude" type="text" class="form-control"
+                              placeholder="124.237230E" />
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -2934,24 +2497,16 @@
                             <span class="input-group-text bg-light-subtle">
                               <i class="ri-map-pin-line text-primary"></i>
                             </span>
-                            <input
-                              v-model="formData.householdInfo.latitude"
-                              type="text"
-                              class="form-control"
-                              placeholder="8.214760N"
-                            />
+                            <input v-model="formData.householdInfo.latitude" type="text" class="form-control"
+                              placeholder="8.214760N" />
                           </div>
                         </div>
                       </div>
-                      <div
-                        class="alert alert-info border-0 bg-info bg-opacity-10 mt-3"
-                      >
+                      <div class="alert alert-info border-0 bg-info bg-opacity-10 mt-3">
                         <div class="d-flex align-items-center">
                           <i class="ri-information-line text-info me-2"></i>
-                          <small
-                            >GPS coordinates are optional but helpful for
-                            mapping purposes</small
-                          >
+                          <small>GPS coordinates are optional but helpful for
+                            mapping purposes</small>
                         </div>
                       </div>
                     </div>
@@ -2962,26 +2517,14 @@
               <!-- Navigation Buttons for Step 4 -->
               <div class="card-footer bg-transparent border-0 pt-4 pb-0">
                 <div class="d-flex justify-content-between align-items-center">
-                  <button
-                    type="button"
-                    class="btn btn-outline-secondary px-4"
-                    @click="prevStep"
-                  >
+                  <button type="button" class="btn btn-outline-secondary px-4" @click="prevStep">
                     <i class="ri-arrow-left-line me-2"></i> Previous
                   </button>
                   <div class="d-flex gap-2">
-                    <button
-                      type="button"
-                      class="btn btn-outline-primary px-4"
-                      @click="saveAsDraft"
-                    >
+                    <button type="button" class="btn btn-outline-primary px-4" @click="saveAsDraft">
                       <i class="ri-save-line me-2"></i> Save Draft
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-primary px-4"
-                      @click="nextStep"
-                    >
+                    <button type="button" class="btn btn-primary px-4" @click="nextStep">
                       Next <i class="ri-arrow-right-line ms-2"></i>
                     </button>
                   </div>
@@ -2998,9 +2541,7 @@
       <div class="row">
         <div class="col-12">
           <div class="card border-0 shadow-sm">
-            <div
-              class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25"
-            >
+            <div class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25">
               <div class="d-flex align-items-center">
                 <div class="step-header-icon">
                   <i class="ri-eye-line text-primary fs-5"></i>
@@ -3009,9 +2550,7 @@
                   <h6 class="mb-0 fw-semibold text-primary">
                     Review and Update
                   </h6>
-                  <small class="text-muted"
-                    >Review all information before updating</small
-                  >
+                  <small class="text-muted">Review all information before updating</small>
                 </div>
               </div>
             </div>
@@ -3072,20 +2611,16 @@
                     </div>
                     <div class="card-body">
                       <div class="d-flex align-items-center mb-3">
-                        <div
-                          class="avatar-circle bg-primary bg-opacity-10 text-primary"
-                        >
+                        <div class="avatar-circle bg-primary bg-opacity-10 text-primary">
                           <i class="ri-user-line"></i>
                         </div>
                         <div class="ms-3">
                           <h6 class="mb-0 fw-semibold">
                             {{ formatName(formData.headOfFamily) }}
                           </h6>
-                          <small class="text-muted"
-                            >{{ formData.headOfFamily.sex }} •
+                          <small class="text-muted">{{ formData.headOfFamily.sex }} •
                             {{ calculateAge(formData.headOfFamily.birthdate) }}
-                            years old</small
-                          >
+                            years old</small>
                         </div>
                       </div>
                       <div class="row g-2">
@@ -3102,7 +2637,7 @@
                             formatDate(formData.headOfFamily.birthdate)
                           }}</span>
                         </div>
-                        <div class="col-6">
+                        <div class="col-3">
                           <small class="text-muted d-block">Civil Status</small>
                           <span class="fw-medium">{{
                             formData.headOfFamily.civilStatus || "Not specified"
@@ -3110,45 +2645,31 @@
                         </div>
                         <div class="col-6">
                           <small class="text-muted d-block">4Ps Member</small>
-                          <span
-                            class="badge"
-                            :class="
-                              formData.headOfFamily.is4psMember === 'Yes'
-                                ? 'bg-info'
-                                : 'bg-secondary'
-                            "
-                          >
+                          <span class="badge" :class="formData.headOfFamily.is4psMember === 'Yes'
+                            ? 'bg-info'
+                            : 'bg-secondary'
+                            ">
                             {{ formData.headOfFamily.is4psMember || "No" }}
                           </span>
                         </div>
-                        <div class="col-6">
+                        <div class="col-3">
                           <small class="text-muted d-block">Voter Status</small>
-                          <span
-                            class="badge"
-                            :class="
-                              formData.headOfFamily.voterStatus === 'Voter'
-                                ? 'bg-success'
-                                : 'bg-secondary'
-                            "
-                          >
+                          <span class="badge" :class="formData.headOfFamily.voterStatus === 'Voter'
+                            ? 'bg-success'
+                            : 'bg-secondary'
+                            ">
                             {{
                               formData.headOfFamily.voterStatus ||
                               "Not specified"
                             }}
                           </span>
                         </div>
-                        <div class="col-6">
-                          <small class="text-muted d-block"
-                            >Living Status</small
-                          >
-                          <span
-                            class="badge"
-                            :class="
-                              formData.headOfFamily.isDeceased === 'Yes'
-                                ? 'bg-dark'
-                                : 'bg-success'
-                            "
-                          >
+                        <div class="col-3">
+                          <small class="text-muted d-block">Living Status</small>
+                          <span class="badge" :class="formData.headOfFamily.isDeceased === 'Yes'
+                            ? 'bg-dark'
+                            : 'bg-success'
+                            ">
                             {{
                               formData.headOfFamily.isDeceased === "Yes"
                                 ? "Deceased"
@@ -3156,6 +2677,19 @@
                             }}
                           </span>
                         </div>
+                        <div class="col-6">
+                          <small class="text-muted d-block">
+                            Person With Disability
+                          </small>
+
+                          <span class="badge" :class="formData.headOfFamily.isPWD === 'Yes'
+                            ? 'bg-success'
+                            : 'bg-secondary'
+                            ">
+                            {{ formData.headOfFamily.isPWD === "Yes" ? "YES" : "NO" }}
+                          </span>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -3165,8 +2699,7 @@
                 <div class="col-12">
                   <div class="card border">
                     <div
-                      class="card-header bg-light-subtle border-bottom d-flex justify-content-between align-items-center"
-                    >
+                      class="card-header bg-light-subtle border-bottom d-flex justify-content-between align-items-center">
                       <h6 class="mb-0 fw-semibold">
                         <i class="ri-group-line text-primary me-2"></i>Family
                         Members
@@ -3209,23 +2742,16 @@
                                 }}
                               </td>
                               <td>
-                                <span
-                                  class="badge"
-                                  :class="
-                                    formData.headOfFamily.employmentStatus ===
-                                    'Employed'
-                                      ? 'bg-success'
-                                      : 'bg-warning'
-                                  "
-                                >
+                                <span class="badge" :class="formData.headOfFamily.employmentStatus ===
+                                  'Employed'
+                                  ? 'bg-success'
+                                  : 'bg-warning'
+                                  ">
                                   {{ formData.headOfFamily.employmentStatus }}
                                 </span>
                               </td>
                             </tr>
-                            <tr
-                              v-for="(member, index) in formData.members"
-                              :key="index"
-                            >
+                            <tr v-for="(member, index) in formData.members" :key="index">
                               <td>{{ index + 1 }}</td>
                               <td>{{ formatName(member) }}</td>
                               <td>{{ member.sex }}</td>
@@ -3235,14 +2761,10 @@
                                 {{ member.occupation || "Not specified" }}
                               </td>
                               <td>
-                                <span
-                                  class="badge"
-                                  :class="
-                                    member.employmentStatus === 'Employed'
-                                      ? 'bg-success'
-                                      : 'bg-warning'
-                                  "
-                                >
+                                <span class="badge" :class="member.employmentStatus === 'Employed'
+                                  ? 'bg-success'
+                                  : 'bg-warning'
+                                  ">
                                   {{ member.employmentStatus }}
                                 </span>
                               </td>
@@ -3269,9 +2791,7 @@
                         <div class="col-md-6">
                           <div class="border rounded p-3 h-100">
                             <div class="d-flex align-items-center mb-3">
-                              <i
-                                class="ri-home-4-line text-primary fs-4 me-3"
-                              ></i>
+                              <i class="ri-home-4-line text-primary fs-4 me-3"></i>
                               <div>
                                 <p class="mb-1 fw-medium">Household Type</p>
                                 <p class="text-primary mb-0">
@@ -3283,9 +2803,7 @@
                               </div>
                             </div>
                             <div class="d-flex align-items-center">
-                              <i
-                                class="ri-building-line text-primary fs-4 me-3"
-                              ></i>
+                              <i class="ri-building-line text-primary fs-4 me-3"></i>
                               <div>
                                 <p class="mb-1 fw-medium">Housing Type</p>
                                 <p class="text-primary mb-0">
@@ -3300,9 +2818,7 @@
                         <div class="col-md-6">
                           <div class="border rounded p-3 h-100">
                             <div class="d-flex align-items-center mb-3">
-                              <i
-                                class="ri-hammer-line text-primary fs-4 me-3"
-                              ></i>
+                              <i class="ri-hammer-line text-primary fs-4 me-3"></i>
                               <div>
                                 <p class="mb-1 fw-medium">House Materials</p>
                                 <p class="text-primary mb-0">
@@ -3311,9 +2827,7 @@
                               </div>
                             </div>
                             <div class="d-flex align-items-center">
-                              <i
-                                class="ri-drop-line text-primary fs-4 me-3"
-                              ></i>
+                              <i class="ri-drop-line text-primary fs-4 me-3"></i>
                               <div>
                                 <p class="mb-1 fw-medium">Water Source</p>
                                 <p class="text-primary mb-0">
@@ -3328,9 +2842,7 @@
                         <div class="col-md-6">
                           <div class="border rounded p-3 h-100">
                             <div class="d-flex align-items-center mb-3">
-                              <i
-                                class="ri-flashlight-line text-primary fs-4 me-3"
-                              ></i>
+                              <i class="ri-flashlight-line text-primary fs-4 me-3"></i>
                               <div>
                                 <p class="mb-1 fw-medium">Power Supply</p>
                                 <p class="text-primary mb-0">
@@ -3339,9 +2851,7 @@
                               </div>
                             </div>
                             <div class="d-flex align-items-center">
-                              <i
-                                class="ri-wifi-line text-primary fs-4 me-3"
-                              ></i>
+                              <i class="ri-wifi-line text-primary fs-4 me-3"></i>
                               <div>
                                 <p class="mb-1 fw-medium">Internet Provider</p>
                                 <p class="text-primary mb-0">
@@ -3356,9 +2866,7 @@
                         <div class="col-md-6">
                           <div class="border rounded p-3 h-100">
                             <div class="d-flex align-items-center mb-3">
-                              <i
-                                class="ri-truck-line text-primary fs-4 me-3"
-                              ></i>
+                              <i class="ri-truck-line text-primary fs-4 me-3"></i>
                               <div>
                                 <p class="mb-1 fw-medium">Garbage Disposal</p>
                                 <p class="text-primary mb-0">
@@ -3367,9 +2875,7 @@
                               </div>
                             </div>
                             <div class="d-flex align-items-center">
-                              <i
-                                class="ri-delete-bin-line text-primary fs-4 me-3"
-                              ></i>
+                              <i class="ri-delete-bin-line text-primary fs-4 me-3"></i>
                               <div>
                                 <p class="mb-1 fw-medium">Solid Waste</p>
                                 <p class="text-primary mb-0">
@@ -3384,9 +2890,7 @@
                         <div class="col-md-6">
                           <div class="border rounded p-3 h-100">
                             <div class="d-flex align-items-start mb-3">
-                              <i
-                                class="ri-leaf-line text-primary fs-4 me-3 mt-1"
-                              ></i>
+                              <i class="ri-leaf-line text-primary fs-4 me-3 mt-1"></i>
                               <div>
                                 <p class="mb-1 fw-medium">Crops Planted</p>
                                 <p class="text-primary mb-0">
@@ -3401,9 +2905,7 @@
                         <div class="col-md-6">
                           <div class="border rounded p-3 h-100">
                             <div class="d-flex align-items-start mb-3">
-                              <i
-                                class="ri-bear-smile-line text-primary fs-4 me-3 mt-1"
-                              ></i>
+                              <i class="ri-bear-smile-line text-primary fs-4 me-3 mt-1"></i>
                               <div>
                                 <p class="mb-1 fw-medium">Livestock Raised</p>
                                 <p class="text-primary mb-0">
@@ -3415,23 +2917,17 @@
                         </div>
 
                         <!-- Fisherfolk Information -->
-                        <div
-                          class="col-12"
-                          v-if="
-                            formData.householdInfo.fishingVessel ||
-                            formData.householdInfo.avgFishCatch
-                          "
-                        >
+                        <div class="col-12" v-if="
+                          formData.householdInfo.fishingVessel ||
+                          formData.householdInfo.avgFishCatch
+                        ">
                           <div class="border rounded p-3">
                             <h6 class="fw-semibold mb-3">
-                              <i class="ri-sailboat-line text-primary me-2"></i
-                              >Fisherfolk Information
+                              <i class="ri-sailboat-line text-primary me-2"></i>Fisherfolk Information
                             </h6>
                             <div class="row">
                               <div class="col-md-4">
-                                <small class="text-muted d-block"
-                                  >Fishing Vessel</small
-                                >
+                                <small class="text-muted d-block">Fishing Vessel</small>
                                 <span class="fw-medium">
                                   {{
                                     formData.householdInfo.fishingVessel ||
@@ -3440,9 +2936,7 @@
                                 </span>
                               </div>
                               <div class="col-md-4">
-                                <small class="text-muted d-block"
-                                  >Average Catch</small
-                                >
+                                <small class="text-muted d-block">Average Catch</small>
                                 <span class="fw-medium">
                                   {{
                                     formData.householdInfo.avgFishCatch
@@ -3452,9 +2946,7 @@
                                 </span>
                               </div>
                               <div class="col-md-4">
-                                <small class="text-muted d-block"
-                                  >Frequency</small
-                                >
+                                <small class="text-muted d-block">Frequency</small>
                                 <span class="fw-medium">
                                   {{
                                     formData.householdInfo.fishingFrequency ||
@@ -3467,18 +2959,13 @@
                         </div>
 
                         <!-- Geo-Tagged Location -->
-                        <div
-                          class="col-12"
-                          v-if="
-                            formData.householdInfo.longitude ||
-                            formData.householdInfo.latitude
-                          "
-                        >
+                        <div class="col-12" v-if="
+                          formData.householdInfo.longitude ||
+                          formData.householdInfo.latitude
+                        ">
                           <div class="border rounded p-3 bg-light-subtle">
                             <div class="d-flex align-items-center">
-                              <i
-                                class="ri-map-pin-line text-primary fs-4 me-3"
-                              ></i>
+                              <i class="ri-map-pin-line text-primary fs-4 me-3"></i>
                               <div>
                                 <p class="mb-1 fw-medium">
                                   Geo-Tagged Location
@@ -3513,8 +3000,7 @@
                   <div class="card border">
                     <div class="card-header bg-light-subtle border-bottom">
                       <h6 class="mb-0 fw-semibold">
-                        <i class="ri-graduation-cap-line text-primary me-2"></i
-                        >Education & Employment Summary
+                        <i class="ri-graduation-cap-line text-primary me-2"></i>Education & Employment Summary
                       </h6>
                     </div>
                     <div class="card-body">
@@ -3552,23 +3038,16 @@
                                 }}
                               </td>
                               <td>
-                                <span
-                                  class="badge"
-                                  :class="
-                                    formData.headOfFamily.employmentStatus ===
-                                    'Employed'
-                                      ? 'bg-success'
-                                      : 'bg-warning'
-                                  "
-                                >
+                                <span class="badge" :class="formData.headOfFamily.employmentStatus ===
+                                  'Employed'
+                                  ? 'bg-success'
+                                  : 'bg-warning'
+                                  ">
                                   {{ formData.headOfFamily.employmentStatus }}
                                 </span>
                               </td>
                               <td>
-                                <span
-                                  v-if="formData.headOfFamily.monthlyIncome"
-                                  class="fw-medium"
-                                >
+                                <span v-if="formData.headOfFamily.monthlyIncome" class="fw-medium">
                                   ₱{{
                                     formatNumber(
                                       formData.headOfFamily.monthlyIncome
@@ -3579,10 +3058,7 @@
                               </td>
                             </tr>
                             <!-- Family Members -->
-                            <tr
-                              v-for="(member, index) in formData.members"
-                              :key="index"
-                            >
+                            <tr v-for="(member, index) in formData.members" :key="index">
                               <td>
                                 <strong>{{ formatName(member) }}</strong>
                                 <br />
@@ -3599,22 +3075,15 @@
                                 }}
                               </td>
                               <td>
-                                <span
-                                  class="badge"
-                                  :class="
-                                    member.employmentStatus === 'Employed'
-                                      ? 'bg-success'
-                                      : 'bg-warning'
-                                  "
-                                >
+                                <span class="badge" :class="member.employmentStatus === 'Employed'
+                                  ? 'bg-success'
+                                  : 'bg-warning'
+                                  ">
                                   {{ member.employmentStatus }}
                                 </span>
                               </td>
                               <td>
-                                <span
-                                  v-if="member.monthlyIncome"
-                                  class="fw-medium"
-                                >
+                                <span v-if="member.monthlyIncome" class="fw-medium">
                                   ₱{{ formatNumber(member.monthlyIncome) }}
                                 </span>
                                 <span v-else class="text-muted">-</span>
@@ -3633,9 +3102,7 @@
                     <div class="col-md-3">
                       <div class="card border-primary border-opacity-25">
                         <div class="card-body text-center">
-                          <i
-                            class="ri-group-line display-6 text-primary mb-3"
-                          ></i>
+                          <i class="ri-group-line display-6 text-primary mb-3"></i>
                           <h3 class="fw-bold mb-1">{{ totalMembers }}</h3>
                           <p class="text-muted mb-0">Total Members</p>
                         </div>
@@ -3644,9 +3111,7 @@
                     <div class="col-md-3">
                       <div class="card border-success border-opacity-25">
                         <div class="card-body text-center">
-                          <i
-                            class="ri-briefcase-line display-6 text-success mb-3"
-                          ></i>
+                          <i class="ri-briefcase-line display-6 text-success mb-3"></i>
                           <h3 class="fw-bold mb-1">{{ employedCount }}</h3>
                           <p class="text-muted mb-0">Employed</p>
                         </div>
@@ -3664,9 +3129,7 @@
                     <div class="col-md-3">
                       <div class="card border-warning border-opacity-25">
                         <div class="card-body text-center">
-                          <i
-                            class="ri-award-line display-6 text-warning mb-3"
-                          ></i>
+                          <i class="ri-award-line display-6 text-warning mb-3"></i>
                           <h3 class="fw-bold mb-1">{{ studentsCount }}</h3>
                           <p class="text-muted mb-0">Students</p>
                         </div>
@@ -3677,13 +3140,9 @@
 
                 <!-- Final Confirmation -->
                 <div class="col-12">
-                  <div
-                    class="alert alert-warning border-0 bg-warning bg-opacity-10"
-                  >
+                  <div class="alert alert-warning border-0 bg-warning bg-opacity-10">
                     <div class="d-flex align-items-center">
-                      <i
-                        class="ri-alarm-warning-line fs-4 text-warning me-3"
-                      ></i>
+                      <i class="ri-alarm-warning-line fs-4 text-warning me-3"></i>
                       <div class="flex-grow-1">
                         <h6 class="fw-semibold mb-1">Update Confirmation</h6>
                         <p class="mb-2">
@@ -3691,12 +3150,7 @@
                           updating.
                         </p>
                         <div class="form-check">
-                          <input
-                            v-model="acceptTerms"
-                            class="form-check-input"
-                            type="checkbox"
-                            id="acceptTerms"
-                          />
+                          <input v-model="acceptTerms" class="form-check-input" type="checkbox" id="acceptTerms" />
                           <label class="form-check-label" for="acceptTerms">
                             I confirm that the updated information is true and
                             accurate.
@@ -3711,27 +3165,14 @@
               <!-- Navigation Buttons for Step 5 -->
               <div class="card-footer bg-transparent border-0 pt-4 pb-0">
                 <div class="d-flex justify-content-between align-items-center">
-                  <button
-                    type="button"
-                    class="btn btn-outline-secondary px-4"
-                    @click="prevStep"
-                  >
+                  <button type="button" class="btn btn-outline-secondary px-4" @click="prevStep">
                     <i class="ri-arrow-left-line me-2"></i> Previous
                   </button>
                   <div class="d-flex gap-2">
-                    <button
-                      type="button"
-                      class="btn btn-outline-primary px-4"
-                      @click="saveAsDraft"
-                    >
+                    <button type="button" class="btn btn-outline-primary px-4" @click="saveAsDraft">
                       <i class="ri-save-line me-2"></i> Save Draft
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-success px-4"
-                      @click="updateForm"
-                      :disabled="!acceptTerms"
-                    >
+                    <button type="button" class="btn btn-success px-4" @click="updateForm" :disabled="!acceptTerms">
                       <i class="ri-check-double-line me-2"></i> Update Household
                     </button>
                   </div>
@@ -3744,19 +3185,11 @@
     </div>
 
     <!-- Loading Modal -->
-    <div
-      v-if="isSubmitting"
-      class="modal fade show"
-      style="display: block; background: rgba(0, 0, 0, 0.5)"
-    >
+    <div v-if="isSubmitting" class="modal fade show" style="display: block; background: rgba(0, 0, 0, 0.5)">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg">
           <div class="modal-body text-center p-5">
-            <div
-              class="spinner-border text-primary mb-4"
-              style="width: 3rem; height: 3rem"
-              role="status"
-            >
+            <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
             <h4 class="fw-semibold mb-3">Updating Household</h4>
@@ -3769,11 +3202,7 @@
     </div>
 
     <!-- Success Modal -->
-    <div
-      v-if="showSuccessModal"
-      class="modal fade show"
-      style="display: block; background: rgba(0, 0, 0, 0.5)"
-    >
+    <div v-if="showSuccessModal" class="modal fade show" style="display: block; background: rgba(0, 0, 0, 0.5)">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg">
           <div class="modal-body text-center p-5">
@@ -3790,18 +3219,12 @@
             <div class="alert alert-info bg-info bg-opacity-10 text-start">
               <div class="d-flex">
                 <i class="ri-information-line text-info me-2"></i>
-                <small
-                  >Reference ID:
-                  <strong class="text-primary">{{ referenceId }}</strong></small
-                >
+                <small>Reference ID:
+                  <strong class="text-primary">{{ referenceId }}</strong></small>
               </div>
             </div>
             <div class="d-flex justify-content-center gap-3 mt-4">
-              <button
-                type="button"
-                class="btn btn-outline-primary"
-                @click="printConfirmation"
-              >
+              <button type="button" class="btn btn-outline-primary" @click="printConfirmation">
                 <i class="ri-printer-line me-2"></i> Print
               </button>
               <button type="button" class="btn btn-primary" @click="goToList">
@@ -3823,6 +3246,22 @@ export default {
       type: Object,
       required: true,
     },
+    region: {
+      type: String,
+      required: true
+    },
+    province: {
+      type: String,
+      required: true
+    },
+    municipality: {
+      type: String,
+      required: true
+    },
+    barangay: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
@@ -3880,7 +3319,7 @@ export default {
         },
         headOfFamily: {
           firstName: "",
-          middleInitial: "",
+          middle_name: "",
           lastName: "",
           extension: "",
           sex: "",
@@ -3896,6 +3335,17 @@ export default {
           is4psMember: "",
           voterStatus: "",
           isDeceased: "",
+          isPWD: "",
+          pwdType: "",
+          pwdOtherSpecify: "",
+          pwdIdNumber: "",
+          pwdCause: "",
+          pwdCauseOther: "",
+          pwdDegree: "",
+          pwdAssistance: [],
+          pwdAssistanceOther: "",
+          pwdNotes: "",
+
           natureOfEmployment: "",
           monthlyIncome: "",
         },
@@ -3998,8 +3448,8 @@ export default {
           this.household.head_of_family || this.household.headOfFamily || {};
         this.formData.headOfFamily = {
           firstName: headOfFamily.first_name || headOfFamily.firstName || "",
-          middleInitial:
-            headOfFamily.middle_initial || headOfFamily.middleInitial || "",
+          middle_name:
+            headOfFamily.middle_initial || headOfFamily.middle_name || "",
           lastName: headOfFamily.last_name || headOfFamily.lastName || "",
           extension: headOfFamily.extension || "",
           sex: headOfFamily.sex || "",
@@ -4028,6 +3478,16 @@ export default {
           voterStatus:
             headOfFamily.voter_status || headOfFamily.voterStatus || "",
           isDeceased: headOfFamily.is_deceased || headOfFamily.isDeceased || "",
+          isPWD: headOfFamily.isPWD || headOfFamily.isPWD || "",
+          pwdType: headOfFamily.pwd_type || "",
+          pwdOtherSpecify: headOfFamily.pwd_other_specify || "",
+          pwdIdNumber: headOfFamily.pwd_id_number || "",
+          pwdCause: headOfFamily.pwd_cause || "",
+          pwdCauseOther: headOfFamily.pwd_cause_other || "",
+          pwdDegree: headOfFamily.pwd_degree || "",
+          pwdAssistance: headOfFamily.pwd_assistance ? JSON.parse(headOfFamily.pwd_assistance) : [],
+          pwdAssistanceOther: headOfFamily.pwd_assistance_other || "",
+          pwdNotes: headOfFamily.pwd_notes || "",
           natureOfEmployment:
             headOfFamily.nature_of_employment ||
             headOfFamily.natureOfEmployment ||
@@ -4041,7 +3501,7 @@ export default {
           this.household.family_members || this.household.familyMembers || [];
         this.formData.members = familyMembers.map((member) => ({
           firstName: member.first_name || member.firstName || "",
-          middleInitial: member.middle_initial || member.middleInitial || "",
+          middle_name: member.middle_initial || member.middle_name || "",
           lastName: member.last_name || member.lastName || "",
           extension: member.extension || "",
           sex: member.sex || "",
@@ -4061,6 +3521,19 @@ export default {
           is4psMember: member.is_4ps_member || member.is4psMember || "",
           voterStatus: member.voter_status || member.voterStatus || "",
           isDeceased: member.is_deceased || member.isDeceased || "",
+          isPWD: member.isPWD || member.isPWD || "",
+
+          pwdType: member.pwd_type || "",
+          pwdOtherSpecify: member.pwd_other_specify || "",
+          pwdIdNumber: member.pwd_id_number || "",
+          pwdCause: member.pwd_cause || "",
+          pwdCauseOther: member.pwd_cause_other || "",
+          pwdDegree: member.pwd_degree || "",
+          pwdAssistance: member.pwd_assistance ?
+            (typeof member.pwd_assistance === 'string' ? JSON.parse(member.pwd_assistance) : member.pwd_assistance) : [],
+          pwdAssistanceOther: member.pwd_assistance_other || "",
+          pwdNotes: member.pwd_notes || "",
+
           natureOfEmployment:
             member.nature_of_employment || member.natureOfEmployment || "",
           monthlyIncome: member.monthly_income || member.monthlyIncome || "",
@@ -4605,6 +4078,7 @@ export default {
             !head.voterStatus ||
             !head.is4psMember ||
             !head.isDeceased ||
+            !head.isPWD ||
             !head.highestEducation ||
             !head.educationalStatus ||
             (head.employmentStatus === "Employed" &&
@@ -4626,13 +4100,20 @@ export default {
               !member.voterStatus ||
               !member.is4psMember ||
               !member.isDeceased ||
+              !member.isPWD ||
               !member.highestEducation ||
               !member.educationalStatus ||
               !member.employmentStatus ||
               (member.employmentStatus === "Employed" &&
                 (!member.occupation ||
                   !member.natureOfEmployment ||
-                  !member.monthlyIncome));
+                  !member.monthlyIncome)) ||
+              (member.isPWD === "Yes" &&
+                (!member.pwdType ||
+                  !member.pwdCause ||
+                  !member.pwdDegree ||
+                  (member.pwdType === "Other" && !member.pwdOtherSpecify) ||
+                  (member.pwdCause === "Other" && !member.pwdCauseOther)));
 
             return hasErrors;
           });
@@ -4703,14 +4184,6 @@ export default {
         this.fieldErrors["headOfFamily.lastName"] =
           "Last name must be at least 2 characters";
         this.validationErrors.push("Last name must be at least 2 characters");
-      }
-
-      if (head.middleInitial) {
-        if (!this.isValidMiddleInitial(head.middleInitial)) {
-          this.fieldErrors["headOfFamily.middleInitial"] =
-            "Middle initial must be 1-3 letters";
-          this.validationErrors.push("Middle initial must be 1-3 letters");
-        }
       }
 
       if (head.extension) {
@@ -4798,6 +4271,46 @@ export default {
           "Living status is required";
         this.validationErrors.push("Living status is required");
       }
+      if (!head.isPWD) {
+        this.fieldErrors["headOfFamily.isPWD"] =
+          "Person With Disability is required";
+        this.validationErrors.push("Person With Disability is required");
+      }
+
+      // CONDITIONAL VALIDATIONS FOR PWD STATUS
+      if (head.isPWD === "Yes") {
+        // Validate PWD Type
+        if (!head.pwdType) {
+          this.fieldErrors["headOfFamily.pwdType"] = "Type of disability is required";
+          this.validationErrors.push("Type of disability is required for PWD");
+        }
+
+        // Validate Other specification if selected
+        if (head.pwdType === "Other" && !head.pwdOtherSpecify) {
+          this.fieldErrors["headOfFamily.pwdOtherSpecify"] = "Please specify disability type";
+          this.validationErrors.push("Please specify disability type");
+        }
+
+        // Validate PWD Cause
+        if (!head.pwdCause) {
+          this.fieldErrors["headOfFamily.pwdCause"] = "Cause of disability is required";
+          this.validationErrors.push("Cause of disability is required for PWD");
+        }
+
+        // Validate Other cause if selected
+        if (head.pwdCause === "Other" && !head.pwdCauseOther) {
+          this.fieldErrors["headOfFamily.pwdCauseOther"] = "Please specify cause of disability";
+          this.validationErrors.push("Please specify cause of disability");
+        }
+
+        // Validate PWD Degree
+        if (!head.pwdDegree) {
+          this.fieldErrors["headOfFamily.pwdDegree"] = "Degree of disability is required";
+          this.validationErrors.push("Degree of disability is required for PWD");
+        }
+      }
+
+
 
       if (!head.highestEducation) {
         this.fieldErrors["headOfFamily.highestEducation"] =
@@ -4881,15 +4394,6 @@ export default {
           );
         }
 
-        if (member.middleInitial) {
-          if (!this.isValidMiddleInitial(member.middleInitial)) {
-            this.fieldErrors[`members.${index}.middleInitial`] =
-              "Middle initial must be 1-3 letters";
-            this.validationErrors.push(
-              `Member ${memberNum}: Middle initial must be 1-3 letters`
-            );
-          }
-        }
 
         if (member.extension) {
           if (!this.isValidExtension(member.extension)) {
@@ -4988,6 +4492,46 @@ export default {
           this.validationErrors.push(
             `Member ${memberNum}: Living status is required`
           );
+        }
+        if (!member.isPWD) {
+          this.fieldErrors[`members.${index}.isPWD`] =
+            "Person With Disability is required";
+          this.validationErrors.push(
+            `Member ${memberNum}: Person With Disability is required`
+          );
+        }
+
+        // CONDITIONAL VALIDATIONS FOR PWD STATUS
+        if (member.isPWD === "Yes") {
+          // Validate PWD Type
+          if (!member.pwdType) {
+            this.fieldErrors[`members.${index}.pwdType`] = "Type of disability is required";
+            this.validationErrors.push(`Member ${memberNum}: Type of disability is required for PWD`);
+          }
+
+          // Validate Other specification if selected
+          if (member.pwdType === "Other" && !member.pwdOtherSpecify) {
+            this.fieldErrors[`members.${index}.pwdOtherSpecify`] = "Please specify disability type";
+            this.validationErrors.push(`Member ${memberNum}: Please specify disability type`);
+          }
+
+          // Validate PWD Cause
+          if (!member.pwdCause) {
+            this.fieldErrors[`members.${index}.pwdCause`] = "Cause of disability is required";
+            this.validationErrors.push(`Member ${memberNum}: Cause of disability is required for PWD`);
+          }
+
+          // Validate Other cause if selected
+          if (member.pwdCause === "Other" && !member.pwdCauseOther) {
+            this.fieldErrors[`members.${index}.pwdCauseOther`] = "Please specify cause of disability";
+            this.validationErrors.push(`Member ${memberNum}: Please specify cause of disability`);
+          }
+
+          // Validate PWD Degree
+          if (!member.pwdDegree) {
+            this.fieldErrors[`members.${index}.pwdDegree`] = "Degree of disability is required";
+            this.validationErrors.push(`Member ${memberNum}: Degree of disability is required for PWD`);
+          }
         }
 
         if (!member.highestEducation) {
@@ -5093,7 +4637,7 @@ export default {
 
           if (
             member1.firstName.toLowerCase() ===
-              member2.firstName.toLowerCase() &&
+            member2.firstName.toLowerCase() &&
             member1.lastName.toLowerCase() === member2.lastName.toLowerCase() &&
             member1.birthdate === member2.birthdate
           ) {
@@ -5164,11 +4708,7 @@ export default {
               this.fieldErrors[fieldPath] = "Must be at least 2 characters";
             }
             break;
-          case "middleInitial":
-            if (value && !this.isValidMiddleInitial(value)) {
-              this.fieldErrors[fieldPath] = "Must be 1-3 letters";
-            }
-            break;
+
           case "extension":
             if (value && !this.isValidExtension(value)) {
               this.fieldErrors[fieldPath] = "Invalid extension";
@@ -5239,6 +4779,11 @@ export default {
           case "isDeceased":
             if (!value) {
               this.fieldErrors[fieldPath] = "Living status is required";
+            }
+            break;
+          case "isPWD":
+            if (!value) {
+              this.fieldErrors[fieldPath] = "Person With Disability is required";
             }
             break;
           case "highestEducation":
@@ -5354,6 +4899,7 @@ export default {
         "voterStatus",
         "is4psMember",
         "isDeceased",
+        "isPWD",
         "highestEducation",
         "educationalStatus",
         "employmentStatus",
@@ -5371,11 +4917,7 @@ export default {
             this.fieldErrors[fieldPath] = "Must be at least 2 characters";
           }
           break;
-        case "middleInitial":
-          if (member[field] && !this.isValidMiddleInitial(member[field])) {
-            this.fieldErrors[fieldPath] = "Must be 1-3 letters";
-          }
-          break;
+
         case "extension":
           if (member[field] && !this.isValidExtension(member[field])) {
             this.fieldErrors[fieldPath] = "Invalid extension";
@@ -5454,9 +4996,7 @@ export default {
           break;
       }
     },
-    isValidMiddleInitial(mi) {
-      return /^[A-Za-z]{1,3}$/.test(mi);
-    },
+
     isValidExtension(ext) {
       const validExtensions = ["Jr", "Sr", "II", "III", "IV"];
       return validExtensions.includes(ext);
@@ -5464,7 +5004,7 @@ export default {
     addMember() {
       this.formData.members.push({
         firstName: "",
-        middleInitial: "",
+        middle_name: "",
         lastName: "",
         extension: "",
         sex: "",
@@ -5481,6 +5021,16 @@ export default {
         is4psMember: "",
         voterStatus: "",
         isDeceased: "",
+        isPWD: "",
+        pwdType: "",
+        pwdOtherSpecify: "",
+        pwdIdNumber: "",
+        pwdCause: "",
+        pwdCauseOther: "",
+        pwdDegree: "",
+        pwdAssistance: [],  // This should be an array for multiple checkboxes
+        pwdAssistanceOther: "",
+        pwdNotes: "",
         natureOfEmployment: "",
         monthlyIncome: "",
       });
@@ -5541,7 +5091,7 @@ export default {
     formatName(person) {
       if (!person.firstName && !person.lastName) return "Not specified";
       let name = `${person.firstName || ""}`;
-      if (person.middleInitial) name += ` ${person.middleInitial}`;
+      if (person.middle_name) name += ` ${person.middle_name}`;
       name += ` ${person.lastName || ""}`;
       if (person.extension) name += ` ${person.extension}`;
       return name.trim();
@@ -5630,7 +5180,7 @@ export default {
           },
           headOfFamily: {
             first_name: this.formData.headOfFamily.firstName,
-            middle_initial: this.formData.headOfFamily.middleInitial || "",
+            middle_name: this.formData.headOfFamily.middle_name || "",
             last_name: this.formData.headOfFamily.lastName,
             extension: this.formData.headOfFamily.extension || "",
             sex: this.formData.headOfFamily.sex,
@@ -5646,6 +5196,22 @@ export default {
             voter_status: this.formData.headOfFamily.voterStatus,
             is_4ps_member: this.formData.headOfFamily.is4psMember,
             is_deceased: this.formData.headOfFamily.isDeceased,
+            isPWD: this.formData.headOfFamily.isPWD,
+
+            pwd_type: this.formData.headOfFamily.pwdType || "",
+            pwd_other_specify: this.formData.headOfFamily.pwdOtherSpecify || "",
+            pwd_id_number: this.formData.headOfFamily.pwdIdNumber || "",
+            pwd_cause: this.formData.headOfFamily.pwdCause || "",
+            pwd_cause_other: this.formData.headOfFamily.pwdCauseOther || "",
+            pwd_degree: this.formData.headOfFamily.pwdDegree || "",
+            pwd_assistance: this.formData.headOfFamily.pwdAssistance || [],
+            pwd_assistance_other: this.formData.headOfFamily.pwdAssistanceOther || "",
+            pwd_notes: this.formData.headOfFamily.pwdNotes || "",
+
+
+
+
+
             nature_of_employment:
               this.formData.headOfFamily.natureOfEmployment || "",
             monthly_income: this.formData.headOfFamily.monthlyIncome || 0,
@@ -5685,7 +5251,7 @@ export default {
           },
           members: this.formData.members.map((member) => ({
             first_name: member.firstName,
-            middle_initial: member.middleInitial || "",
+            middle_name: member.middle_name || "",
             last_name: member.lastName,
             extension: member.extension || "",
             sex: member.sex,
@@ -5702,6 +5268,22 @@ export default {
             voter_status: member.voterStatus,
             is_4ps_member: member.is4psMember,
             is_deceased: member.isDeceased,
+            isPWD: member.isPWD,
+
+            pwd_type: member.pwdType || "",
+            pwd_other_specify: member.pwdOtherSpecify || "",
+            pwd_id_number: member.pwdIdNumber || "",
+            pwd_cause: member.pwdCause || "",
+            pwd_cause_other: member.pwdCauseOther || "",
+            pwd_degree: member.pwdDegree || "",
+            pwd_assistance: member.pwdAssistance || [],
+            pwd_assistance_other: member.pwdAssistanceOther || "",
+            pwd_notes: member.pwdNotes || "",
+
+
+
+
+
             nature_of_employment: member.natureOfEmployment || "",
             monthly_income: member.monthlyIncome || 0,
           })),
@@ -5923,7 +5505,7 @@ export default {
   font-size: 0.875rem;
 }
 
-.btn-group .btn-check:checked + .btn {
+.btn-group .btn-check:checked+.btn {
   background-color: #0d6efd;
   border-color: #0d6efd;
   color: white;
@@ -5983,16 +5565,19 @@ export default {
     width: 0;
     opacity: 1;
   }
+
   20% {
     height: 0;
     width: 20px;
     opacity: 1;
   }
+
   40% {
     height: 40px;
     width: 20px;
     opacity: 1;
   }
+
   100% {
     height: 40px;
     width: 20px;
@@ -6006,10 +5591,12 @@ export default {
     display: block !important;
     background: none !important;
   }
+
   .modal-dialog {
     max-width: 100% !important;
     margin: 0 !important;
   }
+
   .btn {
     display: none !important;
   }
@@ -6020,10 +5607,12 @@ export default {
     width: 40px;
     height: 40px;
   }
+
   .step-label {
     font-size: 0.75rem;
     min-width: 60px;
   }
+
   .btn {
     padding: 0.375rem 0.75rem;
     font-size: 0.875rem;
@@ -6036,7 +5625,7 @@ export default {
     gap: 1rem;
   }
 
-  .card-footer .d-flex > * {
+  .card-footer .d-flex>* {
     width: 100%;
   }
 
@@ -6055,6 +5644,7 @@ export default {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

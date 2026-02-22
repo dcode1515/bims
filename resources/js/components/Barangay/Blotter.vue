@@ -82,12 +82,12 @@
                   }}</td>
                   <td>{{ blotter.case_number }}</td>
                   <td>{{ blotter.case_type }}</td>
-                  <td>{{ blotter.complainant_name }}</td>
-                  <td>{{ blotter.respondent_name }}</td>
+                  <td>{{ blotter.complainant.first_name }} {{ blotter.complainant.middle_name }} {{ blotter.complainant.last_name }}</td>
+                  <td>{{ blotter.respondent.first_name }} {{ blotter.respondent.middle_name }} {{ blotter.respondent.last_name }}</td>
                   <td>{{ blotter.respondent_contact }}</td>
                   <td>{{ blotter.respondent_address }}</td>
                   <td>{{ blotter.date_filed }}</td>
-                    <td>{{ blotter.status }}</td>
+                  <td>{{ blotter.status }}</td>
 
                   <td class="text-center">
                     <div class="btn-group">
@@ -273,16 +273,18 @@
                     </div>
                     <div class="card-body row g-3">
 
-                      <div class="col-md-4">
+                      <div class="col-md-12">
                         <label class="form-label">Full Name *</label>
                         <div class="input-group">
                           <span class="input-group-text"><i class="ri-user-line text-success"></i></span>
-                          <input type="text" v-model="formData.complainant_name" class="form-control"
-                            placeholder="Complainant name">
+                          <v-select class="form-select" v-model="formData.complainant_name"
+                            :options="formattedInhabitants" label="full_name" :reduce="inhabitant => inhabitant.id"
+                            :filterable="true" placeholder="Select an Inhabitant"
+                            no-options-text="Not a Member of this Barangay" />
                         </div>
                       </div>
 
-                      <div class="col-md-4">
+                      <div class="col-md-6">
                         <label class="form-label">Contact *</label>
                         <div class="input-group">
                           <span class="input-group-text"><i class="ri-phone-fill text-success"></i></span>
@@ -291,7 +293,7 @@
                         </div>
                       </div>
 
-                      <div class="col-md-4">
+                      <div class="col-md-6">
                         <label class="form-label">Address *</label>
                         <div class="input-group">
                           <span class="input-group-text"><i class="ri-map-pin-line text-success"></i></span>
@@ -310,16 +312,18 @@
                     </div>
                     <div class="card-body row g-3">
 
-                      <div class="col-md-4">
+                      <div class="col-md-12">
                         <label class="form-label">Full Name *</label>
                         <div class="input-group">
                           <span class="input-group-text"><i class="ri-user-3-line text-danger"></i></span>
-                          <input type="text" v-model="formData.respondent_name" class="form-control"
-                            placeholder="Respondent name">
+                          <v-select class="form-select" v-model="formData.respondent_name"
+                            :options="formattedInhabitants" label="full_name" :reduce="inhabitant => inhabitant.id"
+                            :filterable="true" placeholder="Select an Inhabitant"
+                            no-options-text="Not a Member of this Barangay" />
                         </div>
                       </div>
 
-                      <div class="col-md-4">
+                      <div class="col-md-6">
                         <label class="form-label">Contact *</label>
                         <div class="input-group">
                           <span class="input-group-text"><i class="ri-phone-fill text-danger"></i></span>
@@ -328,7 +332,7 @@
                         </div>
                       </div>
 
-                      <div class="col-md-4">
+                      <div class="col-md-6">
                         <label class="form-label">Address *</label>
                         <div class="input-group">
                           <span class="input-group-text"><i class="ri-map-pin-2-line text-danger"></i></span>
@@ -431,9 +435,20 @@
 
 <script>
 import Swal from "sweetalert2";
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 export default {
-
+  components: { vSelect },
   methods: {
+    async getDataInhabitants() {
+      try {
+        const response = await fetch("/api/get/data/inhabitans/clearance");
+        if (!response.ok) throw new Error("Network response was not ok");
+        this.inhabitants = await response.json();
+      } catch (error) {
+        console.error("Problem fetching inhabitants:", error);
+      }
+    },
     async getDataBlotter() {
       try {
         const response = await axios.get("/api/get/data/blotter", {
@@ -449,9 +464,9 @@ export default {
         this.showError("Failed to load data. Please try again.");
       }
     },
-     closeModal() {
-            $("#modalBlotter").modal("hide");
-        },
+    closeModal() {
+      $("#modalBlotter").modal("hide");
+    },
     changePage(page) {
       if (page >= 1 && page <= this.blotters.last_page) {
         this.blotters.current_page = page;
@@ -573,6 +588,7 @@ export default {
 
   data() {
     return {
+      inhabitants: [],
       blotters: {
         data: [],
         current_page: 1,
@@ -607,6 +623,14 @@ export default {
     };
   },
   computed: {
+    formattedInhabitants() {
+      return this.inhabitants.length
+        ? this.inhabitants.map((i) => ({
+          ...i,
+          full_name: `${i.first_name} ${i.middle_name}. ${i.last_name}`,
+        }))
+        : []; // must return empty array, not undefined
+    },
     pages() {
       const pages = [];
       const total = this.blotters.last_page;
@@ -630,6 +654,7 @@ export default {
     },
   },
   mounted() {
+    this.getDataInhabitants();
     this.getDataBlotter();
   }
 };

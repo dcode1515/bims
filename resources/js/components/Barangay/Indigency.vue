@@ -40,10 +40,18 @@
                                 <span class="input-group-text bg-light">
                                     <i class="ri-search-line"></i>
                                 </span>
-                                <input type="text" class="form-control" v-model="searchQuery"
-                                    @input="getDataIndigency" placeholder="Search name..." />
+                                <input type="text" class="form-control" v-model="searchQuery" @input="getDataIndigency"
+                                    placeholder="Search name..." />
                             </div>
-                        </div>
+                        </div> pwdType: "",
+                        pwdOtherSpecify: "",
+                        pwdIdNumber: "",
+                        pwdCause: "",
+                        pwdCauseOther: "",
+                        pwdDegree: "",
+                        pwdAssistance: [],
+                        pwdAssistanceOther: "",
+                        pwdNotes: "",
 
                         <!-- ACTION BUTTONS -->
                         <div class="col-md-5 text-end">
@@ -165,8 +173,8 @@
                                             <li class="page-item" :class="{
                                                 disabled: indigencys.current_page === indigencys.last_page,
                                             }">
-                                                <button class="page-link" @click="changePage(indigencys.current_page + 1)"
-                                                    title="Next">
+                                                <button class="page-link"
+                                                    @click="changePage(indigencys.current_page + 1)" title="Next">
                                                     <i class="ri-arrow-right-s-line"></i>
                                                 </button>
                                             </li>
@@ -293,8 +301,8 @@
                                                         name="purpose" rows="3"
                                                         placeholder="Enter purpose here..."></textarea>
                                                 </div>
-                                                
-                                               
+
+
                                             </div>
                                         </div>
 
@@ -375,7 +383,7 @@
                                                     <small class="text-dark fw-medium">Important Notes:</small>
                                                     <ul class="text-muted small mb-0 mt-1 ps-3">
                                                         <li>
-                                                            This building permit is valid for 1 year  from
+                                                            This building permit is valid for 1 year from
                                                             date issued
                                                         </li>
                                                         <li>Please present valid ID upon claiming</li>
@@ -557,7 +565,7 @@ export default {
                     amount: "",
                     payment_status: "",
                     date_issued: "",
-                   
+
                 };
             } else if (mode === "edit") {
                 this.modalTitle = "Edit Certificate of Indigency";
@@ -583,7 +591,7 @@ export default {
 
                 ...indigency,
                 name_requestor: indigency.requestor?.id || indigency.name_requestor,
-            
+
                 purok:
                     indigency.purok && indigency.purok.id
                         ? indigency.purok.id

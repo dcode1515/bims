@@ -7,7 +7,7 @@
             <div>
               <h6 class="card-subtitle text-muted">Total Households</h6>
               <h2 class="card-title mt-2 mb-0">{{ totalHouseholds }}</h2>
-              
+
             </div>
             <div class="stat-icon">
               <div class="bg-primary bg-opacity-10 rounded-circle p-3">
@@ -25,8 +25,8 @@
           <div class="d-flex align-items-center justify-content-between">
             <div>
               <h6 class="card-subtitle text-muted">Active Households</h6>
-              <h2 class="card-title mt-2 mb-0">{{InactiveCount}}</h2>
-             
+              <h2 class="card-title mt-2 mb-0">{{ InactiveCount }}</h2>
+
             </div>
             <div class="stat-icon">
               <div class="bg-success bg-opacity-10 rounded-circle p-3">
@@ -44,7 +44,7 @@
             <div>
               <h6 class="card-subtitle text-muted">Puroks Covered</h6>
               <h2 class="card-title mt-2 mb-0">{{ totalHouseholds }}</h2>
-             </div>
+            </div>
             <div class="stat-icon">
               <div class="bg-info bg-opacity-10 rounded-circle p-3">
                 <i class="ri-map-pin-line text-info fs-3"></i>
@@ -60,8 +60,8 @@
           <div class="d-flex align-items-center justify-content-between">
             <div>
               <h6 class="card-subtitle text-muted">This Month</h6>
-              <h2 class="card-title mt-2 mb-0">{{createdThisMonthCount}}</h2>
-             </div>
+              <h2 class="card-title mt-2 mb-0">{{ createdThisMonthCount }}</h2>
+            </div>
             <div class="stat-icon">
               <div class="bg-warning bg-opacity-10 rounded-circle p-3">
                 <i class="ri-calendar-event-line text-warning fs-3"></i>
@@ -95,11 +95,7 @@
               </div>
             </div>
             <div class="col-md-4 text-end">
-              <a
-                href="/create/member"
-                type="button"
-                class="btn btn-light btn-sm"
-              >
+              <a href="/create/member" type="button" class="btn btn-light btn-sm">
                 <i class="ri-add-circle-line me-1"></i>
                 Create Member
               </a>
@@ -115,11 +111,7 @@
                 <span class="input-group-text bg-light">
                   <i class="ri-list-settings-line"></i>
                 </span>
-                <select
-                  class="form-control form-control"
-                  v-model="perPage"
-                  @change="getDataHousehold"
-                >
+                <select class="form-control form-control" v-model="perPage" @change="getDataHousehold">
                   <option value="5">5 per page</option>
                   <option value="10">10 per page</option>
                   <option value="20">20 per page</option>
@@ -132,20 +124,12 @@
                 <span class="input-group-text bg-light">
                   <i class="ri-search-line"></i>
                 </span>
-                <input
-                  v-model="searchQuery"
-                  @input="getDataHousehold"
-                  type="text"
-                  class="form-control"
-                  placeholder="Search  Purok..."
-                />
+                <input v-model="searchQuery" @input="getDataHousehold" type="text" class="form-control"
+                  placeholder="Search  Purok..." />
               </div>
             </div>
             <div class="col-md-3 text-end">
-              <button
-                class="btn btn-outline-primary btn-lg me-1"
-                @click="refreshData"
-              >
+              <button class="btn btn-outline-primary btn-lg me-1" @click="refreshData">
                 <i class="ri-refresh-line"></i>
               </button>
             </div>
@@ -195,10 +179,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  v-for="(household, index) in households.data"
-                  :key="household.id"
-                >
+                <tr v-for="(household, index) in households.data" :key="household.id">
                   <td class="ps-4">
                     {{
                       (households.current_page - 1) * households.per_page +
@@ -227,7 +208,7 @@
                     <div class="d-flex align-items-center">
                       <div>
                         {{ household.head_of_family.first_name }}
-                        {{ household.head_of_family.middle_initial }}.
+                        {{ household.head_of_family.middle_name }}.
                         {{ household.head_of_family.last_name }}
                       </div>
                     </div>
@@ -251,21 +232,23 @@
 
                   <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a :href="`/household/view/${household.id}`"
-                        class="btn btn-sm btn-outline-info d-flex align-items-center gap-1"
-                        title="View Profile"
-                      >
+                      <a :href="`/household/view/${household.id}`"
+                        class="btn btn-sm btn-outline-info d-flex align-items-center gap-1" title="View Profile">
                         <i class="ri-eye-line"></i>
                         View Profile
                       </a>
                       <a :href="`/household/edit/${household.id}`"
-                        class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"
-                        title="Edit Profile"
-                      >
+                        class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1" title="Edit Profile">
                         <i class="ri-edit-line"></i>
                         Edit Profile
                       </a>
-                    
+
+                      <button @click="confirmDelete(household)" class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
+                        title="Delete Profile">
+                        <i class="ri-delete-bin-line"></i>
+                        Delete Household
+                      </button>
+
                     </div>
                   </td>
                 </tr>
@@ -291,69 +274,37 @@
                 <div class="col-md-6">
                   <nav class="float-end">
                     <ul class="pagination pagination-sm mb-0">
-                      <li
-                        class="page-item"
-                        :class="{ disabled: households.current_page === 1 }"
-                      >
-                        <button
-                          class="page-link"
-                          @click="changePage(1)"
-                          title="First"
-                        >
+                      <li class="page-item" :class="{ disabled: households.current_page === 1 }">
+                        <button class="page-link" @click="changePage(1)" title="First">
                           <i class="ri-skip-back-line"></i>
                         </button>
                       </li>
-                      <li
-                        class="page-item"
-                        :class="{ disabled: households.current_page === 1 }"
-                      >
-                        <button
-                          class="page-link"
-                          @click="changePage(households.current_page - 1)"
-                          title="Previous"
-                        >
+                      <li class="page-item" :class="{ disabled: households.current_page === 1 }">
+                        <button class="page-link" @click="changePage(households.current_page - 1)" title="Previous">
                           <i class="ri-arrow-left-s-line"></i>
                         </button>
                       </li>
 
-                      <li
-                        v-for="page in pages"
-                        :key="page"
-                        class="page-item"
-                        :class="{ active: page === households.current_page }"
-                      >
+                      <li v-for="page in pages" :key="page" class="page-item"
+                        :class="{ active: page === households.current_page }">
                         <button class="page-link" @click="changePage(page)">
                           {{ page }}
                         </button>
                       </li>
 
-                      <li
-                        class="page-item"
-                        :class="{
-                          disabled:
-                            households.current_page === households.last_page,
-                        }"
-                      >
-                        <button
-                          class="page-link"
-                          @click="changePage(households.current_page + 1)"
-                          title="Next"
-                        >
+                      <li class="page-item" :class="{
+                        disabled:
+                          households.current_page === households.last_page,
+                      }">
+                        <button class="page-link" @click="changePage(households.current_page + 1)" title="Next">
                           <i class="ri-arrow-right-s-line"></i>
                         </button>
                       </li>
-                      <li
-                        class="page-item"
-                        :class="{
-                          disabled:
-                            households.current_page === households.last_page,
-                        }"
-                      >
-                        <button
-                          class="page-link"
-                          @click="changePage(households.last_page)"
-                          title="Last"
-                        >
+                      <li class="page-item" :class="{
+                        disabled:
+                          households.current_page === households.last_page,
+                      }">
+                        <button class="page-link" @click="changePage(households.last_page)" title="Last">
                           <i class="ri-skip-forward-line"></i>
                         </button>
                       </li>
@@ -395,6 +346,39 @@ export default {
   computed: {},
 
   methods: {
+    async confirmDelete(household) {
+      const result = await Swal.fire({
+        title: "Delete Record",
+        text: `Are you sure you want to delete Head of Family "${household.head_of_family.first_name} ${household.head_of_family.middle_name} ${household.head_of_family.last_name}"?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+        reverseButtons: true,
+      });
+
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(
+            `/api/delete/household/${household.id}`
+          );
+
+          await Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "Record has been deleted successfully.",
+            confirmButtonColor: "#198754",
+            timer: 2000,
+          });
+
+          this.getDataHousehold();
+        } catch (error) {
+          this.showError("Failed to delete record");
+        }
+      }
+    },
     async getDataHousehold() {
       try {
         const response = await axios.get("/api/get/data/household", {
@@ -405,10 +389,10 @@ export default {
           },
         });
         this.totalHouseholds = response.data.total_count; // Store the total count
-         this.InactiveCount = response.data.inactive_count; // Store the inactive count
+        this.InactiveCount = response.data.inactive_count; // Store the inactive count
         this.households = response.data.data;
         this.createdThisMonthCount = response.data.created_this_month_count; // Store the count of households created this month
-       
+
       } catch (error) {
         this.showError("Failed to load data. Please try again.");
       }
@@ -556,6 +540,7 @@ export default {
 .bg-gradient-primary {
   background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
 }
+
 .stat-card {
   border-radius: 12px;
   border: none;
@@ -577,11 +562,9 @@ export default {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(
-    90deg,
-    var(--gradient-start),
-    var(--gradient-end)
-  );
+  background: linear-gradient(90deg,
+      var(--gradient-start),
+      var(--gradient-end));
 }
 
 .stat-card-1 {
@@ -613,6 +596,7 @@ export default {
   font-size: 2.5rem;
   opacity: 0.8;
 }
+
 .main-content-card {
   border-radius: 12px;
   overflow: hidden;

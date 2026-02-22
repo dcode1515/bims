@@ -175,10 +175,10 @@ CREATE TABLE IF NOT EXISTS `blotter_case_records` (
   `barangay_info_id` bigint unsigned NOT NULL,
   `case_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `case_type` enum('CICL','CAR','Dispute','Criminal','Civil','Other') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `complainant_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `complainant_name` int NOT NULL,
   `complainant_contact` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `complainant_address` text COLLATE utf8mb4_unicode_ci,
-  `respondent_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `respondent_name` int NOT NULL,
   `respondent_contact` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `respondent_address` text COLLATE utf8mb4_unicode_ci,
   `date_filed` date NOT NULL,
@@ -192,14 +192,16 @@ CREATE TABLE IF NOT EXISTS `blotter_case_records` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `blotter_case_records_case_number_unique` (`case_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table bims_db.blotter_case_records: ~3 rows (approximately)
 REPLACE INTO `blotter_case_records` (`id`, `barangay_info_id`, `case_number`, `case_type`, `complainant_name`, `complainant_contact`, `complainant_address`, `respondent_name`, `respondent_contact`, `respondent_address`, `date_filed`, `status`, `actions_taken`, `hearing_date`, `hearing_time`, `hearing_location`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 1, '3123Case', 'CICL', 'Danrick C Tekiko', '09199533529', 'Tibungco Relocation Davao City', 'Christine Mae Calunsod', '09304554545', 'Mati Davao Oriental', '2026-02-15', 'Pending', NULL, NULL, NULL, NULL, '2026-02-15 11:13:36', '2026-02-15 11:13:36', NULL),
-	(2, 1, 'CASE2321', 'Criminal', 'Debra Dawn Tekiko', '09199533529', 'DAvao City', 'Helen Culiao', '09199533529', 'dasdasdasdas', '2026-02-15', 'Pending', NULL, NULL, NULL, NULL, '2026-02-15 11:25:31', '2026-02-15 11:25:31', NULL),
-	(3, 1, 'CASE1312321', 'Dispute', 'John Mark Culiao', '0919533529', 'Kabayan Relocatio Davao City', 'Lalo Bangot', '09199533529', 'Kabayan Davao City', '2026-02-15', 'Pending', NULL, NULL, NULL, NULL, '2026-02-15 11:37:37', '2026-02-15 11:37:37', NULL),
-	(4, 1, 'CASE3123123', 'Criminal', 'Lucita Tekiko', '09199533529', 'Kabayan Relocation Davao City', 'Antonio Tekiko', '09199533529', 'Kabayan Relocation Davao City', '2026-02-15', 'Ongoing', 'nag husay ra kay amigo rani sila', '2026-02-17', '19:44:00', 'Barangay Tibungco', '2026-02-15 11:44:03', '2026-02-15 12:02:32', NULL);
+	(1, 1, '3123Case', 'CICL', 1, '09199533529', 'Tibungco Relocation Davao City', 1, '09304554545', 'Mati Davao Oriental', '2026-02-15', 'Pending', NULL, NULL, NULL, NULL, '2026-02-15 11:13:36', '2026-02-15 11:13:36', NULL),
+	(2, 1, 'CASE2321', 'Criminal', 1, '09199533529', 'DAvao City', 1, '09199533529', 'dasdasdasdas', '2026-02-15', 'Pending', NULL, NULL, NULL, NULL, '2026-02-15 11:25:31', '2026-02-15 11:25:31', NULL),
+	(3, 1, 'CASE1312321', 'Dispute', 1, '0919533529', 'Kabayan Relocatio Davao City', 1, '09199533529', 'Kabayan Davao City', '2026-02-15', 'Pending', NULL, NULL, NULL, NULL, '2026-02-15 11:37:37', '2026-02-15 11:37:37', NULL),
+	(4, 1, 'CASE3123123', 'Criminal', 1, '09199533529', 'Kabayan Relocation Davao City', 1, '09199533529', 'Kabayan Relocation Davao City', '2026-02-15', 'Settled', 'nag husay ra kay amigo rani sila', '2026-02-17', '19:44:00', 'Barangay Tibungco', '2026-02-15 11:44:03', '2026-02-22 11:51:15', NULL),
+	(5, 1, 'adas3123das', 'CICL', 1, '09199533529', 'Davao City', 20, '09199533529', 'Davao City Tibungco', '2026-02-22', 'Pending', NULL, NULL, NULL, NULL, '2026-02-22 11:43:29', '2026-02-22 11:43:29', NULL),
+	(6, 1, '3123Casedasdasdsa', 'CICL', 1, '09199533529', 'Tibungco Relocation Davao City', 20, '09304554545', 'Mati Davao Oriental', '2026-02-22', 'Pending', NULL, NULL, NULL, NULL, '2026-02-22 11:51:02', '2026-02-22 11:51:02', NULL);
 
 -- Dumping structure for table bims_db.building_permit_tbl
 CREATE TABLE IF NOT EXISTS `building_permit_tbl` (
@@ -334,12 +336,12 @@ CREATE TABLE IF NOT EXISTS `households_tbl` (
   UNIQUE KEY `households_tbl_reference_id_unique` (`reference_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.households_tbl: ~4 rows (approximately)
+-- Dumping data for table bims_db.households_tbl: ~1 rows (approximately)
 REPLACE INTO `households_tbl` (`id`, `encoded_id`, `barangay_info_id`, `reference_id`, `status`, `purok`, `street`, `household_number`, `longitude`, `latitude`, `household_type`, `housing_type`, `housing_type_other`, `house_materials`, `house_materials_other`, `water_source`, `water_source_icws`, `water_source_other`, `power_supply`, `power_supply_other`, `waste_biodegradable`, `waste_plastics`, `waste_others`, `internet_provider`, `internet_provider_other`, `garbage_disposal`, `garbage_disposal_other`, `fishing_vessel`, `avg_fish_catch`, `fishing_frequency`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, NULL, 1, 'HH-20260216-D02E93', 'Active', '1', 'dasdsadas', '3123dasdas', '11122', '22333', 'Single Family', 'Own', NULL, 'Concrete', NULL, 'None', NULL, NULL, 'None', NULL, 1, 0, NULL, 'PLDT', NULL, 'Garbage Collector', NULL, 'Motorized', 100.00, 'Daily', '2026-02-16 10:27:57', '2026-02-16 10:27:57', NULL),
-	(2, NULL, 1, 'HH-20260217-7296D1', 'Active', '2', 'STREET LIANGAN', 'STREET1341312312', '3123', '1231231', 'Single Family', 'Rent', NULL, 'Wood', NULL, 'None', NULL, NULL, 'ILPI', NULL, 1, 0, NULL, 'Globe', NULL, 'Garbage Collector', NULL, 'Motorized', 100.00, 'Daily', '2026-02-17 04:40:23', '2026-02-17 04:40:23', NULL),
-	(3, NULL, 1, 'HH-20260217-C93C08', 'Active', '3', 'third street', 'Householdstreet1312321', '1112233', '312321312321', 'Single Family', 'Own', NULL, 'Concrete', NULL, 'None', NULL, NULL, 'ILPI', NULL, 1, 0, NULL, 'PLDT', NULL, 'Garbage Collector', NULL, 'Motorized', 100.00, 'Daily', '2026-02-17 13:59:24', '2026-02-17 13:59:24', NULL),
-	(4, NULL, 3, 'HH-20260217-8AAC55', 'Active', '4', 'Santran Street', 'Household12321321', '31321321', '32223131', 'Single Family', 'Own', NULL, 'Concrete', NULL, 'None', NULL, NULL, 'None', NULL, 1, 0, NULL, 'PLDT', NULL, 'Garbage Collector', NULL, 'None', 100.00, 'Daily', '2026-02-17 14:15:36', '2026-02-17 14:15:36', NULL);
+	(1, '2', 1, 'HH-20260222-380682', 'Active', '3', 'asdas3221321', 'test1321', '111', '222', 'Single Family', 'Rent', NULL, 'Wood', NULL, 'None', NULL, NULL, 'ILPI', NULL, 1, 1, NULL, 'PLDT', NULL, 'Burning', NULL, 'Motorized', 200.00, 'Daily', '2026-02-22 07:44:35', '2026-02-22 07:44:35', NULL),
+	(2, '2', 1, 'HH-20260222-C36020', 'Active', '3', 'asdas3221321', 'test1321', '111', '222', 'Single Family', 'Rent', NULL, 'Wood', NULL, 'None', NULL, NULL, 'ILPI', NULL, 1, 1, NULL, 'PLDT', NULL, 'Burning', NULL, 'Motorized', 200.00, 'Daily', '2026-02-22 07:47:56', '2026-02-22 07:47:56', NULL),
+	(3, '2', 1, 'HH-20260222-59E087', 'Active', '1', 'DSADASDAS', '123312312', '3123213', '21321312', 'Nuclear Family', 'Rent', NULL, 'Wood', NULL, 'None', NULL, NULL, 'ILPI', NULL, 1, 1, NULL, 'Globe', NULL, 'Garbage Collector', NULL, 'Motorized', 100.00, 'Daily', '2026-02-22 07:50:29', '2026-02-22 07:50:29', NULL),
+	(4, '2', 1, 'HH-20260222-4F2B0A', 'Active', '3', 'dsadsadas', '312dsadsa', '312313', '312321', 'Single Family', 'Own', NULL, 'Wood', NULL, 'None', NULL, NULL, 'ILPI', NULL, 1, 1, NULL, 'PLDT', NULL, 'Burning', NULL, 'Motorized', 312321.00, 'Daily', '2026-02-22 11:15:00', '2026-02-22 11:15:00', NULL);
 
 -- Dumping structure for table bims_db.household_crops_tbl
 CREATE TABLE IF NOT EXISTS `household_crops_tbl` (
@@ -352,13 +354,9 @@ CREATE TABLE IF NOT EXISTS `household_crops_tbl` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.household_crops_tbl: ~2 rows (approximately)
-REPLACE INTO `household_crops_tbl` (`id`, `household_id`, `name`, `type`, `quantity`, `unit`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'Eggplant', 'Eggplant', 2.00, 'hectares', '2026-02-16 10:27:57', '2026-02-16 10:27:57'),
-	(3, 3, 'Banana', 'Banana', 10.00, 'clumps', '2026-02-17 14:00:24', '2026-02-17 14:00:24'),
-	(4, 4, 'Coconut', 'Coconut', 1.99, 'trees', '2026-02-17 14:15:36', '2026-02-17 14:15:36');
+-- Dumping data for table bims_db.household_crops_tbl: ~0 rows (approximately)
 
 -- Dumping structure for table bims_db.household_livestocks_tbl
 CREATE TABLE IF NOT EXISTS `household_livestocks_tbl` (
@@ -373,13 +371,9 @@ CREATE TABLE IF NOT EXISTS `household_livestocks_tbl` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.household_livestocks_tbl: ~2 rows (approximately)
-REPLACE INTO `household_livestocks_tbl` (`id`, `household_id`, `barangay_info_id`, `type`, `category`, `quantity`, `unit`, `details`, `created_at`, `updated_at`) VALUES
-	(1, 1, 1, 'Cattle (Cow)', 'Cattle', 3, 'head', NULL, '2026-02-16 10:27:57', '2026-02-16 10:27:57'),
-	(3, 3, 1, 'Goat', 'Goat', 3, 'head', NULL, '2026-02-17 14:00:24', '2026-02-17 14:00:24'),
-	(4, 4, 3, 'Goat', 'Goat', 5, 'head', NULL, '2026-02-17 14:15:36', '2026-02-17 14:15:36');
+-- Dumping data for table bims_db.household_livestocks_tbl: ~0 rows (approximately)
 
 -- Dumping structure for table bims_db.household_members_tbl
 CREATE TABLE IF NOT EXISTS `household_members_tbl` (
@@ -388,8 +382,9 @@ CREATE TABLE IF NOT EXISTS `household_members_tbl` (
   `barangay_info_id` bigint unsigned NOT NULL,
   `household_id` bigint unsigned NOT NULL,
   `is_head` tinyint(1) NOT NULL DEFAULT '0',
+  `date_of_residency` date DEFAULT NULL,
   `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `middle_initial` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `middle_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `extension` enum('Jr','Sr','II','III','IV') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sex` enum('Male','Female') COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -400,6 +395,16 @@ CREATE TABLE IF NOT EXISTS `household_members_tbl` (
   `voter_status` enum('Voter','Non-Voter') COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_4ps_member` enum('Yes','No') COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_deceased` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `isPWD` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pwd_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pwd_other_specify` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pwd_id_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pwd_cause` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pwd_cause_other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pwd_degree` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pwd_assistance` json DEFAULT NULL,
+  `pwd_assistance_other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pwd_notes` text COLLATE utf8mb4_unicode_ci,
   `highest_education` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `educational_status` enum('Not Attending School','Currently Enrolled','Graduated','Dropout','ALS Graduate','ALS Student') COLLATE utf8mb4_unicode_ci NOT NULL,
   `employment_status` enum('Employed','Unemployed') COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -415,20 +420,22 @@ CREATE TABLE IF NOT EXISTS `household_members_tbl` (
   KEY `household_members_tbl_voter_status_index` (`voter_status`),
   KEY `household_members_tbl_is_4ps_member_index` (`is_4ps_member`),
   KEY `household_members_tbl_employment_status_index` (`employment_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bims_db.household_members_tbl: ~10 rows (approximately)
-REPLACE INTO `household_members_tbl` (`id`, `encoded_id`, `barangay_info_id`, `household_id`, `is_head`, `first_name`, `middle_initial`, `last_name`, `extension`, `sex`, `birthdate`, `civil_status`, `relationship`, `national_id`, `voter_status`, `is_4ps_member`, `is_deceased`, `highest_education`, `educational_status`, `employment_status`, `occupation`, `nature_of_employment`, `monthly_income`, `contact_number`, `email`, `created_at`, `updated_at`) VALUES
-	(1, NULL, 1, 1, 1, 'Danrick', 'C', 'Tekiko', NULL, 'Male', '1992-11-15', 'Single', 'Head', '321321312312321', 'Voter', 'Yes', 'Alive', 'Elementary Level', 'Not Attending School', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-16 10:27:57', '2026-02-16 10:27:57'),
-	(2, NULL, 1, 1, 0, 'Christine Mae', 'C', 'Calunsod', 'Jr', 'Female', '1996-11-15', 'Single', 'Spouse', '312321321321', 'Voter', 'Yes', 'No', 'College Graduate', 'Graduated', 'Employed', 'Computer Programmer II', 'Government Employee', 299999.98, '0919-9533-529', NULL, '2026-02-16 10:27:57', '2026-02-16 10:27:57'),
-	(3, NULL, 1, 2, 1, 'HELEN', 'C', 'CULIAO', NULL, 'Male', '1992-02-17', 'Single', 'Head', '32132131312312', 'Voter', 'Yes', 'Alive', 'Elementary Level', 'Not Attending School', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-17 04:40:23', '2026-02-17 04:40:23'),
-	(4, NULL, 1, 3, 1, 'Rosalita', 'B', 'Bacote', NULL, 'Female', '1953-01-10', 'Widowed', 'Head', '3123213213213213', 'Voter', 'No', 'Alive', 'College Level', 'Not Attending School', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-17 13:59:24', '2026-02-17 14:00:24'),
-	(7, NULL, 1, 3, 0, 'Geri', 'b', 'Mainit', NULL, 'Female', '1992-02-11', 'Married', 'Child', '312312312321321312', 'Voter', 'No', 'No', 'College Graduate', 'Graduated', 'Employed', 'Manager', 'Private Employee', 99999.99, '0919-9533-529', NULL, '2026-02-17 14:00:24', '2026-02-17 14:00:24'),
-	(8, NULL, 1, 3, 0, 'Danrick', 'C', 'Mainit', NULL, 'Female', '1996-02-11', 'Single', 'Child', '312321321321321', 'Voter', 'No', 'No', 'College Graduate', 'Graduated', 'Employed', 'Programmer', 'Government Employee', 30000.00, '0919-9533-529', 'dcode0516@gmail.com', '2026-02-17 14:00:24', '2026-02-17 14:00:24'),
-	(9, NULL, 1, 3, 0, 'Sample', 'C', 'Mainit', 'Jr', 'Male', '1992-11-15', 'Single', 'Child', '312321321312', 'Voter', 'Yes', 'No', 'College Graduate', 'Graduated', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-17 14:00:24', '2026-02-17 14:00:24'),
-	(10, NULL, 3, 4, 1, 'Antonio', 'C', 'Tekiko', NULL, 'Male', '1966-02-17', 'Married', 'Head', '312312321321', 'Voter', 'No', 'Alive', 'College Level', 'Not Attending School', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-17 14:15:36', '2026-02-17 14:15:36'),
-	(11, NULL, 3, 4, 0, 'Lucita', 'c', 'tEKIKO', NULL, 'Male', '2026-02-17', 'Married', 'Spouse', '312321312312', 'Voter', 'No', 'No', 'College Level', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-17 14:15:36', '2026-02-17 14:15:36'),
-	(12, NULL, 3, 4, 0, 'dEBRA', 'c', 'tEKIKO', NULL, 'Male', '2026-02-17', 'Married', 'Spouse', '312321312312', 'Voter', 'No', 'No', 'College Level', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-17 14:15:36', '2026-02-17 14:15:36');
+-- Dumping data for table bims_db.household_members_tbl: ~4 rows (approximately)
+REPLACE INTO `household_members_tbl` (`id`, `encoded_id`, `barangay_info_id`, `household_id`, `is_head`, `date_of_residency`, `first_name`, `middle_name`, `last_name`, `extension`, `sex`, `birthdate`, `civil_status`, `relationship`, `national_id`, `voter_status`, `is_4ps_member`, `is_deceased`, `isPWD`, `pwd_type`, `pwd_other_specify`, `pwd_id_number`, `pwd_cause`, `pwd_cause_other`, `pwd_degree`, `pwd_assistance`, `pwd_assistance_other`, `pwd_notes`, `highest_education`, `educational_status`, `employment_status`, `occupation`, `nature_of_employment`, `monthly_income`, `contact_number`, `email`, `created_at`, `updated_at`) VALUES
+	(1, '2', 1, 1, 1, NULL, 'Danrick', 'C', 'Tekiko', NULL, 'Male', '1960-02-22', 'Widowed', 'Head', '312312321312', 'Voter', 'Yes', 'No', 'No', NULL, NULL, NULL, NULL, NULL, NULL, '[]', NULL, NULL, 'Elementary Level', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-22 07:44:35', '2026-02-22 07:44:35'),
+	(2, '2', 1, 1, 0, NULL, 'Danrick', 'c', 'tEKIKO', NULL, 'Male', '1960-02-22', 'Single', 'Spouse', '321321321312', 'Voter', 'Yes', 'No', 'Yes', 'Physical Disability', NULL, '312312312', 'Congenital', NULL, 'Mild', NULL, NULL, NULL, 'No Formal Education', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, '0919-9953-352', NULL, '2026-02-22 07:44:35', '2026-02-22 07:44:35'),
+	(3, '2', 1, 1, 0, NULL, 'eKOY', 'c', 'tEKIKO', NULL, 'Male', '1960-02-22', 'Single', 'Spouse', '321321321312', 'Voter', 'Yes', 'No', 'Yes', 'Physical Disability', NULL, '312312312', 'Congenital', NULL, 'Mild', NULL, NULL, NULL, 'No Formal Education', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, '0919-9953-352', NULL, '2026-02-22 07:44:35', '2026-02-22 07:44:35'),
+	(4, '2', 1, 2, 1, NULL, 'Danrick', 'C', 'Tekiko', NULL, 'Male', '1960-02-21', 'Single', 'Head', '312312321312', 'Voter', 'Yes', 'No', 'No', NULL, NULL, NULL, NULL, NULL, NULL, '[]', NULL, NULL, 'Elementary Level', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-22 07:47:56', '2026-02-22 07:47:56'),
+	(5, '2', 1, 2, 0, NULL, 'Danrick', 'c', 'tEKIKO', NULL, 'Male', '1960-02-21', 'Single', 'Spouse', '321321321312', 'Voter', 'Yes', 'No', 'Yes', 'Physical Disability', NULL, '312312312', 'Congenital', NULL, 'Mild', '["Medical", "Educational", "Livelihood", "Financial"]', NULL, NULL, 'No Formal Education', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, '0919-9953-352', NULL, '2026-02-22 07:47:56', '2026-02-22 07:47:56'),
+	(6, '2', 1, 2, 0, NULL, 'eKOY', 'c', 'tEKIKO', NULL, 'Male', '2002-02-21', 'Single', 'Spouse', '321321321312', 'Voter', 'Yes', 'No', 'Yes', 'Physical Disability', NULL, '312312312', 'Congenital', NULL, 'Mild', '["Mobility Aid", "Financial"]', NULL, NULL, 'No Formal Education', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, '0919-9953-352', NULL, '2026-02-22 07:47:56', '2026-02-22 07:47:56'),
+	(7, '2', 1, 3, 1, NULL, 'DASDASDASDAS', 'D', '31312321', NULL, 'Male', '1960-02-18', 'Single', 'Head', '312321312321', 'Voter', 'Yes', 'No', 'Yes', 'Physical Disability', NULL, '312312', 'Aging', NULL, 'Profound', '["Medical", "Other"]', 'haha', 'hahaha', 'No Formal Education', 'Not Attending School', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-22 07:50:29', '2026-02-22 08:00:33'),
+	(16, NULL, 1, 3, 0, NULL, '1312', 'DSADAS', '312321', 'Jr', 'Male', '1960-02-18', 'Single', 'Spouse', '312312321312', 'Voter', 'Yes', 'No', 'Yes', 'Multiple Disabilities', NULL, '113123123', 'Congenital', NULL, 'Mild', '["Mobility Aid", "Financial", "Medical", "Educational", "Psychosocial Support", "Livelihood"]', NULL, NULL, 'Elementary Level', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, NULL, NULL, '2026-02-22 08:00:33', '2026-02-22 08:00:33'),
+	(17, NULL, 1, 3, 0, NULL, '3123123', '12312', '31231', 'Jr', 'Female', '1960-02-18', 'Married', 'Spouse', '312321312321', 'Voter', 'Yes', 'No', 'Yes', 'Mental Health Condition', NULL, '1134243543', 'Accident/Injury', NULL, 'Mild', '["Mobility Aid", "Financial", "Medical", "Educational", "Psychosocial Support", "Livelihood"]', NULL, '312312', 'Vocational/Tech Course', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, NULL, NULL, '2026-02-22 08:00:33', '2026-02-22 08:00:33'),
+	(18, '2', 1, 4, 1, '2026-02-22', 'Dadsadas', 'dasdsa', 'ddadas', 'Jr', 'Male', '2026-02-22', 'Single', 'Head', '312321321321', 'Voter', 'Yes', 'No', 'No', NULL, NULL, NULL, NULL, NULL, NULL, '[]', NULL, NULL, 'Elementary Level', 'Not Attending School', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-22 11:15:01', '2026-02-22 11:15:01'),
+	(19, '2', 1, 4, 0, '2026-02-23', 'dsadsa', 'c', 'dasdasd', NULL, 'Male', '2026-02-22', 'Single', 'Spouse', '312321312321', 'Voter', 'No', 'No', 'No', NULL, NULL, NULL, NULL, NULL, NULL, '[]', NULL, NULL, 'Post Graduate', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-22 11:15:01', '2026-02-22 11:15:01'),
+	(20, '2', 1, 4, 0, '2026-02-26', 'dsadsa (Copy)', 'c', 'dasdasd', NULL, 'Male', '2026-02-22', 'Single', 'Spouse', '312321312321', 'Voter', 'No', 'No', 'No', NULL, NULL, NULL, NULL, NULL, NULL, '[]', NULL, NULL, 'Post Graduate', 'Currently Enrolled', 'Unemployed', NULL, NULL, 0.00, '0919-9533-529', NULL, '2026-02-22 11:15:01', '2026-02-22 11:15:01');
 
 -- Dumping structure for table bims_db.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -436,7 +443,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table bims_db.migrations: ~57 rows (approximately)
 REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -511,7 +518,14 @@ REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(69, '2026_02_18_155941_add_application_no_to_residency_certificate_tbl', 12),
 	(70, '2026_02_18_160842_add_barangay_info_id_to_residency_certificate_tbl', 12),
 	(71, '2026_02_20_062502_add_encoded_id_to_households_tbl', 13),
-	(72, '2026_02_20_062551_add_encoded_id_to_household_members_tbl', 14);
+	(72, '2026_02_20_062551_add_encoded_id_to_household_members_tbl', 14),
+	(73, '2026_02_21_081913_rename_middle_initial_to_household_members_tbl_table', 15),
+	(74, '2026_02_21_082039_rename_middle_name_to_household_members_tbl_table', 16),
+	(75, '2026_02_21_092037_change_middle_name_length_in_household_members_tbl', 17),
+	(76, '2026_02_21_101211_add_is_deceased_to_household_members_tbl', 18),
+	(77, '2026_02_21_115815_add_pwd_columns_to_household_members_tbl', 19),
+	(78, '2026_02_22_185250_add_date_of_residency_to_household_members_tbl', 20),
+	(79, '2026_02_22_194439_change_name_columns_to_integer_in_blotter_case_records', 21);
 
 -- Dumping structure for table bims_db.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (

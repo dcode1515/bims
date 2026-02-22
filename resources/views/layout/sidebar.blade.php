@@ -186,18 +186,18 @@
                             <ul class="nav nav-sm flex-column">
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="widgets.html">
+                                    <a class="nav-link" href="{{route('reports')}}">
                                         <i class="ri-file-chart-line me-2"></i>
                                         Reports
                                     </a>
                                 </li>
 
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="widgets.html">
                                         <i class="ri-database-2-line me-2"></i>
                                         Data Logs
                                     </a>
-                                </li>
+                                </li> -->
 
                             </ul>
                         </div>
@@ -211,7 +211,7 @@
                     <div class="collapse menu-dropdown" id="settings">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('barangay.official') }}" class="nav-link">Barangay Officials</a>
+                                <a href="{{ route('barangay.officials') }}" class="nav-link">Barangay Officials</a>
                             </li>
                               <li class="nav-item">
                                         <a href="{{route('position')}}" class="nav-link" data-key="t-chat">Barangay Positions</a>
