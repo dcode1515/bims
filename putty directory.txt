@@ -1,0 +1,6 @@
+ls
+cd domains
+ls
+tab tab keyboard auto complete
+ls
+cd directory
