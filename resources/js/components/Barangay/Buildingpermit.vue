@@ -122,7 +122,7 @@
                                     </td>
                                 </tr>
                                 <tr v-if="buildings.data.length === 0">
-                                    <td colspan="6" class="text-center py-5">
+                                    <td colspan="8" class="text-center py-5">
                                         <div class="text-muted">
                                             <i class="ri-search-line display-5"></i>
                                             <p class="mt-3 mb-0">No records found</p>
@@ -664,7 +664,7 @@ export default {
             return this.inhabitants.length
                 ? this.inhabitants.map((i) => ({
                     ...i,
-                    full_name: `${i.first_name} ${i.middle_initial}. ${i.last_name}`,
+                    full_name: `${i.first_name} ${i.middle_name}. ${i.last_name}`,
                 }))
                 : []; // must return empty array, not undefined
         },

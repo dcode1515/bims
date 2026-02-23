@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Residency Certificate</title>
+<title>Certificate of Residency</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -10,6 +10,7 @@
         margin: 0;
         padding: 0;
         font-family: "Bookman Old Style", serif;
+        background: white;
     }
 
     .blurred {
@@ -27,11 +28,47 @@
         line-height: 1.4;
         overflow-wrap: break-word;
         word-break: break-word;
+        z-index: 2;
     }
-
+    
+    /* Main content container with 2-space margins */
+    .content-container {
+        margin-left: 2em;
+        margin-right: 2em;
+        margin-top: 20px;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .signature-section {
+        margin-left: 310px;
+        margin-top: 100px;
+    }
+    
+    .or-section {
+        margin-top: 70px;
+    }
+    
+    .paragraph-text {
+        font-size: 12pt;
+        margin-left: 12px;
+        text-align: justify;
+        font-family: 'Bookman Old Style', serif;
+        line-height: 1.6;
+    }
+    
+    .applicant-signature {
+        font-size: 12pt;
+        margin-top: 60px;
+    }
+    
     @media print {
         .blurred {
             filter: blur(4px);
+        }
+        .content-container {
+            margin-left: 2em;
+            margin-right: 2em;
         }
     }
 </style>
@@ -42,189 +79,99 @@
 <!-- ================= HEADER ================= -->
 <div class="header">
     @if(Auth::user()->barangay_info_id==1)
-        <img style="width:120%; margin-top:-50px; margin-left:-50px;"
-             src="{{ asset('public/barangay/header/ubaldo.png') }}"
+        <img style="width:113%; margin-top:-50px; margin-left:-50px;"
+             src="{{ asset('public/images/logo/header_ubaldo.png') }}"
              alt="Barangay Header">
     @endif
 </div>
 
-<!-- ================= LEFT VERTICAL LINE ================= -->
-
-<div style="position:absolute; left:195px; top:80px; width:400px; height:1990px;">
-      <img style="width: 5%; height:50%;" src="{{ asset('public/barangay/header/line.jpg') }}" alt="Barangay Header">
-</div>
-
-
-<!-- ================= LEFT SIDE OFFICIALS ================= -->
-<div class="officials-container">
-
-    <p style="font-weight:bold;">SANGGUNIANG BARANGAY</p>
-
-    {{-- Barangay Chairman --}}
-    @if($chairman)
-        <p style="font-weight:bold; color:#800000;">
-            {{ $chairman->first_name }} {{ $chairman->middle_initial }}. {{ $chairman->last_name }}
-        </p>
-        <p>{{ $chairman->position->position ?? 'Barangay Chairman' }}</p>
-
-        @if($chairman->commitee)
-            <p>{{ $chairman->commitee->commitee }}</p>
-        @endif
-    @else
-        <p style="font-weight:bold;">No Chairman Found</p>
-        <p>Barangay Chairman</p>
-    @endif
-
-    <br>
-    <p style="font-weight:bold;">BARANGAY KAGAWAD</p>
-
-    @foreach($councilors as $councilor)
-        <p>
-            <strong style="color:#800000;">
-                {{ $councilor->first_name }} {{ $councilor->middle_initial }}. {{ $councilor->last_name }}
-            </strong><br>
-
-            @if($councilor->commitee)
-                {{ $councilor->commitee->commitee }}
-            @else
-                Committee not assigned
-            @endif
-        </p>
-    @endforeach
-
-    <br>
-
-    {{-- Barangay Administrator --}}
-    @if($barangay_administrator)
-        <p>
-            <strong style="color:#800000;">
-                {{ $barangay_administrator->first_name }} {{ $barangay_administrator->middle_initial }}. {{ $barangay_administrator->last_name }}
-            </strong><br>
-            {{ $barangay_administrator->position->position ?? 'Barangay Administrator' }}
-
-            @if($barangay_administrator->commitee)
-                <br>{{ $barangay_administrator->commitee->commitee }}
-            @endif
-        </p>
-        <br>
-    @endif
-
-    {{-- SK Chairman --}}
-    @if($sk_chairman)
-        <p>
-            <strong style="color:#800000;">
-                {{ $sk_chairman->first_name }} {{ $sk_chairman->middle_initial }}. {{ $sk_chairman->last_name }}
-            </strong><br>
-            {{ $sk_chairman->position->position ?? 'SK Chairman' }}
-
-            @if($sk_chairman->commitee)
-                <br>{{ $sk_chairman->commitee->commitee }}
-            @endif
-        </p>
-        <br>
-    @endif
-
-    {{-- Barangay Secretary --}}
-    @if($secretary)
-        <p>
-            <strong style="color:#800000;">
-                {{ $secretary->first_name }} {{ $secretary->middle_initial }}. {{ $secretary->last_name }}
-            </strong><br>
-            {{ $secretary->position->position ?? 'Barangay Secretary' }}
-
-            @if($secretary->commitee)
-                <br>{{ $secretary->commitee->commitee }}
-            @endif
-        </p>
-        <br>
-    @endif
-
-    {{-- Barangay Treasurer --}}
-    @if($treasurer)
-        <p>
-            <strong style="color:#800000;">
-                {{ $treasurer->first_name }} {{ $treasurer->middle_initial }}. {{ $treasurer->last_name }}
-            </strong><br>
-            {{ $treasurer->position->position ?? 'Barangay Treasurer' }}
-
-            @if($treasurer->commitee)
-                <br>{{ $treasurer->commitee->commitee }}
-            @endif
-        </p>
-    @endif
-
-    <p style="margin-top:100px;">NOT VALID WITHOUT SEAL</p>
-
-</div>
-
-
 <!-- ================= MAIN CONTENT ================= -->
-<div style="margin-left:230px; margin-right:35px;">
+<div class="content-container">
 
-    <h2 style="text-align:center; font-size:24px; font-family:Elephant;">
-        CERTIFICATE OF INDIGENCY
+    <h2 style="text-align:center; font-size:24px; font-family:Elephant; margin-top: 20px; margin-bottom: 30px;">
+        CERTIFICATE OF RESIDENCY
     </h2>
 
     {{-- Watermark Logo --}}
-    @if(Auth::user()->barangay->photo)
+   @if(Auth::user()->barangay->photo)
         <div style="
-            position:absolute;
-            top:40%;
-            left:65%;
-            transform:translate(-50%, -50%);
-            opacity:0.15;
-            z-index:0;
-            pointer-events:none;">
-            <img src="{{ asset('public/barangay/logo/' . Auth::user()->barangay->barangay_name . '/' . Auth::user()->barangay->photo) }}"
-                 alt="Barangay Logo"
-                 style="max-width:350px;">
+            position: absolute;
+            top: 25%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            z-index: 0;
+            pointer-events: none;
+        ">
+            <img src="{{ asset('public/barangay/logo/' . Auth::user()->barangay->barangay_name . '/' . Auth::user()->barangay->photo) }}" 
+                 alt="{{ Auth::user()->barangay->barangay_name }} Logo" 
+                 style="max-width: 550px; height: auto;">
         </div>
     @endif
 
-    <p style="font-size:12pt;">TO WHOM IT MAY CONCERN:</p>
 
-   <p style="font-size:12pt; margin-left:12px; text-align:justify; font-family:'Bookman Old Style', serif;">
-This is to certify that Mr, Ms & Mrs {{ $residency_certificate->requestor->first_name }}
-{{ $residency_certificate->requestor->middle_initial }}.
-{{ $residency_certificate->requestor->last_name }},
-{{ \Carbon\Carbon::parse($residency_certificate->requestor->birthdate)->age }} years old, single/married/widow/widower, Filipino citizen, whose specimen signature appears below, is a <b>{{ strtoupper($residency_certificate->resident_type) }}</b>
- of this Barangay.
+    <p style="font-family:'Times New Roman', serif; font-size:14pt; margin-bottom: 25px;">TO WHOM IT MAY CONCERN:</p>
 
+    <p class="paragraph-text">
+        This is to certify that 
+        <b>
+            @if($residency_certificate->requestor->sex === 'Male')
+                Mr.
+            @elseif($residency_certificate->requestor->sex === 'Female')
+                Ms./Mrs.
+            @endif
+            {{ $residency_certificate->requestor->first_name }}
+            {{ $residency_certificate->requestor->middle_initial }}.
+            {{ $residency_certificate->requestor->last_name }}
+        </b>,
+        {{ \Carbon\Carbon::parse($residency_certificate->requestor->birthdate)->age }} years old, 
+        {{ strtolower($residency_certificate->requestor->civil_status) }}, Filipino citizen, 
+        whose specimen signature appears below, is a <b>{{ strtoupper($residency_certificate->resident_type) }}</b> of this Barangay.
     </p>
 
-    <p style="font-size:12pt; margin-left:12px; text-align:justify; font-family:'Bookman Old Style', serif;">
-           Based on the records of this office, he/she has been residing at Purok {{ $residency_certificate->purok->purok_name }}, Ubaldo D. Laya, Iligan City since July 2, 2025.
+    <p class="paragraph-text">
+        Based on the records of this office, he/she has been residing at 
+        <b>Purok {{ $residency_certificate->purok->purok_name }}</b>, 
+        {{ Auth::user()->barangay->barangay_name }}, {{ Auth::user()->barangay->municipality->municipality_name }} 
+        since <b>{{ \Carbon\Carbon::parse($residency_certificate->requestor->date_of_residency)->format('F j, Y') }}</b>.
     </p>
 
-      <p style="font-size:12pt; margin-left:12px; text-align:justify; font-family:'Bookman Old Style', serif;">
-         This certification is being issued upon the of {{ $residency_certificate->requestor->first_name }}
-{{ $residency_certificate->requestor->middle_initial }}.
-{{ $residency_certificate->requestor->last_name }} for  {{ $residency_certificate->purpose }} purposes.
+    <p class="paragraph-text">
+        This certification is being issued upon the request of 
+        <b>{{ $residency_certificate->requestor->first_name }} {{ $residency_certificate->requestor->last_name }}</b> 
+        for <b>{{ $residency_certificate->purpose }}</b> purposes.
     </p>
 
-@php
-    $issuedDate = \Carbon\Carbon::parse($residency_certificate->date_issued);
-@endphp
+    @php
+        $issuedDate = \Carbon\Carbon::parse($residency_certificate->date_issued);
+    @endphp
 
-    <p style="font-size:12pt; margin-left:12px; text-align:justify; font-family:'Bookman Old Style', serif;">
-     Issued this {{ $issuedDate->format('jS') }} day of {{ strtoupper($issuedDate->format('F')) }} , {{ $issuedDate->format('Y') }} at
-{{ Auth::user()->barangay->barangay_name }}, {{ Auth::user()->barangay->municipality->municipality_name }}.
-
+    <p class="paragraph-text">
+        Issued this <b>{{ $issuedDate->format('jS') }}</b> day of 
+        <b>{{ strtoupper($issuedDate->format('F')) }} {{ $issuedDate->format('Y') }}</b> at 
+        <b>{{ Auth::user()->barangay->barangay_name }}</b>, {{ Auth::user()->barangay->municipality->municipality_name }}.
     </p>
 
-     <div class="signature" style="font-size:12pt;">
-        <p>__________________________</p>
-        <p>Signature above Printed Name</p>
-        <br><br>
-       
-    </div>
+    <!-- Applicant Signature -->
+  
 
-    <!-- Signature -->
-    <div style="margin-left:140px; margin-top:100px; font-size:14pt;">
+   <div class="applicant-signature">
         <p style="margin:0; border-bottom:1px solid black; display:inline-block; font-size:14pt; font-family:'Bookman Old Style', serif;">
             @if($chairman)
                 <strong>
-                    {{ strtoupper("HON {$chairman->first_name} {$chairman->middle_initial}. {$chairman->last_name}, CSSP") }}
+                    {{ $residency_certificate->requestor->first_name }} {{ $residency_certificate->requestor->last_name }}
+                </strong>
+            @endif
+        </p>
+        <p style="margin:0; font-size:12pt; font-family:'Bookman Old Style', serif;">Signature Over Printed Name</p>
+    </div>
+
+    <!-- Punong Barangay Signature -->
+    <div class="signature-section">
+        <p style="margin:0; border-bottom:1px solid black; display:inline-block; font-size:14pt; font-family:'Bookman Old Style', serif;">
+            @if($chairman)
+                <strong>
+                    {{ strtoupper("HON. {$chairman->first_name} {$chairman->middle_initial}. {$chairman->last_name}, CSSP") }}
                 </strong>
             @endif
         </p>
@@ -232,14 +179,13 @@ This is to certify that Mr, Ms & Mrs {{ $residency_certificate->requestor->first
     </div>
 
     <!-- Footer Signatures -->
-    <div class="blurred" style="margin-top:70px; font-family:'Bookman Old Style', serif;">
-        O.R No._______________<br>
-        Date Issued:______________<br>
+    <div class="or-section blurred">
+        O.R No. _______________<br>
+        Date Issued: _______________<br>
         Doc. Stamp Paid
     </div>
 
-   
-
+    <br><br><br>
 </div>
 
 </body>

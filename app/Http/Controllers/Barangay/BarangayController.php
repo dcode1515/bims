@@ -39,7 +39,7 @@ class BarangayController extends Controller
 
    public function dashboard_barangay()
 {
-    $members = HouseholdMember::all();
+  $members = HouseholdMember::where('barangay_info_id', Auth::user()->barangay_info_id)->get();
     
     // Calculate age for each member based on birthdate
     foreach ($members as $member) {
@@ -219,14 +219,14 @@ class BarangayController extends Controller
                 'errors' => $validator->errors()
             ], 422);
         }
-        if (BarangayPosition::where('position', $request->position)
-        ->where('position', $request->position)
+         if (BarangayPosition::where('position', $request->position)
+        ->where('barangay_info_id', Auth::user()->barangay_info_id)
         ->exists()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'The Barangay Position already exists under the selected.',
-            ], 409); // 409 Conflict status code
-            }
+        return response()->json([
+            'success' => false,
+            'message' => 'The Barangay Position already exists in your barangay.',
+        ], 409); // 409 Conflict status code
+    }
     
         try {
             $position = new BarangayPosition;
@@ -1819,6 +1819,11 @@ public function getDataBlotter(Request $request){
             'purpose' => 'required|string|max:255',
             'other_purpose' => 'required_if:purpose,Others|nullable|string|max:255',
             'date_issued' => 'required|date',
+            'date_paid' => 'required',
+            'payment_mode' => 'required',
+            'amount' => 'required',
+            'payment_status' => 'required',
+            
     ]);
 
     DB::beginTransaction();
@@ -1964,6 +1969,36 @@ public function update_barangay_clearance(Request $request, $id)
     {
         $inhabitants = HouseholdMember::where('barangay_info_id', Auth::user()->barangay_info_id)->orderBy('first_name')->get();
         return response()->json($inhabitants);
+    }
+     public function getDataInhabitansCertificationCase()
+    {
+        $inhabitants = HouseholdMember::where('barangay_info_id', Auth::user()->barangay_info_id)
+        ->orderBy('first_name')
+        ->get()
+        ->map(function($member) {
+            // Check if member has pending or ongoing cases as RESPONDENT only
+            $hasPendingCases = Blotter::where('barangay_info_id', Auth::user()->barangay_info_id)
+                ->where('respondent_name', $member->id)  // Only check as respondent
+                ->whereIn('status', ['Pending', 'Ongoing'])
+                ->exists();
+            
+            // Add flag to member object
+            $member->has_pending_case = $hasPendingCases;
+            
+            // Optionally get case details (only as respondent)
+            if ($hasPendingCases) {
+                $cases = Blotter::where('barangay_info_id', Auth::user()->barangay_info_id)
+                    ->where('respondent_name', $member->id)  // Only get cases where member is respondent
+                    ->whereIn('status', ['Pending', 'Ongoing'])
+                    ->get(['id', 'case_number', 'status', 'complainant_name', 'respondent_name']);
+                
+                $member->pending_cases = $cases;
+            }
+            
+            return $member;
+        });
+    
+    return response()->json($inhabitants);
     }
        public function getDataDeceased()
     {

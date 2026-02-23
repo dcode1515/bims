@@ -86,6 +86,7 @@ Route::post('/api/store/barangay/clearance', [App\Http\Controllers\Barangay\Bara
 Route::get('/api/get/data/barangay/clearance', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataBarangayClearance']);
 Route::put('/api/update/barangay/clearance/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'update_barangay_clearance']);
 Route::get('/api/get/data/inhabitans/clearance', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataInhabitansCertification']);
+Route::get('/api/get/data/inhabitans/clearance/case', [App\Http\Controllers\Barangay\BarangayController::class, 'getDataInhabitansCertificationCase']);
 Route::get('/print/barangay/clearance/{id}', [App\Http\Controllers\Barangay\BarangayController::class, 'print_barangay_clearance']);
 Route::get('/manage/building/permit', [App\Http\Controllers\Barangay\BarangayController::class, 'manage_building_permit']);
 Route::post('/api/store/building/permit', [App\Http\Controllers\Barangay\BarangayController::class, 'store_building_permit']);

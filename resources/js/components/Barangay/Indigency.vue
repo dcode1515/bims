@@ -43,15 +43,7 @@
                                 <input type="text" class="form-control" v-model="searchQuery" @input="getDataIndigency"
                                     placeholder="Search name..." />
                             </div>
-                        </div> pwdType: "",
-                        pwdOtherSpecify: "",
-                        pwdIdNumber: "",
-                        pwdCause: "",
-                        pwdCauseOther: "",
-                        pwdDegree: "",
-                        pwdAssistance: [],
-                        pwdAssistanceOther: "",
-                        pwdNotes: "",
+                        </div> 
 
                         <!-- ACTION BUTTONS -->
                         <div class="col-md-5 text-end">
@@ -62,7 +54,7 @@
                             <button class="btn btn-primary btn-xl" @click="openModal('add')">
                                 <i class="ri-add-line me-1"></i>
                             </button>
-                            <a href="/certification" class="btn btn-danger btn-xl">
+                            <a href="/ertification" class="btn btn-danger btn-xl">
                                 <i class="ri-arrow-left-line me-1"></i>
                             </a>
                         </div>

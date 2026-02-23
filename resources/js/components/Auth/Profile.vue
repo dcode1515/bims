@@ -436,7 +436,7 @@ export default {
                 email: this.user.email || "",
                 confirm_password: "",
             },
-            userProfileImage: "assets/images/users/technician-avatar.png", // Changed to technician avatar
+            userProfileImage: "/public/assets/images/users/technician-avatar.png", // Changed to technician avatar
             updating: false,
             changingPassword: false,
         };

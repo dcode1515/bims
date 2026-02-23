@@ -6,25 +6,11 @@
        
     <div class="container-fluid">
         <div class="row">
+
+        
             
             <div class="col-12">
-                <div class="card border-0 shadow-sm">
-                    <!-- HEADER -->
-                    <div class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25">
-                        <div class="d-flex align-items-center">
-                            <div class="step-header-icon">
-                                <i class="ri-user-line text-primary fs-4"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h5 class="mb-0 fw-semibold text-primary">Barangay Dashboard</h5>
-                                <small class="text-muted">Household Members Overview & Analytics</small>
-                            </div>
-                        </div>
-                    </div> <!-- end card-header -->
-
-                    <div class="card-body">
-                        <!-- Summary Cards Row -->
-                        <div class="row g-3 mb-4">
+                <div class="row g-3 mb-4">
                             <div class="col-xl-3 col-md-6">
                                 <div class="summary-card">
                                     <div class="d-flex align-items-center">
@@ -94,6 +80,23 @@
                             </div>
                         </div>
 
+                <div class="card border-0 shadow-sm">
+                    <!-- HEADER -->
+                    <div class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25">
+                        <div class="d-flex align-items-center">
+                            <div class="step-header-icon">
+                                <i class="ri-user-line text-primary fs-4"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h5 class="mb-0 fw-semibold text-primary">Barangay Dashboard</h5>
+                                <small class="text-muted">Household Members Overview & Analytics</small>
+                            </div>
+                        </div>
+                    </div> <!-- end card-header -->
+
+                    <div class="card-body">
+                        <!-- Summary Cards Row -->
+                        
                         <!-- Demographics Row -->
                         <div class="row g-3 mb-4">
                             <div class="col-xl-12">
