@@ -321,6 +321,10 @@
     <script src="{{ asset('public/Dashboard-Template-Velzon-main/assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
     <script src="{{ asset('public/Dashboard-Template-Velzon-main/assets/js/app.js') }}"></script>
    <script src="<?php echo asset('public/js/tinymce/tinymce.min.js')?>"></script>
+   <!-- Add to <head> -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<!-- Add before closing </body> -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   
  </script>
  

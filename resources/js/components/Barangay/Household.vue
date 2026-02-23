@@ -95,7 +95,7 @@
               </div>
             </div>
             <div class="col-md-4 text-end">
-              <a href="/create/member" type="button" class="btn btn-light btn-sm">
+              <a href="/bims/create/member" type="button" class="btn btn-light btn-sm">
                 <i class="ri-add-circle-line me-1"></i>
                 Create Member
               </a>
