@@ -328,6 +328,9 @@ import Swal from "sweetalert2";
 export default {
   data() {
     return {
+      InactiveCount:"",
+      totalHouseholds:"",
+      createdThisMonthCount:"",
       households: {
         data: [],
         current_page: 1,
@@ -362,7 +365,7 @@ export default {
       if (result.isConfirmed) {
         try {
           await axios.delete(
-            `/api/delete/household/${household.id}`
+            `/bims/api/delete/household/${household.id}`
           );
 
           await Swal.fire({
@@ -381,7 +384,7 @@ export default {
     },
     async getDataHousehold() {
       try {
-        const response = await axios.get("/api/get/data/household", {
+        const response = await axios.get("/bims/api/get/data/household", {
           params: {
             page: this.households.current_page,
             per_page: this.perPage,

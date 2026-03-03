@@ -698,7 +698,7 @@ export default {
     methods: {
         async getDataBarangay() {
             try {
-                const response = await fetch("/api/get/data/barangay/user"); // Replace with your actual endpoint
+                const response = await fetch("/bims/api/get/data/barangay/user"); // Replace with your actual endpoint
                 if (!response.ok) throw new Error("Network response was not ok");
                 this.barangays = await response.json(); // Assign fetched data to chairmanships
             } catch (error) {
@@ -708,7 +708,7 @@ export default {
 
         async getDataUser() {
             try {
-                const response = await axios.get("/api/get/data/active/user", {
+                const response = await axios.get("/bims/api/get/data/active/user", {
                     params: {
                         page: this.users.current_page,
                         per_page: this.perPage,

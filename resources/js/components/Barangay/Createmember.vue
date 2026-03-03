@@ -204,92 +204,7 @@
                     <div class="form-text">Enter household Number</div>
                   </div>
                 </div>
-                <div class="col-12 mt-4">
-                  <div class="card border-primary border-opacity-25">
-                    <div
-                      class="card-header bg-primary bg-opacity-10 border-primary border-opacity-25 d-flex justify-content-between align-items-center"
-                    >
-                      <h6 class="mb-0 fw-semibold text-primary">
-                        <i class="ri-map-pin-line me-2"></i>Pin Your Location
-                      </h6>
-                      <div>
-                        <button
-                          type="button"
-                          class="btn btn-sm btn-outline-success me-2"
-                          @click="setDavaoCityLocation"
-                        >
-                          <i class="ri-map-pin-line me-1"></i> Davao City Center
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-sm btn-outline-primary me-2"
-                          @click="getCurrentLocation"
-                          :disabled="isGettingLocation"
-                        >
-                          <i class="ri-gps-line me-1"></i>
-                          <span v-if="isGettingLocation"
-                            >Getting Location...</span
-                          >
-                          <span v-else>Get Current Location</span>
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-sm btn-outline-secondary"
-                          @click="resetMapLocation"
-                        >
-                          <i class="ri-refresh-line"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="card-body p-0">
-                      <div
-                        id="map"
-                        class="map-container"
-                        style="
-                          height: 400px;
-                          width: 100%;
-                          border-radius: 0 0 0.375rem 0.375rem;
-                        "
-                      ></div>
-                    </div>
-                    <div class="card-footer bg-light-subtle">
-                      <div class="row g-3">
-                        <div class="col-md-6">
-                          <label class="form-label small fw-medium">
-                            <i class="ri-globe-line text-primary me-1"></i
-                            >Longitude
-                          </label>
-                          <input
-                            type="text"
-                            class="form-control form-control-sm"
-                            v-model="formData.householdInfo.longitude"
-                            readonly
-                            placeholder="Click on map to set"
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="form-label small fw-medium">
-                            <i class="ri-map-pin-line text-primary me-1"></i
-                            >Latitude
-                          </label>
-                          <input
-                            type="text"
-                            class="form-control form-control-sm"
-                            v-model="formData.householdInfo.latitude"
-                            readonly
-                            placeholder="Click on map to set"
-                          />
-                        </div>
-                      </div>
-                      <small class="text-muted d-block mt-2">
-                        <i class="ri-information-line me-1"></i>
-                        Click on the map to set your exact location, or use the
-                        "Get Current Location" button to automatically detect
-                        your position.
-                      </small>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
 
               <!-- Navigation Buttons for Step 1 -->
@@ -4954,30 +4869,6 @@
 </template>
 
 <script>
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-
-// Fix for default marker icons in Leaflet with webpack
-delete L.Icon.Default.prototype._getIconUrl;
-
-// Create custom marker icon from local file
-const customIcon = new L.Icon({
-  iconUrl: '/bims/create/marker-icon.png', // Path to your local marker image
-  iconSize: [32, 32], // Adjust based on your image size
-  iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location
-  popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', // Optional shadow
-  shadowSize: [41, 41],
-  shadowAnchor: [13, 41]
-});
-
-// Alternative if you don't want shadow or if your image already has shadow
-const customIconNoShadow = new L.Icon({
-  iconUrl: '/bims/create/marker-icon.png',
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32]
-});
 
 export default {
   name: "EnhancedHouseholdForm",
@@ -5001,14 +4892,7 @@ export default {
   },
   data() {
     return {
-      map: null,
-      marker: null,
-      isGettingLocation: false,
-      isMapInitialized: false, // Flag to track map initialization
-      // Davao City coordinates (approximate center)
-      davaoCityCenter: [7.1907, 125.4553], // Latitude: 7.1907° N, Longitude: 125.4553° E
-      defaultZoom: 13,
-
+   
       currentStep: 1,
       acceptTerms: false,
       showSuccessModal: false,
@@ -7298,7 +7182,7 @@ export default {
         console.log("Submitting data:", JSON.stringify(formData, null, 2));
 
         // Make API call
-        const response = await fetch("/api/households/store", {
+        const response = await fetch("/bims/api/households/store", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

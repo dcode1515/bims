@@ -372,7 +372,7 @@ public function getDataCommitee(Request $request){
      public function update_commitee(Request $request, $id)
 {
     $validator = Validator::make($request->all(), [
-        'commitee' => 'required',
+        'commitee' => 'nullable',
     ]);
 
     if ($validator->fails()) {
