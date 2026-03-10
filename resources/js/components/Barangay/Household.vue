@@ -95,7 +95,7 @@
               </div>
             </div>
             <div class="col-md-4 text-end">
-              <a href="/bims/create/member" type="button" class="btn btn-light btn-sm">
+              <a href="/create/member" type="button" class="btn btn-light btn-sm">
                 <i class="ri-add-circle-line me-1"></i>
                 Create Member
               </a>
@@ -365,7 +365,7 @@ export default {
       if (result.isConfirmed) {
         try {
           await axios.delete(
-            `/bims/api/delete/household/${household.id}`
+            `/api/delete/household/${household.id}`
           );
 
           await Swal.fire({
@@ -384,7 +384,7 @@ export default {
     },
     async getDataHousehold() {
       try {
-        const response = await axios.get("/bims/api/get/data/household", {
+        const response = await axios.get("/api/get/data/household", {
           params: {
             page: this.households.current_page,
             per_page: this.perPage,

@@ -204,7 +204,6 @@
                     <div class="form-text">Enter household Number</div>
                   </div>
                 </div>
-                
               </div>
 
               <!-- Navigation Buttons for Step 1 -->
@@ -4869,7 +4868,6 @@
 </template>
 
 <script>
-
 export default {
   name: "EnhancedHouseholdForm",
   props: {
@@ -4892,7 +4890,6 @@ export default {
   },
   data() {
     return {
-   
       currentStep: 1,
       acceptTerms: false,
       showSuccessModal: false,
@@ -5072,10 +5069,9 @@ export default {
     },
   },
   methods: {
-   
     initMap() {
       // Check if map container exists
-      const mapContainer = document.getElementById('map');
+      const mapContainer = document.getElementById("map");
       if (!mapContainer) {
         console.error("Map container not found");
         return;
@@ -5088,25 +5084,32 @@ export default {
       }
 
       // Initialize map with Davao City center
-      this.map = L.map('map').setView(this.davaoCityCenter, this.defaultZoom);
+      this.map = L.map("map").setView(this.davaoCityCenter, this.defaultZoom);
 
       // Add tile layer (OpenStreetMap)
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(this.map);
 
       // Add click event to map
-      this.map.on('click', this.onMapClick);
+      this.map.on("click", this.onMapClick);
 
       // Set initialized flag
       this.isMapInitialized = true;
 
       // If there are existing coordinates, set marker
-      if (this.formData.householdInfo.latitude && this.formData.householdInfo.longitude) {
-        this.setMarker([parseFloat(this.formData.householdInfo.latitude), parseFloat(this.formData.householdInfo.longitude)]);
+      if (
+        this.formData.householdInfo.latitude &&
+        this.formData.householdInfo.longitude
+      ) {
+        this.setMarker([
+          parseFloat(this.formData.householdInfo.latitude),
+          parseFloat(this.formData.householdInfo.longitude),
+        ]);
       }
     },
-   
+
     onMapClick(e) {
       if (!this.map) return;
       const { lat, lng } = e.latlng;
@@ -5138,11 +5141,11 @@ export default {
 
         // Add new marker
         this.marker = L.marker(latlng, {
-          draggable: true
+          draggable: true,
         }).addTo(this.map);
 
         // Update coordinates when marker is dragged
-        this.marker.on('dragend', (event) => {
+        this.marker.on("dragend", (event) => {
           const position = event.target.getLatLng();
           this.formData.householdInfo.latitude = position.lat.toFixed(6);
           this.formData.householdInfo.longitude = position.lng.toFixed(6);
@@ -5160,9 +5163,9 @@ export default {
         console.error("Error setting marker:", error);
       }
     },
-   getCurrentLocation() {
+    getCurrentLocation() {
       if (!navigator.geolocation) {
-        alert('Geolocation is not supported by your browser');
+        alert("Geolocation is not supported by your browser");
         return;
       }
 
@@ -5176,49 +5179,49 @@ export default {
         return;
       }
 
-       this.isGettingLocation = true;
+      this.isGettingLocation = true;
 
       navigator.geolocation.getCurrentPosition(
-        position => {
+        (position) => {
           const { latitude, longitude } = position.coords;
           this.setMarker([latitude, longitude]);
           this.formData.householdInfo.latitude = latitude.toFixed(6);
           this.formData.householdInfo.longitude = longitude.toFixed(6);
           this.isGettingLocation = false;
-          
+
           // Success message
-          this.showToast('Location detected successfully!', 'success');
+          this.showToast("Location detected successfully!", "success");
         },
-         error => {
+        (error) => {
           this.isGettingLocation = false;
-          let errorMessage = '';
-          
-          switch(error.code) {
+          let errorMessage = "";
+
+          switch (error.code) {
             case error.PERMISSION_DENIED:
-              errorMessage = 'Please allow location access to use this feature';
+              errorMessage = "Please allow location access to use this feature";
               break;
             case error.POSITION_UNAVAILABLE:
-              errorMessage = 'Location information is unavailable';
+              errorMessage = "Location information is unavailable";
               break;
             case error.TIMEOUT:
-              errorMessage = 'Location request timed out';
+              errorMessage = "Location request timed out";
               break;
             default:
-              errorMessage = 'An unknown error occurred';
+              errorMessage = "An unknown error occurred";
           }
-          
+
           alert(errorMessage);
-          this.showToast(errorMessage, 'error');
+          this.showToast(errorMessage, "error");
         },
         {
           enableHighAccuracy: true,
           timeout: 10000,
-          maximumAge: 0
+          maximumAge: 0,
         }
       );
     },
     // Optional: Add a method to set location to Davao City center
-       setDavaoCityLocation() {
+    setDavaoCityLocation() {
       // Check if map is initialized
       if (!this.map) {
         this.initMap();
@@ -5228,12 +5231,11 @@ export default {
         }, 500);
         return;
       }
-      
+
       this.setMarker(this.davaoCityCenter);
-      this.showToast('Location set to Davao City center', 'info');
+      this.showToast("Location set to Davao City center", "info");
     },
 
-   
     resetMapLocation() {
       // Check if map is initialized
       if (!this.map) {
@@ -5248,26 +5250,34 @@ export default {
       }
 
       // Clear coordinates
-      this.formData.householdInfo.latitude = '';
-      this.formData.householdInfo.longitude = '';
+      this.formData.householdInfo.latitude = "";
+      this.formData.householdInfo.longitude = "";
 
       // Reset map view to Davao City
       this.map.setView(this.davaoCityCenter, this.defaultZoom);
-      
-      this.showToast('Map reset to Davao City', 'info');
+
+      this.showToast("Map reset to Davao City", "info");
     },
     // Simple toast notification (you can replace with your preferred toast library)
-      showToast(message, type = 'info') {
+    showToast(message, type = "info") {
       console.log(`[${type.toUpperCase()}] ${message}`);
-      
+
       // Optional: Show a temporary alert
-      const toast = document.createElement('div');
-      toast.className = `alert alert-${type === 'error' ? 'danger' : type} position-fixed top-0 start-50 translate-middle-x mt-3 shadow`;
-      toast.style.zIndex = '9999';
-      toast.style.minWidth = '300px';
+      const toast = document.createElement("div");
+      toast.className = `alert alert-${
+        type === "error" ? "danger" : type
+      } position-fixed top-0 start-50 translate-middle-x mt-3 shadow`;
+      toast.style.zIndex = "9999";
+      toast.style.minWidth = "300px";
       toast.innerHTML = `
         <div class="d-flex align-items-center">
-          <i class="ri-${type === 'success' ? 'checkbox-circle' : type === 'error' ? 'error-warning' : 'information'}-line me-2 fs-5"></i>
+          <i class="ri-${
+            type === "success"
+              ? "checkbox-circle"
+              : type === "error"
+              ? "error-warning"
+              : "information"
+          }-line me-2 fs-5"></i>
           <span>${message}</span>
         </div>
       `;
@@ -5280,7 +5290,7 @@ export default {
     },
     async getDataPurok() {
       try {
-        const response = await fetch("/bims/api/get/data/purok-per-household"); // Replace with your actual endpoint
+        const response = await fetch("/api/get/data/purok-per-household"); // Replace with your actual endpoint
         if (!response.ok) throw new Error("Network response was not ok");
         this.puroks = await response.json(); // Assign fetched data to puroks
       } catch (error) {
@@ -5851,9 +5861,6 @@ export default {
 
       // Validate contact number
       if (!head.contactNumber) {
-        this.fieldErrors["headOfFamily.contactNumber"] =
-          "Contact number is required";
-        this.validationErrors.push("Contact number is required");
       } else {
         const phoneRegex = /^09\d{9}$/;
         const cleanNumber = head.contactNumber.replace(/\D/g, "");
@@ -6503,14 +6510,12 @@ export default {
             }
             break;
           case "contactNumber":
-            if (!value) {
-              this.fieldErrors[fieldPath] = "Contact number is required";
-            } else {
-              const cleanNumber = value.replace(/\D/g, "");
-              if (!/^09\d{9}$/.test(cleanNumber)) {
-                this.fieldErrors[fieldPath] = "Invalid format (09XXXXXXXXX)";
-              }
+            const cleanNumber = value.replace(/\D/g, "");
+
+            if (!/^09\d{9}$/.test(cleanNumber)) {
+              this.fieldErrors[fieldPath] = "Invalid format (09XXXXXXXXX)";
             }
+
             break;
           case "employmentStatus":
             if (!value) {
@@ -7182,7 +7187,7 @@ export default {
         console.log("Submitting data:", JSON.stringify(formData, null, 2));
 
         // Make API call
-        const response = await fetch("/bims/api/households/store", {
+        const response = await fetch("/api/households/store", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -7352,11 +7357,11 @@ export default {
   mounted() {
     this.getDataPurok();
     this.loadDraft();
-    this.$watch('currentStep', (newStep, oldStep) => {
+    this.$watch("currentStep", (newStep, oldStep) => {
       if (newStep === 1) {
         // When switching to step 1, initialize or refresh map
         this.$nextTick(() => {
-          const mapContainer = document.getElementById('map');
+          const mapContainer = document.getElementById("map");
           if (mapContainer) {
             setTimeout(() => {
               if (!this.map) {
@@ -7374,7 +7379,7 @@ export default {
       }
     });
   },
-    beforeDestroy() {
+  beforeDestroy() {
     // Clean up map when component is destroyed
     if (this.map) {
       this.map.remove();

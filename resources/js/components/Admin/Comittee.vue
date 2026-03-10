@@ -340,7 +340,7 @@ export default {
 
         async getDataCommitee() {
             try {
-                const response = await axios.get("/bims/api/get/data/commitee", {
+                const response = await axios.get("/api/get/data/commitee", {
                     params: {
                         page: this.committees.current_page,
                         per_page: this.perPage,
@@ -437,12 +437,12 @@ export default {
 
                 if (this.modalMode === "add") {
                     response = await axios.post(
-                        "/bims/api/store/commitee",
+                        "/api/store/commitee",
                         this.formData
                     );
                 } else {
                     response = await axios.post(
-                        `/bims/api/update/commitee/${this.formData.id}`,
+                        `/api/update/commitee/${this.formData.id}`,
                         this.formData
                     );
                 }
@@ -491,7 +491,7 @@ export default {
 
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`/bims/api/delete/commitee/${commitee.id}`);
+                    await axios.delete(`/api/delete/commitee/${commitee.id}`);
 
                     await Swal.fire({
                         icon: "success",
