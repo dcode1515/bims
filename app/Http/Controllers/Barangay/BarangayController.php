@@ -2630,7 +2630,7 @@ public function update_buildingy_permit(Request $request, $id)
                 })
                  ->orWhereHas('requestor', function ($q) use ($search) {
                     $q->where('first_name', 'like', '%' . $search . '%')
-                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                     ->orWhere('middle_name', 'like', '%' . $search . '%')
                       ->orWhere('last_name', 'like', '%' . $search . '%');
                 });
                 
@@ -2783,7 +2783,7 @@ public function getDataIndigency(Request $request){
                 })
                  ->orWhereHas('requestor', function ($q) use ($search) {
                     $q->where('first_name', 'like', '%' . $search . '%')
-                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                     ->orWhere('middle_name', 'like', '%' . $search . '%')
                       ->orWhere('last_name', 'like', '%' . $search . '%');
                 });
                 
@@ -2822,12 +2822,12 @@ public function getDataIndigency(Request $request){
                 })
                  ->orWhereHas('requestor', function ($q) use ($search) {
                     $q->where('first_name', 'like', '%' . $search . '%')
-                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                     ->orWhere('middle_name', 'like', '%' . $search . '%')
                       ->orWhere('last_name', 'like', '%' . $search . '%');
                 })
                  ->orWhereHas('deceased', function ($q) use ($search) {
                     $q->where('first_name', 'like', '%' . $search . '%')
-                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                     ->orWhere('middle_name', 'like', '%' . $search . '%')
                       ->orWhere('last_name', 'like', '%' . $search . '%');
                 });
                
@@ -2940,7 +2940,7 @@ public function getDataResidency(Request $request){
                 })
                  ->orWhereHas('requestor', function ($q) use ($search) {
                     $q->where('first_name', 'like', '%' . $search . '%')
-                     ->orWhere('middle_initial', 'like', '%' . $search . '%')
+                     ->orWhere('middle_name', 'like', '%' . $search . '%')
                       ->orWhere('last_name', 'like', '%' . $search . '%');
                 });
                 
@@ -3103,7 +3103,7 @@ public function getDataInhabitants(Request $request)
         ->when($search, function ($query, $search) {
             return $query->where(function ($q) use ($search) {
                 $q->where('first_name', 'like', "%$search%")
-                  ->orWhere('middle_initial', 'like', "%$search%")
+                  ->orWhere('middle_name', 'like', "%$search%")
                   ->orWhere('last_name', 'like', "%$search%")
                   ->orWhere('extension', 'like', "%$search%")
                   ->orWhere('birthdate', 'like', "%$search%")
